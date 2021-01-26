@@ -19,17 +19,8 @@
   
 <div class="container">
   <div class="row">
-    <div class="col-sm-2">
-      <h6>Name</h6>
-      <!-- <form action="/action_page.php">
-        <div class="form-group">
-          <label for="Name">Name:</label>
-          <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form> -->
+    <div class="col-sm-2" id="nameList">
     </div>
-
     <div class="col-sm-1" id="table0">
     </div>
     <div class="col-sm-1" id="table1">
@@ -54,8 +45,30 @@
 </div>
 
     <script id='script'>
+      const pop = array => {
+        return array.pop();
+      };
+      var colors = ["rgba(239, 103, 103, 0.75)", "rgba(239, 191, 103, 0.75)", "rgba(239, 239, 103, 0.75)", "rgba(170, 239, 103, 0.75)", "rgba(103, 239, 219, 0.75)", "rgba(103, 191, 239, 0.75)", "rgba(103, 116, 239, 0.75)", "rgba(150, 103, 239, 0.75)", "rgba(225, 103, 239, 0.75)"];
+      var titles = ["發表", "聽發表", "訪問", "學習", "侍奉", "睇影像說教", "祈禱", "睇真理書", "傳道", "實踐母親的教誨"];
+      var names = [];
+      var dataArr = new Array(10);
 
-      function tableCreate(index) {
+      function initDataArr() {
+        for (var i = 0; i < 10; i++){
+          dataArr[i] = [];
+        }
+      }
+
+      function createAllTable() {
+        for (var i = 0; i < 10; i++) {
+          createTable(i);
+        }
+      }
+
+      function createTable(index) {
+        console.log(dataArr[index].length);
+        rindex = 600 - dataArr[index].length;
+        console.log(rindex);
         var str1 = '#table';
         var selector = str1.concat(index.toString());
         var column = document.querySelector(selector);
@@ -68,45 +81,58 @@
           for (var j = 0; j < 6; j++) {
             var td = document.createElement('td');
             td.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+            if (rindex <= (i*6+j)){
+              td.style.backgroundColor = colors[dataArr[index].pop()];
+            }
             tr.appendChild(td);
           }
           tbdy.appendChild(tr);
         }
         tbl.appendChild(tbdy);
         column.appendChild(tbl);
-        columnTitleCreate(column, index);
+        createColumnTitle(column, index);
       }
 
-      var titles = ["發表", "聽發表", "訪問", "學習", "侍奉", "睇影像說教", "祈禱", "睇真理書", "傳道", "實踐母親的教誨"];
-
-      function columnTitleCreate(column, index) {
+      function createColumnTitle(column, index) {
         var h6 = document.createElement('h6');
         h6.appendChild(document.createTextNode(titles[index]));
         h6.style.textAlign = "center";
         column.appendChild(h6);
-
       }
 
-
-      localStorage.clear();
-      $.getJSON('https://spreadsheets.google.com/feeds/list/1rLp8OySlDiaL7JSxsT-FLA_9iLDtXpgIw_JFpMFv72U/od6/public/values?alt=json', function(data) {
-    // JSON result in `data` variable
-      var entry = data.feed.entry;
-
-      var names = [];
-      var colors = [""];
-      console.log(titles);
-      for (var key in data.feed.entry) {
-        var obj = data.feed.entry[key];
-        var name = obj.gsx$name.$t;
-        if (name && !names.includes(name)) {
-          names.push(name);
+      function updateNameList(names) {
+        var div = document.querySelector('#nameList');
+        for (var name in names) {
+          var h6 = document.createElement('h6');
+          h6.appendChild(document.createTextNode(names[name]));
+          h6.style.color = colors[name];
+          div.appendChild(h6);
         }
       }
-      console.log(names);
-      for (var i = 0; i < 10; i++) {
-        tableCreate(i);
-      }
+
+      initDataArr();
+      localStorage.clear();
+      $.getJSON('https://spreadsheets.google.com/feeds/list/1KPV_V51w4_efxruWLZzk7xurdN3gCMEqBGGtfWw0qFU/owj7sdf/public/values?alt=json', function(data) {
+        // JSON result in `data` variable
+        var entry = data.feed.entry;
+
+        for (var key in data.feed.entry) {
+          var obj = data.feed.entry[key];
+          var name = obj.gsx$name.$t;
+          if (name) {
+            if (!names.includes(name)) {
+              names.push(name);
+            }
+            var type = titles.indexOf(obj.gsx$type.$t);
+            var units = obj.gsx$units.$t;
+            var num = names.indexOf(name);
+            for (var i = 0; i < units; i++) {
+              dataArr[type].push(num);
+            }
+          }
+        }
+        updateNameList(names);
+        createAllTable();
       });
 
 
