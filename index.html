@@ -66,10 +66,15 @@
       var dataArr = new Array(10);
 
       var bgimages=['https://www.desktopbackground.org/download/o/2012/12/01/492285_backgrounds-simple-mountains-wallpapers_1920x1080_h.jpg',
-            'https://wallpaperaccess.com/full/802624.jpg',];
+            'https://wallpaperaccess.com/full/802624.jpg',
+            'https://watv.org/wp-content/uploads/2021/01/worry-first-enjoy-later.jpg',
+            'https://watv.org/wp-content/uploads/2021/01/melchizedek-and-christ.jpg',];
       var cardImages=['https://inews.gtimg.com/newsapp_match/0/11884148139/0',
-            'https://img3.goodfon.com/wallpaper/nbig/d/58/leaves-macro-transparent.jpg',];
+            'https://img3.goodfon.com/wallpaper/nbig/d/58/leaves-macro-transparent.jpg',
+            'https://elohist.watv.org/upElohist/setting/fc33ae4829671f172ee9e7ddfffa792f.jpg',
+            'https://watv.org/wp-content/uploads/2020/03/teachings-of-mother-10-750x500.jpg',];
       var randomNumber = Math.floor(Math.random() * bgimages.length);
+      var applyTextWhite = [0, 2, 3];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
       var cardImg = 'url(' + cardImages[randomNumber] + ')';
@@ -77,7 +82,7 @@
 
       $('body').css({'background':bgImg, 'background-size':'cover'});
       card.style.backgroundImage = cardImg;
-      if (randomNumber == 0) {
+      if (applyTextWhite.includes(randomNumber)) {
         $('body').css({'color': 'white'});
       }
 
