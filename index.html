@@ -9,9 +9,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body style="background-image: url(https://wallpaperaccess.com/full/802624.jpg);background-size: cover;">
+<body>
 
-<div class="jumbotron text-center" style="background-image: url(https://inews.gtimg.com/newsapp_match/0/11884148139/0); background-size: 100%; color: white">
+<div class="jumbotron text-center" style="background-image: url(https://inews.gtimg.com/newsapp_match/0/11884148139/0); background-size: 100%; color: white" id="card">
   <h1>100% Faith</h1>
   <p>God bless you!</p> 
 </div>
@@ -64,6 +64,24 @@
       var titles = ["發表", "聽發表", "訪問", "學習", "侍奉", "睇影像說教", "祈禱", "睇真理書", "傳道", "實踐母親的教誨"];
       var names = [];
       var dataArr = new Array(10);
+
+      var bgimages=['https://www.desktopbackground.org/download/o/2012/12/01/492285_backgrounds-simple-mountains-wallpapers_1920x1080_h.jpg',
+            'https://wallpaperaccess.com/full/802624.jpg',];
+      var cardImages=['https://inews.gtimg.com/newsapp_match/0/11884148139/0',
+            'https://img3.goodfon.com/wallpaper/nbig/d/58/leaves-macro-transparent.jpg',];
+      var randomNumber = Math.floor(Math.random() * bgimages.length);
+
+      var bgImg = 'url(' + bgimages[randomNumber] + ')';
+      var cardImg = 'url(' + cardImages[randomNumber] + ')';
+      var card = document.querySelector('#card');
+
+      $('body').css({'background':bgImg, 'background-size':'cover'});
+      card.style.backgroundImage = cardImg;
+      if (randomNumber == 0) {
+        $('body').css({'color': 'white'});
+      }
+
+      
 
       function initDataArr() {
         for (var i = 0; i < 10; i++){
