@@ -15,20 +15,21 @@
   <h1>100% Faith</h1>
   <p>God bless you!</p> 
 </div>
+
+<div id="googleSheetForm">
+</div>
   
 <div class="container">
   <div class="row">
     <div class="col-sm-1" id="nameList">
-      <!-- <form>
         <div class="form-group">
         </div>
         <div class="form-group">
-          <label for="googleKey">Google Sheet Key</label>
-          <input type="text" class="form-control" id="googleKey" placeholder="Google Sheet Key">
+          <label for="key">Key</label>
+          <input type="text" class="form-control" id="key" placeholder="Key">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      <hr> -->
+        <button class="btn btn-primary" onclick="loadData()">Submit</button>
+      <hr>
     </div>
     <div class="col-sm-1" id="table0">
     </div>
@@ -85,9 +86,9 @@
       if (applyTextWhite.includes(randomNumber)) {
         $('body').css({'color': 'white'});
       }
-
       
-
+      initDataArr();
+      
       function initDataArr() {
         for (var i = 0; i < 10; i++){
           dataArr[i] = [];
@@ -143,31 +144,59 @@
         }
       }
 
-      initDataArr();
-      localStorage.clear();
-      $.getJSON('https://spreadsheets.google.com/feeds/list/1KPV_V51w4_efxruWLZzk7xurdN3gCMEqBGGtfWw0qFU/owj7sdf/public/values?alt=json', function(data) {
-        // JSON result in `data` variable
-        var entry = data.feed.entry;
+      function loadData() {
+        var key = document.getElementById("key").value;
+        localStorage.setItem("key", key);
+        location.reload();
+      }
 
-        for (var key in data.feed.entry) {
-          var obj = data.feed.entry[key];
-          var name = obj.gsx$name.$t;
-          if (name) {
-            if (!names.includes(name)) {
-              names.push(name);
+      window.onload = function() {
+
+        var key = localStorage.getItem("key");
+        if (key !== null) {
+          var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
+
+          $.getJSON(url, function(data) {
+
+            if (data !== null) {
+              // JSON result in `data` variable
+              var entry = data.feed.entry;
+
+              for (var key in data.feed.entry) {
+                var obj = data.feed.entry[key];
+                var name = obj.gsx$name.$t;
+                if (name) {
+                  if (!names.includes(name)) {
+                    names.push(name);
+                  }
+                  var type = titles.indexOf(obj.gsx$type.$t);
+                  var units = obj.gsx$units.$t;
+                  var num = names.indexOf(name);
+                  for (var i = 0; i < units; i++) {
+                    dataArr[type].push(num);
+                  }
+                }
+              }
+              updateNameList(names);
+              createAllTable();
+            }else{
+              console.log('incorrect key');
+              localStorage.clear();
+              location.reload();
             }
-            var type = titles.indexOf(obj.gsx$type.$t);
-            var units = obj.gsx$units.$t;
-            var num = names.indexOf(name);
-            for (var i = 0; i < units; i++) {
-              dataArr[type].push(num);
-            }
-          }
+            
+          });
         }
-        updateNameList(names);
-        createAllTable();
-      });
+      }
 
+      // disable right click
+      var message = "function disabled";
+
+      function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }
+
+      if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
+
+      document.onmousedown = rtclickcheck;
 
     </script>
 </body>
