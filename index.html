@@ -90,8 +90,8 @@
       var colors = ["rgba(239, 103, 103, 0.75)", "rgba(239, 191, 103, 0.75)", "rgba(239, 239, 103, 0.75)", "rgba(170, 239, 103, 0.75)", "rgba(103, 239, 219, 0.75)", "rgba(103, 191, 239, 0.75)", "rgba(103, 116, 239, 0.75)", "rgba(150, 103, 239, 0.75)", "rgba(225, 103, 239, 0.75)"];
       var cardColor = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"];
       var titles = ["發表", "聽發表", "訪問", "學習", "侍奉", "睇影像說教", "祈禱", "睇真理書", "傳道", "實踐母親的教誨"];
-      var dataArr = new Array(10);
       var names = [];
+      var dataArr = new Array(10);
 
       var bgimages=['https://elohist.watv.org/upElohist//web/photoessay/9bb5d5dd894a1022da916f00ab342241.jpg',
             'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
@@ -116,9 +116,7 @@
       card.style.backgroundImage = cardImg;
       if (applyTextWhite.includes(randomNumber)) {
         $('body').css({'color': 'white'});
-      }
-      // card.style.color = cardColor[randomNumber];
-      
+      }      
       initDataArr();
       
       function initDataArr() {
@@ -255,7 +253,7 @@
       var diff = now - start;
       var oneDay = 1000 * 60 * 60 * 24;
       var day = Math.floor(diff / oneDay);
-      var teachingIndex = (day+1) % 12;
+      var teachingIndex = day % 12;
 
       // Teachings of Mother
       var p = document.createElement('p');
