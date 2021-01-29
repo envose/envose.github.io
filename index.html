@@ -192,11 +192,20 @@
               // JSON result in `data` variable
               var entry = data.feed.entry;
               var title = data.feed.title.$t;
+              var lastUpdateDate = new Date(data.feed.updated.$t);
+              var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
+              console.log(lastUpdateStr);
 
               var titleDiv = document.querySelector('#title');
               var h3 = document.createElement('h3');
               h3.appendChild(document.createTextNode(title));
               titleDiv.appendChild(h3);
+
+              var p = document.createElement('p');
+              p.appendChild(document.createTextNode(lastUpdateStr));
+              titleDiv.appendChild(p);
+
+
               var hr = document.createElement('hr');
               titleDiv.appendChild(hr);
 
