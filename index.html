@@ -16,7 +16,7 @@
   <p>God bless you!</p> 
 </div>
 
-<div id="googleSheetForm">
+<div class="page-header text-center" id="title">
 </div>
   
 <div class="container">
@@ -25,10 +25,9 @@
         <div class="form-group">
         </div>
         <div class="form-group">
-          <label for="key">Key</label>
-          <input type="text" class="form-control" id="key" placeholder="Key">
+          <input type="text" class="form-control" id="key" placeholder="密碼">
         </div>
-        <button class="btn btn-primary" onclick="loadData()">Submit</button>
+        <button class="btn btn-primary" onclick="loadData()">提交</button>
       <hr>
     </div>
     <div class="col-sm-1" id="table0">
@@ -66,16 +65,20 @@
       var names = [];
       var dataArr = new Array(10);
 
-      var bgimages=['https://www.desktopbackground.org/download/o/2012/12/01/492285_backgrounds-simple-mountains-wallpapers_1920x1080_h.jpg',
-            'https://wallpaperaccess.com/full/802624.jpg',
+      var bgimages=['https://elohist.watv.org/upElohist//web/photoessay/9bb5d5dd894a1022da916f00ab342241.jpg',
+            'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
             'https://watv.org/wp-content/uploads/2021/01/worry-first-enjoy-later.jpg',
-            'https://watv.org/wp-content/uploads/2021/01/melchizedek-and-christ.jpg',];
+            'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
+            'https://elohist.watv.org/upElohist/web/misodiary/f9ef32e3e299634e8ad69b1e0cd3c457.jpg',
+            'https://elohist.watv.org/upElohist//web/photoessay/2fa2094f4cf7f68925be1384e27038b0.jpg'];
       var cardImages=['https://inews.gtimg.com/newsapp_match/0/11884148139/0',
-            'https://img3.goodfon.com/wallpaper/nbig/d/58/leaves-macro-transparent.jpg',
+            'https://watv.org/wp-content/uploads/2019/05/Allelopathy-in-Plants.jpg',
             'https://elohist.watv.org/upElohist/setting/fc33ae4829671f172ee9e7ddfffa792f.jpg',
-            'https://watv.org/wp-content/uploads/2020/03/teachings-of-mother-10-750x500.jpg',];
+            'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
+            'https://i0.wp.com/trippy.me/wp-content/uploads/sky.gif?fit=600%2C338&ssl=1',
+            'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
       var randomNumber = Math.floor(Math.random() * bgimages.length);
-      var applyTextWhite = [0, 2, 3];
+      var applyTextWhite = [0, 2, 4, 5];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
       var cardImg = 'url(' + cardImages[randomNumber] + ')';
@@ -161,16 +164,24 @@
             if (data !== null) {
               // JSON result in `data` variable
               var entry = data.feed.entry;
+              var title = data.feed.title.$t;
+
+              var titleDiv = document.querySelector('#title');
+              var h3 = document.createElement('h3');
+              h3.appendChild(document.createTextNode(title));
+              titleDiv.appendChild(h3);
+              var hr = document.createElement('hr');
+              titleDiv.appendChild(hr);
 
               for (var key in data.feed.entry) {
                 var obj = data.feed.entry[key];
-                var name = obj.gsx$name.$t;
+                var name = obj.gsx$姓名.$t;
                 if (name) {
                   if (!names.includes(name)) {
                     names.push(name);
                   }
-                  var type = titles.indexOf(obj.gsx$type.$t);
-                  var units = obj.gsx$units.$t;
+                  var type = titles.indexOf(obj.gsx$活動.$t);
+                  var units = obj.gsx$格數.$t;
                   var num = names.indexOf(name);
                   for (var i = 0; i < units; i++) {
                     dataArr[type].push(num);
@@ -190,13 +201,20 @@
       }
 
       // disable right click
-      var message = "function disabled";
+      var message = "不可以偷看喔！";
 
       function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }
 
       if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
 
       document.onmousedown = rtclickcheck;
+
+      $('#key').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+           loadData();
+        }
+      });
 
     </script>
 </body>
