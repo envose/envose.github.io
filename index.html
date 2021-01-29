@@ -11,9 +11,8 @@
 </head>
 <body>
 
-<div class="jumbotron text-center" style="background-image: url(https://inews.gtimg.com/newsapp_match/0/11884148139/0); background-size: 100%; color: white" id="card">
+<div class="jumbotron text-center" style="background-image: url(https://inews.gtimg.com/newsapp_match/0/11884148139/0); background-size: 100%; color: white;" id="card">
   <h1>100% Faith</h1>
-  <p>God bless you!</p> 
 </div>
 
 <div class="page-header text-center" id="title">
@@ -59,10 +58,38 @@
       const pop = array => {
         return array.pop();
       };
+      var enTeachings = ['As God always gives love, giving love is more blessed than receiving love.',
+        'When we give glory to God, that glory will be ours in the end.',
+        'When we look at things beautifully without hatred in our hearts, we can achieve perfect love.',
+        'As Abraham received more blessings when he yielded for his nephew Lot, we, too, will receive more blessings when we yield for our brothers and sisters.',
+        'Arrogance is feeling disappointed when our expectations are not met.',
+        'Although others do not work, let us work faithfully without complaining. When we work with the mindset of an owner, we can work with joy and ease.',
+        'Arrogance arises from a heart full of complaint. When we always serve God with gratitude, arrogance and complaint disappear, and humility will dwell in our hearts.',
+        'When we compliment our brothers and sisters, compliments will return to us.',
+        'As the sea receives all the dirt and purifies it, we should have a broad and beautiful heart to embrace the faults of our brothers and sisters.',
+        'Whoever wants to be led by the Lamb should become a lamb smaller than the Lamb.',
+        'Sacrifice is needed in the process of becoming a greater vessel.',
+        'We should endure present sufferings for the Kingdom of Heaven will be ours.',
+        'Even God came to serve, not to be served. When we serve one another without wanting to be served, God will be pleased.'];
+
+      var zhTeachings = ['如同上帝常賜予我們愛一樣，付出愛將比得到愛更有福。',
+        '將榮耀歸於上帝，其榮耀終歸我自己。',
+        '美好的心靈沒有憎惡，必成就圓滿的愛。',
+        '如同亞伯拉罕將好的讓給侄兒羅得後，得到更大的祝福一樣， 我們把好的讓給兄弟，就會得到更大的祝福。',
+        '所謂高傲的心是指易感到遺憾的心。',
+        '不要抱怨別人不做事，只管對自己該做的事忠心。以主人的心作工，就不會感到累反而心情愉快。',
+        '不滿積多會產生驕傲，常以感謝的心侍奉上帝，就會消除不滿和驕傲， 具備謙卑的心。',
+        '多稱讚兄弟姐妹其稱讚就返回到我這裡。',
+        '像大海容納一切污垢又淨化一樣， 包容所有兄弟姐妹缺點的大海般寬廣的胸懷，是真正美好的心靈。',
+        '願得到羔羊引導的人，要成為比羔羊還小的羊。',
+        '犧牲是成為大器皿所必須的過程。',
+        '之所以要忍耐今天的痛苦，是因為天國在我這裡。',
+        '上帝來到這世上不是要受人的服侍，乃是要服侍人， 不甘願受人的服侍，相互服侍的心是上帝所喜悅的。'];
+
       var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(239, 239, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 239, 219, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)"];
       var colors = ["rgba(239, 103, 103, 0.75)", "rgba(239, 191, 103, 0.75)", "rgba(239, 239, 103, 0.75)", "rgba(170, 239, 103, 0.75)", "rgba(103, 239, 219, 0.75)", "rgba(103, 191, 239, 0.75)", "rgba(103, 116, 239, 0.75)", "rgba(150, 103, 239, 0.75)", "rgba(225, 103, 239, 0.75)"];
+      var cardColor = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"];
       var titles = ["發表", "聽發表", "訪問", "學習", "侍奉", "睇影像說教", "祈禱", "睇真理書", "傳道", "實踐母親的教誨"];
-      var names = [];
       var dataArr = new Array(10);
 
       var bgimages=['https://elohist.watv.org/upElohist//web/photoessay/9bb5d5dd894a1022da916f00ab342241.jpg',
@@ -89,6 +116,7 @@
       if (applyTextWhite.includes(randomNumber)) {
         $('body').css({'color': 'white'});
       }
+      // card.style.color = cardColor[randomNumber];
       
       initDataArr();
       
@@ -184,7 +212,11 @@
                   var units = obj.gsx$格數.$t;
                   var num = names.indexOf(name);
                   for (var i = 0; i < units; i++) {
-                    dataArr[type].push(num);
+                    if (dataArr[type].length < 600) {
+                      dataArr[type].push(num);
+                    }else{
+                      break;
+                    }
                   }
                 }
               }
@@ -215,6 +247,21 @@
            loadData();
         }
       });
+
+      // get day
+      var now = new Date();
+      var start = new Date(now.getFullYear(), 0, 0);
+      var diff = now - start;
+      var oneDay = 1000 * 60 * 60 * 24;
+      var day = Math.floor(diff / oneDay);
+      var teachingIndex = (day+1) % 12;
+
+      // Teachings of Mother
+      var p = document.createElement('p');
+      p.appendChild(document.createTextNode(enTeachings[teachingIndex]));
+      p.appendChild(document.createElement('br'));
+      p.appendChild(document.createTextNode(zhTeachings[teachingIndex]));
+      card.appendChild(p);
 
     </script>
 </body>
