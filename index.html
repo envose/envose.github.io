@@ -100,20 +100,22 @@
 
       var enGps = ['Establish 100% Faith Campaign (Testing)'];
 
-      var bgimages=['https://elohist.watv.org/upElohist//web/photoessay/9bb5d5dd894a1022da916f00ab342241.jpg',
+      // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
+      var bgimages=['https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg',
             'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
             'https://watv.org/wp-content/uploads/2021/01/worry-first-enjoy-later.jpg',
             'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
             'https://elohist.watv.org/upElohist/web/misodiary/f9ef32e3e299634e8ad69b1e0cd3c457.jpg',
             'https://elohist.watv.org/upElohist//web/photoessay/2fa2094f4cf7f68925be1384e27038b0.jpg'];
-      var cardImages=['https://inews.gtimg.com/newsapp_match/0/11884148139/0',
+      var cardImages=['https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
             'https://watv.org/wp-content/uploads/2019/05/Allelopathy-in-Plants.jpg',
             'https://elohist.watv.org/upElohist/setting/fc33ae4829671f172ee9e7ddfffa792f.jpg',
             'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
             'https://i0.wp.com/trippy.me/wp-content/uploads/sky.gif?fit=600%2C338&ssl=1',
             'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
       var randomNumber = Math.floor(Math.random() * bgimages.length);
-      var applyTextWhite = [0, 2, 4, 5];
+      randomNumber = 0;
+      var applyTextWhite = [2, 4, 5];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
       var cardImg = 'url(' + cardImages[randomNumber] + ')';
@@ -392,6 +394,7 @@
       var diff = now - start;
       var oneDay = 1000 * 60 * 60 * 24;
       var day = Math.floor(diff / oneDay);
+      day = 6;
       var teachingIndex = day % 12;
 
       // Teachings of Mother
