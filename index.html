@@ -103,24 +103,29 @@
       // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
       var bgimages=['https://cdn.shopify.com/s/files/1/1003/7610/products/Classical_style_pattern_seamless_Wall_Mural_Wallpaper_a_1400x.jpg?v=1578614224',
             'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
-            'https://watv.org/wp-content/uploads/2021/01/worry-first-enjoy-later.jpg',
+            'https://st.depositphotos.com/1828227/1843/v/950/depositphotos_18432919-stock-illustration-lace-grape-vines-seamless-pattern.jpg',
             'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
-            'https://elohist.watv.org/upElohist/web/misodiary/f9ef32e3e299634e8ad69b1e0cd3c457.jpg',
-            'https://elohist.watv.org/upElohist//web/photoessay/2fa2094f4cf7f68925be1384e27038b0.jpg'];
+            'https://image.freepik.com/free-vector/vector-flower-seamless-pattern-background-elegant-texture-backgrounds-classical-luxury-old-fashioned-floral-ornament-seamless-texture-wallpapers-textile-wrapping_1217-390.jpg',
+            'https://i.pinimg.com/originals/2c/78/96/2c7896933736f485e23561c44e9c8e9f.jpg'];
       var cardImages=['https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
             'https://watv.org/wp-content/uploads/2019/05/Allelopathy-in-Plants.jpg',
-            'https://elohist.watv.org/upElohist/setting/fc33ae4829671f172ee9e7ddfffa792f.jpg',
+            'https://data.whicdn.com/images/301111176/original.gif',
             'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
             'https://i0.wp.com/trippy.me/wp-content/uploads/sky.gif?fit=600%2C338&ssl=1',
             'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
       var randomNumber = Math.floor(Math.random() * bgimages.length);
-      var applyTextWhite = [2, 4, 5];
+      randomNumber = 4;
+      var applyTextWhite = [2, 5];
+      var repeatBg = [0, 2, 4, 5];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
       var cardImg = 'url(' + cardImages[randomNumber] + ')';
       var card = document.querySelector('#card');
 
       $('body').css({'background':bgImg, 'background-size':'cover'});
+      if (repeatBg.includes(randomNumber)) {
+        $('body').css({'background-size':'100%', 'background-repeat': 'repeat'});
+      }
       card.style.backgroundImage = cardImg;
       if (applyTextWhite.includes(randomNumber)) {
         $('body').css({'color': 'white'});
@@ -393,6 +398,7 @@
       var diff = now - start;
       var oneDay = 1000 * 60 * 60 * 24;
       var day = Math.floor(diff / oneDay);
+      day=6;
       var teachingIndex = day % 12;
 
       // Teachings of Mother
