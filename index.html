@@ -14,7 +14,8 @@
 <body>
 
 <div class="jumbotron text-center" style="background-size: 100%; color: white;" id="card">
-  <h1>100% Faith</h1>
+  <div id="card_container" style="height:100%; width:100%;">
+  </div>
 </div>
 
 <div class="page-header text-center" id="title">
@@ -103,19 +104,20 @@
       // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
       var bgimages=['https://cdn.shopify.com/s/files/1/1003/7610/products/Classical_style_pattern_seamless_Wall_Mural_Wallpaper_a_1400x.jpg?v=1578614224',
             'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
-            'https://st.depositphotos.com/1828227/1843/v/950/depositphotos_18432919-stock-illustration-lace-grape-vines-seamless-pattern.jpg',
+            'https://image.freepik.com/free-vector/father-s-day-themed-seamless-pattern_1319-486.jpg',
             'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
-            'https://image.freepik.com/free-vector/vector-flower-seamless-pattern-background-elegant-texture-backgrounds-classical-luxury-old-fashioned-floral-ornament-seamless-texture-wallpapers-textile-wrapping_1217-390.jpg',
-            'https://i.pinimg.com/originals/2c/78/96/2c7896933736f485e23561c44e9c8e9f.jpg'];
+            'https://image.freepik.com/free-vector/white-prism-background-design-vector_53876-86339.jpg',
+            'http://vrthumb.imagetoday.co.kr/2017/08/09/tid274t000160.jpg'];
       var cardImages=['https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
             'https://watv.org/wp-content/uploads/2019/05/Allelopathy-in-Plants.jpg',
-            'https://data.whicdn.com/images/301111176/original.gif',
+            'https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif',
             'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
-            'https://i0.wp.com/trippy.me/wp-content/uploads/sky.gif?fit=600%2C338&ssl=1',
+            'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
             'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
       var randomNumber = Math.floor(Math.random() * bgimages.length);
-      var applyTextWhite = [2, 5];
+      var applyTextWhite = [];
       var repeatBg = [0, 2, 4, 5];
+      var rotateCardBg = [4];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
       var cardImg = 'url(' + cardImages[randomNumber] + ')';
@@ -128,8 +130,55 @@
       card.style.backgroundImage = cardImg;
       if (applyTextWhite.includes(randomNumber)) {
         $('body').css({'color': 'white'});
-      }      
+      }
+
+      // get day
+      var now = new Date();
+      var start = new Date(now.getFullYear(), 0, 0);
+      var diff = now - start;
+      var oneDay = 1000 * 60 * 60 * 24;
+      var day = Math.floor(diff / oneDay);
+      var teachingIndex = day % 12;
+
+      // card title
+      var h1 = document.createElement('h1');
+      h1.appendChild(document.createTextNode('100% Faith'));
+      h1.id = 'card_h1';
+
+      // Teachings of Mother
+      var p = document.createElement('p');
+      p.appendChild(document.createTextNode(enTeachings[teachingIndex]));
+      p.appendChild(document.createElement('br'));
+      p.appendChild(document.createTextNode(zhTeachings[teachingIndex]));
+      p.style.fontSize = "1rem";
+      p.id = "card_p";
+
+      var card_container = document.querySelector('#card_container');
+      if (rotateCardBg.includes(randomNumber)) {
+        card.style.transform = 'rotate(180deg)';
+        card_container.style.transform = 'rotate(180deg)';
+      }
+
+      card_container.appendChild(h1);
+      card_container.appendChild(p);
+
       initDataArr();
+
+
+      // disable right click
+      var message = "不可以偷看喔！";
+      function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }
+
+      if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
+
+      document.onmousedown = rtclickcheck;
+
+      $('#key').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+           loadData();
+        }
+      });
       
       function initDataArr() {
         for (var i = 0; i < 10; i++){
@@ -374,39 +423,6 @@
           }
         }
       }
-
-      // disable right click
-      var message = "不可以偷看喔！";
-
-      function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }
-
-      if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
-
-      document.onmousedown = rtclickcheck;
-
-      $('#key').keypress(function(event){
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if(keycode == '13'){
-           loadData();
-        }
-      });
-
-      // get day
-      var now = new Date();
-      var start = new Date(now.getFullYear(), 0, 0);
-      var diff = now - start;
-      var oneDay = 1000 * 60 * 60 * 24;
-      var day = Math.floor(diff / oneDay);
-      day=6;
-      var teachingIndex = day % 12;
-
-      // Teachings of Mother
-      var p = document.createElement('p');
-      p.appendChild(document.createTextNode(enTeachings[teachingIndex]));
-      p.appendChild(document.createElement('br'));
-      p.appendChild(document.createTextNode(zhTeachings[teachingIndex]));
-      p.style.fontSize = "1rem";
-      card.appendChild(p);
 
     </script>
 </body>
