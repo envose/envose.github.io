@@ -4,8 +4,8 @@
   <title>100% Faith</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="ruby-gemstone.png" rel="icon" type="image/png">
-  <link href="ruby-gemstone.png" rel="apple-touch-icon" type="image/png">
+  <link href="https://envose.github.io/ruby-gemstone.png" rel="icon" type="image/png">
+  <link href="https://envose.github.io/ruby-gemstone.png" rel="apple-touch-icon" type="image/png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -17,19 +17,25 @@
   <div id="card_container" style="height:100%; width:100%;">
   </div>
 </div>
-
+<!-- <div class="dropdown d-flex justify-content-center" style="margin:1rem;">
+  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    區域
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu" id="menu">
+  </div>
+</div> -->
 <div class="page-header text-center" id="title">
 </div>
   
 <div class="container">
   <div class="row">
-    <div class="col-sm-1" id="nameList">
-        <div class="form-group">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="key" placeholder="密碼">
-        </div>
-        <button class="btn btn-primary" onclick="loadData()">提交</button>
+    <div class="col-sm-1">
+      <div class="form-group">
+        <input type="text" class="form-control" id="key" placeholder="密碼">
+      </div>
+      <button class="btn btn-primary" onclick="loadData()">提交</button>
+      <div id="nameList">
+      </div>
       <hr>
     </div>
     <div class="col-sm-1" id="table0">
@@ -97,6 +103,9 @@
       var title;
       var names = [];
       var dataArr = new Array(10);
+      var completeArr = new Array(10);
+      var isListAll = false;
+      var list = [];
 
 
       var enGps = ['Establish 100% Faith Campaign: Testing'];
@@ -104,19 +113,29 @@
       // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
       var bgimages=['https://cdn.shopify.com/s/files/1/1003/7610/products/Classical_style_pattern_seamless_Wall_Mural_Wallpaper_a_1400x.jpg?v=1578614224',
             'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
-            'https://image.freepik.com/free-vector/father-s-day-themed-seamless-pattern_1319-486.jpg',
+            'https://wallpaperaccess.com/full/802624.jpg',
             'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
             'https://image.freepik.com/free-vector/white-prism-background-design-vector_53876-86339.jpg',
-            'http://vrthumb.imagetoday.co.kr/2017/08/09/tid274t000160.jpg'];
+            'https://i.pinimg.com/736x/88/4b/ec/884becb4540e2724d01db2b53ccdb71e.jpg'];
       var cardImages=['https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
             'https://watv.org/wp-content/uploads/2019/05/Allelopathy-in-Plants.jpg',
             'https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif',
             'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
             'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
             'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
+      var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
+            'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
+            'https://media0.giphy.com/media/87gEOGe1VT5md30Qgn/giphy.gif',
+            'https://media1.giphy.com/media/LZ5xZMrO7i4JH3glcj/giphy.gif',
+            'https://media1.giphy.com/media/pz3ZNXGgvR19V7k8Eb/giphy.gif',
+            'https://media2.giphy.com/media/1qgdfBl0FRZ4dM7YzU/source.gif',
+            'https://media3.giphy.com/media/fQMmshQtGmqXxwHoO1/giphy.gif',
+            'https://media0.giphy.com/media/3gWIjOpHyh066G46he/giphy.gif',
+            'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
+            'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
       var randomNumber = Math.floor(Math.random() * bgimages.length);
       var applyTextWhite = [];
-      var repeatBg = [0, 2, 4, 5];
+      var repeatBg = [0, 4, 5];
       var rotateCardBg = [4];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
@@ -181,8 +200,27 @@
       });
       
       function initDataArr() {
+
+        names = [];
+        dataArr = new Array(10);
+        completeArr = new Array(10);
         for (var i = 0; i < 10; i++){
           dataArr[i] = [];
+          completeArr[i] = 0;
+        }
+      }
+
+      function initContainers() {
+        var h = document.querySelector('#nameList');
+        h.innerHTML = '';
+        var t = document.querySelector('#title');
+        t.innerHTML = '';
+        for (var i = 0; i < 10; i++) {
+          var str1 = '#table';
+          var selector = str1.concat(i.toString());
+          var column = document.querySelector(selector);
+
+          column.innerHTML = '';
         }
       }
 
@@ -216,6 +254,25 @@
         tbl.appendChild(tbdy);
         column.appendChild(tbl);
         createColumnTitle(column, index);
+        createColumnCompleteMarks(column, index);
+      }
+
+      function createColumnCompleteMarks(column, index) {
+        var div = document.createElement('div');
+        div.style.textAlign = 'center';
+        div.style.marginBottom = '3rem';
+        for (var i = 0; i < completeArr[index]; i++) {
+          var img = document.createElement('img');
+          img.src = completeImages[index];
+          if (index == 9)
+            img.style.width = '1.5rem';
+          else
+            img.style.width = '1rem';
+          img.style.height = 'auto';
+          img.style.margin = '0.5rem';
+          div.appendChild(img);
+        }
+        column.appendChild(div);
       }
 
       function createColumnTitle(column, index) {
@@ -239,6 +296,23 @@
         }
       }
 
+      function createMenuItem(item, key) {
+        var menu = document.querySelector('#menu');
+        var btn = document.createElement('button');
+        btn.classList.add('dropdown-item');
+        btn.type = 'button';
+        btn.id = key;
+        btn.onclick = function() {selectGp(btn)};
+        btn.appendChild(document.createTextNode(item));
+        menu.appendChild(btn);
+      }
+
+      function selectGp(btn) {
+        var menuBtn = document.querySelector('#dropdownMenu');
+        menuBtn.innerHTML = btn.innerHTML;
+        parseData(btn.id);
+      }
+
       function loadData() {
         var key = document.getElementById("key").value;
         localStorage.setItem("key", key);
@@ -247,68 +321,93 @@
 
       window.onload = function() {
 
-        var key = localStorage.getItem("key");
-        if (key !== null) {
+        if (isListAll) {
+          localStorage.clear();
+          var key = '1JdbPseFBz9jUJiSDkg5zUnHe4noeag6HuJHnQoqXYJs/od6';
           var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
 
           $.getJSON(url, function(data) {
 
             if (data !== null) {
-              // JSON result in `data` variable
-              console.log(data);
-              title = data.feed.title.$t;
-              var entry = data.feed.entry;
-              var lastUpdateDate;
-
-
-
-              var titleDiv = document.querySelector('#title');
-              var h3 = document.createElement('h3');
-              h3.appendChild(document.createTextNode(title));
-              titleDiv.appendChild(h3);
-
-              var i = 0;
-              for (var key in data.feed.entry) {
-                var obj = data.feed.entry[key];
-                lastUpdateDate = new Date(obj.gsx$timestamp.$t);
-                if (enGps.includes(title)) {
-                  var name = obj.gsx$name.$t;
-                  if (name) {
-                    if (!names.includes(name)) {
-                      names.push(name);
-                    }
-                    if (i < 10) {
-                      i++;
-                      continue;
-                    }
+                // JSON result in `data` variable
+                for (var key in data.feed.entry) {
+                  var obj = data.feed.entry[key];
+                  if (obj.gsx$密碼.$t) {
+                    list.push(obj);
+                    createMenuItem(obj.gsx$區域.$t, obj.gsx$密碼.$t);
                   }
-                  getEngEntry(obj);
-                }else{
-                  var name = obj.gsx$姓名.$t;
-                  if (name) {
-                    if (!names.includes(name)) {
-                      names.push(name);
-                    }
-                    if (i < 10) {
-                      i++;
-                      continue;
-                    }
-                  }
-                  getEntry(obj);
                 }
-              }
-              var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
-              updateLastUpdate(lastUpdateStr);
-              updateNameList(names);
-              createAllTable();
-            }else{
-              console.log('incorrect key');
-              localStorage.clear();
-              location.reload();
             }
-            
           });
+
+        }else{
+          var key = localStorage.getItem("key");
+          if (key !== null) {
+            parseData(key);
+          }
         }
+
+      }
+
+      function parseData (key) {
+        initDataArr();
+        initContainers();
+        var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
+
+        $.getJSON(url, function(data) {
+
+          if (data !== null) {
+            // JSON result in `data` variable
+            title = data.feed.title.$t;
+            var entry = data.feed.entry;
+            var lastUpdateDate;
+
+            var titleDiv = document.querySelector('#title');
+            var h3 = document.createElement('h3');
+            h3.appendChild(document.createTextNode(title));
+            titleDiv.appendChild(h3);
+
+            var i = 0;
+            for (var key in data.feed.entry) {
+              var obj = data.feed.entry[key];
+              lastUpdateDate = new Date(obj.gsx$timestamp.$t);
+              if (enGps.includes(title)) {
+                var name = obj.gsx$name.$t;
+                if (name) {
+                  if (!names.includes(name)) {
+                    names.push(name);
+                  }
+                  if (i < 10) {
+                    i++;
+                    continue;
+                  }
+                }
+                getEngEntry(obj);
+              }else{
+                var name = obj.gsx$姓名.$t;
+                if (name) {
+                  if (!names.includes(name)) {
+                    names.push(name);
+                  }
+                  if (i < 10) {
+                    i++;
+                    continue;
+                  }
+                }
+                getEntry(obj);
+              }
+            }
+            var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
+            updateLastUpdate(lastUpdateStr);
+            updateNameList(names);
+            createAllTable();
+          }else{
+            console.log('incorrect key');
+            localStorage.clear();
+            location.reload();
+          }
+
+        });
       }
 
       function getEngEntry (obj) {
@@ -416,11 +515,11 @@
 
       function updateDataArr(type, units, num) {
         for (var i = 0; i < units; i++) {
-          if (dataArr[type].length < names.length*100) {
-            dataArr[type].push(num);
-          }else{
-            break;
+          if (dataArr[type].length >= names.length*100) {
+            dataArr[type] = [];
+            completeArr[type]++;
           }
+          dataArr[type].push(num);
         }
       }
 
