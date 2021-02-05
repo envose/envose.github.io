@@ -131,6 +131,7 @@
             'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
             'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
       var randomNumber = Math.floor(Math.random() * 2);
+      randomNumber = randomNumber*2 + 2;
       var applyTextWhite = [];
       var repeatBg = [0, 4, 5];
       var rotateCardBg = [4];
@@ -286,36 +287,50 @@
         }
       }
 
-      function createForm() {
+      function createForm(islogged) {
         var form = document.querySelector('#form');
-        var div = document.createElement('div');
-        div.classList.add('form-group');
 
-        var input = document.createElement('input');
-        input.type = 'password';
-        input.classList.add('form-control');
-        input.id='key';
-        input.placeholder = '密碼';
-        input.style.marginBottom = '0.5rem';
-        input.onkeypress = function(event) {
-          var keycode = (event.keyCode ? event.keyCode : event.which);
-          if(keycode == '13'){
-             loadData();
-          }
-        };
-        div.appendChild(input);
+        if (islogged) {
+          var logoutbtn = document.createElement('button');
+          logoutbtn.classList.add('btn');
+          logoutbtn.classList.add('btn-danger');
+          logoutbtn.appendChild(document.createTextNode('登出'));
+          logoutbtn.onclick = function() {logout()};
+          form.appendChild(logoutbtn);
 
-        var btn = document.createElement('button');
-        btn.classList.add('btn');
-        btn.classList.add('btn-primary');
-        btn.onclick = function() {loadData()};
-        btn.appendChild(document.createTextNode('提交'));
-        div.appendChild(btn);
+          var hr = document.createElement('hr');
+          form.appendChild(hr);
+        }else{
+          var div = document.createElement('div');
+          div.classList.add('form-group');
 
-        var hr = document.createElement('hr');
-        div.appendChild(hr);
+          var input = document.createElement('input');
+          input.type = 'password';
+          input.classList.add('form-control');
+          input.id='key';
+          input.placeholder = '密碼';
+          input.style.marginBottom = '0.5rem';
+          input.onkeypress = function(event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+               loadData();
+            }
+          };
+          div.appendChild(input);
 
-        form.appendChild(div);
+          var btn = document.createElement('button');
+          btn.classList.add('btn');
+          btn.classList.add('btn-primary');
+          btn.onclick = function() {loadData()};
+          btn.appendChild(document.createTextNode('提交'));
+          div.appendChild(btn);
+
+          var hr = document.createElement('hr');
+          div.appendChild(hr);
+
+          form.appendChild(div);
+        }
+        
       }
 
       function createMenuItem(menu, item, key) {
@@ -398,9 +413,11 @@
             }
           });
         }else {
-          createForm();
           if (key) {
+            createForm(true);
             parseData(key);
+          }else{
+            createForm(false);
           }
         }
 
