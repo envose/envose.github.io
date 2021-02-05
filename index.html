@@ -17,12 +17,7 @@
   <div id="card_container" style="height:100%; width:100%;">
   </div>
 </div>
-<div class="dropdown d-flex justify-content-center" style="margin:1rem;">
-  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    區域
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu" id="menu">
-  </div>
+<div class="dropdown d-flex justify-content-center" style="margin:1rem;" id='dropdown'>
 </div>
 <div class="page-header text-center" id="title">
 </div>
@@ -30,11 +25,13 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-1">
-      <!-- <div class="form-group">
-        <input type="text" class="form-control" id="key" placeholder="密碼">
+      <div id='form'>
+<!--         <div class="form-group">
+          <input type="text" class="form-control" id="key" placeholder="密碼">
+        </div>
+        <button class="btn btn-primary" onclick="loadData()">提交</button>
+        <hr> -->
       </div>
-      <button class="btn btn-primary" onclick="loadData()">提交</button>
-      <hr> -->
       <div id="nameList">
       </div>
     </div>
@@ -104,7 +101,7 @@
       var names = [];
       var dataArr = new Array(10);
       var completeArr = new Array(10);
-      var isListAll = true;
+      var isListAll = false;
       var list = [];
 
 
@@ -191,13 +188,6 @@
       if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
 
       document.onmousedown = rtclickcheck;
-
-      $('#key').keypress(function(event){
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if(keycode == '13'){
-           loadData();
-        }
-      });
       
       function initDataArr() {
 
@@ -296,8 +286,40 @@
         }
       }
 
-      function createMenuItem(item, key) {
-        var menu = document.querySelector('#menu');
+      function createForm() {
+        var form = document.querySelector('#form');
+        var div = document.createElement('div');
+        div.classList.add('form-group');
+
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.classList.add('form-control');
+        input.id='key';
+        input.placeholder = '密碼';
+        input.style.marginBottom = '0.5rem';
+        input.onkeypress = function(event) {
+          var keycode = (event.keyCode ? event.keyCode : event.which);
+          if(keycode == '13'){
+             loadData();
+          }
+        };
+        div.appendChild(input);
+
+        var btn = document.createElement('button');
+        btn.classList.add('btn');
+        btn.classList.add('btn-primary');
+        btn.onclick = function() {loadData()};
+        btn.appendChild(document.createTextNode('提交'));
+        div.appendChild(btn);
+
+        var hr = document.createElement('hr');
+        div.appendChild(hr);
+
+        form.appendChild(div);
+      }
+
+      function createMenuItem(menu, item, key) {
+        // var menu = document.querySelector('#menu');
         var btn = document.createElement('button');
         btn.classList.add('dropdown-item');
         btn.type = 'button';
@@ -305,6 +327,40 @@
         btn.onclick = function() {selectGp(btn)};
         btn.appendChild(document.createTextNode(item));
         menu.appendChild(btn);
+      }
+
+      function createDropDown() {
+        const dd = document.querySelector('#dropdown');
+        var btn = document.createElement('button');
+        btn.classList.add('btn');
+        btn.classList.add('btn-info');
+        btn.classList.add('dropdown-toggle');
+        btn.type = 'button';
+        btn.id = 'dropdownMenu';
+        btn.setAttribute('data-toggle', 'dropdown');
+        btn.setAttribute('aria-haspopup', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.appendChild(document.createTextNode('區域'));
+        dd.appendChild(btn);
+
+        var div = document.createElement('div');
+        div.classList.add('dropdown-menu');
+        div.setAttribute('aria-labelledby', 'dropdownMenu');
+        div.id = 'menu';
+        dd.appendChild(div);
+
+        for (var item in list) {
+          var obj = list[item];
+          createMenuItem(div, obj.gsx$區域.$t, obj.gsx$密碼.$t);
+        }
+
+        var logoutbtn = document.createElement('button');
+        logoutbtn.classList.add('btn');
+        logoutbtn.classList.add('btn-danger');
+        logoutbtn.style.marginLeft = '0.5rem';
+        logoutbtn.appendChild(document.createTextNode('登出'));
+        logoutbtn.onclick = function() {logout()};
+        dd.appendChild(logoutbtn);
       }
 
       function selectGp(btn) {
@@ -321,10 +377,11 @@
 
       window.onload = function() {
 
-        if (isListAll) {
-          localStorage.clear();
-          var key = '1FFeYr-tHGtlmDvTDscQpBWb9zNqEhmdhpv_cOv1ZS2c/od6';
-          var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
+        var key = localStorage.getItem("key");
+        if (key === 'jackshin') {
+
+          const key = '1FFeYr-tHGtlmDvTDscQpBWb9zNqEhmdhpv_cOv1ZS2c/od6';
+          const url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
 
           $.getJSON(url, function(data) {
 
@@ -334,15 +391,15 @@
                   var obj = data.feed.entry[key];
                   if (obj.gsx$密碼.$t) {
                     list.push(obj);
-                    createMenuItem(obj.gsx$區域.$t, obj.gsx$密碼.$t);
                   }
                 }
+
+                createDropDown();
             }
           });
-
-        }else{
-          var key = localStorage.getItem("key");
-          if (key !== null) {
+        }else {
+          createForm();
+          if (key) {
             parseData(key);
           }
         }
@@ -350,6 +407,7 @@
       }
 
       function parseData (key) {
+
         initDataArr();
         initContainers();
         var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
@@ -521,6 +579,11 @@
             completeArr[type]++;
           }
         }
+      }
+
+      function logout () {
+        localStorage.clear();
+        location.reload();
       }
 
     </script>
