@@ -92,10 +92,15 @@
         '之所以要忍耐今天的痛苦，是因為天國在我這裡。',
         '上帝來到這世上不是要受人的服侍，乃是要服侍人， 不甘願受人的服侍，相互服侍的心是上帝所喜悅的。'];
 
-      var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(239, 239, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 239, 219, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)"];
-      var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)"];
+      // var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(239, 239, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 239, 219, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)"];
+      // var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)"];
+
+      var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)", "rgba(103, 239, 219, 1)", "rgba(239, 239, 103, 1)"];
+      var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(239, 239, 103, 0.85)"];
+
       var cardColor = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"];
       var titles = ["禱告", "父親真理書", "講道書/影像說教（禮拜除外）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（包括探訪）", "實踐母親的教誨"];
+      var displayTitles = ["禱告", "父親真理書", "講道書／影像說教（ 禮拜除外 ）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（ 包括探訪 ）", "實踐母親的教誨"];
       var enTitles = ["Prayer", "Father's Truth Books", "Sermon Books/ Video Sermon (exclude worship services)", "Bible", "Study", "Sermon Preaching", "Listening to Sermon Preaching", "Preaching", "Service (include Visit)", "Practice the Teachings of Mother"];
       var title;
       var names = [];
@@ -105,7 +110,7 @@
       var list = [];
 
 
-      var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-4', 'Establish 100% Faith Campaign: Female Young Adult 4-5'];
+      var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
 
       // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
       var bgimages=['https://cdn.shopify.com/s/files/1/1003/7610/products/Classical_style_pattern_seamless_Wall_Mural_Wallpaper_a_1400x.jpg?v=1578614224',
@@ -271,7 +276,7 @@
         if (enGps.includes(title)) {
           h6.appendChild(document.createTextNode(enTitles[index]));
         }else{
-          h6.appendChild(document.createTextNode(titles[index]));
+          h6.appendChild(document.createTextNode(displayTitles[index]));
         }
         h6.style.textAlign = "center";
         column.appendChild(h6);
@@ -322,7 +327,7 @@
           btn.classList.add('btn');
           btn.classList.add('btn-primary');
           btn.onclick = function() {loadData()};
-          btn.appendChild(document.createTextNode('提交'));
+          btn.appendChild(document.createTextNode('登入'));
           div.appendChild(btn);
 
           var hr = document.createElement('hr');
