@@ -130,7 +130,8 @@
             'https://media0.giphy.com/media/3gWIjOpHyh066G46he/giphy.gif',
             'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
             'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
-      var randomNumber = Math.floor(Math.random() * bgimages.length);
+      var randomNumber = Math.floor(Math.random() * 2);
+      randomNumber = randomNumber*2 + 2;
       var applyTextWhite = [];
       var repeatBg = [0, 4, 5];
       var rotateCardBg = [4];
@@ -292,7 +293,7 @@
         div.classList.add('form-group');
 
         var input = document.createElement('input');
-        input.type = 'text';
+        input.type = 'password';
         input.classList.add('form-control');
         input.id='key';
         input.placeholder = '密碼';
