@@ -17,24 +17,24 @@
   <div id="card_container" style="height:100%; width:100%;">
   </div>
 </div>
-<!-- <div class="dropdown d-flex justify-content-center" style="margin:1rem;">
+<div class="dropdown d-flex justify-content-center" style="margin:1rem;">
   <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     區域
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenu" id="menu">
   </div>
-</div> -->
+</div>
 <div class="page-header text-center" id="title">
 </div>
   
 <div class="container">
   <div class="row">
     <div class="col-sm-1">
-      <div class="form-group">
+      <!-- <div class="form-group">
         <input type="text" class="form-control" id="key" placeholder="密碼">
       </div>
       <button class="btn btn-primary" onclick="loadData()">提交</button>
-      <hr>
+      <hr> -->
       <div id="nameList">
       </div>
     </div>
@@ -104,7 +104,7 @@
       var names = [];
       var dataArr = new Array(10);
       var completeArr = new Array(10);
-      var isListAll = false;
+      var isListAll = true;
       var list = [];
 
 
@@ -323,7 +323,7 @@
 
         if (isListAll) {
           localStorage.clear();
-          var key = '1JdbPseFBz9jUJiSDkg5zUnHe4noeag6HuJHnQoqXYJs/od6';
+          var key = '1FFeYr-tHGtlmDvTDscQpBWb9zNqEhmdhpv_cOv1ZS2c/od6';
           var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
 
           $.getJSON(url, function(data) {
