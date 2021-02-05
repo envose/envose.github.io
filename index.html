@@ -515,11 +515,11 @@
 
       function updateDataArr(type, units, num) {
         for (var i = 0; i < units; i++) {
+          dataArr[type].push(num);
           if (dataArr[type].length >= names.length*100) {
             dataArr[type] = [];
             completeArr[type]++;
           }
-          dataArr[type].push(num);
         }
       }
 
