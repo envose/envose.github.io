@@ -111,6 +111,7 @@
 
 
       var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
+      var zhEnGps = ['建立100%信心活動：壯年1-3／Establish 100% Faith Campaign: Male Adult 1-3'];
 
       // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
       var bgimages=['https://cdn.shopify.com/s/files/1/1003/7610/products/Classical_style_pattern_seamless_Wall_Mural_Wallpaper_a_1400x.jpg?v=1578614224',
@@ -280,6 +281,12 @@
         }
         h6.style.textAlign = "center";
         column.appendChild(h6);
+        if (zhEnGps.includes(title)) {
+          var h6 = document.createElement('h6');
+          h6.appendChild(document.createTextNode(enTitles[index]));
+          h6.style.textAlign = "center";
+          column.appendChild(h6);
+        }
       }
 
       function updateNameList(names) {
@@ -463,7 +470,19 @@
                   }
                 }
                 getEngEntry(obj);
-              }else{
+              }else if (zhEnGps.includes(title)) {
+                var name = obj.gsx$姓名name.$t;
+                if (name) {
+                  if (!names.includes(name)) {
+                    names.push(name);
+                  }
+                  if (i < 10) {
+                    i++;
+                    continue;
+                  }
+                }
+                getZhEngEntry(obj);
+              }else {
                 var name = obj.gsx$姓名.$t;
                 if (name) {
                   if (!names.includes(name)) {
@@ -533,6 +552,52 @@
 
         if (obj.gsx$practicetheteachingsofmother.$t){
           updateDataArr(9, parseInt(obj.gsx$practicetheteachingsofmother.$t)/10, num);
+        }
+      }
+
+      function getZhEngEntry (obj) {
+        var type;
+        var units;
+        var name = obj.gsx$姓名name.$t;
+        var num = names.indexOf(name);
+        if (obj.gsx$禱告prayer.$t){
+          updateDataArr(0, parseInt(obj.gsx$禱告prayer.$t)/10, num);
+        }
+
+        if (obj.gsx$父親真理書fatherstruthbooks.$t){
+          updateDataArr(1, parseInt(obj.gsx$父親真理書fatherstruthbooks.$t)/10, num);
+        }
+
+        if (obj.gsx$講道書影像說教禮拜除外sermonbooksvideosermonexcludeworshipservices.$t){
+          updateDataArr(2, parseInt(obj.gsx$講道書影像說教禮拜除外sermonbooksvideosermonexcludeworshipservices.$t)/10, num);
+        }
+
+        if (obj.gsx$聖經bible.$t){
+          updateDataArr(3, parseInt(obj.gsx$聖經bible.$t)/10, num);
+        }
+
+        if (obj.gsx$學習study.$t){
+          updateDataArr(4, parseInt(obj.gsx$學習study.$t)/10, num);
+        }
+
+        if (obj.gsx$發表sermonpreaching.$t){
+          updateDataArr(5, parseInt(obj.gsx$發表sermonpreaching.$t)/10, num);
+        }
+
+        if (obj.gsx$聽發表listeningtosermonpreaching.$t){
+          updateDataArr(6, parseInt(obj.gsx$聽發表listeningtosermonpreaching.$t)/10, num);
+        }
+
+        if (obj.gsx$傳道preaching.$t){
+          updateDataArr(7, parseInt(obj.gsx$傳道preaching.$t)/10, num);
+        }
+
+        if (obj.gsx$事奉包括探訪serviceincludevisit.$t){
+          updateDataArr(8, parseInt(obj.gsx$事奉包括探訪serviceincludevisit.$t)/10, num);
+        }
+
+        if (obj.gsx$實踐母親的教誨practicetheteachingsofmother.$t){
+          updateDataArr(9, parseInt(obj.gsx$實踐母親的教誨practicetheteachingsofmother.$t)/10, num);
         }
       }
 
