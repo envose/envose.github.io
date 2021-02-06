@@ -10,11 +10,32 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    .calendar {
+      position: relative;
+      text-align: center;
+      color: white;
+      margin-top: 0;
+    }
+    .centered {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
 </head>
 <body>
 
 <div class="jumbotron text-center" style="background-size: 100%; color: white;" id="card">
   <div id="card_container" style="height:100%; width:100%;">
+  </div>
+</div>
+
+<div class="calendar">
+  <img src="https://cdn.icon-icons.com/icons2/1520/PNG/512/calendarblankflat_106035.png" style="width:100px; height: auto;">
+  <div class="centered">
+    <span id="100days" style="text-align: center;font-size: 40px;margin-top: 0px; color:black;"></span><br>
   </div>
 </div>
 <div class="dropdown d-flex justify-content-center" style="margin:1rem;" id='dropdown'>
@@ -154,6 +175,47 @@
       if (applyTextWhite.includes(randomNumber)) {
         $('body').css({'color': 'white'});
       }
+
+      // countdown
+      // Set the date we're counting down to
+      var countDownDate = new Date("May 18, 2021 00:00:00").getTime();
+      var countDate = new Date("Feb 7, 2021 00:00:00").getTime();
+
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+          
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        var distance2 = now - countDate;
+          
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        var days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+        if (days2 > 100) {
+          days2 = '結';
+        }
+          
+        // Output the result in an element with id="demo"
+        // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        // + minutes + "m " + seconds + "s ";
+        // document.getElementById("demo").innerHTML = days;
+        document.getElementById("100days").innerHTML = days2;
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+      }, 1000);
+
+
 
       // get day
       var now = new Date();
