@@ -467,6 +467,11 @@
 
       window.onload = function() {
 
+        let urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('$k')) {
+          localStorage.setItem("key", urlParams.get('$k'));
+        }
+
         var key = localStorage.getItem("key");
         if (key === 'jackshin') {
 
@@ -754,7 +759,8 @@
 
       function logout () {
         localStorage.clear();
-        location.reload();
+        console.log(window.location.href.split('?')[0]);
+        window.location.assign(window.location.href.split('?')[0]);
       }
 
     </script>
