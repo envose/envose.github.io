@@ -572,9 +572,7 @@
             updateNameList(names);
             createAllTable();
           }else{
-            console.log('incorrect key');
-            localStorage.clear();
-            location.reload();
+            logout();
           }
 
         });
@@ -758,7 +756,6 @@
 
       function logout () {
         localStorage.clear();
-        console.log(window.location.href.split('?')[0]);
         window.location.assign(window.location.href.split('?')[0]);
       }
 
