@@ -40,12 +40,6 @@
   </div>
 </div>
 
-<div class="calendar">
-  <img src="https://cdn.icon-icons.com/icons2/1520/PNG/512/calendarblankflat_106035.png" style="width:100px; height: auto;">
-  <div class="centered">
-    <span id="100days" style="text-align: center;font-size: 40px;margin-top: 0px; color:black;"></span><br>
-  </div>
-</div>
 <div class="dropdown d-flex justify-content-center" style="margin:1rem;" id='dropdown'>
 </div>
 <div class="page-header text-center" id="title">
@@ -88,6 +82,13 @@
     </div>
   </div>
 </div>
+<hr>
+<div class="calendar">
+  <img src="https://cdn2.iconfinder.com/data/icons/date-and-time-fill-outline/64/Calendar_month_date_schedule_blank-512.png" style="width:100px; height: auto;">
+  <div class="centered">
+    <span id="100days" style="text-align: center;font-size: 40px;margin-top: 0px; color:black;"></span><br>
+  </div>
+</div>
 
     <script id='script'>
       const pop = array => {
@@ -124,8 +125,8 @@
       // var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(239, 239, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 239, 219, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)"];
       // var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)"];
 
-      var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)", "rgba(103, 239, 219, 1)", "rgba(239, 239, 103, 1)"];
-      var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(239, 239, 103, 0.85)"];
+      var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)", "rgba(103, 239, 219, 1)", "rgba(239, 239, 103, 1)", "rgba(149, 194, 148, 1)", "rgba(75, 130, 74, 1)"];
+      var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(149, 194, 148, 0.85)", "rgba(75, 130, 74, 0.85)"];
 
       var cardColor = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"];
       var titles = ["禱告", "父親真理書", "講道書/影像說教（禮拜除外）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（包括探訪）", "實踐母親的教誨"];
@@ -140,7 +141,7 @@
 
 
       var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
-      var zhEnGps = ['建立100%信心活動：壯年1-3／Establish 100% Faith Campaign: Male Adult 1-3'];
+      var zhEnGps = ['建立100%信心活動：壯年4組／Establish 100% Faith Campaign: Male Adult Group 4'];
 
       // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
       var bgimages=['https://cdn.shopify.com/s/files/1/1003/7610/products/Classical_style_pattern_seamless_Wall_Mural_Wallpaper_a_1400x.jpg?v=1578614224',
@@ -402,9 +403,6 @@
           btn.appendChild(document.createTextNode('登入'));
           div.appendChild(btn);
 
-          var hr = document.createElement('hr');
-          div.appendChild(hr);
-
           form.appendChild(div);
         }
         
@@ -506,8 +504,9 @@
         initContainers();
         var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
 
+        var success = false;
         $.getJSON(url, function(data) {
-
+          success = true;
           if (data !== null) {
             // JSON result in `data` variable
             title = data.feed.title.$t;
@@ -522,7 +521,7 @@
             var i = 0;
             for (var key in data.feed.entry) {
               var obj = data.feed.entry[key];
-              lastUpdateDate = new Date(obj.gsx$timestamp.$t);
+              lastUpdateDate = parseDate(obj.gsx$timestamp.$t);
               if (enGps.includes(title)) {
                 var name = obj.gsx$name.$t;
                 if (name) {
@@ -561,8 +560,10 @@
                 getEntry(obj);
               }
             }
-            var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
-            updateLastUpdate(lastUpdateStr);
+            if (lastUpdateDate) {
+              var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
+              updateLastUpdate(lastUpdateStr);
+            }
             updateNameList(names);
             createAllTable();
           }else{
@@ -572,12 +573,21 @@
           }
 
         });
+        // handle wrong key
+        const timeout = setTimeout(function() {
+          if (!success){
+            // Handle error accordingly
+            alert("密碼錯誤\nWrong Password");
+            localStorage.clear();
+            location.reload();
+          }
+        }, 10000);
       }
 
       function getEngEntry (obj) {
         var type;
         var units;
-        var name = obj.gsx$姓名.$t;
+        var name = obj.gsx$name.$t;
         var num = names.indexOf(name);
         if (obj.gsx$prayer.$t){
           updateDataArr(0, parseInt(obj.gsx$prayer.$t)/10, num);
@@ -710,6 +720,15 @@
         if (obj.gsx$實踐母親的教誨.$t){
           updateDataArr(9, parseInt(obj.gsx$實踐母親的教誨.$t)/10, num);
         }
+      }
+
+      function parseDate(dateString) { 
+        var parts = dateString.split(' ');
+        var dateParts = parts[0].split('/');
+        var timeParts = parts[1].split(':');
+        var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], timeParts[0], timeParts[1], timeParts[2]); 
+        return dateObject;
+
       }
 
       function updateLastUpdate (lastUpdateStr) {
