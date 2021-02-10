@@ -583,8 +583,7 @@
           if (!success){
             // Handle error accordingly
             alert("密碼錯誤\nWrong Password");
-            localStorage.clear();
-            location.reload();
+            logout();
           }
         }, 10000);
       }
