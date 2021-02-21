@@ -11,6 +11,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <style type="text/css">
+    @media only screen and (max-width : 576px)
+    {
+      .mobile-card-container > .row {
+        overflow-x: auto;
+      }
+    }
     body{
       -webkit-touch-callout: none;
       -webkit-user-select: none;
@@ -45,8 +51,8 @@
 <div class="page-header text-center" id="title">
 </div>
   
-<div class="container">
-  <div class="row">
+<div class="container container-fluid mobile-card-container">
+  <div class="row text-center flex-nowrap flex-sm-wrap">
     <div class="col-sm-1">
       <div id='form'>
 <!--         <div class="form-group">
@@ -125,8 +131,8 @@
       // var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(239, 239, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 239, 219, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)"];
       // var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)"];
 
-      var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)", "rgba(103, 239, 219, 1)", "rgba(239, 239, 103, 1)", "rgba(149, 194, 148, 1)", "rgba(75, 130, 74, 1)"];
-      var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(149, 194, 148, 0.85)", "rgba(75, 130, 74, 0.85)"];
+      var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(152, 232, 150, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)", "rgba(103, 239, 219, 1)", "rgba(239, 239, 103, 1)", "rgba(149, 194, 148, 1)", "rgba(75, 130, 74, 1)"];
+      var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(152, 232, 150, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(149, 194, 148, 0.85)", "rgba(75, 130, 74, 0.85)"];
 
       var cardColor = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"];
       var titles = ["禱告", "父親真理書", "講道書/影像說教（禮拜除外）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（包括探訪）", "實踐母親的教誨"];
@@ -143,18 +149,19 @@
       var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
       var zhEnGps = ['建立100%信心活動：壯年4組／Establish 100% Faith Campaign: Male Adult Group 4'];
 
-      // 'https://www.teahub.io/photos/full/121-1210853_tulip-flowers-fresh-wallpaper-tulip-wallpaper-for-mobile.jpg'
-      var bgimages=['https://cdn.shopify.com/s/files/1/1003/7610/products/Classical_style_pattern_seamless_Wall_Mural_Wallpaper_a_1400x.jpg?v=1578614224',
-            'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
-            'https://wallpaperaccess.com/full/802624.jpg',
-            'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
+      var bgimages=[
+            'https://wallpapercave.com/wp/wp6328875.jpg',
             'https://image.freepik.com/free-vector/white-prism-background-design-vector_53876-86339.jpg',
+            'https://image.freepik.com/free-photo/background_53876-32171.jpg',
+            'https://watv.org/wp-content/uploads/2020/04/law-of-nature.jpg',
+            'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
             'https://i.pinimg.com/736x/88/4b/ec/884becb4540e2724d01db2b53ccdb71e.jpg'];
-      var cardImages=['https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
-            'https://watv.org/wp-content/uploads/2019/05/Allelopathy-in-Plants.jpg',
+      var cardImages=[
             'https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif',
-            'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
             'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
+            'https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
+            'https://watv.org/wp-content/uploads/2019/05/Allelopathy-in-Plants.jpg',
+            'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
             'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
       var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
             'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
@@ -166,11 +173,10 @@
             'https://media0.giphy.com/media/3gWIjOpHyh066G46he/giphy.gif',
             'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
             'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
-      var randomNumber = Math.floor(Math.random() * 2);
-      randomNumber = randomNumber*2 + 2;
+      var randomNumber = Math.floor(Math.random() * 3);
       var applyTextWhite = [];
-      var repeatBg = [0, 4, 5];
-      var rotateCardBg = [4];
+      var repeatBg = [1, 2, 5];
+      var rotateCardBg = [1];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
       var cardImg = 'url(' + cardImages[randomNumber] + ')';
@@ -232,7 +238,7 @@
       var diff = now - start;
       var oneDay = 1000 * 60 * 60 * 24;
       var day = Math.floor(diff / oneDay);
-      var teachingIndex = day % 12;
+      var teachingIndex = day % 13;
 
       // card title
       var h1 = document.createElement('h1');
