@@ -349,6 +349,7 @@
         var h6 = document.createElement('h6');
         if (enGps.includes(title)) {
           h6.appendChild(document.createTextNode(enTitles[index]));
+          column.classList.add('col-2');
         }else{
           h6.appendChild(document.createTextNode(displayTitles[index]));
         }
@@ -359,6 +360,7 @@
           h6.appendChild(document.createTextNode(enTitles[index]));
           h6.style.textAlign = "center";
           column.appendChild(h6);
+          column.classList.add('col-2');
         }
       }
 
