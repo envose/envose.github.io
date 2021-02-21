@@ -53,7 +53,7 @@
   
 <div class="container container-fluid mobile-card-container">
   <div class="row text-center flex-nowrap flex-sm-wrap">
-    <div class="col-sm-1 mx-auto">
+    <div class="col-sm-1 mx-auto" id='form_container' style="text-align: left">
       <div id='form'>
 <!--         <div class="form-group">
           <input type="text" class="form-control" id="key" placeholder="密碼">
@@ -61,7 +61,7 @@
         <button class="btn btn-primary" onclick="loadData()">提交</button>
         <hr> -->
       </div>
-      <div id="nameList" style="text-align: left">
+      <div id="nameList">
       </div>
     </div>
     <div class="col-sm-1 mx-auto" id="table0">
@@ -376,9 +376,18 @@
       }
 
       function createForm(islogged) {
+        var form_c = document.querySelector('#form_container');
         var form = document.querySelector('#form');
 
         if (islogged) {
+          if (form_c.classList.contains('col-12')) {
+            form_c.classList.remove('col-12');
+          }
+          if (!form_c.classList.contains('col-sm-2')) {
+            form_c.classList.remove('col-sm-2');
+            form_c.classList.add('col-sm-1');
+          }
+
           var logoutbtn = document.createElement('button');
           logoutbtn.classList.add('btn');
           logoutbtn.classList.add('btn-danger');
@@ -389,6 +398,14 @@
           var hr = document.createElement('hr');
           form.appendChild(hr);
         }else{
+          if (!form_c.classList.contains('col-12')) {
+            form_c.classList.add('col-12');
+          }
+          if (form_c.classList.contains('col-sm-1')) {
+            form_c.classList.remove('col-sm-1');
+            form_c.classList.add('col-sm-2');
+          }
+
           var div = document.createElement('div');
           div.classList.add('form-group');
 
