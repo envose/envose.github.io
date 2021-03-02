@@ -150,14 +150,16 @@
       var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
       var zhEnGps = ['建立100%信心活動：壯年4組／Establish 100% Faith Campaign: Male Adult Group 4'];
 
+
+            // 'https://wallpaperaccess.com/full/1157298.png',
       var bgimages=[
             'https://wallpapercave.com/wp/wp6328875.jpg',
             'https://image.freepik.com/free-vector/white-prism-background-design-vector_53876-86339.jpg',
             'https://image.freepik.com/free-photo/background_53876-32171.jpg',
-            'https://wallpaperaccess.com/full/1157298.png',
+            'https://image.freepik.com/free-vector/bright-rhombus-background_1053-185.jpg',
             'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
             'https://i.pinimg.com/736x/88/4b/ec/884becb4540e2724d01db2b53ccdb71e.jpg'];
-            
+
             // 'https://media1.giphy.com/media/cJl4NoIJOc5nN7r5MA/giphy.gif',
       var cardImages=[
             'https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif',
@@ -178,8 +180,8 @@
             'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
       var randomNumber = Math.floor(Math.random() * 4);
       randomNumber = 3;
-      var applyTextWhite = [3];
-      var repeatBg = [1, 2, 5];
+      var applyTextWhite = [];
+      var repeatBg = [1, 2, 3, 5];
       var rotateCardBg = [1];
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
@@ -243,6 +245,7 @@
       var oneDay = 1000 * 60 * 60 * 24;
       var day = Math.floor(diff / oneDay);
       var teachingIndex = day % 13;
+      teachingIndex = 5;
 
       // card title
       var h1 = document.createElement('h1');
