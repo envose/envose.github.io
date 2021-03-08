@@ -140,6 +140,8 @@
       var enTitles = ["Prayer", "Father's Truth Books", "Sermon Books/ Video Sermon (exclude worship services)", "Bible", "Study", "Sermon Preaching", "Listening to Sermon Preaching", "Preaching", "Service (include Visit)", "Practice the Teachings of Mother"];
       var title;
       var names = [];
+      var display_names = [];
+      var additional = false;
       var dataArr = new Array(10);
       var completeArr = new Array(10);
       var totalArr = new Array(10);
@@ -157,8 +159,8 @@
             'https://image.freepik.com/free-vector/white-prism-background-design-vector_53876-86339.jpg',
             'https://image.freepik.com/free-photo/background_53876-32171.jpg',
             'https://image.freepik.com/free-vector/simple-pattern-white-branches-background_53876-60579.jpg',
-            'https://image.freepik.com/free-vector/elegant-floral-seamless-pattern_21799-4104.jpg',
-            'https://wallpaperaccess.com/full/1157298.png'];
+            'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
+            'https://i.pinimg.com/736x/88/4b/ec/884becb4540e2724d01db2b53ccdb71e.jpg'];
 
             // 'https://media1.giphy.com/media/cJl4NoIJOc5nN7r5MA/giphy.gif',
       var cardImages=[
@@ -166,7 +168,7 @@
             'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
             'https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
             'https://media1.giphy.com/media/ieaUdBJJC19uw/giphy.gif',
-            'https://raw.githubusercontent.com/envose/envose.github.io/main/card4.gif',
+            'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
             'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
       var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
             'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
@@ -178,12 +180,10 @@
             'https://media0.giphy.com/media/3gWIjOpHyh066G46he/giphy.gif',
             'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
             'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
-      var randomNumber = Math.floor(Math.random() * 3);
-      randomNumber = 5;
+      var randomNumber = Math.floor(Math.random() * 4);
       var applyTextWhite = [];
-      var repeatBg = [1, 2, 3, 4, 5];
+      var repeatBg = [1, 2, 3, 5];
       var rotateCardBg = [1];
-      randomNumber = 4;
 
       var bgImg = 'url(' + bgimages[randomNumber] + ')';
       var cardImg = 'url(' + cardImages[randomNumber] + ')';
@@ -278,6 +278,7 @@
       function initDataArr() {
 
         names = [];
+        display_names = [];
         dataArr = new Array(10);
         completeArr = new Array(10);
         for (var i = 0; i < 10; i++){
@@ -388,11 +389,11 @@
         }
       }
 
-      function updateNameList(names) {
+      function updateNameList() {
         var div = document.querySelector('#nameList');
-        for (var name in names) {
+        for (var name in display_names) {
           var h6 = document.createElement('h6');
-          h6.appendChild(document.createTextNode(names[name]));
+          h6.appendChild(document.createTextNode(display_names[name]));
           h6.style.color = textColors[name];
           div.appendChild(h6);
         }
@@ -575,42 +576,52 @@
             titleDiv.appendChild(h3);
 
             var i = 0;
+            var additional = false;
             for (var key in data.feed.entry) {
               var obj = data.feed.entry[key];
               lastUpdateDate = parseDate(obj.gsx$timestamp.$t);
               if (enGps.includes(title)) {
                 var name = obj.gsx$name.$t;
-                if (name) {
+                if (name && i<10) {
                   if (!names.includes(name)) {
-                    names.push(name);
+                    if (!additional)
+                      names.push(name);
+                    display_names.push(name);
+                  }else{
+                    additional = true;
                   }
                   if (i < 10) {
                     i++;
-                    continue;
                   }
                 }
                 getEngEntry(obj);
               }else if (zhEnGps.includes(title)) {
                 var name = obj.gsx$姓名name.$t;
-                if (name) {
+                if (name && i<10) {
                   if (!names.includes(name)) {
-                    names.push(name);
+                    if (!additional)
+                      names.push(name);
+                    display_names.push(name);
+                  }else{
+                    additional = true;
                   }
                   if (i < 10) {
                     i++;
-                    continue;
                   }
                 }
                 getZhEngEntry(obj);
               }else {
                 var name = obj.gsx$姓名.$t;
-                if (name) {
+                if (name && i<10) {
                   if (!names.includes(name)) {
-                    names.push(name);
+                    if (!additional)
+                      names.push(name);
+                    display_names.push(name);
+                  }else{
+                    additional = true;
                   }
                   if (i < 10) {
                     i++;
-                    continue;
                   }
                 }
                 getEntry(obj);
@@ -620,7 +631,7 @@
               var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
               updateLastUpdate(lastUpdateStr);
             }
-            updateNameList(names);
+            updateNameList();
             createAllTable();
           }else{
             logout();
@@ -641,7 +652,7 @@
         var type;
         var units;
         var name = obj.gsx$name.$t;
-        var num = names.indexOf(name);
+        var num = display_names.indexOf(name);
         if (obj.gsx$prayer.$t){
           updateDataArr(0, parseInt(obj.gsx$prayer.$t)/10, num);
         }
@@ -687,7 +698,7 @@
         var type;
         var units;
         var name = obj.gsx$姓名name.$t;
-        var num = names.indexOf(name);
+        var num = display_names.indexOf(name);
         if (obj.gsx$禱告prayer.$t){
           updateDataArr(0, parseInt(obj.gsx$禱告prayer.$t)/10, num);
         }
@@ -733,7 +744,7 @@
         var type;
         var units;
         var name = obj.gsx$姓名.$t;
-        var num = names.indexOf(name);
+        var num = display_names.indexOf(name);
         if (obj.gsx$禱告.$t){
           updateDataArr(0, parseInt(obj.gsx$禱告.$t)/10, num);
         }
