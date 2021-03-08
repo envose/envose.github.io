@@ -1,0 +1,724 @@
+const pop = array => {
+  return array.pop();
+};
+var enTeachings = ['As God always gives love, giving love is more blessed than receiving love.',
+'When we give glory to God, that glory will be ours in the end.',
+'When we look at things beautifully without hatred in our hearts, we can achieve perfect love.',
+'As Abraham received more blessings when he yielded for his nephew Lot, we, too, will receive more blessings when we yield for our brothers and sisters.',
+'Arrogance is feeling disappointed when our expectations are not met.',
+'Although others do not work, let us work faithfully without complaining. When we work with the mindset of an owner, we can work with joy and ease.',
+'Arrogance arises from a heart full of complaint. When we always serve God with gratitude, arrogance and complaint disappear, and humility will dwell in our hearts.',
+'When we compliment our brothers and sisters, compliments will return to us.',
+'As the sea receives all the dirt and purifies it, we should have a broad and beautiful heart to embrace the faults of our brothers and sisters.',
+'Whoever wants to be led by the Lamb should become a lamb smaller than the Lamb.',
+'Sacrifice is needed in the process of becoming a greater vessel.',
+'We should endure present sufferings for the Kingdom of Heaven will be ours.',
+'Even God came to serve, not to be served. When we serve one another without wanting to be served, God will be pleased.'];
+
+var zhTeachings = ['如同上帝常賜予我們愛一樣，付出愛將比得到愛更有福。',
+'將榮耀歸於上帝，其榮耀終歸我自己。',
+'美好的心靈沒有憎惡，必成就圓滿的愛。',
+'如同亞伯拉罕將好的讓給侄兒羅得後，得到更大的祝福一樣， 我們把好的讓給兄弟，就會得到更大的祝福。',
+'所謂高傲的心是指易感到遺憾的心。',
+'不要抱怨別人不做事，只管對自己該做的事忠心。以主人的心作工，就不會感到累反而心情愉快。',
+'不滿積多會產生驕傲，常以感謝的心侍奉上帝，就會消除不滿和驕傲， 具備謙卑的心。',
+'多稱讚兄弟姐妹其稱讚就返回到我這裡。',
+'像大海容納一切污垢又淨化一樣， 包容所有兄弟姐妹缺點的大海般寬廣的胸懷，是真正美好的心靈。',
+'願得到羔羊引導的人，要成為比羔羊還小的羊。',
+'犧牲是成為大器皿所必須的過程。',
+'之所以要忍耐今天的痛苦，是因為天國在我這裡。',
+'上帝來到這世上不是要受人的服侍，乃是要服侍人， 不甘願受人的服侍，相互服侍的心是上帝所喜悅的。'];
+
+// var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(239, 239, 103, 1)", "rgba(170, 239, 103, 1)", "rgba(103, 239, 219, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)"];
+// var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(170, 239, 103, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)"];
+
+var textColors = ["rgba(239, 103, 103, 1)", "rgba(239, 191, 103, 1)", "rgba(152, 232, 150, 1)", "rgba(103, 191, 239, 1)", "rgba(103, 116, 239, 1)", "rgba(150, 103, 239, 1)", "rgba(225, 103, 239, 1)", "rgba(103, 239, 219, 1)", "rgba(239, 239, 103, 1)", "rgba(149, 194, 148, 1)", "rgba(75, 130, 74, 1)"];
+var colors = ["rgba(239, 103, 103, 0.85)", "rgba(239, 191, 103, 0.85)", "rgba(152, 232, 150, 0.85)", "rgba(103, 191, 239, 0.85)", "rgba(103, 116, 239, 0.85)", "rgba(150, 103, 239, 0.85)", "rgba(225, 103, 239, 0.85)", "rgba(103, 239, 219, 0.85)", "rgba(239, 239, 103, 0.85)", "rgba(149, 194, 148, 0.85)", "rgba(75, 130, 74, 0.85)"];
+
+var cardColor = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"];
+var titles = ["禱告", "父親真理書", "講道書/影像說教（禮拜除外）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（包括探訪）", "實踐母親的教誨"];
+var displayTitles = ["禱告", "父親真理書", "講道書／影像說教（ 禮拜除外 ）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（ 包括探訪 ）", "實踐母親的教誨"];
+var enTitles = ["Prayer", "Father's Truth Books", "Sermon Books/ Video Sermon (exclude worship services)", "Bible", "Study", "Sermon Preaching", "Listening to Sermon Preaching", "Preaching", "Service (include Visit)", "Practice the Teachings of Mother"];
+var title;
+var names = [];
+var display_names = [];
+var additional = false;
+var dataArr = new Array(10);
+var completeArr = new Array(10);
+var totalArr = new Array(10);
+var isListAll = false;
+var list = [];
+
+
+var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
+var zhEnGps = ['建立100%信心活動：壯年4組／Establish 100% Faith Campaign: Male Adult Group 4'];
+
+
+// 'https://wallpaperaccess.com/full/1157298.png',
+var bgimages=[
+'https://wallpapercave.com/wp/wp6328875.jpg',
+'https://image.freepik.com/free-vector/white-prism-background-design-vector_53876-86339.jpg',
+'https://image.freepik.com/free-photo/background_53876-32171.jpg',
+'https://image.freepik.com/free-vector/simple-pattern-white-branches-background_53876-60579.jpg',
+'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
+'https://i.pinimg.com/736x/88/4b/ec/884becb4540e2724d01db2b53ccdb71e.jpg'];
+
+// 'https://media1.giphy.com/media/cJl4NoIJOc5nN7r5MA/giphy.gif',
+var cardImages=[
+'https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif',
+'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
+'https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
+'https://media1.giphy.com/media/ieaUdBJJC19uw/giphy.gif',
+'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
+'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
+var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
+'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
+'https://media0.giphy.com/media/87gEOGe1VT5md30Qgn/giphy.gif',
+'https://media1.giphy.com/media/LZ5xZMrO7i4JH3glcj/giphy.gif',
+'https://media1.giphy.com/media/pz3ZNXGgvR19V7k8Eb/giphy.gif',
+'https://media2.giphy.com/media/1qgdfBl0FRZ4dM7YzU/source.gif',
+'https://media3.giphy.com/media/fQMmshQtGmqXxwHoO1/giphy.gif',
+'https://media0.giphy.com/media/3gWIjOpHyh066G46he/giphy.gif',
+'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
+'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
+var randomNumber = Math.floor(Math.random() * 4);
+var applyTextWhite = [];
+var repeatBg = [1, 2, 3, 5];
+var rotateCardBg = [1];
+
+var bgImg = 'url(' + bgimages[randomNumber] + ')';
+var cardImg = 'url(' + cardImages[randomNumber] + ')';
+var card = document.querySelector('#card');
+
+$('body').css({'background':bgImg, 'background-size':'cover'});
+if (repeatBg.includes(randomNumber)) {
+  $('body').css({'background-size':'100%', 'background-repeat': 'repeat'});
+}
+card.style.backgroundImage = cardImg;
+if (applyTextWhite.includes(randomNumber)) {
+  $('body').css({'color': 'white'});
+}
+
+// countdown
+// Set the date we're counting down to
+var countDownDate = new Date("May 18, 2021 00:00:00").getTime();
+var countDate = new Date("Feb 7, 2021 00:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+  var distance2 = now - countDate;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  var days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+  if (days2 > 100) {
+    days2 = '結';
+  }
+
+  // Output the result in an element with id="demo"
+  // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  // + minutes + "m " + seconds + "s ";
+  // document.getElementById("demo").innerHTML = days;
+  document.getElementById("100days").innerHTML = days2;
+
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+
+
+// get day
+var now = new Date();
+var start = new Date(now.getFullYear(), 0, 0);
+var diff = now - start;
+var oneDay = 1000 * 60 * 60 * 24;
+var day = Math.floor(diff / oneDay);
+var teachingIndex = day % 13;
+
+// card title
+var h1 = document.createElement('h1');
+h1.appendChild(document.createTextNode('100% Faith'));
+h1.id = 'card_h1';
+
+// Teachings of Mother
+var p = document.createElement('p');
+p.appendChild(document.createTextNode(enTeachings[teachingIndex]));
+p.appendChild(document.createElement('br'));
+p.appendChild(document.createTextNode(zhTeachings[teachingIndex]));
+p.style.fontSize = "1rem";
+p.id = "card_p";
+
+var card_container = document.querySelector('#card_container');
+if (rotateCardBg.includes(randomNumber)) {
+  card.style.transform = 'rotate(180deg)';
+  card_container.style.transform = 'rotate(180deg)';
+}
+
+card_container.appendChild(h1);
+card_container.appendChild(p);
+
+initDataArr();
+
+
+// disable right click
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+function initDataArr() {
+
+  names = [];
+  display_names = [];
+  dataArr = new Array(10);
+  completeArr = new Array(10);
+  for (var i = 0; i < 10; i++){
+    dataArr[i] = [];
+    completeArr[i] = 0;
+    totalArr[i] = 0;
+  }
+}
+
+function initContainers() {
+  var h = document.querySelector('#nameList');
+  h.innerHTML = '';
+  var t = document.querySelector('#title');
+  t.innerHTML = '';
+  for (var i = 0; i < 10; i++) {
+    var str1 = '#table';
+    var selector = str1.concat(i.toString());
+    var column = document.querySelector(selector);
+
+    column.innerHTML = '';
+  }
+}
+
+function createAllTable() {
+  for (var i = 0; i < 10; i++) {
+    createTable(i);
+  }
+}
+
+function createTable(index) {
+  rindex = names.length*100 - dataArr[index].length;
+  var str1 = '#table';
+  var selector = str1.concat(index.toString());
+  var column = document.querySelector(selector);
+  var tbl = document.createElement('table');
+  tbl.style.width = '100%';
+  tbl.setAttribute('class', 'table table-bordered table-sm');
+  var tbdy = document.createElement('tbody');
+  for (var i = 0; i < 100; i++) {
+    var tr = document.createElement('tr');
+    for (var j = 0; j < names.length; j++) {
+      var td = document.createElement('td');
+      td.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+      if (rindex <= (i*names.length+j)){
+        td.style.backgroundColor = colors[dataArr[index].pop()];
+      }
+      tr.appendChild(td);
+    }
+    tbdy.appendChild(tr);
+  }
+  tbl.appendChild(tbdy);
+  column.appendChild(tbl);
+  createColumnTitle(column, index);
+  createColumnCompleteMarks(column, index);
+}
+
+function createColumnCompleteMarks(column, index) {
+  var div = document.createElement('div');
+  div.style.textAlign = 'center';
+  div.style.marginBottom = '3rem';
+  for (var i = 0; i < completeArr[index]; i++) {
+    var img = document.createElement('img');
+    img.src = completeImages[index];
+    if (index == 9)
+      img.style.width = '2.2rem';
+    else
+      img.style.width = '1.5rem';
+    img.style.height = 'auto';
+    img.style.margin = '0.5rem 0 0.5rem 0';
+    img.style.maxWidth = '100%';
+    div.appendChild(img);
+  }
+  column.appendChild(div);
+}
+
+function createColumnTitle(column, index) {
+
+  var h6_2 = document.createElement('h6');
+  var percent = Math.trunc(totalArr[index]/(names.length*100)*100);
+  var str = percent + '%';
+  h6_2.appendChild(document.createTextNode(str));
+  h6_2.style.textAlign = "center";
+  column.appendChild(h6_2);
+
+  var h6 = document.createElement('h6');
+  if (enGps.includes(title)) {
+    h6.appendChild(document.createTextNode(enTitles[index]));
+    column.classList.remove('col-2');
+    column.classList.add('col-3');
+  }else{
+    h6.appendChild(document.createTextNode(displayTitles[index]));
+    column.classList.remove('col-3');
+    if (names.length < 4) {
+      column.classList.add('col-2');
+    }else{
+      column.classList.remove('col-2');
+    }
+  }
+  h6.style.textAlign = "center";
+  column.appendChild(h6);
+  if (zhEnGps.includes(title)) {
+    var h6 = document.createElement('h6');
+    h6.appendChild(document.createTextNode(enTitles[index]));
+    h6.style.textAlign = "center";
+    column.appendChild(h6);
+    column.classList.remove('col-2');
+    column.classList.add('col-3');
+  }
+}
+
+function updateNameList() {
+  var div = document.querySelector('#nameList');
+  for (var name in display_names) {
+    var h6 = document.createElement('h6');
+    h6.appendChild(document.createTextNode(display_names[name]));
+    h6.style.color = textColors[name];
+    div.appendChild(h6);
+  }
+}
+
+function createForm(islogged) {
+  var form_c = document.querySelector('#form_container');
+  var form = document.querySelector('#form');
+
+  if (islogged) {
+    if (form_c.classList.contains('col-12')) {
+      form_c.classList.remove('col-12');
+    }
+    if (!form_c.classList.contains('col-sm-2')) {
+      form_c.classList.remove('col-sm-2');
+      form_c.classList.add('col-sm-1');
+    }
+
+    var logoutbtn = document.createElement('button');
+    logoutbtn.classList.add('btn');
+    logoutbtn.classList.add('btn-sm');
+    logoutbtn.classList.add('btn-danger');
+    logoutbtn.appendChild(document.createTextNode('登出'));
+    logoutbtn.onclick = function() {logout()};
+    form.appendChild(logoutbtn);
+
+    var hr = document.createElement('hr');
+    form.appendChild(hr);
+  }else{
+    if (!form_c.classList.contains('col-12')) {
+      form_c.classList.add('col-12');
+    }
+    if (form_c.classList.contains('col-sm-1')) {
+      form_c.classList.remove('col-sm-1');
+      form_c.classList.add('col-sm-2');
+    }
+
+    var div = document.createElement('div');
+    div.classList.add('form-group');
+
+    var input = document.createElement('input');
+    input.type = 'password';
+    input.classList.add('form-control');
+    input.id='key';
+    input.placeholder = '密碼';
+    input.style.marginBottom = '0.5rem';
+    input.onkeypress = function(event) {
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13'){
+       loadData();
+     }
+   };
+   div.appendChild(input);
+
+   var btn = document.createElement('button');
+   btn.classList.add('btn');
+   btn.classList.add('btn-primary');
+   btn.onclick = function() {loadData()};
+   btn.appendChild(document.createTextNode('登入'));
+   div.appendChild(btn);
+
+   form.appendChild(div);
+ }
+
+}
+
+function createMenuItem(menu, item, key) {
+  // var menu = document.querySelector('#menu');
+  var btn = document.createElement('button');
+  btn.classList.add('dropdown-item');
+  btn.type = 'button';
+  btn.id = key;
+  btn.onclick = function() {selectGp(btn)};
+  btn.appendChild(document.createTextNode(item));
+  menu.appendChild(btn);
+}
+
+function createDropDown() {
+  const dd = document.querySelector('#dropdown');
+  var btn = document.createElement('button');
+  btn.classList.add('btn');
+  btn.classList.add('btn-info');
+  btn.classList.add('dropdown-toggle');
+  btn.type = 'button';
+  btn.id = 'dropdownMenu';
+  btn.setAttribute('data-toggle', 'dropdown');
+  btn.setAttribute('aria-haspopup', 'true');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.appendChild(document.createTextNode('區域'));
+  dd.appendChild(btn);
+
+  var div = document.createElement('div');
+  div.classList.add('dropdown-menu');
+  div.setAttribute('aria-labelledby', 'dropdownMenu');
+  div.id = 'menu';
+  dd.appendChild(div);
+
+  for (var item in list) {
+    var obj = list[item];
+    createMenuItem(div, obj.gsx$區域.$t, obj.gsx$密碼.$t);
+  }
+
+  var logoutbtn = document.createElement('button');
+  logoutbtn.classList.add('btn');
+  logoutbtn.classList.add('btn-danger');
+  logoutbtn.style.marginLeft = '0.5rem';
+  logoutbtn.appendChild(document.createTextNode('登出'));
+  logoutbtn.onclick = function() {logout()};
+  dd.appendChild(logoutbtn);
+}
+
+function selectGp(btn) {
+  var menuBtn = document.querySelector('#dropdownMenu');
+  menuBtn.innerHTML = btn.innerHTML;
+  parseData(btn.id);
+}
+
+function loadData() {
+  var key = document.getElementById("key").value;
+  localStorage.setItem("key", key);
+  location.reload();
+}
+
+window.onload = function() {
+
+  let urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('$k')) {
+    localStorage.setItem("key", urlParams.get('$k'));
+  }
+
+  var key = localStorage.getItem("key");
+  if (key === 'jackshin') {
+
+    const key = '1JdbPseFBz9jUJiSDkg5zUnHe4noeag6HuJHnQoqXYJs/od6';
+    const url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
+
+    $.getJSON(url, function(data) {
+
+      if (data !== null) {
+                // JSON result in `data` variable
+                for (var key in data.feed.entry) {
+                  var obj = data.feed.entry[key];
+                  if (obj.gsx$密碼.$t) {
+                    list.push(obj);
+                  }
+                }
+
+                createDropDown();
+              }
+            });
+  }else {
+    if (key) {
+      createForm(true);
+      parseData(key);
+    }else{
+      createForm(false);
+    }
+  }
+
+}
+
+function parseData (key) {
+
+  initDataArr();
+  initContainers();
+  var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
+
+  var success = false;
+  $.getJSON(url, function(data) {
+    success = true;
+    if (data !== null) {
+      // JSON result in `data` variable
+      title = data.feed.title.$t;
+      var entry = data.feed.entry;
+      var lastUpdateDate;
+
+      var titleDiv = document.querySelector('#title');
+      var h3 = document.createElement('h3');
+      h3.appendChild(document.createTextNode(title));
+      titleDiv.appendChild(h3);
+
+      var i = 0;
+      var additional = false;
+      for (var key in data.feed.entry) {
+        var obj = data.feed.entry[key];
+        lastUpdateDate = parseDate(obj.gsx$timestamp.$t);
+        if (enGps.includes(title)) {
+          var name = obj.gsx$name.$t;
+          if (name && i<10) {
+            if (!names.includes(name)) {
+              if (!additional)
+                names.push(name);
+              display_names.push(name);
+            }else{
+              additional = true;
+            }
+            if (i < 10) {
+              i++;
+            }
+          }
+          getEngEntry(obj);
+        }else if (zhEnGps.includes(title)) {
+          var name = obj.gsx$姓名name.$t;
+          if (name && i<10) {
+            if (!names.includes(name)) {
+              if (!additional)
+                names.push(name);
+              display_names.push(name);
+            }else{
+              additional = true;
+            }
+            if (i < 10) {
+              i++;
+            }
+          }
+          getZhEngEntry(obj);
+        }else {
+          var name = obj.gsx$姓名.$t;
+          if (name && i<10) {
+            if (!names.includes(name)) {
+              if (!additional)
+                names.push(name);
+              display_names.push(name);
+            }else{
+              additional = true;
+            }
+            if (i < 10) {
+              i++;
+            }
+          }
+          getEntry(obj);
+        }
+      }
+      if (lastUpdateDate) {
+        var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
+        updateLastUpdate(lastUpdateStr);
+      }
+      updateNameList();
+      createAllTable();
+    }else{
+      logout();
+    }
+
+  });
+  // handle wrong key
+  const timeout = setTimeout(function() {
+    if (!success){
+            // Handle error accordingly
+            alert("密碼錯誤\nWrong Password");
+            logout();
+          }
+        }, 10000);
+}
+
+function getEngEntry (obj) {
+  var type;
+  var units;
+  var name = obj.gsx$name.$t;
+  var num = display_names.indexOf(name);
+  if (obj.gsx$prayer.$t){
+    updateDataArr(0, parseInt(obj.gsx$prayer.$t)/10, num);
+  }
+
+  if (obj.gsx$fatherstruthbooks.$t){
+    updateDataArr(1, parseInt(obj.gsx$fatherstruthbooks.$t)/10, num);
+  }
+
+  if (obj.gsx$sermonbooksvideosermonexcludeworshipservices.$t){
+    updateDataArr(2, parseInt(obj.gsx$sermonbooksvideosermonexcludeworshipservices.$t)/10, num);
+  }
+
+  if (obj.gsx$bible.$t){
+    updateDataArr(3, parseInt(obj.gsx$bible.$t)/10, num);
+  }
+
+  if (obj.gsx$study.$t){
+    updateDataArr(4, parseInt(obj.gsx$study.$t)/10, num);
+  }
+
+  if (obj.gsx$sermonpreaching.$t){
+    updateDataArr(5, parseInt(obj.gsx$sermonpreaching.$t)/10, num);
+  }
+
+  if (obj.gsx$listeningtosermonpreaching.$t){
+    updateDataArr(6, parseInt(obj.gsx$listeningtosermonpreaching.$t)/10, num);
+  }
+
+  if (obj.gsx$preaching.$t){
+    updateDataArr(7, parseInt(obj.gsx$preaching.$t)/10, num);
+  }
+
+  if (obj.gsx$serviceincludevisit.$t){
+    updateDataArr(8, parseInt(obj.gsx$serviceincludevisit.$t)/10, num);
+  }
+
+  if (obj.gsx$practicetheteachingsofmother.$t){
+    updateDataArr(9, parseInt(obj.gsx$practicetheteachingsofmother.$t)/10, num);
+  }
+}
+
+function getZhEngEntry (obj) {
+  var type;
+  var units;
+  var name = obj.gsx$姓名name.$t;
+  var num = display_names.indexOf(name);
+  if (obj.gsx$禱告prayer.$t){
+    updateDataArr(0, parseInt(obj.gsx$禱告prayer.$t)/10, num);
+  }
+
+  if (obj.gsx$父親真理書fatherstruthbooks.$t){
+    updateDataArr(1, parseInt(obj.gsx$父親真理書fatherstruthbooks.$t)/10, num);
+  }
+
+  if (obj.gsx$講道書影像說教禮拜除外sermonbooksvideosermonexcludeworshipservices.$t){
+    updateDataArr(2, parseInt(obj.gsx$講道書影像說教禮拜除外sermonbooksvideosermonexcludeworshipservices.$t)/10, num);
+  }
+
+  if (obj.gsx$聖經bible.$t){
+    updateDataArr(3, parseInt(obj.gsx$聖經bible.$t)/10, num);
+  }
+
+  if (obj.gsx$學習study.$t){
+    updateDataArr(4, parseInt(obj.gsx$學習study.$t)/10, num);
+  }
+
+  if (obj.gsx$發表sermonpreaching.$t){
+    updateDataArr(5, parseInt(obj.gsx$發表sermonpreaching.$t)/10, num);
+  }
+
+  if (obj.gsx$聽發表listeningtosermonpreaching.$t){
+    updateDataArr(6, parseInt(obj.gsx$聽發表listeningtosermonpreaching.$t)/10, num);
+  }
+
+  if (obj.gsx$傳道preaching.$t){
+    updateDataArr(7, parseInt(obj.gsx$傳道preaching.$t)/10, num);
+  }
+
+  if (obj.gsx$事奉包括探訪serviceincludevisit.$t){
+    updateDataArr(8, parseInt(obj.gsx$事奉包括探訪serviceincludevisit.$t)/10, num);
+  }
+
+  if (obj.gsx$實踐母親的教誨practicetheteachingsofmother.$t){
+    updateDataArr(9, parseInt(obj.gsx$實踐母親的教誨practicetheteachingsofmother.$t)/10, num);
+  }
+}
+
+function getEntry (obj) {
+  var type;
+  var units;
+  var name = obj.gsx$姓名.$t;
+  var num = display_names.indexOf(name);
+  if (obj.gsx$禱告.$t){
+    updateDataArr(0, parseInt(obj.gsx$禱告.$t)/10, num);
+  }
+
+  if (obj.gsx$父親真理書.$t){
+    updateDataArr(1, parseInt(obj.gsx$父親真理書.$t)/10, num);
+  }
+
+  if (obj.gsx$講道書影像說教禮拜除外.$t){
+    updateDataArr(2, parseInt(obj.gsx$講道書影像說教禮拜除外.$t)/10, num);
+  }
+
+  if (obj.gsx$聖經.$t){
+    updateDataArr(3, parseInt(obj.gsx$聖經.$t)/10, num);
+  }
+
+  if (obj.gsx$學習.$t){
+    updateDataArr(4, parseInt(obj.gsx$學習.$t)/10, num);
+  }
+
+  if (obj.gsx$發表.$t){
+    updateDataArr(5, parseInt(obj.gsx$發表.$t)/10, num);
+  }
+
+  if (obj.gsx$聽發表.$t){
+    updateDataArr(6, parseInt(obj.gsx$聽發表.$t)/10, num);
+  }
+
+  if (obj.gsx$傳道.$t){
+    updateDataArr(7, parseInt(obj.gsx$傳道.$t)/10, num);
+  }
+
+  if (obj.gsx$事奉包括探訪.$t){
+    updateDataArr(8, parseInt(obj.gsx$事奉包括探訪.$t)/10, num);
+  }
+
+  if (obj.gsx$實踐母親的教誨.$t){
+    updateDataArr(9, parseInt(obj.gsx$實踐母親的教誨.$t)/10, num);
+  }
+}
+
+function parseDate(dateString) { 
+  var parts = dateString.split(' ');
+  var dateParts = parts[0].split('/');
+  var timeParts = parts[1].split(':');
+  var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], timeParts[0], timeParts[1], timeParts[2]); 
+  return dateObject;
+
+}
+
+function updateLastUpdate (lastUpdateStr) {
+  var titleDiv = document.querySelector('#title');
+  var p = document.createElement('p');
+  p.appendChild(document.createTextNode(lastUpdateStr));
+  titleDiv.appendChild(p);
+
+
+  var hr = document.createElement('hr');
+  titleDiv.appendChild(hr);
+}
+
+function updateDataArr(type, units, num) {
+  for (var i = 0; i < units; i++) {
+    dataArr[type].push(num);
+    totalArr[type]++;
+    if (dataArr[type].length >= names.length*100) {
+      dataArr[type] = [];
+      completeArr[type]++;
+    }
+  }
+}
+
+function logout () {
+  localStorage.clear();
+  window.location.assign(window.location.href.split('?')[0]);
+}
