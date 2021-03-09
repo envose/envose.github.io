@@ -13,96 +13,129 @@
   <link href="css/basic.css" rel="stylesheet">
 </head>
 <body>
-
-<div class="jumbotron text-center" style="background-size: 100%; color: white;" id="card">
-  <div id="card_container" style="height:100%; width:100%;">
+  <div id="overlay">
+    <div class="centered">
+      <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="dropdown d-flex justify-content-center" style="margin:1rem;" id='dropdown'>
-</div>
-<div class="page-header text-center" id="title">
-</div>
+  <div class="jumbotron text-center" style="background-size: 100%; color: white;" id="card">
+    <div id="card_container" style="height:100%; width:100%;">
+    </div>
+  </div>
+  <div class="dropdown d-flex justify-content-center" style="margin:1rem;" id='dropdown'>
+  </div>
+  <div class="page-header text-center" id="title">
+  </div>
   
-<div class="container container-fluid mobile-card-container">
-  <div class="row text-center flex-nowrap flex-sm-wrap">
-      <div class="justify-content-center align-items-center">
-        <div id="overlay">
-          <div class="w-100 d-flex justify-content-center align-items-center">
-            <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
-              <span class="sr-only">Loading...</span>
+  <div class="container container-fluid mobile-card-container">
+    <div class="row text-center flex-nowrap flex-sm-wrap">
+      <div class="col-sm-1 mx-auto" id='form_container' style="text-align: left">
+        <div id='form'>
+          <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal" id="record">記錄</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">記錄 Record</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <form name="submit-to-google-sheet">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="finame" id="liname"></label>
+                    <select class="form-control" name="name" id="finame" required></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="fi0" id="li0"></label>
+                    <input class="form-control" name="prayer" type="number" id="fi0" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi1" id="li1"></label>
+                    <input class="form-control" name="truth" type="number" id="fi1" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi2" id="li2"></label>
+                    <input class="form-control" name="sermon" type="number" id="fi2" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi3" id="li3"></label>
+                    <input class="form-control" name="bible" type="number" id="fi3" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi4" id="li4"></label>
+                    <input class="form-control" name="study" type="number" id="fi4" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi5" id="li5"></label>
+                    <input class="form-control" name="sermonpreach" type="number" id="fi5" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi6" id="li6"></label>
+                    <input class="form-control" name="listen" type="number" id="fi6" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi7" id="li7"></label>
+                    <input class="form-control" name="preaching" type="number" id="fi7" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi8" id="li8"></label>
+                    <input class="form-control" name="service" type="number" id="fi8" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="fi9" id="li9"></label>
+                    <input class="form-control" name="mother" type="number" id="fi9" data-toggle="tooltip">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-light">確定 Confirm</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-      </div>
-    <div class="col-sm-1 mx-auto" id='form_container' style="text-align: left">
-      <div id='form'>
-      </div>
-      <div id="nameList">
-      </div>
-      <!-- Trigger the modal with a button -->
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" id="record">記錄</button>
-
-      <!-- Modal -->
-      <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">記錄</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form name="submit-to-google-sheet">
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="finame">姓名</label>
-                  <input class="form-control" name="name" type="text" placeholder="姓名" id="finame" required>
-                </div>
-                <div class="form-group">
-                  <label for="fi0">祈禱</label>
-                  <input class="form-control" name="prayer" type="number" placeholder="Prayer" id="fi0" title="必須為10的倍數，不能超過1天24小時（1440分鐘）" data-toggle="tooltip">
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-default">確定</button>
-              </div>
-            </form>
-          </div>
+        </div>
+        <div id="nameList">
         </div>
       </div>
-
-    </div>
-    <div class="col-sm-1 mx-auto" id="table0">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table1">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table2">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table3">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table4">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table5">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table6">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table7">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table8">
-    </div>
-    <div class="col-sm-1 mx-auto" id="table9">
-    </div>
-    <div class="col-sm-1 mx-auto">
+      <div class="col-sm-1 mx-auto" id="table0">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table1">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table2">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table3">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table4">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table5">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table6">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table7">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table8">
+      </div>
+      <div class="col-sm-1 mx-auto" id="table9">
+      </div>
+      <div class="col-sm-1 mx-auto">
+      </div>
     </div>
   </div>
-</div>
-<hr>
-<div class="calendar">
-  <img src="https://cdn2.iconfinder.com/data/icons/date-and-time-fill-outline/64/Calendar_month_date_schedule_blank-512.png" style="width:100px; height: auto;">
-  <div class="centered">
-    <span id="100days" style="text-align: center;font-size: 40px;margin-top: 0px; color:black;"></span><br>
+  <hr>
+  <div class="text-center" id="form_logout">
   </div>
-</div>
-<script src="js/basic.js"></script>
+  <div class="calendar">
+    <img src="https://cdn2.iconfinder.com/data/icons/date-and-time-fill-outline/64/Calendar_month_date_schedule_blank-512.png" style="width:100px; height: auto;">
+    <div class="centered">
+      <span id="100days" style="text-align: center;font-size: 40px;margin-top: 0px; color:black;"></span><br>
+    </div>
+  </div>
+  <script src="js/basic.js"></script>
 </body>
 </html>
