@@ -877,7 +877,7 @@ form.addEventListener('submit', e => {
     on();
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
     .then(response => {
-      alert('已記錄 Recorded');
+      // alert('已記錄 Recorded');
       off();
       getMetaData(localStorage.getItem("key"));
     })
