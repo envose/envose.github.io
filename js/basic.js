@@ -490,6 +490,17 @@ function updateFormTitles(obj) {
 
 }
 
+function enableRecord(enable) {
+  var record = document.querySelector('#record');
+  if (enable) {
+    record.style.display = 'block';
+    var ele = document.querySelector('#finame');
+    ele.placeholder = 'Name';
+  }else{
+    record.style.display ='none';
+  }
+}
+
 function loadData() {
   var key = document.getElementById('key').value;
   localStorage.setItem('key', key);
@@ -846,7 +857,6 @@ function checkValidate() {
   }
   return true;
 }
-
 
 function validate(index) {
   var selector = '#fi'.concat(index.toString());
