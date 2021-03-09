@@ -310,18 +310,21 @@ function updateNameList() {
     h6.style.color = textColors[name];
     div.appendChild(h6);
   }
-  select = document.getElementById('finame');
-  // default
-  var opt = document.createElement('option');
-  opt.value = '';
-  opt.innerHTML = ftitles[ftitles.length-1];
-  select.appendChild(opt);
+  
+  if ($('#finame option').length < 1) {
+    select = document.getElementById('finame');
+    // default
+    var opt = document.createElement('option');
+    opt.value = '';
+    opt.innerHTML = ftitles[ftitles.length-1];
+    select.appendChild(opt);
 
-  for (var i = 0; i < display_names.length; i++){
-      var opt = document.createElement('option');
-      opt.value = display_names[i];
-      opt.innerHTML = display_names[i];
-      select.appendChild(opt);
+    for (var i = 0; i < display_names.length; i++){
+        var opt = document.createElement('option');
+        opt.value = display_names[i];
+        opt.innerHTML = display_names[i];
+        select.appendChild(opt);
+    }
   }
 }
 
@@ -488,17 +491,6 @@ function updateFormTitles(obj) {
     document.querySelector(selector).appendChild(document.createTextNode(ftitles[i]));
   }
 
-}
-
-function enableRecord(enable) {
-  var record = document.querySelector('#record');
-  if (enable) {
-    record.style.display = 'block';
-    var ele = document.querySelector('#finame');
-    ele.placeholder = 'Name';
-  }else{
-    record.style.display ='none';
-  }
 }
 
 function loadData() {
@@ -857,6 +849,7 @@ function checkValidate() {
   }
   return true;
 }
+
 
 function validate(index) {
   var selector = '#fi'.concat(index.toString());
