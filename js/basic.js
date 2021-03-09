@@ -39,6 +39,9 @@ var cardColor = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 
 var titles = ["禱告", "父親真理書", "講道書/影像說教（禮拜除外）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（包括探訪）", "實踐母親的教誨"];
 var displayTitles = ["禱告", "父親真理書", "講道書／影像說教（ 禮拜除外 ）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（ 包括探訪 ）", "實踐母親的教誨"];
 var enTitles = ["Prayer", "Father's Truth Books", "Sermon Books/ Video Sermon (exclude worship services)", "Bible", "Study", "Sermon Preaching", "Listening to Sermon Preaching", "Preaching", "Service (include Visit)", "Practice the Teachings of Mother"];
+var recordError = ["必須為10的倍數，不能超過1天24小時（1440分鐘）", "Must be a multiple of 10 and cannot exceed 24 hours a day (1440 minutes) "];
+var headerPrefix = ["建立100%信心活動", "Establish 100% Faith Campaign"];
+var langOpt = 0;
 var title;
 var names = [];
 var display_names = [];
@@ -48,11 +51,17 @@ var completeArr = new Array(10);
 var totalArr = new Array(10);
 var isListAll = false;
 var list = [];
+var metaData = [];
 var validateArr = new Array(10);
+var ftitles = [];
+var first = false;
+
+var scriptURL = '';
+const form = document.forms['submit-to-google-sheet'];
 
 
-var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
-var zhEnGps = ['建立100%信心活動：壯年4組／Establish 100% Faith Campaign: Male Adult Group 4'];
+var enGps = ['女青年4-3', '女青年4-4'];
+var zhEnGps = ['壯年4組'];
 
 
 // 'https://wallpaperaccess.com/full/1157298.png',
@@ -183,6 +192,8 @@ function initDataArr() {
   display_names = [];
   dataArr = new Array(10);
   completeArr = new Array(10);
+  scriptURL = '';
+  metaData = [];
   for (var i = 0; i < 10; i++){
     dataArr[i] = [];
     completeArr[i] = 0;
@@ -258,7 +269,6 @@ function createColumnCompleteMarks(column, index) {
 }
 
 function createColumnTitle(column, index) {
-
   var h6_2 = document.createElement('h6');
   var percent = Math.trunc(totalArr[index]/(names.length*100)*100);
   var str = percent + '%';
@@ -267,7 +277,7 @@ function createColumnTitle(column, index) {
   column.appendChild(h6_2);
 
   var h6 = document.createElement('h6');
-  if (enGps.includes(title)) {
+  if (langOpt == 1) {
     h6.appendChild(document.createTextNode(enTitles[index]));
     column.classList.remove('col-2');
     column.classList.add('col-3');
@@ -282,7 +292,7 @@ function createColumnTitle(column, index) {
   }
   h6.style.textAlign = "center";
   column.appendChild(h6);
-  if (zhEnGps.includes(title)) {
+  if (langOpt == 2) {
     var h6 = document.createElement('h6');
     h6.appendChild(document.createTextNode(enTitles[index]));
     h6.style.textAlign = "center";
@@ -300,6 +310,19 @@ function updateNameList() {
     h6.style.color = textColors[name];
     div.appendChild(h6);
   }
+  select = document.getElementById('finame');
+  // default
+  var opt = document.createElement('option');
+  opt.value = '';
+  opt.innerHTML = ftitles[ftitles.length-1];
+  select.appendChild(opt);
+
+  for (var i = 0; i < display_names.length; i++){
+      var opt = document.createElement('option');
+      opt.value = display_names[i];
+      opt.innerHTML = display_names[i];
+      select.appendChild(opt);
+  }
 }
 
 function createForm(islogged) {
@@ -315,13 +338,14 @@ function createForm(islogged) {
       form_c.classList.add('col-sm-1');
     }
 
+    const dd = document.querySelector('#form_logout');
     var logoutbtn = document.createElement('button');
     logoutbtn.classList.add('btn');
     logoutbtn.classList.add('btn-sm');
     logoutbtn.classList.add('btn-danger');
     logoutbtn.appendChild(document.createTextNode('登出'));
     logoutbtn.onclick = function() {logout()};
-    form.appendChild(logoutbtn);
+    dd.appendChild(logoutbtn);
 
     var hr = document.createElement('hr');
     form.appendChild(hr);
@@ -396,7 +420,7 @@ function createDropDown() {
 
   for (var item in list) {
     var obj = list[item];
-    createMenuItem(div, obj.gsx$區域.$t, obj.gsx$密碼.$t);
+    createMenuItem(div, obj.gsx$group.$t, obj.gsx$key.$t);
   }
 
   var logoutbtn = document.createElement('button');
@@ -411,7 +435,59 @@ function createDropDown() {
 function selectGp(btn) {
   var menuBtn = document.querySelector('#dropdownMenu');
   menuBtn.innerHTML = btn.innerHTML;
-  parseData(btn.id);
+  getMetaData(btn.id);
+}
+
+function getMetaData(key) {
+  filtered = list.filter(function(el) {
+    return el.gsx$key.$t === key;
+  });
+  metaData = filtered[0];
+  parseData(metaData);
+}
+
+function enableRecord(enable) {
+  var record = document.querySelector('#record');
+  if (enable) {
+    record.style.display = 'block';
+  }else{
+    record.style.display ='none';
+  }
+}
+
+function updateFormTitles(obj) {
+  ftitles.push(obj.gsx$prayer.$t);
+  ftitles.push(obj.gsx$truth.$t);
+  ftitles.push(obj.gsx$sermon.$t);
+  ftitles.push(obj.gsx$bible.$t);
+  ftitles.push(obj.gsx$study.$t);
+  ftitles.push(obj.gsx$sermonpreach.$t);
+  ftitles.push(obj.gsx$listen.$t);
+  ftitles.push(obj.gsx$preaching.$t);
+  ftitles.push(obj.gsx$service.$t);
+  ftitles.push(obj.gsx$mother.$t);
+  ftitles.push(obj.gsx$name.$t);
+  
+  // update record form text
+  document.querySelector('#finame').placeholder = ftitles[ftitles.length-1];
+  document.querySelector('#liname').appendChild(document.createTextNode(ftitles[ftitles.length-1]));
+  var str1 = '#fi';
+  var str2 = '#li';
+  for (var i = 0; i < 10; i++) {
+    var parts = ftitles[i].split('. ');
+    var selector = str1.concat(i.toString());
+    document.querySelector(selector).placeholder = parts[1];
+    if (langOpt < 2) {
+      $(selector).attr('data-original-title',recordError[langOpt]);
+    }else{
+      $(selector).attr('data-original-title',recordError[0]+'\n'+recordError[1]);
+    }
+    
+
+    selector = str2.concat(i.toString());
+    document.querySelector(selector).appendChild(document.createTextNode(ftitles[i]));
+  }
+
 }
 
 function enableRecord(enable) {
@@ -434,68 +510,94 @@ function loadData() {
 window.onload = function() {
 
   enableRecord(false);
+  first = true;
 
-  let urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has('$k')) {
-    localStorage.setItem('key', urlParams.get('$k'));
-  }
+  const key = '1JdbPseFBz9jUJiSDkg5zUnHe4noeag6HuJHnQoqXYJs/od6';
+  const url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
 
-  var key = localStorage.getItem("key");
-  if (key === 'jackshin') {
+  $.getJSON(url, function(data) {
 
-    const key = '1JdbPseFBz9jUJiSDkg5zUnHe4noeag6HuJHnQoqXYJs/od6';
-    const url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
+    if (data !== null) {
+      // JSON result in `data` variable
+      for (var key in data.feed.entry) {
+        var obj = data.feed.entry[key];
+        if (obj.gsx$key.$t) {
+          list.push(obj);
+        }
+      }
+      let urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('$k')) {
+        localStorage.setItem('key', urlParams.get('$k'));
+      }
 
-    $.getJSON(url, function(data) {
-
-      if (data !== null) {
-                // JSON result in `data` variable
-                for (var key in data.feed.entry) {
-                  var obj = data.feed.entry[key];
-                  if (obj.gsx$密碼.$t) {
-                    list.push(obj);
-                  }
-                }
-
-                createDropDown();
-              }
-            });
-  }else {
-    if (key) {
-      createForm(true);
-      parseData(key);
-      enableRecord(true);
-    }else{
-      createForm(false);
+      var key = localStorage.getItem("key");
+      if (key === 'jackshin') {
+        createDropDown();
+      }else {
+        if (key) {
+          createForm(true);
+          getMetaData(key);
+          enableRecord(true);
+        }else{
+          createForm(false);
+        }
+      }
     }
-  }
+  });
 
 }
 
-function parseData (key) {
-
+function parseData (meta) {
   initDataArr();
   initContainers();
-  var url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
+  var url = 'https://spreadsheets.google.com/feeds/list/'.concat(meta.gsx$key.$t).concat('/public/values?alt=json');
 
   var success = false;
   $.getJSON(url, function(data) {
     success = true;
     if (data !== null) {
       // JSON result in `data` variable
-      title = data.feed.title.$t;
       var entry = data.feed.entry;
       var lastUpdateDate;
 
       var titleDiv = document.querySelector('#title');
       var h3 = document.createElement('h3');
-      h3.appendChild(document.createTextNode(title));
+
+      langOpt = 0;
+      if (enGps.includes(meta.gsx$group.$t)) {
+        langOpt = 1;
+      }
+      if (zhEnGps.includes(meta.gsx$group.$t)) {
+        langOpt = 2;
+      }
+      // if (langOpt < 2) {
+      //   h3.appendChild(document.createTextNode(headerPrefix[langOpt]));
+      //   h3.appendChild(document.createElement("br"));
+      // }else{
+      //   h3.appendChild(document.createTextNode(headerPrefix[0]));
+      //   h3.appendChild(document.createElement("br"));
+      //   h3.appendChild(document.createTextNode(headerPrefix[1]));
+      //   h3.appendChild(document.createElement("br"));
+      // }
+      h3.appendChild(document.createTextNode(meta.gsx$group.$t));
       titleDiv.appendChild(h3);
+
+      scriptURL = meta.gsx$api.$t;
 
       var i = 0;
       var additional = false;
+      var here_first = true;
       for (var key in data.feed.entry) {
         var obj = data.feed.entry[key];
+        if (first) {
+          updateFormTitles(obj);
+          first = false;
+          here_first = false;
+          continue;
+        }else if (here_first) {
+          here_first = false;
+          continue;
+        }
         lastUpdateDate = parseDate(obj.gsx$timestamp.$t);
         if (enGps.includes(title)) {
           var name = obj.gsx$name.$t;
@@ -528,7 +630,7 @@ function parseData (key) {
           }
           getZhEngEntry(obj);
         }else {
-          var name = obj.gsx$姓名.$t;
+          var name = obj.gsx$name.$t;
           if (name && i<10) {
             if (!names.includes(name)) {
               if (!additional)
@@ -660,46 +762,46 @@ function getZhEngEntry (obj) {
 function getEntry (obj) {
   var type;
   var units;
-  var name = obj.gsx$姓名.$t;
+  var name = obj.gsx$name.$t;
   var num = display_names.indexOf(name);
-  if (obj.gsx$禱告.$t){
-    updateDataArr(0, parseInt(obj.gsx$禱告.$t)/10, num);
+  if (obj.gsx$prayer.$t){
+    updateDataArr(0, parseInt(obj.gsx$prayer.$t)/10, num);
   }
 
-  if (obj.gsx$父親真理書.$t){
-    updateDataArr(1, parseInt(obj.gsx$父親真理書.$t)/10, num);
+  if (obj.gsx$truth.$t){
+    updateDataArr(1, parseInt(obj.gsx$truth.$t)/10, num);
   }
 
-  if (obj.gsx$講道書影像說教禮拜除外.$t){
-    updateDataArr(2, parseInt(obj.gsx$講道書影像說教禮拜除外.$t)/10, num);
+  if (obj.gsx$sermon.$t){
+    updateDataArr(2, parseInt(obj.gsx$sermon.$t)/10, num);
   }
 
-  if (obj.gsx$聖經.$t){
-    updateDataArr(3, parseInt(obj.gsx$聖經.$t)/10, num);
+  if (obj.gsx$bible.$t){
+    updateDataArr(3, parseInt(obj.gsx$bible.$t)/10, num);
   }
 
-  if (obj.gsx$學習.$t){
-    updateDataArr(4, parseInt(obj.gsx$學習.$t)/10, num);
+  if (obj.gsx$study.$t){
+    updateDataArr(4, parseInt(obj.gsx$study.$t)/10, num);
   }
 
-  if (obj.gsx$發表.$t){
-    updateDataArr(5, parseInt(obj.gsx$發表.$t)/10, num);
+  if (obj.gsx$sermonpreach.$t){
+    updateDataArr(5, parseInt(obj.gsx$sermonpreach.$t)/10, num);
   }
 
-  if (obj.gsx$聽發表.$t){
-    updateDataArr(6, parseInt(obj.gsx$聽發表.$t)/10, num);
+  if (obj.gsx$listen.$t){
+    updateDataArr(6, parseInt(obj.gsx$listen.$t)/10, num);
   }
 
-  if (obj.gsx$傳道.$t){
-    updateDataArr(7, parseInt(obj.gsx$傳道.$t)/10, num);
+  if (obj.gsx$preaching.$t){
+    updateDataArr(7, parseInt(obj.gsx$preaching.$t)/10, num);
   }
 
-  if (obj.gsx$事奉包括探訪.$t){
-    updateDataArr(8, parseInt(obj.gsx$事奉包括探訪.$t)/10, num);
+  if (obj.gsx$service.$t){
+    updateDataArr(8, parseInt(obj.gsx$service.$t)/10, num);
   }
 
-  if (obj.gsx$實踐母親的教誨.$t){
-    updateDataArr(9, parseInt(obj.gsx$實踐母親的教誨.$t)/10, num);
+  if (obj.gsx$mother.$t){
+    updateDataArr(9, parseInt(obj.gsx$mother.$t)/10, num);
   }
 }
 
@@ -740,15 +842,12 @@ function logout () {
 }
 
 function on() {
-  document.getElementById('overlay').style.display = 'flex';
+  document.getElementById('overlay').style.display = 'block';
 }
 
 function off() {
   document.getElementById('overlay').style.display = 'none';
 }
-// write to google sheet
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzL1_c-Rdu3dj3-sGXwk8OEmD8vvQBjb0EQTuvddwiOFRglob8biALh12ZblhDe8l1I/exec';
-const form = document.forms['submit-to-google-sheet'];
 
 function checkValidate() {
   for (var i = 0; i < 10; i++) {
@@ -759,35 +858,41 @@ function checkValidate() {
   return true;
 }
 
-$('#fi0').tooltip({trigger: 'manual'});
-$('#fi0').on('change', function() {
-  const num = this.value;
-  if (num%10 != 0 || num < 1 || num > 1440) {
+function validate(index) {
+  var selector = '#fi'.concat(index.toString());
+  const num = document.querySelector(selector).value;
+  if (num%10 != 0 || num < 0 || num > 1440) {
     validateArr[0] = false;
-    $('#fi0').tooltip('show');
-    console.log(checkValidate());
+    $(selector).tooltip('show');
   }else{
-    console.log('hide');
-    $('#fi0').tooltip('hide');
+    $(selector).tooltip('hide');
     validateArr[0] = true;
-    console.log(checkValidate());
   }
-});
+}
 
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    if (checkValidate()) {
-      on();
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-          off();
-        })
-        .catch(error => {
-          alert('錯誤！Error!', error.message);
-          off();
-        })
-      form.reset();
-      $('#myModal').modal('hide');
-    }
-    
-  })
+for (let i = 0; i < 10; i++) {
+  let selector = '#fi'.concat(i.toString());
+  $(selector).tooltip({trigger: 'manual'});
+  $(selector).on('change', function() {
+    validate(i);
+  });
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  if (checkValidate()) {
+    on();
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    .then(response => {
+      alert('已記錄 Recorded');
+      off();
+      getMetaData(localStorage.getItem("key"));
+    })
+    .catch(error => {
+      alert('錯誤 Error\n['+ error.message + ']');
+      off();
+    })
+    form.reset();
+    $('#myModal').modal('hide');
+  }
+})

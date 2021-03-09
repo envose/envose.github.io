@@ -24,6 +24,12 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+#form_logout {
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+}
+
 .spinner {
   height: 60px;
   width: 60px;
@@ -78,7 +84,7 @@ body{
 }
 
 #overlay {
-  position: absolute;
+  position: fixed;
   display: none;
   top: 0;
   left: 0;
@@ -86,5 +92,5 @@ body{
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  cursor: pointer;
+  cursor: none;
 }
