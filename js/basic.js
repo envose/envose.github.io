@@ -48,6 +48,7 @@ var completeArr = new Array(10);
 var totalArr = new Array(10);
 var isListAll = false;
 var list = [];
+var validateArr = new Array(10);
 
 
 var enGps = ['Establish 100% Faith Campaign: Testing', 'Establish 100% Faith Campaign: Female Young Adult 4-3', 'Establish 100% Faith Campaign: Female Young Adult 4-4'];
@@ -186,6 +187,7 @@ function initDataArr() {
     dataArr[i] = [];
     completeArr[i] = 0;
     totalArr[i] = 0;
+    validateArr[i] = true;
   }
 }
 
@@ -412,17 +414,30 @@ function selectGp(btn) {
   parseData(btn.id);
 }
 
+function enableRecord(enable) {
+  var record = document.querySelector('#record');
+  if (enable) {
+    record.style.display = 'block';
+    var ele = document.querySelector('#finame');
+    ele.placeholder = 'Name';
+  }else{
+    record.style.display ='none';
+  }
+}
+
 function loadData() {
-  var key = document.getElementById("key").value;
-  localStorage.setItem("key", key);
+  var key = document.getElementById('key').value;
+  localStorage.setItem('key', key);
   location.reload();
 }
 
 window.onload = function() {
 
+  enableRecord(false);
+
   let urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('$k')) {
-    localStorage.setItem("key", urlParams.get('$k'));
+    localStorage.setItem('key', urlParams.get('$k'));
   }
 
   var key = localStorage.getItem("key");
@@ -449,6 +464,7 @@ window.onload = function() {
     if (key) {
       createForm(true);
       parseData(key);
+      enableRecord(true);
     }else{
       createForm(false);
     }
@@ -722,3 +738,56 @@ function logout () {
   localStorage.clear();
   window.location.assign(window.location.href.split('?')[0]);
 }
+
+function on() {
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+function off() {
+  document.getElementById('overlay').style.display = 'none';
+}
+// write to google sheet
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzL1_c-Rdu3dj3-sGXwk8OEmD8vvQBjb0EQTuvddwiOFRglob8biALh12ZblhDe8l1I/exec';
+const form = document.forms['submit-to-google-sheet'];
+
+function checkValidate() {
+  for (var i = 0; i < 10; i++) {
+    if (!validateArr[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+$('#fi0').tooltip({trigger: 'manual'});
+$('#fi0').on('change', function() {
+  const num = this.value;
+  if (num%10 != 0 || num < 1 || num > 1440) {
+    validateArr[0] = false;
+    $('#fi0').tooltip('show');
+    console.log(checkValidate());
+  }else{
+    console.log('hide');
+    $('#fi0').tooltip('hide');
+    validateArr[0] = true;
+    console.log(checkValidate());
+  }
+});
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    if (checkValidate()) {
+      on();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+          off();
+        })
+        .catch(error => {
+          alert('錯誤！Error!', error.message);
+          off();
+        })
+      form.reset();
+      $('#myModal').modal('hide');
+    }
+    
+  })

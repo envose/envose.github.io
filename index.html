@@ -26,11 +26,51 @@
   
 <div class="container container-fluid mobile-card-container">
   <div class="row text-center flex-nowrap flex-sm-wrap">
+      <div class="justify-content-center align-items-center">
+        <div id="overlay">
+          <div class="w-100 d-flex justify-content-center align-items-center">
+            <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="col-sm-1 mx-auto" id='form_container' style="text-align: left">
       <div id='form'>
       </div>
       <div id="nameList">
       </div>
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" id="record">記錄</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">記錄</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form name="submit-to-google-sheet">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="finame">姓名</label>
+                  <input class="form-control" name="name" type="text" placeholder="姓名" id="finame" required>
+                </div>
+                <div class="form-group">
+                  <label for="fi0">祈禱</label>
+                  <input class="form-control" name="prayer" type="number" placeholder="Prayer" id="fi0" title="必須為10的倍數，不能超過1天24小時（1440分鐘）" data-toggle="tooltip">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-default">確定</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="col-sm-1 mx-auto" id="table0">
     </div>
