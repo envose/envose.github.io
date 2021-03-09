@@ -54,6 +54,7 @@ var list = [];
 var metaData = [];
 var validateArr = new Array(10);
 var ftitles = [];
+var first = false;
 
 var scriptURL = '';
 const form = document.forms['submit-to-google-sheet'];
@@ -498,6 +499,7 @@ function loadData() {
 window.onload = function() {
 
   enableRecord(false);
+  first = true;
 
   const key = '1JdbPseFBz9jUJiSDkg5zUnHe4noeag6HuJHnQoqXYJs/od6';
   const url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
@@ -572,13 +574,17 @@ function parseData (meta) {
       scriptURL = meta.gsx$api.$t;
 
       var i = 0;
-      var first = true;
       var additional = false;
+      var here_first = true;
       for (var key in data.feed.entry) {
         var obj = data.feed.entry[key];
         if (first) {
           updateFormTitles(obj);
           first = false;
+          here_first = false;
+          continue;
+        }else if (here_first) {
+          here_first = false;
           continue;
         }
         lastUpdateDate = parseDate(obj.gsx$timestamp.$t);
