@@ -60,8 +60,28 @@ var scriptURL = '';
 const form = document.forms['submit-to-google-sheet'];
 
 
-var enGps = ['女青年4-3', '女青年4-4'];
-var zhEnGps = ['壯年4組'];
+var enGps = ['Young Adult (Female) 4-3', 'Young Adult (Female) 4-4'];
+var zhEnGps = ['壯年4組／Male Adult Group 4'];
+
+var translate = [{
+  'login':    '登入',
+  'logout':   '登出',
+  'password': '密碼',
+  'record':   '記錄',
+  'confirm':  '確認',
+},{
+  'login':    'Login',
+  'logout':   'Logout',
+  'password': 'Password',
+  'record':   'Record',
+  'confirm':  'Confirm',
+},{
+  'login':    '登入／Login',
+  'logout':   '登出／Logout',
+  'password': '密碼／Password',
+  'record':   '記錄／Record',
+  'confirm':  '確認／Confirm',
+}];
 
 
 // 'https://wallpaperaccess.com/full/1157298.png',
@@ -346,7 +366,8 @@ function createForm(islogged) {
     logoutbtn.classList.add('btn');
     logoutbtn.classList.add('btn-sm');
     logoutbtn.classList.add('btn-danger');
-    logoutbtn.appendChild(document.createTextNode('登出'));
+    logoutbtn.id = 'logoutBtn';
+    logoutbtn.appendChild(document.createTextNode(translate[langOpt].logout));
     logoutbtn.onclick = function() {logout()};
     dd.appendChild(logoutbtn);
 
@@ -368,7 +389,7 @@ function createForm(islogged) {
     input.type = 'password';
     input.classList.add('form-control');
     input.id='key';
-    input.placeholder = '密碼';
+    input.placeholder = translate[langOpt].password;
     input.style.marginBottom = '0.5rem';
     input.onkeypress = function(event) {
       var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -382,7 +403,7 @@ function createForm(islogged) {
    btn.classList.add('btn');
    btn.classList.add('btn-primary');
    btn.onclick = function() {loadData()};
-   btn.appendChild(document.createTextNode('登入'));
+   btn.appendChild(document.createTextNode(translate[langOpt].login));
    div.appendChild(btn);
 
    form.appendChild(div);
@@ -451,8 +472,13 @@ function getMetaData(key) {
 
 function enableRecord(enable) {
   var record = document.querySelector('#record');
+  var mTitle = document.querySelector('#modalTitle');
+  var cBtn = document.querySelector('#confirmBtn');
   if (enable) {
     record.style.display = 'block';
+    record.appendChild(document.createTextNode(translate[langOpt].record));
+    mTitle.appendChild(document.createTextNode(translate[langOpt].record));
+    cBtn.appendChild(document.createTextNode(translate[langOpt].confirm));
   }else{
     record.style.display ='none';
   }
@@ -537,6 +563,20 @@ window.onload = function() {
     }
   });
 
+}
+
+function translateAll () {
+  var l = document.getElementById('logoutBtn').firstChild;
+  l.nodeValue = translate[langOpt].logout;
+
+  var r = document.getElementById('record').firstChild;
+  r.nodeValue = translate[langOpt].record;
+
+  var m = document.getElementById('modalTitle').firstChild;
+  m.nodeValue = translate[langOpt].record;
+
+  var c = document.getElementById('confirmBtn').firstChild;
+  c.nodeValue = translate[langOpt].confirm;
 }
 
 function parseData (meta) {
@@ -644,6 +684,7 @@ function parseData (meta) {
       }
       updateNameList();
       createAllTable();
+      translateAll();
     }else{
       logout();
     }
