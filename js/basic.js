@@ -115,8 +115,7 @@ var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.g
 'https://media0.giphy.com/media/3gWIjOpHyh066G46he/giphy.gif',
 'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
 'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
-var randomNumber = Math.floor(Math.random() * 4);
-randomNumber = 4;
+var randomNumber = Math.floor(Math.random() * 5);
 var applyTextWhite = [4];
 var repeatBg = [1, 2, 3, 5];
 var rotateCardBg = [1];
