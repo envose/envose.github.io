@@ -40,21 +40,19 @@ var titles = ["禱告", "父親真理書", "講道書/影像說教（禮拜除�
 var displayTitles = ["禱告", "父親真理書", "講道書／影像說教（ 禮拜除外 ）", "聖經", "學習", "發表", "聽發表", "傳道", "事奉（ 包括探訪 ）", "實踐母親的教誨"];
 var enTitles = ["Prayer", "Father's Truth Books", "Sermon Books/ Video Sermon (exclude worship services)", "Bible", "Study", "Sermon Preaching", "Listening to Sermon Preaching", "Preaching", "Service (include Visit)", "Practice the Teachings of Mother"];
 var recordError = ["必須為10的倍數，不能超過1天24小時（1440分鐘）", "Must be a multiple of 10 and cannot exceed 24 hours a day (1440 minutes) "];
-var headerPrefix = ["建立100%信心活動", "Establish 100% Faith Campaign"];
 var langOpt = 0;
-var title;
 var names = [];
 var display_names = [];
 var additional = false;
 var dataArr = new Array(10);
 var completeArr = new Array(10);
 var totalArr = new Array(10);
-var isListAll = false;
 var list = [];
 var metaData = [];
 var validateArr = new Array(10);
 var ftitles = [];
 var first = false;
+var isActive = true;
 
 var scriptURL = '';
 const form = document.forms['submit-to-google-sheet'];
@@ -70,6 +68,7 @@ var translate = [{
   'add':      '新增', 
   'record':   '新增記錄',
   'confirm':  '確認',
+  'end':      '結', 
 },{
   'login':    'Login',
   'logout':   'Logout',
@@ -77,6 +76,7 @@ var translate = [{
   'add':      'Add', 
   'record':   'Add a New Record',
   'confirm':  'Confirm',
+  'end':      'End', 
 },{
   'login':    '登入／Login',
   'logout':   '登出／Logout',
@@ -84,6 +84,7 @@ var translate = [{
   'add':      '新增／Add', 
   'record':   '新增記錄／Add a New Record',
   'confirm':  '確認／Confirm',
+  'end':      '結', 
 }];
 
 
@@ -93,7 +94,7 @@ var bgimages=[
 'https://image.freepik.com/free-vector/white-prism-background-design-vector_53876-86339.jpg',
 'https://image.freepik.com/free-photo/background_53876-32171.jpg',
 'https://image.freepik.com/free-vector/simple-pattern-white-branches-background_53876-60579.jpg',
-'https://watv.org/wp-content/uploads/2020/12/kings-another-mother.jpg',
+'https://wallpaperaccess.com/full/1157298.png',
 'https://i.pinimg.com/736x/88/4b/ec/884becb4540e2724d01db2b53ccdb71e.jpg'];
 
 // 'https://media1.giphy.com/media/cJl4NoIJOc5nN7r5MA/giphy.gif',
@@ -102,7 +103,7 @@ var cardImages=[
 'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
 'https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
 'https://media1.giphy.com/media/ieaUdBJJC19uw/giphy.gif',
-'https://watv.org/wp-content/uploads/2020/05/children-of-light.jpg',
+'https://media3.giphy.com/media/MHboUUIoxzOKs/giphy.gif?cid=ecf05e47bh7g1icl10bjovg55yy0x0qbjzwh4oz4a0v86qb1&rid=giphy.gif',
 'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
 var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
 'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
@@ -115,7 +116,7 @@ var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.g
 'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
 'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
 var randomNumber = Math.floor(Math.random() * 4);
-var applyTextWhite = [];
+var applyTextWhite = [4];
 var repeatBg = [1, 2, 3, 5];
 var rotateCardBg = [1];
 
@@ -131,14 +132,13 @@ card.style.backgroundImage = cardImg;
 if (applyTextWhite.includes(randomNumber)) {
   $('body').css({'color': 'white'});
 }
-
 // countdown
 // Set the date we're counting down to
-var countDownDate = new Date("May 18, 2021 00:00:00").getTime();
+var countDownDate = new Date("May 18, 2021 23:59:59").getTime();
 var countDate = new Date("Feb 7, 2021 00:00:00").getTime();
 
 // Update the count down every 1 second
-var x = setInterval(function() {
+var x = setInterval(function () {
 
   // Get today's date and time
   var now = new Date().getTime();
@@ -147,31 +147,21 @@ var x = setInterval(function() {
   var distance = countDownDate - now;
   var distance2 = now - countDate;
 
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  var days = Math.floor(distance2 / (1000 * 60 * 60 * 24));
 
-  var days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
-  if (days2 > 100) {
-    days2 = '結';
-  }
+  document.getElementById("days").innerHTML = days;
 
-  // Output the result in an element with id="demo"
-  // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  // + minutes + "m " + seconds + "s ";
-  // document.getElementById("demo").innerHTML = days;
-  document.getElementById("100days").innerHTML = days2;
-
-  // If the count down is over, write some text 
+  // If the count down is over, do sth
   if (distance < 0) {
+    isActive = false;
+    enableRecord(false);
+    document.getElementById("hr_record").remove();
+    days = translate[langOpt].end;
+    document.getElementById("days").innerHTML = days;
     clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
   }
+
 }, 1000);
-
-
 
 // get day
 var now = new Date();
@@ -374,8 +364,11 @@ function createForm(islogged) {
     logoutbtn.onclick = function() {logout()};
     dd.appendChild(logoutbtn);
 
-    var hr = document.createElement('hr');
-    form.appendChild(hr);
+    if (isActive){
+      var hr = document.createElement('hr');
+      hr.id = 'hr_record';
+      form.appendChild(hr);
+    }
   }else{
     if (!form_c.classList.contains('col-12')) {
       form_c.classList.add('col-12');
@@ -477,13 +470,14 @@ function enableRecord(enable) {
   var record = document.querySelector('#record');
   var mTitle = document.querySelector('#modalTitle');
   var cBtn = document.querySelector('#confirmBtn');
-  if (enable) {
+
+  record.style.display ='none';
+
+  if (enable && isActive) {
     record.style.display = 'block';
     record.appendChild(document.createTextNode(translate[langOpt].add));
     mTitle.appendChild(document.createTextNode(translate[langOpt].record));
     cBtn.appendChild(document.createTextNode(translate[langOpt].confirm));
-  }else{
-    record.style.display ='none';
   }
 }
 
@@ -539,7 +533,6 @@ window.onload = function() {
   $.getJSON(url, function(data) {
 
     if (data !== null) {
-      // JSON result in `data` variable
       for (var key in data.feed.entry) {
         var obj = data.feed.entry[key];
         if (obj.gsx$key.$t) {
@@ -573,7 +566,9 @@ function translateAll () {
   l.nodeValue = translate[langOpt].logout;
 
   var r = document.getElementById('record').firstChild;
-  r.nodeValue = translate[langOpt].add;
+  if (r.nodeValue) {
+    r.nodeValue = translate[langOpt].add;
+  }
 
   var m = document.getElementById('modalTitle').firstChild;
   m.nodeValue = translate[langOpt].record;
@@ -591,7 +586,6 @@ function parseData (meta) {
   $.getJSON(url, function(data) {
     success = true;
     if (data !== null) {
-      // JSON result in `data` variable
       var entry = data.feed.entry;
       var lastUpdateDate;
 
@@ -605,15 +599,6 @@ function parseData (meta) {
       if (zhEnGps.includes(meta.gsx$group.$t)) {
         langOpt = 2;
       }
-      // if (langOpt < 2) {
-      //   h3.appendChild(document.createTextNode(headerPrefix[langOpt]));
-      //   h3.appendChild(document.createElement("br"));
-      // }else{
-      //   h3.appendChild(document.createTextNode(headerPrefix[0]));
-      //   h3.appendChild(document.createElement("br"));
-      //   h3.appendChild(document.createTextNode(headerPrefix[1]));
-      //   h3.appendChild(document.createElement("br"));
-      // }
       h3.appendChild(document.createTextNode(meta.gsx$group.$t));
       titleDiv.appendChild(h3);
 
@@ -634,38 +619,7 @@ function parseData (meta) {
           continue;
         }
         lastUpdateDate = parseDate(obj.gsx$timestamp.$t);
-        if (enGps.includes(title)) {
-          var name = obj.gsx$name.$t;
-          if (name && i<10) {
-            if (!names.includes(name)) {
-              if (!additional)
-                names.push(name);
-              display_names.push(name);
-            }else{
-              additional = true;
-            }
-            if (i < 10) {
-              i++;
-            }
-          }
-          getEngEntry(obj);
-        }else if (zhEnGps.includes(title)) {
-          var name = obj.gsx$姓名name.$t;
-          if (name && i<10) {
-            if (!names.includes(name)) {
-              if (!additional)
-                names.push(name);
-              display_names.push(name);
-            }else{
-              additional = true;
-            }
-            if (i < 10) {
-              i++;
-            }
-          }
-          getZhEngEntry(obj);
-        }else {
-          var name = obj.gsx$name.$t;
+        var name = obj.gsx$name.$t;
           if (name && i<10) {
             if (!names.includes(name)) {
               if (!additional)
@@ -679,7 +633,6 @@ function parseData (meta) {
             }
           }
           getEntry(obj);
-        }
       }
       if (lastUpdateDate) {
         var lastUpdateStr = lastUpdateDate.toLocaleDateString().concat(" ".concat(lastUpdateDate.toLocaleTimeString()));
@@ -701,98 +654,6 @@ function parseData (meta) {
             logout();
           }
         }, 10000);
-}
-
-function getEngEntry (obj) {
-  var type;
-  var units;
-  var name = obj.gsx$name.$t;
-  var num = display_names.indexOf(name);
-  if (obj.gsx$prayer.$t){
-    updateDataArr(0, parseInt(obj.gsx$prayer.$t)/10, num);
-  }
-
-  if (obj.gsx$fatherstruthbooks.$t){
-    updateDataArr(1, parseInt(obj.gsx$fatherstruthbooks.$t)/10, num);
-  }
-
-  if (obj.gsx$sermonbooksvideosermonexcludeworshipservices.$t){
-    updateDataArr(2, parseInt(obj.gsx$sermonbooksvideosermonexcludeworshipservices.$t)/10, num);
-  }
-
-  if (obj.gsx$bible.$t){
-    updateDataArr(3, parseInt(obj.gsx$bible.$t)/10, num);
-  }
-
-  if (obj.gsx$study.$t){
-    updateDataArr(4, parseInt(obj.gsx$study.$t)/10, num);
-  }
-
-  if (obj.gsx$sermonpreaching.$t){
-    updateDataArr(5, parseInt(obj.gsx$sermonpreaching.$t)/10, num);
-  }
-
-  if (obj.gsx$listeningtosermonpreaching.$t){
-    updateDataArr(6, parseInt(obj.gsx$listeningtosermonpreaching.$t)/10, num);
-  }
-
-  if (obj.gsx$preaching.$t){
-    updateDataArr(7, parseInt(obj.gsx$preaching.$t)/10, num);
-  }
-
-  if (obj.gsx$serviceincludevisit.$t){
-    updateDataArr(8, parseInt(obj.gsx$serviceincludevisit.$t)/10, num);
-  }
-
-  if (obj.gsx$practicetheteachingsofmother.$t){
-    updateDataArr(9, parseInt(obj.gsx$practicetheteachingsofmother.$t)/10, num);
-  }
-}
-
-function getZhEngEntry (obj) {
-  var type;
-  var units;
-  var name = obj.gsx$姓名name.$t;
-  var num = display_names.indexOf(name);
-  if (obj.gsx$禱告prayer.$t){
-    updateDataArr(0, parseInt(obj.gsx$禱告prayer.$t)/10, num);
-  }
-
-  if (obj.gsx$父親真理書fatherstruthbooks.$t){
-    updateDataArr(1, parseInt(obj.gsx$父親真理書fatherstruthbooks.$t)/10, num);
-  }
-
-  if (obj.gsx$講道書影像說教禮拜除外sermonbooksvideosermonexcludeworshipservices.$t){
-    updateDataArr(2, parseInt(obj.gsx$講道書影像說教禮拜除外sermonbooksvideosermonexcludeworshipservices.$t)/10, num);
-  }
-
-  if (obj.gsx$聖經bible.$t){
-    updateDataArr(3, parseInt(obj.gsx$聖經bible.$t)/10, num);
-  }
-
-  if (obj.gsx$學習study.$t){
-    updateDataArr(4, parseInt(obj.gsx$學習study.$t)/10, num);
-  }
-
-  if (obj.gsx$發表sermonpreaching.$t){
-    updateDataArr(5, parseInt(obj.gsx$發表sermonpreaching.$t)/10, num);
-  }
-
-  if (obj.gsx$聽發表listeningtosermonpreaching.$t){
-    updateDataArr(6, parseInt(obj.gsx$聽發表listeningtosermonpreaching.$t)/10, num);
-  }
-
-  if (obj.gsx$傳道preaching.$t){
-    updateDataArr(7, parseInt(obj.gsx$傳道preaching.$t)/10, num);
-  }
-
-  if (obj.gsx$事奉包括探訪serviceincludevisit.$t){
-    updateDataArr(8, parseInt(obj.gsx$事奉包括探訪serviceincludevisit.$t)/10, num);
-  }
-
-  if (obj.gsx$實踐母親的教誨practicetheteachingsofmother.$t){
-    updateDataArr(9, parseInt(obj.gsx$實踐母親的教誨practicetheteachingsofmother.$t)/10, num);
-  }
 }
 
 function getEntry (obj) {
@@ -917,7 +778,7 @@ for (let i = 0; i < 10; i++) {
 
 form.addEventListener('submit', e => {
   e.preventDefault()
-  if (checkValidate()) {
+  if (checkValidate() && isActive) {
     on();
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
     .then(response => {
