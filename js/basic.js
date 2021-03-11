@@ -67,19 +67,19 @@ var translate = [{
   'login':    '登入',
   'logout':   '登出',
   'password': '密碼',
-  'record':   '記錄',
+  'record':   '新記錄',
   'confirm':  '確認',
 },{
   'login':    'Login',
   'logout':   'Logout',
   'password': 'Password',
-  'record':   'Record',
+  'record':   'New Record',
   'confirm':  'Confirm',
 },{
   'login':    '登入／Login',
   'logout':   '登出／Logout',
   'password': '密碼／Password',
-  'record':   '記錄／Record',
+  'record':   '新記錄／New Record',
   'confirm':  '確認／Confirm',
 }];
 
