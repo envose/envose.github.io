@@ -479,7 +479,7 @@ function enableRecord(enable) {
   var cBtn = document.querySelector('#confirmBtn');
   if (enable) {
     record.style.display = 'block';
-    record.appendChild(document.createTextNode(translate[langOpt].record));
+    record.appendChild(document.createTextNode(translate[langOpt].add));
     mTitle.appendChild(document.createTextNode(translate[langOpt].record));
     cBtn.appendChild(document.createTextNode(translate[langOpt].confirm));
   }else{
