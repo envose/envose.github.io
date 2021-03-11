@@ -930,3 +930,7 @@ form.addEventListener('submit', e => {
     $('#myModal').modal('hide');
   }
 })
+
+function closeForm() {
+  form.reset();
+}
