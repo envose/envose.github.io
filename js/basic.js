@@ -103,7 +103,7 @@ var cardImages=[
 'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
 'https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
 'https://media1.giphy.com/media/ieaUdBJJC19uw/giphy.gif',
-'https://media0.giphy.com/media/knBA26sv2ueXK/giphy.gif',
+'https://i.pinimg.com/originals/df/35/d2/df35d27ecd70207a710bde66041cb80c.gif',
 'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
 var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
 'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
