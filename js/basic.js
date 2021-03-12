@@ -103,7 +103,7 @@ var cardImages=[
 'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
 'https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
 'https://media1.giphy.com/media/ieaUdBJJC19uw/giphy.gif',
-'https://media3.giphy.com/media/xT9IgDmCrgQ830BvcA/giphy.gif?cid=ecf05e47c8okl64dk9rv3vtj1qy2t7te0y3omqeqb36m5lr4&rid=giphy.gif',
+'https://media0.giphy.com/media/knBA26sv2ueXK/giphy.gif',
 'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
 var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
 'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
@@ -115,7 +115,8 @@ var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.g
 'https://media0.giphy.com/media/3gWIjOpHyh066G46he/giphy.gif',
 'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
 'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
-var randomNumber = Math.floor(Math.random() * 5);
+var randomNumber = Math.floor(Math.random() * 4);
+randomNumber = 4;
 var applyTextWhite = [4];
 var repeatBg = [1, 2, 3, 5];
 var rotateCardBg = [1];

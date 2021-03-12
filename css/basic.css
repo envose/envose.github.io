@@ -36,7 +36,6 @@ body{
 }
 #card {
   background-size: 100%;
-  min-height: 300px;
   color: white;
 }
 #card_container {
