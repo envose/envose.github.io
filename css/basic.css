@@ -45,6 +45,9 @@ body{
 #dropdown {
   margin: 1rem;
 }
+#record {
+  display: none;
+}
 #myModal {
   color: black;
 }
