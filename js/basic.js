@@ -761,11 +761,11 @@ function validate(index) {
   var selector = '#fi'.concat(index.toString());
   const num = document.querySelector(selector).value;
   if (num%10 != 0 || num < 0 || num > 1440) {
-    validateArr[0] = false;
+    validateArr[index] = false;
     $(selector).tooltip('show');
   }else{
     $(selector).tooltip('hide');
-    validateArr[0] = true;
+    validateArr[index] = true;
   }
 }
 
