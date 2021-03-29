@@ -65,6 +65,14 @@ body{
   margin-top: 0rem;
   margin-bottom: 3rem;
 }
+#alert {
+  margin: 0;
+  display: none;
+}
+#alert_body {
+  max-width: 100%;
+  width: 100%;
+}
 .spinner {
   height: 60px;
   width: 60px;

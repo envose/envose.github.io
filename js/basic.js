@@ -69,6 +69,9 @@ var translate = [{
   'record':   '新增記錄',
   'confirm':  '確認',
   'end':      '結', 
+  'alertMsgDay': '請多多得福！表格將於明晚關閉。',
+  'alertMsgHr':  '請多多得福！表格將於[hr]小時後關閉。',
+  'alertMsgMin': '請多多得福！表格將於[min]分鐘後關閉。',
 },{
   'login':    'Login',
   'logout':   'Logout',
@@ -77,6 +80,9 @@ var translate = [{
   'record':   'Add a New Record',
   'confirm':  'Confirm',
   'end':      'End', 
+  'alertMsgDay': 'GBU! Form will be closed tomorrow night.',
+  'alertMsgHr':  'GBU! Form will be closed in [hr] hours.',
+  'alertMsgMin': 'GBU! Form will be closed in [min] mins.',
 },{
   'login':    '登入／Login',
   'logout':   '登出／Logout',
@@ -85,6 +91,9 @@ var translate = [{
   'record':   '新增記錄／Add a New Record',
   'confirm':  '確認／Confirm',
   'end':      '結', 
+  'alertMsgDay': '請多多得福！表格將於明晚關閉',
+  'alertMsgHr':  '請多多得福！表格將於[hr](hr)小時後關閉',
+  'alertMsgMin': '請多多得福！表格將於[min](min)分鐘後關閉',
 }];
 
 
@@ -103,7 +112,7 @@ var cardImages=[
 'https://media0.giphy.com/media/jaOXKCxtBPLieRLI0c/giphy.gif',
 'https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif',
 'https://media1.giphy.com/media/ieaUdBJJC19uw/giphy.gif',
-'https://i.pinimg.com/originals/df/35/d2/df35d27ecd70207a710bde66041cb80c.gif',
+'https://media3.giphy.com/media/xT9IgDmCrgQ830BvcA/giphy.gif?cid=ecf05e47c8okl64dk9rv3vtj1qy2t7te0y3omqeqb36m5lr4&rid=giphy.gif',
 'https://sgwmscog.com/wp-content/uploads/Child-light.gif'];
 var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.gif',
 'https://media2.giphy.com/media/SiGjBqizFrcXWk5iBb/giphy.gif',
@@ -116,7 +125,6 @@ var completeImages = ['https://media0.giphy.com/media/5zmvqWl2HAPz47oEkG/giphy.g
 'https://media2.giphy.com/media/SHT2ELb4lvmLU9IcC1/giphy.gif',
 'http://cdn.lowgif.com/full/a4e39312923151bd-.gif',];
 var randomNumber = Math.floor(Math.random() * 4);
-randomNumber = 4;
 var applyTextWhite = [4];
 var repeatBg = [1, 2, 3, 5];
 var rotateCardBg = [1];
@@ -135,8 +143,8 @@ if (applyTextWhite.includes(randomNumber)) {
 }
 // countdown
 // Set the date we're counting down to
-var countDownDate = new Date("May 18, 2021 23:59:59").getTime();
-var countDate = new Date("Feb 7, 2021 00:00:00").getTime();
+const countDownDate = new Date("May 18, 2021 23:59:59").getTime();
+const countDate = new Date("Feb 7, 2021 00:00:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function () {
@@ -149,17 +157,32 @@ var x = setInterval(function () {
   var distance2 = now - countDate;
 
   var days = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+  var days_left = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours_left = Math.floor(distance / (1000 * 60 * 60));
+  var mins_left = Math.floor(distance / (1000 * 60));
 
   document.getElementById("days").innerHTML = days;
 
   // If the count down is over, do sth
   if (distance < 0) {
+    document.getElementById("alert").style.display = "none";
     isActive = false;
     enableRecord(false);
-    document.getElementById("hr_record").remove();
+    if (document.getElementById("hr_record")) {
+      document.getElementById("hr_record").remove();
+    }
     days = translate[langOpt].end;
     document.getElementById("days").innerHTML = days;
     clearInterval(x);
+  }else if (days_left <= 1){
+    var msg = getTranslate("alertMsgDay");
+    if (mins_left < 60) {
+      msg = getTranslate("alertMsgMin").replace("[min]", (mins_left+1).toString());
+    }else if (hours_left < 24) {
+      msg = getTranslate("alertMsgHr").replace("[hr]", (hours_left+1).toString());
+    }
+    document.getElementById("alert").style.display = "block";
+    document.getElementById("alert_msg").innerHTML = msg;
   }
 
 }, 1000);
@@ -227,6 +250,15 @@ function initContainers() {
     var column = document.querySelector(selector);
 
     column.innerHTML = '';
+  }
+}
+
+function getTranslate(key) {
+  if (key in translate[langOpt]) {
+    return translate[langOpt][key];
+  }else{
+    alert('error: no tranlate for ' + key);
+    return '';
   }
 }
 
@@ -441,7 +473,9 @@ function createDropDown() {
 
   for (var item in list) {
     var obj = list[item];
-    createMenuItem(div, obj.gsx$group.$t, obj.gsx$key.$t);
+    if (obj.gsx$區域.$t) {
+      createMenuItem(div, obj.gsx$區域.$t, obj.gsx$key.$t);
+    }
   }
 
   var logoutbtn = document.createElement('button');
@@ -464,7 +498,12 @@ function getMetaData(key) {
     return el.gsx$key.$t === key;
   });
   metaData = filtered[0];
-  parseData(metaData);
+  if (metaData)
+    parseData(metaData);
+  else {
+    alert('密碼錯誤\nWrong Password');
+    logout();
+  }
 }
 
 function enableRecord(enable) {
@@ -552,7 +591,7 @@ window.onload = function() {
         if (key) {
           createForm(true);
           getMetaData(key);
-          enableRecord(true);
+          setTimeout(function(){enableRecord(isActive)},500);
         }else{
           createForm(false);
         }
@@ -567,15 +606,16 @@ function translateAll () {
   l.nodeValue = translate[langOpt].logout;
 
   var r = document.getElementById('record').firstChild;
-  if (r.nodeValue) {
+  if (r && r.nodeValue)
     r.nodeValue = translate[langOpt].add;
-  }
 
   var m = document.getElementById('modalTitle').firstChild;
-  m.nodeValue = translate[langOpt].record;
+  if (m && m.nodeValue)
+    m.nodeValue = translate[langOpt].record;
 
   var c = document.getElementById('confirmBtn').firstChild;
-  c.nodeValue = translate[langOpt].confirm;
+  if (c && c.nodeValue)
+    c.nodeValue = translate[langOpt].confirm;
 }
 
 function parseData (meta) {
@@ -651,7 +691,7 @@ function parseData (meta) {
   const timeout = setTimeout(function() {
     if (!success){
             // Handle error accordingly
-            alert("密碼錯誤\nWrong Password");
+            alert("登入超時\nLogin Timeout");
             logout();
           }
         }, 10000);
