@@ -79,7 +79,7 @@ function createContextPage(topic) {
   hideEle(container);
 
   showEle(slide);
-  initSlideFrame();
+  initSlideFrame(topic);
 
 }
 
