@@ -1,6 +1,6 @@
 var container = document.getElementById('container_view');
 var slide = document.getElementById('slide');
-var slide_header_container = document.getElementById('slide_header_container');
+//var slide_header_container = document.getElementById('slide_header_container');
 
 function initContainer () {
   container.innerHTML = "";
