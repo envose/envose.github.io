@@ -1,12 +1,11 @@
 // Define predefined CSS Class list for elements
 
 var cssClassStr = {
-  'btn_default': ['btn', 'btn-info', 'btn-lg', 'align-self-center', 'w-50', 'fadein_1s'],
-  'slide_header': ['text-center'],
-  'text': ['align-self-center', 'paragraph'],
-  'title': ['align-self-center'],
-  'view_center_middle': ['vh-100', 'd-flex', 'flex-column', 'justify-content-between'],
-  'view_content': ['d-flex', 'w-100', 'd-flex', 'flex-column'],
+  'btn_login': ['btn', 'btn-primary', 'text-center', 'align-self-center'],
+  'btn_lang': ['btn', 'btn-primary', 'col-4', 'col-lg-3', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
+  'title': ['text-center', 'col'],
+  'view_content_center': ['d-flex', 'col', 'd-flex', 'flex-column', 'align-intems-center', 'mt-3', 'mb-3'],
+  'view_entry': ['row', 'my-2', 'align-self-center'],
 };
 
 function getCSSClassStr(key) {

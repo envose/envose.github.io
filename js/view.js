@@ -1,91 +1,122 @@
-var container = document.getElementById('container_view');
+var header = document.getElementById('container_header');
+var content = document.getElementById('container_content');
+var footer = document.getElementById('container_footer');
 
-function initContainer () {
-  container.innerHTML = "";
+function initViews() {
+  header.innerHTML = '';
+  content.innerHTML = '';
+  footer.innerHTML = '';
 }
 
-function createSelectLangView() {
-  const view = 'lang_view';
+function setHeaderTitle(ele, text) {
+  var title = createCustomElement(ele, 'title');
+  title.innerHTML = text;
 
-  initContainer();
-  var content_view = createCustomElement('div', 'view_content');
-  var div = createCustomElement('div', 'view_center_middle');
-  var btn_en = createCustomElement('button', 'btn_default');
-  var btn_zh = createCustomElement('button', 'btn_default');
+  header.innerHTML = '';
+  header.appendChild(title);
+}
 
-  content_view.id = view;
+function createSelectSysLangView() {
+  initViews();
+
+  // header
+  setHeaderTitle('h3', 'Select System Language<br><br>選擇系統語言');
+
+  // content
+  var div = createCustomElement('div', 'view_content_center');
+
+  var btn_en = createCustomElement('button', 'btn_lang');
   btn_en.innerHTML = 'English';
-  btn_zh.innerHTML = '中文';
-  btn_en.onclick = function() {selectedLang(0)};
-  btn_zh.onclick = function() {selectedLang(1)};
-
+  btn_en.onclick = function () { setSysLangOpt('en');createLoginView(); };
   div.appendChild(btn_en);
+
+  var btn_zh = createCustomElement('button', 'btn_lang');
+  btn_zh.innerHTML = '中文';
+  btn_zh.onclick = function () { setSysLangOpt('zh');createLoginView(); };
   div.appendChild(btn_zh);
-  content_view.appendChild(div);
-  container.appendChild(content_view);
-}
+  
+  content.appendChild(div);
 
-function createStartPage() {
-  const view = 'start_view';
-
-  initContainer();
-  var content_view = createCustomElement('div', 'view_content');
-  var div = createCustomElement('div', 'view_center_middle');
-  var title = createCustomElement('h2', 'title');
-  var text = createCustomElement('p', 'text');
-  var btn_start = createCustomElement('btn', 'btn_default');
-
-  content_view.id = view;
-  title.innerHTML = getTranslate('preface');
-  text.innerHTML = getTranslate('start_text');
-  btn_start.innerHTML = getTranslate('start');
-  btn_start.onclick = function() {start();};
-
-  div.appendChild(title);
-  div.appendChild(text);
-  div.appendChild(btn_start);
-  content_view.appendChild(div);
-  container.appendChild(content_view);
-}
-
-function createTopicPage() {
-  const view = 'topic_view';
-
-  initContainer();
-  var content_view = createCustomElement('div', 'view_content');
-  var div = createCustomElement('div', 'view_center_middle');
-  var title = createCustomElement('h2', 'title');
-  var btn_po = createCustomElement('btn', 'btn_default');
-  var btn_mo = createCustomElement('btn', 'btn_default');
-
-  content_view.id = view;
-  title.innerHTML = getTranslate('select_topic');
-  btn_po.innerHTML = getTranslate('passover');
-  btn_mo.innerHTML = getTranslate('mother');
-  btn_po.onclick = function() {selectedTopic('po');};
-  btn_mo.onclick = function() {selectedTopic('mo');};
-
-  div.appendChild(title);
-  div.appendChild(btn_po);
-  div.appendChild(btn_mo);
-  content_view.appendChild(div);
-  container.appendChild(content_view);
-}
-
-function createContextPage(topic) {
-  const view = 'context_view';
-
-  initContainer();
-  hideEle(container);
-
-  showEle(slide);
-  initSlideFrame(topic);
+  // footer
 
 }
 
+function createLoginView() {
+  initViews();
 
+  // header
+  setHeaderTitle('h2', getSysTranslate('login'));
 
+  // content
+  var div = createCustomElement('div', 'view_content_center');
+  var input = document.createElement('input');
+  input.type = 'password';
+  input.classList.add(...['form-control', 'col-5', 'text-center', 'align-self-center', 'mt-5']);
+  input.id='key';
+  input.placeholder = getSysTranslate('password');
+  input.style.marginBottom = '0.5rem';
+  input.onkeypress = function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+      // to-do
+      login();
+    }
+  }
+  div.appendChild(input);
+  content.appendChild(div);
 
+  // footer
+  var div = createCustomElement('div', 'view_content_center');
+  var btn = createCustomElement('button', 'btn_login');
+  btn.innerHTML = getSysTranslate('submit');
+  btn.onclick = function() { login(); };
+  div.appendChild(btn);
+  footer.appendChild(div);
 
+}
 
+var numOfMem = 0;
+function createAddEntry(div) {
+  if (numOfMem >= 3) {
+    alert(getSysTranslate('alert_exceed_mem'));
+    return;
+  }
+  var input = document.createElement('input');
+  input.classList.add(...['form-control', 'col-5', 'text-center', 'align-self-center', 'mb-1']);
+  input.id='member_'+numOfMem;
+  numOfMem++;
+  input.placeholder = getSysTranslate('name');
+  div.appendChild(input);
+}
 
+function createTeamView() {
+  initViews();
+
+  // header
+  setHeaderTitle('h2', getSysTranslate('form_team'));
+
+  // content
+  var c_div = createCustomElement('div', 'view_content_center');
+  createAddEntry(c_div);
+  
+  content.appendChild(c_div);
+
+  // footer
+  var div = createCustomElement('div', 'view_content_center');
+
+  var entry = createCustomElement('div', 'view_entry');
+  var btn = document.createElement('button');
+  btn.classList.add(...['btn', 'btn-info', 'mt-2', 'ml-2']);
+  btn.innerHTML = getSysTranslate('add');
+  btn.onclick = function () { createAddEntry(c_div); };
+  btn.style.marginBottom = '0.5rem';
+  entry.appendChild(btn);
+
+  var btn = createCustomElement('button', 'btn_login');
+  btn.innerHTML = getSysTranslate('confirm');
+  // btn.onclick = function() { login(); };
+  entry.appendChild(btn);
+  div.appendChild(entry);
+  footer.appendChild(div);
+
+}

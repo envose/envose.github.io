@@ -3,22 +3,10 @@ function selectedLang(langOpt) {
   createStartPage();
 }
 
-function selectedTopic(topic) {
-  createContextPage(topic);
+// to-do
+function login() {
+  createTeamView();
 }
-
-function start() {
-  createTopicPage();
-}
-
-function hideEle(ele) {
-  ele.style.display = 'none';
-}
-
-function showEle(ele) {
-  ele.style.display = 'block';
-}
-
 
 
 

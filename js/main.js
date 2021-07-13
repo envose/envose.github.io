@@ -1,5 +1,6 @@
-$('.carousel').carousel({
-  interval: false,
-});
-createSelectLangView();
-hideEle(slide);
+// $('.carousel').carousel({
+//   interval: false,
+// });
+// createSelectLangView();
+// hideEle(slide);
+createSelectSysLangView();
