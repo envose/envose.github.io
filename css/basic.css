@@ -20,12 +20,16 @@ body {
   }
 }
 
+.slide_header {
+  padding-top: 5rem;
+}
+
 #container {
   overflow-y: 'hidden';
 }
 
 #container_view {
-  Padding-top: 5rem;
+  padding-top: 5rem;
   height: 100%;
   width: 100%;
 }
