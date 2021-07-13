@@ -1,8 +1,8 @@
 // Define predefined CSS Class list for elements
 
 var cssClassStr = {
-  'btn_default': ['btn', 'btn-danger', 'btn-lg', 'align-self-center', 'w-50', 'fadein_1s'],
-  'slide_header': ['align-self-center'], 'slide_header'],
+  'btn_default': ['btn', 'btn-info', 'btn-lg', 'align-self-center', 'w-50', 'fadein_1s'],
+  'slide_header': ['text-center'],
   'text': ['align-self-center', 'paragraph'],
   'title': ['align-self-center'],
   'view_center_middle': ['vh-100', 'd-flex', 'flex-column', 'justify-content-between'],

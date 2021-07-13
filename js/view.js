@@ -1,6 +1,4 @@
 var container = document.getElementById('container_view');
-var slide = document.getElementById('slide');
-//var slide_header_container = document.getElementById('slide_header_container');
 
 function initContainer () {
   container.innerHTML = "";
@@ -64,8 +62,8 @@ function createTopicPage() {
   title.innerHTML = getTranslate('select_topic');
   btn_po.innerHTML = getTranslate('passover');
   btn_mo.innerHTML = getTranslate('mother');
-  btn_po.onclick = function() {selectedTopic();};
-  btn_mo.onclick = function() {selectedTopic();};
+  btn_po.onclick = function() {selectedTopic('po');};
+  btn_mo.onclick = function() {selectedTopic('mo');};
 
   div.appendChild(title);
   div.appendChild(btn_po);
@@ -74,28 +72,18 @@ function createTopicPage() {
   container.appendChild(content_view);
 }
 
-function createContextPage() {
+function createContextPage(topic) {
   const view = 'context_view';
 
   initContainer();
   hideEle(container);
 
-  //showEle(slide);
-  //initSlideFrame();
+  showEle(slide);
+  initSlideFrame();
 
 }
 
-function initSlideFrame() {
-  //slide_header_container.innerHTML = '';
-  //var header = createCustomElement('h2', 'slide_header');
-  //slide_header_container.append(header);
-  
-}
 
-function createSlideView() {
-  var slide = createCustomElement('div', 'slide_view');
-  return slide;
-}
 
 
 

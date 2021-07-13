@@ -3,8 +3,8 @@ function selectedLang(langOpt) {
   createStartPage();
 }
 
-function selectedTopic() {
-  createContextPage();
+function selectedTopic(topic) {
+  createContextPage(topic);
 }
 
 function start() {

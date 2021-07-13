@@ -20,8 +20,7 @@ function getTranslate(key) {
   if (key in strings[langOpt]) {
     return strings[langOpt][key];
   }else{
-    alert('error: no tranlate for ' + key);
-    return '';
+    return key;
   }
 }
 
