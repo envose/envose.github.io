@@ -2,6 +2,7 @@
 
 var cssClassStr = {
   'btn_default': ['btn', 'btn-danger', 'btn-lg', 'align-self-center', 'w-50', 'fadein_1s'],
+  'slide_header': ['align-self-center'], 'slide_header'],
   'text': ['align-self-center', 'paragraph'],
   'title': ['align-self-center'],
   'view_center_middle': ['vh-100', 'd-flex', 'flex-column', 'justify-content-between'],
