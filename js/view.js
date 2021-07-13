@@ -1,5 +1,6 @@
 var container = document.getElementById('container_view');
 var slide = document.getElementById('slide');
+var slide_header_container = document.getElementById('slide_header_container');
 
 function initContainer () {
   container.innerHTML = "";
@@ -80,25 +81,15 @@ function createContextPage() {
   hideEle(container);
 
   showEle(slide);
+  initSlideFrame();
 
 }
 
-function createSlideFrame() {
-  var sframe = createCustomElement('div', 'slide_frame');
-  var slide = createSlideView();
-  var btn_pre = createCustomElement('button', 'btn_control');
-  var btn_t = createCustomElement('button', 'btn_control');
-  var btn_next = createCustomElement('button', 'btn_control');
-
-  btn_pre.innerHTML = '❮';
-  btn_t.innerHTML = '❯';
-  btn_next.innerHTML = '❯';
-
-  sframe.appendChild(btn_pre);
-  sframe.appendChild(slide);
-  sframe.appendChild(btn_next);
-
-  return sframe;
+function initSlideFrame() {
+  slide_header_container.innerHTML = '';
+  var header = createCustomElement('h2', 'slide_header');
+  slide_header_container.append(header);
+  
 }
 
 function createSlideView() {
