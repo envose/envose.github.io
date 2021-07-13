@@ -169,7 +169,7 @@ function createSlideView(key) {
   }
 }
 
-function initSlideFrame() {
+function initSlideFrame(topic) {
   slide_header_container.innerHTML = '';
   slide_footer_container.innerHTML = '';
 
