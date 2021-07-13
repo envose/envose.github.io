@@ -80,7 +80,7 @@ function createContextPage() {
   initContainer();
   hideEle(container);
 
-  showEle(slide);
+  //showEle(slide);
   //initSlideFrame();
 
 }
