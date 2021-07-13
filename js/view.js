@@ -88,7 +88,7 @@ function createContextPage() {
 function initSlideFrame() {
   slide_header_container.innerHTML = '';
   var header = createCustomElement('h2', 'slide_header');
-  slide_header_container.append(header);
+  //slide_header_container.append(header);
   
 }
 
