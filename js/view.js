@@ -67,7 +67,7 @@ function createLoginView() {
 
   // footer
   var div = createCustomElement('div', 'view_content_center');
-  var btn = createCustomElement('button', 'btn_login');
+  var btn = createCustomElement('button', 'btn_primary');
   btn.innerHTML = getSysTranslate('submit');
   btn.onclick = function() { login(); };
   div.appendChild(btn);
@@ -81,12 +81,15 @@ function createAddEntry(div) {
     alert(getSysTranslate('alert_exceed_mem'));
     return;
   }
+
+  var entry = createCustomElement('div', 'view_entry');
   var input = document.createElement('input');
-  input.classList.add(...['form-control', 'col-5', 'text-center', 'align-self-center', 'mb-1']);
+  input.classList.add(...['form-control', 'col', 'text-center', 'align-self-center', 'mb-1']);
   input.id='member_'+numOfEntry;
   numOfEntry++;
   input.placeholder = getSysTranslate('name');
-  div.appendChild(input);
+  entry.appendChild(input);
+  div.appendChild(entry);
 }
 
 function createTeamView() {
@@ -105,13 +108,13 @@ function createTeamView() {
   var div = createCustomElement('div', 'view_content_center');
 
   var entry = createCustomElement('div', 'view_entry');
-  var btn = document.createElement('button');
-  btn.classList.add(...['btn', 'btn-info', 'mt-2', 'ml-2', 'mb-1']);
+  var btn = createCustomElement('button', 'btn_info');
+  btn.classList.add(...['btn', 'btn-info', 'mr-3']);
   btn.innerHTML = getSysTranslate('add');
   btn.onclick = function () { createAddEntry(c_div); };
   entry.appendChild(btn);
 
-  var btn = createCustomElement('button', 'btn_login');
+  var btn = createCustomElement('button', 'btn_primary');
   btn.innerHTML = getSysTranslate('confirm');
   // btn.onclick = function() { login(); };
   entry.appendChild(btn);

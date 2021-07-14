@@ -1,7 +1,8 @@
 // Define predefined CSS Class list for elements
 
 var cssClassStr = {
-  'btn_login': ['btn', 'btn-primary', 'text-center', 'align-self-center'],
+  'btn_primary': ['btn', 'btn-primary', 'text-center', 'align-self-center'],
+  'btn_info': ['btn', 'btn-info', 'text-center', 'align-self-center'],
   'btn_lang': ['btn', 'btn-primary', 'col-4', 'col-lg-3', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
   'title': ['text-center', 'col'],
   'view_content_center': ['d-flex', 'col', 'd-flex', 'flex-column', 'align-intems-center', 'mt-3', 'mb-3'],
