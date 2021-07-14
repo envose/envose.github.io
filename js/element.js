@@ -4,11 +4,12 @@ var cssClassStr = {
   'btn_free_primary': ['btn', 'btn-primary', 'text-center', 'align-self-center'],
   'btn_free_info': ['btn', 'btn-info', 'text-center', 'align-self-center'],
   'btn_free_danger': ['btn', 'btn-danger', 'text-center', 'align-self-center'],
-  'btn_std_primary': ['btn', 'btn-primary', 'col-4', 'col-lg-3', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
-  'btn_std_info': ['btn', 'btn-info', 'col-4', 'col-lg-3', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
-  'btn_std_danger': ['btn', 'btn-danger', 'col-4', 'col-lg-3', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
+  'btn_std_primary': ['btn', 'btn-primary', 'btn-block', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
+  'btn_std_info': ['btn', 'btn-info', 'btn-block', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
+  'btn_std_danger': ['btn', 'btn-danger', 'btn-block', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
   'title': ['text-center', 'col'],
-  'view_content_center': ['d-flex', 'col', 'd-flex', 'flex-column', 'align-intems-center', 'mt-3', 'mb-3'],
+  'view_content_center': ['d-flex', 'col', 'd-flex', 'flex-column', 'align-items-center', 'mt-3', 'mb-3'],
+  'view_col5': ['col-5', 'col-lg-3'],
   'view_entry': ['row', 'my-2', 'align-self-center'],
 };
 
