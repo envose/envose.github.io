@@ -20,17 +20,19 @@ function createSelectSysLangView() {
 
   // content
   var div = createCustomElement('div', 'view_content_center');
+  var div2 = createCustomElement('div', 'view_col5');
 
   var btn_en = createCustomElement('button', 'btn_std_primary');
   btn_en.innerHTML = 'English';
   btn_en.onclick = function () { setSysLangOpt('en');createLoginView(); };
-  div.appendChild(btn_en);
+  div2.appendChild(btn_en);
 
   var btn_zh = createCustomElement('button', 'btn_std_primary');
   btn_zh.innerHTML = '中文';
   btn_zh.onclick = function () { setSysLangOpt('zh');createLoginView(); };
-  div.appendChild(btn_zh);
+  div2.appendChild(btn_zh);
   
+  div.appendChild(div2);
   content.appendChild(div);
 
   // footer
@@ -128,20 +130,29 @@ function dashboard() {
 
   // content
   var div = createCustomElement('div', 'view_content_center');
+  var div2 = createCustomElement('div', 'view_col5');
+
   var btn_entry = createCustomElement('btn', 'btn_std_primary');
   btn_entry.innerHTML = getSysTranslate('entry');
-  div.appendChild(btn_entry);
+  div2.appendChild(btn_entry);
+
   var btn_record = createCustomElement('btn', 'btn_std_info');
   btn_record.innerHTML = getSysTranslate('record');
-  div.appendChild(btn_record);
+  div2.appendChild(btn_record);
+
+  div.appendChild(div2);
   content.appendChild(div);
 
   // footer
-  var div2 = createCustomElement('div', 'view_content_center');
+  var div3 = createCustomElement('div', 'view_content_center');
+  var div4 = createCustomElement('div', 'view_col5');
+
   var btn_complete = createCustomElement('button', 'btn_std_danger');
   btn_complete.classList.add('mt-5');
   btn_complete.innerHTML = getSysTranslate('complete');
   //btn.onclick = function() { login(); };
-  div2.appendChild(btn_complete);
-  footer.appendChild(div2);
+  div4.appendChild(btn_complete);
+
+  div3.appendChild(div4);
+  footer.appendChild(div3);
 }
