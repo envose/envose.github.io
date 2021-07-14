@@ -128,37 +128,20 @@ function dashboard() {
 
   // content
   var div = createCustomElement('div', 'view_content_center');
-
-  var btn_en = createCustomElement('button', 'btn_std_primary');
-  btn_en.innerHTML = getSysTranslate('entry');
-  btn_en.onclick = function () { setSysLangOpt('en');createLoginView(); };
-  div.appendChild(btn_en);
-
-  var btn_re = createCustomElement('button', 'btn_std_info');
-  btn_re.innerHTML = getSysTranslate('record');
-  btn_re.onclick = function () { setSysLangOpt('zh');createLoginView(); };
-  div.appendChild(btn_re);
-
-  var btn_co = createCustomElement('button', 'btn_std_danger');
-  btn_co.innerHTML = getSysTranslate('complete');
-  btn_co.onclick = function () { setSysLangOpt('zh');createLoginView(); };
-  div.appendChild(btn_co);
-  
+  var btn_entry = createCustomElement('btn', 'btn_std_primary');
+  btn_entry.innerHTML = getSysTranslate('entry');
+  div.appendChild(btn_entry);
+  var btn_record = createCustomElement('btn', 'btn_std_info');
+  btn_record.innerHTML = getSysTranslate('record');
+  div.appendChild(btn_record);
   content.appendChild(div);
 
-  // var div = createCustomElement('div', 'view_content_center');
-  // var btn_entry = createCustomElement('btn', 'btn_std_primary');
-  // btn_entry.innerHTML = getSysTranslate('entry');
-  // div.appendChild(btn_entry);
-  // var btn_record = createCustomElement('btn', 'btn_std_info');
-  // btn_record.innerHTML = getSysTranslate('record');
-  // div.appendChild(btn_record);
-  // content.appendChild(div);
-  // var btn_complete = createCustomElement('button', 'btn_std_danger');
-  // btn_complete.classList.add('mt-5');
-  // btn_complete.innerHTML = getSysTranslate('complete');
-  // //btn.onclick = function() { login(); };
-  // div.appendChild(btn_complete);
-
   // footer
+  var div2 = createCustomElement('div', 'view_content_center');
+  var btn_complete = createCustomElement('button', 'btn_std_danger');
+  btn_complete.classList.add('mt-5');
+  btn_complete.innerHTML = getSysTranslate('complete');
+  //btn.onclick = function() { login(); };
+  div2.appendChild(btn_complete);
+  footer.appendChild(div2);
 }
