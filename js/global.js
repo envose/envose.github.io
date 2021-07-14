@@ -7,3 +7,4 @@ var footer = document.getElementById('container_footer');
 var numOfMemEntry = 0;
 var team = [];
 var ppl = [];
+var startDate = '';

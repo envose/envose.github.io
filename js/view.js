@@ -229,24 +229,26 @@ function recordView() {
 
 
   // footer
-  // download
-  var div_col12 = document.createElement(div);
+  var div_col12 = document.createElement('div');
   var div_center = createCustomElement('div', 'view_content_center');
+  var entry = createCustomElement('div', 'view_entry');
+
   div_col12.classList.add('col-12');
+
+  var btn_back = createCustomElement('button', 'btn_free_light');
+  btn_back.classList.add('mr-3');
+  btn_back.innerHTML = getSysTranslate('back');  btn_back.onclick = function() { dashboard(); };
+  entry.appendChild(btn_back);
+
+  // download
   var btn = createCustomElement('button', 'btn_free_primary');
   btn.innerHTML = getSysTranslate('download');
   btn.onclick = function () { downloadRecord(rows) };
-  div_center.appendChild(btn);
+  entry.appendChild(btn);
+
+  div_center.appendChild(entry);
   div_col12.appendChild(div_center);
   footer.appendChild(div_col12);
-
-  var div = createCustomElement('div', 'view_content_center');
-  var btn_back = createCustomElement('button', 'btn_free_light');
-  btn_back.innerHTML = getSysTranslate('back');
-  btn_back.classList.add(...['mt-5']);
-  btn_back.onclick = function() { dashboard(); };
-  div.appendChild(btn_back);
-  footer.appendChild(div);
 
 }
 
