@@ -9,9 +9,10 @@ var strings = [{
   'warning': 'Warning: ',
   'alert_noMembers': 'Require at least 1 person',
   'member': 'Member',
-  'greeting': 'Hello! ',
-  ',': ', ',
-  'and': 'and',
+  'team': 'Team: ',
+  'entry': 'Entry',
+  'record': 'Record',
+  'complete': 'Complete', 
 },{
   'login': '登入',
   'password': '密碼',
@@ -23,9 +24,10 @@ var strings = [{
   'warning': '注意：',
   'alert_noMembers': '至少需要一人',
   'member': '成員',
-  'greeting': '你好！',
-  ',': '，',
-  'and': '和',
+  'team': '隊伍：',
+  'entry': '輸入',
+  'record': '記錄',
+  'complete': '完成',
 }];
 
 var sysLangOpt = 0;

@@ -21,7 +21,7 @@ function submitTeam() {
     }
   }
   if (team.length > 0) {
-    createDashboard();
+    dashboard();
   }else{
     msgAlert('alert_noMembers');
   }

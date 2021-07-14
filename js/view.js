@@ -21,12 +21,12 @@ function createSelectSysLangView() {
   // content
   var div = createCustomElement('div', 'view_content_center');
 
-  var btn_en = createCustomElement('button', 'btn_lang');
+  var btn_en = createCustomElement('button', 'btn_std_primary');
   btn_en.innerHTML = 'English';
   btn_en.onclick = function () { setSysLangOpt('en');createLoginView(); };
   div.appendChild(btn_en);
 
-  var btn_zh = createCustomElement('button', 'btn_lang');
+  var btn_zh = createCustomElement('button', 'btn_std_primary');
   btn_zh.innerHTML = '中文';
   btn_zh.onclick = function () { setSysLangOpt('zh');createLoginView(); };
   div.appendChild(btn_zh);
@@ -63,7 +63,7 @@ function createLoginView() {
 
   // footer
   var div = createCustomElement('div', 'view_content_center');
-  var btn = createCustomElement('button', 'btn_primary');
+  var btn = createCustomElement('button', 'btn_free_primary');
   btn.innerHTML = getSysTranslate('submit');
   btn.onclick = function() { login(); };
   div.appendChild(btn);
@@ -97,14 +97,14 @@ function createTeamView() {
   var div = createCustomElement('div', 'view_content_center');
 
   var entry = createCustomElement('div', 'view_entry');
-  var addbtn = createCustomElement('button', 'btn_info');
+  var addbtn = createCustomElement('button', 'btn_free_info');
   addbtn.id = 'addbtn';
   addbtn.classList.add(...['btn', 'btn-info', 'mr-3']);
   addbtn.innerHTML = getSysTranslate('add');
   addbtn.onclick = function () { createAddEntry(c_div); };
   entry.appendChild(addbtn);
 
-  var btn = createCustomElement('button', 'btn_primary');
+  var btn = createCustomElement('button', 'btn_free_primary');
   btn.innerHTML = getSysTranslate('confirm');
   btn.onclick = function() { submitTeam(); };
   entry.appendChild(btn);
@@ -118,11 +118,29 @@ function createTeamView() {
   content.appendChild(c_div);
 }
 
-function createDashboard() {
+function dashboard() {
   initViews();
 
-  //header
-  var msg = getSysTranslate('greeting');
-  msg += team.slice(0, team.length-1).join(', ');
-  console.log(msg);
+  // header
+  var msg = getSysTranslate('team');
+  msg += team.join(', ');
+  setHeaderTitle('h5', msg);
+
+  // content
+  var div = createCustomElement('div', 'view_content_center');
+  var btn_entry = createCustomElement('btn', 'btn_std_primary');
+  btn_entry.innerHTML = getSysTranslate('entry');
+  div.appendChild(btn_entry);
+  var btn_record = createCustomElement('btn', 'btn_std_info');
+  btn_record.innerHTML = getSysTranslate('record');
+  div.appendChild(btn_record);
+  content.appendChild(div);
+
+  // footer
+  var div = createCustomElement('div', 'view_content_center');
+  var btn_complete = createCustomElement('button', 'btn_std_danger');
+  btn_complete.innerHTML = getSysTranslate('complete');
+  //btn.onclick = function() { login(); };
+  div.appendChild(btn_complete);
+  footer.appendChild(div);
 }
