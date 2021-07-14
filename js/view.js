@@ -130,17 +130,22 @@ function dashboard() {
   var div = createCustomElement('div', 'view_content_center');
 
   var btn_en = createCustomElement('button', 'btn_std_primary');
-  btn_en.innerHTML = 'English';
+  btn_en.innerHTML = getSysTranslate('entry');
   btn_en.onclick = function () { setSysLangOpt('en');createLoginView(); };
   div.appendChild(btn_en);
 
-  var btn_zh = createCustomElement('button', 'btn_std_primary');
-  btn_zh.innerHTML = '中文';
-  btn_zh.onclick = function () { setSysLangOpt('zh');createLoginView(); };
-  div.appendChild(btn_zh);
+  var btn_re = createCustomElement('button', 'btn_std_info');
+  btn_re.innerHTML = getSysTranslate('record');
+  btn_re.onclick = function () { setSysLangOpt('zh');createLoginView(); };
+  div.appendChild(btn_re);
+
+  var btn_co = createCustomElement('button', 'btn_std_danger');
+  btn_co.innerHTML = getSysTranslate('complete');
+  btn_co.onclick = function () { setSysLangOpt('zh');createLoginView(); };
+  div.appendChild(btn_co);
   
   content.appendChild(div);
-  
+
   // var div = createCustomElement('div', 'view_content_center');
   // var btn_entry = createCustomElement('btn', 'btn_std_primary');
   // btn_entry.innerHTML = getSysTranslate('entry');
