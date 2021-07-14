@@ -19,6 +19,9 @@ var strings = [{
   'dismiss': 'Dismiss',
   'alert_dismiss': 'Make sure you have saved all records',
   'alert_exit': 'Are you sure you want to exit?',
+  'number': 'Number',
+  'note': 'Note',
+  'download': 'Download',
 },{
   'login': '登入',
   'password': '密碼',
@@ -40,6 +43,9 @@ var strings = [{
   'dismiss': '解散',
   'alert_dismiss': '請確保已儲存所有資料',
   'alert_exit': '是否確定退出？',
+  'number': '號碼',
+  'note': '筆記',
+  'download': '下載',
 }];
 
 var sysLangOpt = 0;

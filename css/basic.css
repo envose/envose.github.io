@@ -7,12 +7,27 @@ html, body {
   overflow: hidden;
 }
 
-#container{
+#container {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: auto;
+}
+
+table {
+  position:  relative;
+}
+
+th {
+  background: white;
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+}
+
+#container_content {
+  max-height: 50vh;
   overflow: auto;
 }
 

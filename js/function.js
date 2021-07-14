@@ -51,14 +51,51 @@ function initModalAlert(classification, title, body, btn, callback, btn_close) {
   btn_.innerHTML = btn;
   btn_.onclick = callback;
   m_footer.appendChild(btn_);
+}
 
+function createRecord(name, number, note='') {
 
-          // <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          // <button type="button" class="btn btn-danger">Save changes</button>
+  if (name.length > 0) {
+    var r = {
+    'name': name,
+    'number': number,
+    'note': note,
+    }
+    ppl.push(r);
+  }
+}
+
+function dummyPPL() {
+  createRecord('ann', '123');
+  createRecord('ben', '123');
+  createRecord('candy', '123');
+  createRecord('david', '123');
+  createRecord('ann odah haou dhaoh doah odoi', '123');
+  createRecord('ben', '123');
+  createRecord('candy', '123');
+  createRecord('david', '123');
+  createRecord('ann', '123');
+  createRecord('ben', '123');
+  createRecord('candy', '123');
+  createRecord('david', '123');
 
 }
 
+function downloadRecord(rows) {
+  let csvContent = "data:text/csv;charset=utf-8,";
+  rows.forEach(function(rowArray) {
+    let row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
 
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "my_data.csv");
+  document.body.appendChild(link); // Required for FF
+
+  link.click(); // This will download the data file named "my_data.csv".
+}
 
 
 

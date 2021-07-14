@@ -12,6 +12,7 @@ var cssClassStr = {
   'view_content_center': ['d-flex', 'col', 'd-flex', 'flex-column', 'align-items-center', 'mt-3', 'mb-3'],
   'view_col5': ['col-5', 'col-lg-3'],
   'view_entry': ['row', 'my-2', 'align-self-center'],
+  'table': ['table', 'table-striped', 'table-light'],
 };
 
 function getCSSClassStr(key) {
