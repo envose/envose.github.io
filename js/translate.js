@@ -6,7 +6,12 @@ var strings = [{
   'add': 'Add',
   'confirm': 'Confirm',
   'name': 'Name',
-  'alert_exceed_mem': 'No more than 3 members in a team.',
+  'warning': 'Warning: ',
+  'alert_noMembers': 'Require at least 1 person',
+  'member': 'Member',
+  'greeting': 'Hello! ',
+  ',': ', ',
+  'and': 'and',
 },{
   'login': '登入',
   'password': '密碼',
@@ -15,7 +20,12 @@ var strings = [{
   'add': '新增',
   'confirm': '確認',
   'name': '姓名',
-  'alert_exceed_mem': '不可多於3人一組。',
+  'warning': '注意：',
+  'alert_noMembers': '至少需要一人',
+  'member': '成員',
+  'greeting': '你好！',
+  ',': '，',
+  'and': '和',
 }];
 
 var sysLangOpt = 0;

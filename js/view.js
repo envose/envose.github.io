@@ -1,7 +1,3 @@
-var header = document.getElementById('container_header');
-var content = document.getElementById('container_content');
-var footer = document.getElementById('container_footer');
-
 function initViews() {
   header.innerHTML = '';
   content.innerHTML = '';
@@ -75,21 +71,20 @@ function createLoginView() {
 
 }
 
-var numOfEntry = 0;
 function createAddEntry(div) {
-  if (numOfEntry >= 3) {
-    alert(getSysTranslate('alert_exceed_mem'));
-    return;
-  }
 
   var entry = createCustomElement('div', 'view_entry');
   var input = document.createElement('input');
   input.classList.add(...['form-control', 'col', 'text-center', 'align-self-center', 'mb-1']);
-  input.id='member_'+numOfEntry;
-  numOfEntry++;
-  input.placeholder = getSysTranslate('name');
+  input.id='member_'+numOfMemEntry;
+  numOfMemEntry++;
+  input.placeholder = getSysTranslate('member') + ' ' + numOfMemEntry;
   entry.appendChild(input);
   div.appendChild(entry);
+
+  if (numOfMemEntry >= 3) {
+    $('#addbtn').attr('disabled','disabled');
+  }
 }
 
 function createTeamView() {
@@ -98,27 +93,36 @@ function createTeamView() {
   // header
   setHeaderTitle('h2', getSysTranslate('form_team'));
 
-  // content
-  var c_div = createCustomElement('div', 'view_content_center');
-  createAddEntry(c_div);
-  
-  content.appendChild(c_div);
-
   // footer
   var div = createCustomElement('div', 'view_content_center');
 
   var entry = createCustomElement('div', 'view_entry');
-  var btn = createCustomElement('button', 'btn_info');
-  btn.classList.add(...['btn', 'btn-info', 'mr-3']);
-  btn.innerHTML = getSysTranslate('add');
-  btn.onclick = function () { createAddEntry(c_div); };
-  entry.appendChild(btn);
+  var addbtn = createCustomElement('button', 'btn_info');
+  addbtn.id = 'addbtn';
+  addbtn.classList.add(...['btn', 'btn-info', 'mr-3']);
+  addbtn.innerHTML = getSysTranslate('add');
+  addbtn.onclick = function () { createAddEntry(c_div); };
+  entry.appendChild(addbtn);
 
   var btn = createCustomElement('button', 'btn_primary');
   btn.innerHTML = getSysTranslate('confirm');
-  // btn.onclick = function() { login(); };
+  btn.onclick = function() { submitTeam(); };
   entry.appendChild(btn);
   div.appendChild(entry);
   footer.appendChild(div);
 
+  // content
+  var c_div = createCustomElement('div', 'view_content_center');
+  createAddEntry(c_div);
+
+  content.appendChild(c_div);
+}
+
+function createDashboard() {
+  initViews();
+
+  //header
+  var msg = getSysTranslate('greeting');
+  msg += team.slice(0, team.length-1).join(', ');
+  console.log(msg);
 }
