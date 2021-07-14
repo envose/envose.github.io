@@ -14,6 +14,7 @@ function msgAlert(msg) {
 
 function submitTeam() {
   team = [];
+  ppl = [];
   for (let i = 0; i < numOfMemEntry; i++) {
     var mem = document.getElementById('member_'+i);
     if (mem.value.length > 0) {

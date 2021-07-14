@@ -184,13 +184,18 @@ function dashboard() {
   initViews();
 
   // header
-  var msg = getSysTranslate('team');
-  msg += team.join(', ');
-  setHeaderTitle('h5', msg);
+  setHeaderTitle('h1', ppl.length);
 
   // content
   var div = createCustomElement('div', 'view_content_center');
   var div2 = createCustomElement('div', 'view_col5');
+
+  var msg = getSysTranslate('team');
+  msg += team.join(', ');
+  var h5 = createCustomElement('h5', 'title');
+  h5.classList.add(...['mt-5', 'mb-3']);
+  h5.innerHTML = msg;
+  div.appendChild(h5);
 
   var btn_entry = createCustomElement('btn', 'btn_std_primary');
   btn_entry.innerHTML = getSysTranslate('entry');

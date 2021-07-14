@@ -6,3 +6,4 @@ var footer = document.getElementById('container_footer');
 // team
 var numOfMemEntry = 0;
 var team = [];
+var ppl = [];
