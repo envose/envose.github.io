@@ -75,16 +75,16 @@ function createLoginView() {
 
 }
 
-var numOfMem = 0;
+var numOfEntry = 0;
 function createAddEntry(div) {
-  if (numOfMem >= 3) {
+  if (numOfEntry >= 3) {
     alert(getSysTranslate('alert_exceed_mem'));
     return;
   }
   var input = document.createElement('input');
   input.classList.add(...['form-control', 'col-5', 'text-center', 'align-self-center', 'mb-1']);
-  input.id='member_'+numOfMem;
-  numOfMem++;
+  input.id='member_'+numOfEntry;
+  numOfEntry++;
   input.placeholder = getSysTranslate('name');
   div.appendChild(input);
 }
@@ -106,10 +106,9 @@ function createTeamView() {
 
   var entry = createCustomElement('div', 'view_entry');
   var btn = document.createElement('button');
-  btn.classList.add(...['btn', 'btn-info', 'mt-2', 'ml-2']);
+  btn.classList.add(...['btn', 'btn-info', 'mt-2', 'ml-2', 'mb-1']);
   btn.innerHTML = getSysTranslate('add');
   btn.onclick = function () { createAddEntry(c_div); };
-  btn.style.marginBottom = '0.5rem';
   entry.appendChild(btn);
 
   var btn = createCustomElement('button', 'btn_login');
