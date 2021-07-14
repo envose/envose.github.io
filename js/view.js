@@ -135,12 +135,11 @@ function dashboard() {
   btn_record.innerHTML = getSysTranslate('record');
   div.appendChild(btn_record);
   content.appendChild(div);
-
-  // footer
-  var div = createCustomElement('div', 'view_content_center');
   var btn_complete = createCustomElement('button', 'btn_std_danger');
+  btn_complete.classList.add('mt-5');
   btn_complete.innerHTML = getSysTranslate('complete');
   //btn.onclick = function() { login(); };
   div.appendChild(btn_complete);
-  footer.appendChild(div);
+
+  // footer
 }
