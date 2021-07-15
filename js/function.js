@@ -29,6 +29,20 @@ function storeteam() {
   }
 }
 
+function getStartDate() {
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  startDate = today;
+
+  if (localStorage.getItem('key')) {
+    localStorage.setItem('startDate', startDate);
+  }
+}
+
 function updateLangBtn() {
   var btn = document.getElementById('btn_lang');
   switch (sysLangOpt) {
@@ -79,6 +93,7 @@ function submitTeam() {
 
 function dismiss() {
   localStorage.removeItem('team');
+  localStorage.removeItem('startDate');
   location.reload();
 }
 
@@ -134,16 +149,6 @@ function dummyPPL() {
   createRecord('candy', '123');
   createRecord('david', '123');
 
-}
-
-function getStartDate() {
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = yyyy + '/' + mm + '/' + dd;
-  startDate = today;
 }
 
 function downloadRecord(rows) {

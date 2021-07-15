@@ -15,6 +15,13 @@ window.onload = function() {
     var localTeam = localStorage.getItem('team');
     if (localTeam) {
       team = localTeam.split(',');
+
+      var localStartDate = localStorage.getItem('startDate');
+      if (localStartDate) {
+        startDate = localStartDate;
+      }else{
+        getStartDate;
+      }
       dashboard();
     }else{
       createTeamView();
