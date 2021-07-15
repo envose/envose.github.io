@@ -16,6 +16,11 @@ function msgAlert(msg) {
   alert(getSysTranslate('warning') + getSysTranslate(msg));
 }
 
+function msgToast(msg) {
+  document.getElementById('toast_body').innerHTML = msg;
+  $('#toast').toast('show');
+}
+
 function storeLangOpt() {
   if (localStorage.getItem('key')) {
     localStorage.setItem('lang_sys', sysLangOpt);
@@ -44,16 +49,20 @@ function getStartDate() {
 }
 
 function updateLangBtn() {
-  var btn = document.getElementById('btn_lang');
+
+  var text = '';
   switch (sysLangOpt) {
     case 0:
-      btn.innerHTML = '中';
+      text = '中';
       break;
     case 1:
-      btn.innerHTML = 'Eng';
+      text = 'Eng';
       break;
     default:
   }
+
+  document.getElementById('btn_lang').innerHTML = text;
+  document.getElementById('btn_lang_dummy').innerHTML = text;
 }
 
 // to-do
@@ -168,6 +177,8 @@ function copyToClipboard(rows) {
   var result = document.execCommand("copy");
   $("#temp").remove();
   // return result?"Copied to clipboard":"Clipboard failed...";
+
+  msgToast(getSysTranslate('success_copy'));
 }
 
 function downloadRecord(rows) {

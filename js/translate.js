@@ -24,6 +24,7 @@ var strings = [{
   'download': 'Download',
   'alert_login': 'Incorrect Password!',
   'copy': 'Copy',
+  'success_copy': 'Copied',
 },{
   'login': '登入',
   'password': '密碼',
@@ -50,6 +51,7 @@ var strings = [{
   'download': '下載',
   'alert_login': '密碼錯誤！',
   'copy': '複製',
+  'success_copy': '已複製',
 }];
 
 var sysLangOpt = 1;

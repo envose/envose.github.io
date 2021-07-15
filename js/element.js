@@ -9,10 +9,13 @@ var cssClassStr = {
   'btn_std_info': ['btn', 'btn-info', 'btn-block', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
   'btn_std_danger': ['btn', 'btn-danger', 'btn-block', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],
   'title': ['text-center', 'col'],
-  'view_content_center': ['d-flex', 'col', 'd-flex', 'flex-column', 'align-items-center', 'mt-3', 'mb-3'],
+  'view_content_center': ['d-flex', 'col', 'flex-column', 'align-items-center', 'mt-3', 'mb-3'],
   'view_col5': ['col-5', 'col-lg-3'],
   'view_entry': ['row', 'my-2', 'align-self-center'],
   'table': ['table', 'table-striped', 'table-light'],
+  'toast': ['toast'],
+  'toast_body': ['toast-body'],
+  'col_12': ['col-12'],
 };
 
 function getCSSClassStr(key) {
