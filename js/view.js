@@ -246,6 +246,8 @@ function recordView() {
   // copy to clipboard
   var btn_cp = createCustomElement('button', 'btn_free_primary');
   btn_cp.innerHTML = getSysTranslate('copy');
+  btn_cp.id = 'btn_cp';
+  tooltipable(btn_cp, getSysTranslate('success_copy'));
   btn_cp.onclick = function () { copyToClipboard(rows) };
   entry.appendChild(btn_cp);
 

@@ -31,14 +31,6 @@ th {
   overflow: auto;
 }
 
-#top_bar {
-  height: 60px;
-}
-
-.alert-trim {
-  display: inline-block;
-}
-
 .fadein_1s {
   opacity: 1;
   animation: fadeIn 1s ease-in-out;

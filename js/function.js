@@ -62,7 +62,6 @@ function updateLangBtn() {
   }
 
   document.getElementById('btn_lang').innerHTML = text;
-  document.getElementById('btn_lang_dummy').innerHTML = text;
 }
 
 // to-do
@@ -178,7 +177,25 @@ function copyToClipboard(rows) {
   $("#temp").remove();
   // return result?"Copied to clipboard":"Clipboard failed...";
 
-  msgToast(getSysTranslate('success_copy'));
+  // msgToast(getSysTranslate('success_copy'));
+  popTooltip('btn_cp');
+}
+
+function tooltipable(ele, msg) {
+  // console.log(eid);
+  // var ele = document.getElementById(eid);
+  // console.log(ele);
+  ele.setAttribute('title', msg);
+  ele.setAttribute('data-placement', 'bottom');
+  ele.setAttribute('data-trigger', 'manual');
+}
+
+function popTooltip (eid) {
+  var id = '#'+eid;
+  $(id).tooltip('show');
+    setTimeout(function(){
+        $(id).tooltip('hide');
+    }, 500);
 }
 
 function downloadRecord(rows) {
