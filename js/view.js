@@ -237,15 +237,22 @@ function recordView() {
   div_col12.classList.add('col-12');
 
   var btn_back = createCustomElement('button', 'btn_free_light');
-  btn_back.classList.add('mr-3');
+  btn_back.classList.add('mr-5');
   btn_back.innerHTML = getSysTranslate('back');  btn_back.onclick = function() { dashboard(); };
   entry.appendChild(btn_back);
 
   // download
-  var btn = createCustomElement('button', 'btn_free_primary');
-  btn.innerHTML = getSysTranslate('download');
-  btn.onclick = function () { downloadRecord(rows) };
-  entry.appendChild(btn);
+  var btn_dl = createCustomElement('button', 'btn_free_primary');
+  btn_dl.classList.add('mr-3');
+  btn_dl.innerHTML = getSysTranslate('download');
+  btn_dl.onclick = function () { downloadRecord(rows) };
+  entry.appendChild(btn_dl);
+
+  // copy to clipboard
+  var btn_cp = createCustomElement('button', 'btn_free_primary');
+  btn_cp.innerHTML = getSysTranslate('copy');
+  btn_cp.onclick = function () { copyToClipboard(rows) };
+  entry.appendChild(btn_cp);
 
   div_center.appendChild(entry);
   div_col12.appendChild(div_center);

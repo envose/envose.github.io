@@ -23,6 +23,7 @@ var strings = [{
   'note': 'Note',
   'download': 'Download',
   'alert_login': 'Incorrect Password!',
+  'copy': 'Copy',
 },{
   'login': '登入',
   'password': '密碼',
@@ -48,6 +49,7 @@ var strings = [{
   'note': '筆記',
   'download': '下載',
   'alert_login': '密碼錯誤！',
+  'copy': '複製',
 }];
 
 var sysLangOpt = 1;

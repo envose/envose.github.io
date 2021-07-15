@@ -151,6 +151,25 @@ function dummyPPL() {
 
 }
 
+function copyToClipboard(rows) {
+
+  let copy = '';
+  let fheader = [startDate, team.join(', ')].join('\n');
+  copy += fheader + '\n\n';
+
+  rows.forEach(function(rowArray) {
+    let row = rowArray.join(': ');
+    copy += row + '\n';
+  });
+
+  var $temp = $("<textarea id='temp'>").text(copy);
+  $("body").append($temp)
+  $("#temp").select();
+  var result = document.execCommand("copy");
+  $("#temp").remove();
+  // return result?"Copied to clipboard":"Clipboard failed...";
+}
+
 function downloadRecord(rows) {
   let csvContent = "data:text/csv;charset=utf-8,";
   
