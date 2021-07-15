@@ -19,9 +19,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="alertModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>
+          </button> -->
         </div>
         <div class="modal-body" id="alertModalBody">
         </div>
@@ -34,10 +34,11 @@
   </div>
 
   <div id="container w-100">
-    <div class="d-flex flex-row-reverse">
-        <button type="button" class="btn btn-light mx-3 mx-md-5 mt-1 mt-md-5" id="btn_lang" onclick="switchSysLang()">Eng</button>
+    <div class="d-flex flex-row justify-content-between" id="topbar">
+        <button type="button" class="btn btn-light mx-3 mx-md-5 mt-1 mt-md-5" id="btn_lang_quiz" onclick="switchQuizLang()">Eng</button>
+        <button type="button" class="btn btn-light mx-3 mx-md-5 mt-1 mt-md-5" id="btn_lang_sys" onclick="switchSysLang()">Eng</button>
     </div>
-    <div id="container_header" class="row mt-2 pt-md-5 fadein_1s">
+    <div id="container_header" class="row fadein_1s">
     </div>
     <div id="container_content" class="row fadein_1s">
     </div>

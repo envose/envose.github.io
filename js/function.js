@@ -4,7 +4,16 @@ function selectedLang(langOpt) {
 }
 
 function provideSysLangOpt(isAvailable) {
-  var btn = document.getElementById('btn_lang');
+  var btn = document.getElementById('btn_lang_sys');
+  if (isAvailable) {
+    btn.style.visibility = 'visible';
+  }else{
+    btn.style.visibility = 'hidden';
+  }
+}
+
+function provideQuizLangOpt(isAvailable) {
+  var btn = document.getElementById('btn_lang_quiz');
   if (isAvailable) {
     btn.style.visibility = 'visible';
   }else{
@@ -21,11 +30,18 @@ function msgToast(msg) {
   $('#toast').toast('show');
 }
 
-function storeLangOpt() {
+function storeSysLangOpt() {
   if (localStorage.getItem('key')) {
     localStorage.setItem('lang_sys', sysLangOpt);
   }
-  updateLangBtn();
+  updateSysLangBtn();
+}
+
+function storeQuizLangOpt() {
+  if (localStorage.getItem('key')) {
+    localStorage.setItem('lang_quiz', quizLangOpt);
+  }
+  updateQuizLangBtn();
 }
 
 function storeteam() {
@@ -48,7 +64,7 @@ function getStartDate() {
   }
 }
 
-function updateLangBtn() {
+function updateSysLangBtn() {
 
   var text = '';
   switch (sysLangOpt) {
@@ -61,7 +77,23 @@ function updateLangBtn() {
     default:
   }
 
-  document.getElementById('btn_lang').innerHTML = text;
+  document.getElementById('btn_lang_sys').innerHTML = text;
+}
+
+function updateQuizLangBtn() {
+
+  var text = '';
+  switch (quizLangOpt) {
+    case 0:
+      text = '中';
+      break;
+    case 1:
+      text = 'Eng';
+      break;
+    default:
+  }
+
+  document.getElementById('btn_lang_quiz').innerHTML = text;
 }
 
 // to-do
@@ -130,6 +162,51 @@ function initModalAlert(classification, title, body, btn, callback, btn_close) {
   m_footer.appendChild(btn_);
 }
 
+function popupGuard() {
+  localStorage.setItem('guard', guardAttempt);
+
+  var m_title = document.getElementById('alertModalLabel');
+  var m_body = document.getElementById('alertModalBody');
+  var m_footer = document.getElementById('alertModalFooter');
+
+  m_title.innerHTML = '';
+  m_title.innerHTML = getQuizTranslate('guard');
+
+  m_body.innerHTML = '';
+  var input = document.createElement('input');
+  input.type = 'password';
+  input.classList.add(...['form-control', 'col-12', 'text-center', 'align-self-center']);
+  input.id='guard';
+  input.placeholder = getSysTranslate('guard');
+  input.onkeypress = function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+      if (input.value != 'animo') {
+        guardProcedure()
+      }else{
+        guardAttempt = 0;
+        localStorage.removeItem('guard');
+        localStorage.removeItem('lang_quiz');
+        location.reload();
+      }
+    }
+  }
+  m_body.appendChild(input);
+
+  m_footer.innerHTML = '';
+
+}
+
+function guardProcedure() {
+  if (guardAttempt < GUARD_QUOTA) {
+    guardAttempt++;
+    localStorage.setItem('guard', guardAttempt);
+    msgAlert(getQuizTranslate('alert_login'));
+  }else{
+    logout();
+  }
+}
+
 function createRecord(name, number, note='') {
 
   if (name.length > 0) {
@@ -182,9 +259,6 @@ function copyToClipboard(rows) {
 }
 
 function tooltipable(ele, msg) {
-  // console.log(eid);
-  // var ele = document.getElementById(eid);
-  // console.log(ele);
   ele.setAttribute('title', msg);
   ele.setAttribute('data-placement', 'bottom');
   ele.setAttribute('data-trigger', 'manual');
@@ -199,7 +273,7 @@ function popTooltip (eid) {
 }
 
 function downloadRecord(rows) {
-  let csvContent = "data:text/csv;charset=utf-8,";
+  let csvContent = 'data:text/csv;charset=utf-8,';
   
   let fheader = [startDate, team.join('+')].join('_');
   csvContent += fheader + '\r\n\n';

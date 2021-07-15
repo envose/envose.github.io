@@ -11,7 +11,7 @@ var cssClassStr = {
   'title': ['text-center', 'col'],
   'view_content_center': ['d-flex', 'col', 'flex-column', 'align-items-center', 'mt-3', 'mb-3'],
   'view_col5': ['col-5', 'col-lg-3'],
-  'view_entry': ['row', 'my-2', 'align-self-center'],
+  'view_entry': ['row', 'mx-lg-5', 'my-2', 'align-self-center'],
   'table': ['table', 'table-striped', 'table-light'],
   'col_12': ['col-12'],
 };

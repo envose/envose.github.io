@@ -25,6 +25,10 @@ var strings = [{
   'alert_login': 'Incorrect Password!',
   'copy': 'Copy',
   'success_copy': 'Copied',
+  'quiz_title': 'How well you know<br>about the Bible',
+  'quiz_desc': 'Here are 5 MC questions.<br><br>1. Whose birthday is Dec 25, X\'mas?<br>2. What day of the week should we worship God?<br>3. How many Gods are testified by the Bible?<br>4. When should we have the Holy Supper?<br>5. What is the true meaning of the Passover?',
+  'start': 'Start',
+  'guard': 'Security Code',
 },{
   'login': '登入',
   'password': '密碼',
@@ -52,6 +56,10 @@ var strings = [{
   'alert_login': '密碼錯誤！',
   'copy': '複製',
   'success_copy': '已複製',
+  'quiz_title': '聖經知多少',
+  'quiz_desc': '這裏有5條MC題。<br><br>1. 12月25日聖誕節是誰的生日？<br>2. 應該在星期幾去教會做禮拜？<br>3. 聖經見證的上帝有幾多位？<br>4. 應該在甚麼時候舉行聖餐？<br>5. 逾越節真正的意義是甚麼？',
+  'start': '開始',
+  'guard': '安全密碼',
 }];
 
 var sysLangOpt = 1;
@@ -74,49 +82,55 @@ function getQuizTranslate(key) {
 }
 
 function setSysLangOpt(opt) {
-  if (typeof opt == 'number') {
-    switch (opt) {
-      case 0:
-        sysLangOpt = 0;
-        break;
-      case 1:
-        sysLangOpt = 1;
-        break;
-      default:
-        // code block
-    }
-  }else if (typeof opt == 'string') {
-    switch (opt) {
-      case 'en':
-        sysLangOpt = 0;
-        break;
-      case 'zh':
-        sysLangOpt = 1;
-        break;
-      case '0':
-        sysLangOpt = 0;
-        break;
-      case '1':
-        sysLangOpt = 1;
-        break;
-      default:
-        // code block
-    }
+  switch (opt) {
+    case 0:
+      sysLangOpt = 0;
+      break;
+    case 1:
+      sysLangOpt = 1;
+      break;
+    case 'en':
+      sysLangOpt = 0;
+      break;
+    case 'zh':
+      sysLangOpt = 1;
+      break;
+    case '0':
+      sysLangOpt = 0;
+      break;
+    case '1':
+      sysLangOpt = 1;
+      break;
+    default:
+      // code block
   }
-  storeLangOpt();
+  storeSysLangOpt();
 }
 
 function setQuizLangOpt(opt) {
-  switch (opt){
+  switch (opt) {
+    case 0:
+      quizLangOpt = 0;
+      break;
+    case 1:
+      quizLangOpt = 1;
+      break;
     case 'en':
       quizLangOpt = 0;
       break;
     case 'zh':
       quizLangOpt = 1;
       break;
+    case '0':
+      quizLangOpt = 0;
+      break;
+    case '1':
+      quizLangOpt = 1;
+      break;
     default:
       // code block
   }
+  storeQuizLangOpt();
 }
 
 function switchSysLang() {
@@ -138,13 +152,20 @@ function switchSysLang() {
 }
 
 function switchQuizLang() {
-  switch (sysLangOpt) {
+  switch (quizLangOpt) {
     case 0:
-      sysLangOpt = 1;
+      setQuizLangOpt(1);
       break;
     case 1:
-      sysLangOpt = 0;
+      setQuizLangOpt(0);
       break;
     default:
+  }
+  //check if key exists
+  if (localStorage.getItem('key')) {
+    location.reload();
+  }else{
+    alert('error: 22331');
+    logout();
   }
 }

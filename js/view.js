@@ -42,6 +42,7 @@ function createSelectSysLangView() {
 function createLoginView() {
   initViews();
   provideSysLangOpt(true);
+  provideQuizLangOpt(false);
 
   // header
   setHeaderTitle('h2', getSysTranslate('login'));
@@ -92,6 +93,7 @@ function createAddEntry(div) {
 function createTeamView() {
   initViews();
   provideSysLangOpt(true);
+  provideQuizLangOpt(false);
   numOfMemEntry = 0;
 
   // header
@@ -146,14 +148,39 @@ function createTeamView() {
 function entryView() {
   initViews();
   provideSysLangOpt(false);
+  provideQuizLangOpt(true);
+  storeQuizLangOpt()
 
-  // footer
-  var div = createCustomElement('div', 'view_content_center');
-  div.classList.add(...['mt-5', 'pt-5']);
+  // header
+  setHeaderTitle('h3', getQuizTranslate('quiz_title'));
+
+  // content
+  var div2 = createCustomElement('div', 'col_12');
+  var b_div = createCustomElement('div', 'view_content_center');
+  var entry1 = createCustomElement('div', 'view_entry');
+  entry1.classList.add('mx-2');
+  entry1.innerHTML = getQuizTranslate('quiz_desc');
+  b_div.appendChild(entry1);
+  div2.appendChild(b_div);
+  content.appendChild(div2);
+
+  var div = createCustomElement('div', 'col_12');
+  var div_1 = document.createElement('div');
+  div_1.classList.add(...['d-flex', 'flex-row', 'flex-lg-column', 'justify-content-between', 'mt-5', 'mx-5']);
+
   var btn_back = createCustomElement('button', 'btn_free_light');
-  btn_back.innerHTML = getSysTranslate('back');
-  btn_back.onclick = function() { dashboard(); };
-  div.appendChild(btn_back);
+  btn_back.innerHTML = getQuizTranslate('back');
+  btn_back.setAttribute('data-toggle', 'modal');
+  btn_back.setAttribute('data-target', '#alertModal');
+  btn_back.onclick = function() { popupGuard(); };
+  div_1.appendChild(btn_back);
+
+  var btn_s = createCustomElement('button', 'btn_free_primary');
+  btn_s.classList.add('mt-lg-5');
+  btn_s.innerHTML = getQuizTranslate('start');
+  div_1.appendChild(btn_s);
+
+  div.appendChild(div_1);
   footer.appendChild(div);
 
 }
@@ -161,6 +188,7 @@ function entryView() {
 function recordView() {
   initViews();
   provideSysLangOpt(false);
+  provideQuizLangOpt(false);
 
   // header
   setHeaderTitle('h2', getSysTranslate('record'));
@@ -232,7 +260,7 @@ function recordView() {
   var entry = createCustomElement('div', 'view_entry');
 
   var btn_back = createCustomElement('button', 'btn_free_light');
-  btn_back.classList.add('mr-5');
+  btn_back.classList.add(...['mr-md-5', 'mr-3']);
   btn_back.innerHTML = getSysTranslate('back');  btn_back.onclick = function() { dashboard(); };
   entry.appendChild(btn_back);
 
@@ -259,10 +287,15 @@ function recordView() {
 function dashboard() {
   initViews();
   provideSysLangOpt(true);
+  provideQuizLangOpt(false);
   dummyPPL();
 
   // header
-  setHeaderTitle('h1', ppl.length);
+  // setHeaderTitle('h1', ppl.length);
+  var title = createCustomElement('h1', 'title');
+  title.classList.add('display-1');
+  title.innerHTML = ppl.length;
+  header.appendChild(title);
 
   // content
   var div = createCustomElement('div', 'view_content_center');
