@@ -5,10 +5,10 @@ function initViews() {
 }
 
 function setHeaderTitle(ele, text) {
+  header.innerHTML = '';
+
   var title = createCustomElement(ele, 'title');
   title.innerHTML = text;
-
-  header.innerHTML = '';
   header.appendChild(title);
 }
 
@@ -41,6 +41,7 @@ function createSelectSysLangView() {
 
 function createLoginView() {
   initViews();
+  provideSysLangOpt(true);
 
   // header
   setHeaderTitle('h2', getSysTranslate('login'));
@@ -56,7 +57,6 @@ function createLoginView() {
   input.onkeypress = function(event) {
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
-      // to-do
       login();
     }
   }
@@ -91,6 +91,7 @@ function createAddEntry(div) {
 
 function createTeamView() {
   initViews();
+  provideSysLangOpt(true);
   numOfMemEntry = 0;
 
   // header
@@ -136,8 +137,7 @@ function createTeamView() {
   btn_exit.setAttribute('data-toggle', 'modal');
   btn_exit.setAttribute('data-target', '#alertModal');
   var callback = function () {
-    createLoginView();
-    $('#alertModal').modal('hide');
+    logout();
   }
   btn_exit.onclick = function() { initModalAlert('btn-danger', getSysTranslate('exit'), getSysTranslate('alert_exit'), getSysTranslate('continue'), callback, getSysTranslate('back')); };
   div3.appendChild(btn_exit);
@@ -147,13 +147,13 @@ function createTeamView() {
 
 function entryView() {
   initViews();
+  provideSysLangOpt(false);
 
   // footer
   var div = createCustomElement('div', 'view_content_center');
   div.classList.add(...['mt-5', 'pt-5']);
   var btn_back = createCustomElement('button', 'btn_free_light');
   btn_back.innerHTML = getSysTranslate('back');
-  btn_back.classList.add(...['mt-5', 'pt-5']);
   btn_back.onclick = function() { dashboard(); };
   div.appendChild(btn_back);
   footer.appendChild(div);
@@ -162,6 +162,7 @@ function entryView() {
 
 function recordView() {
   initViews();
+  provideSysLangOpt(false);
 
   // header
   setHeaderTitle('h2', getSysTranslate('record'));
@@ -254,6 +255,7 @@ function recordView() {
 
 function dashboard() {
   initViews();
+  provideSysLangOpt(true);
   dummyPPL();
 
   // header
@@ -292,8 +294,7 @@ function dashboard() {
   btn_dismiss.setAttribute('data-toggle', 'modal');
   btn_dismiss.setAttribute('data-target', '#alertModal');
   var callback = function () {
-    createTeamView();
-    $('#alertModal').modal('hide');
+    dismiss();
   }
   btn_dismiss.onclick = function() { initModalAlert('btn-danger', getSysTranslate('dismiss'), getSysTranslate('alert_dismiss'), getSysTranslate('continue'), callback, getSysTranslate('back')); };
   div3.appendChild(btn_dismiss);

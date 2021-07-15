@@ -22,6 +22,7 @@ var strings = [{
   'number': 'Number',
   'note': 'Note',
   'download': 'Download',
+  'alert_login': 'Incorrect Password!',
 },{
   'login': '登入',
   'password': '密碼',
@@ -46,10 +47,11 @@ var strings = [{
   'number': '號碼',
   'note': '筆記',
   'download': '下載',
+  'alert_login': '密碼錯誤！',
 }];
 
-var sysLangOpt = 0;
-var quizLangOpt = 0;
+var sysLangOpt = 1;
+var quizLangOpt = 1;
 
 function getSysTranslate(key) {
   if (key in strings[sysLangOpt]) {
@@ -68,16 +70,36 @@ function getQuizTranslate(key) {
 }
 
 function setSysLangOpt(opt) {
-  switch (opt){
-  	case 'en':
-  	  sysLangOpt = 0;
-  	  break;
-  	case 'zh':
-  	  sysLangOpt = 1;
-  	  break;
-    default:
-      // code block
+  if (typeof opt == 'number') {
+    switch (opt) {
+      case 0:
+        sysLangOpt = 0;
+        break;
+      case 1:
+        sysLangOpt = 1;
+        break;
+      default:
+        // code block
+    }
+  }else if (typeof opt == 'string') {
+    switch (opt) {
+      case 'en':
+        sysLangOpt = 0;
+        break;
+      case 'zh':
+        sysLangOpt = 1;
+        break;
+      case '0':
+        sysLangOpt = 0;
+        break;
+      case '1':
+        sysLangOpt = 1;
+        break;
+      default:
+        // code block
+    }
   }
+  storeLangOpt();
 }
 
 function setQuizLangOpt(opt) {
@@ -90,5 +112,35 @@ function setQuizLangOpt(opt) {
       break;
     default:
       // code block
+  }
+}
+
+function switchSysLang() {
+  switch (sysLangOpt) {
+    case 0:
+      setSysLangOpt(1);
+      break;
+    case 1:
+      setSysLangOpt(0);
+      break;
+    default:
+  }
+  // check if key exists
+  if (localStorage.getItem('key')) {
+    location.reload();
+  }else{
+    createLoginView();
+  }
+}
+
+function switchQuizLang() {
+  switch (sysLangOpt) {
+    case 0:
+      sysLangOpt = 1;
+      break;
+    case 1:
+      sysLangOpt = 0;
+      break;
+    default:
   }
 }

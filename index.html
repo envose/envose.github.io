@@ -26,7 +26,7 @@
         <div class="modal-body" id="alertModalBody">
         </div>
         <div class="modal-footer" id="alertModalFooter">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-danger">Save changes</button>
         </div>
       </div>
@@ -34,11 +34,14 @@
   </div>
 
   <div id="container w-100">
-    <div id="container_header" class="row mt-5 pt-md-5">
+    <div class="d-flex flex-row-reverse">
+        <button type="button" class="btn btn-light mt-1 mr-1" id="btn_lang" onclick="switchSysLang()">Eng</button>
     </div>
-    <div id="container_content" class="row">
+    <div id="container_header" class="row mt-2 pt-md-5 fadein_1s">
     </div>
-    <div id="container_footer" class="row">
+    <div id="container_content" class="row fadein_1s">
+    </div>
+    <div id="container_footer" class="row fadein_1s">
     </div>
   </div>
   

@@ -3,13 +3,60 @@ function selectedLang(langOpt) {
   createStartPage();
 }
 
-// to-do
-function login() {
-  createTeamView();
+function provideSysLangOpt(isAvailable) {
+  var btn = document.getElementById('btn_lang');
+  if (isAvailable) {
+    btn.style.visibility = 'visible';
+  }else{
+    btn.style.visibility = 'hidden';
+  }
 }
 
 function msgAlert(msg) {
   alert(getSysTranslate('warning') + getSysTranslate(msg));
+}
+
+function storeLangOpt() {
+  if (localStorage.getItem('key')) {
+    localStorage.setItem('lang_sys', sysLangOpt);
+  }
+  updateLangBtn();
+}
+
+function storeteam() {
+  if (localStorage.getItem('key')) {
+    localStorage.setItem('team', team);
+  }
+}
+
+function updateLangBtn() {
+  var btn = document.getElementById('btn_lang');
+  switch (sysLangOpt) {
+    case 0:
+      btn.innerHTML = '中';
+      break;
+    case 1:
+      btn.innerHTML = 'Eng';
+      break;
+    default:
+  }
+}
+
+// to-do
+function login() {
+  var key = document.getElementById('key');
+  if (key.value != '123') {
+    msgAlert(getSysTranslate('alert_login'));
+  }else{
+    localStorage.setItem('key', key.value);
+    createTeamView();
+  }
+  
+}
+
+function logout() {
+  localStorage.clear();
+  window.location.assign(window.location.href.split('?')[0]);
 }
 
 function submitTeam() {
@@ -22,11 +69,17 @@ function submitTeam() {
     }
   }
   if (team.length > 0) {
+    storeteam();
     getStartDate();
     dashboard();
   }else{
     msgAlert('alert_noMembers');
   }
+}
+
+function dismiss() {
+  localStorage.removeItem('team');
+  location.reload();
 }
 
 function initModalAlert(classification, title, body, btn, callback, btn_close) {
@@ -42,7 +95,7 @@ function initModalAlert(classification, title, body, btn, callback, btn_close) {
 
   m_footer.innerHTML = '';
   var btn_c = document.createElement('button');
-  btn_c.classList.add(...['btn', 'btn-secondary']);
+  btn_c.classList.add(...['btn', 'btn-light']);
   btn_c.setAttribute('data-dismiss', 'modal');
   btn_c.innerHTML = btn_close;
   m_footer.appendChild(btn_c);
