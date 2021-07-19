@@ -145,6 +145,21 @@ function createTeamView() {
   footer.appendChild(div3);
 }
 
+function createMCView() {
+  initViews();
+  provideSysLangOpt(false);
+  provideQuizLangOpt(false);
+  storeQuizLangOpt()
+
+  // header
+
+  // content
+  document.getElementById('mcq_view').style.display = 'block';
+
+  // footer
+
+}
+
 function entryView() {
   initViews();
   provideSysLangOpt(false);
@@ -164,6 +179,7 @@ function entryView() {
   div2.appendChild(b_div);
   content.appendChild(div2);
 
+  //footer
   var div = createCustomElement('div', 'col_12');
   var div_1 = document.createElement('div');
   div_1.classList.add(...['d-flex', 'flex-row', 'flex-lg-column', 'justify-content-between', 'mt-5', 'mx-5']);
@@ -178,6 +194,7 @@ function entryView() {
   var btn_s = createCustomElement('button', 'btn_free_primary');
   btn_s.classList.add('mt-lg-5');
   btn_s.innerHTML = getQuizTranslate('start');
+  btn_s.onclick = function () { createMCView(); };
   div_1.appendChild(btn_s);
 
   div.appendChild(div_1);

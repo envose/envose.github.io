@@ -6,7 +6,19 @@ html, body {
   width: 100%;
   overflow: hidden;
   font-size: 1rem;
+  color: #1B1725;
 }
+/*#1b1725
+#534b62
+#a499b3
+#d0bcd5
+#226ce0*/
+
+/*#E63946
+#F1FAEE
+#A8DADC
+#457B9D
+#1D3557*/
 
 table {
   position:  relative;
@@ -34,6 +46,12 @@ th {
 #container_content {
   max-height: 50vh;
   overflow: auto;
+}
+
+#mcq_view {
+  max-height: 50vh;
+  overflow: auto;
+  background: #F1FAEE;
 }
 
 .fadein_1s {
