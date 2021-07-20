@@ -2,6 +2,11 @@ function initViews() {
   header.innerHTML = '';
   content.innerHTML = '';
   footer.innerHTML = '';
+document.getElementById('mcq_view').style.background = '';
+  document.getElementById('mcq_view').style.display = 'none';
+
+  header.style.background = '';
+  document.getElementById('topbar').style.background = '';
 }
 
 function setHeaderTitle(ele, text) {
@@ -149,15 +154,110 @@ function createMCView() {
   initViews();
   provideSysLangOpt(false);
   provideQuizLangOpt(false);
-  storeQuizLangOpt()
+  storeQuizLangOpt();
 
   // header
+  // setHeaderTitle('h2', getSysTranslate('Question 1'));
+  header.style.background = mcqBGColor;
+  document.getElementById('topbar').style.background = mcqBGColor;
 
   // content
+  document.getElementById('mcq_view').style.background = mcqBGColor;
   document.getElementById('mcq_view').style.display = 'block';
 
-  // footer
+  var mc_ol = document.getElementById('mc_ol');
+  mc_ol.innerHTML = '';
 
+  var mc_inner = document.getElementById('mc_inner');
+  mc_inner.innerHTML = '';
+
+  for (let i = 0; i < numOfQ; i++) {
+    // <li data-target="#mc_carousel" data-slide-to="0" class="active"></li>
+    var li = document.createElement('li');
+    li.setAttribute('data-target', '#mc_carousel');
+    li.setAttribute('data-slide-to', i.toString());
+
+          // <div class="carousel-item active">
+          //   <img class="d-block w-100" src="assets/mo_4.png" alt="First slide">
+          //   <div class="carousel-caption">
+          //     <h5 style="color: black">Whose birthday is Dec 25, X'mas?</h5>
+          //   </div>
+          // </div>
+    var div_c1 = document.createElement('div');
+    div_c1.classList.add(...['carousel-item']);
+
+    var img = document.createElement('img');
+    img.classList.add(...['d-block', 'w-100']);
+    img.src = 'assets/q' + (i+1).toString() + '.png';
+    div_c1.appendChild(img);
+
+    var div_c2 = document.createElement('div');
+    div_c2.classList.add('carousel-caption');
+    var h5 = document.createElement('h5');
+    h5.style.color = mcqColor;
+    h5.innerHTML = getQuizContent('q'+ (i+1).toString());
+    div_c2.appendChild(h5);
+    div_c1.appendChild(div_c2);
+
+    if (i == currentQ) {
+      li.classList.add('active');
+      div_c1.classList.add('active');
+    }
+
+    mc_ol.appendChild(li);
+    mc_inner.appendChild(div_c1);
+  }
+
+  // footer
+  var div_col12 = createCustomElement('div', 'col_12');
+  var div_center = createCustomElement('div', 'view_content_center');
+  var entry = createCustomElement('div', 'view_entry');
+
+  // btn A
+  var btn_a = createCustomElement('button', 'btn_free_primary');
+  btn_a.classList.add(['mr-3']);
+  btn_a.innerHTML = 'A.   ' + getQuizContent('q1c1');
+  btn_a.onclick = function () { mcqSlide() };
+  entry.appendChild(btn_a);
+
+  // btn B
+  var btn_b = createCustomElement('button', 'btn_free_primary');
+  btn_b.innerHTML = 'B.   ' + getQuizContent('q1c2');
+  btn_b.id = 'btn_b';
+  // btn_cp.onclick = function () { copyToClipboard(rows) };
+  btn_b.onclick = function () { mcqSlide() };
+  entry.appendChild(btn_b);
+
+  div_center.appendChild(entry);
+  div_col12.appendChild(div_center);
+  footer.appendChild(div_col12);
+
+
+  // var div_col12_2 = createCustomElement('div', 'col_12');
+  // var div_center_2 = createCustomElement('div', 'view_content_center');
+  var entry2 = createCustomElement('div', 'view_entry');
+
+  // btn C
+  var btn_c = createCustomElement('button', 'btn_free_primary');
+  btn_c.classList.add(['mr-3']);
+  btn_c.innerHTML = 'C.   ' + getQuizContent('q1c3');
+  btn_c.onclick = function () { mcqSlide() };
+  entry2.appendChild(btn_c);
+
+  // btn D
+  var btn_d = createCustomElement('button', 'btn_free_primary');
+  btn_d.innerHTML = 'D.   ' + getQuizContent('q1c4');
+  btn_d.id = 'btn_d';
+  // btn_cp.onclick = function () { copyToClipboard(rows) };
+  btn_d.onclick = function () { mcqSlide() };
+  entry2.appendChild(btn_d);
+
+  div_center.appendChild(entry2);
+  // div_col12_2.appendChild(div_center_2);
+  // footer.appendChild(div_col12_2);
+
+  // default q1
+  mcqSlide();
 }
 
 function entryView() {

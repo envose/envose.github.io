@@ -13,3 +13,9 @@ var team = [];
 var ppl = [];
 var startDate = '';
 var guardAttempt = 0;
+
+// quiz
+var numOfQ = 5;
+var currentQ = 0;
+var mcqBGColor = '#D5E9FF';
+var mcqColor = 'black';

@@ -292,6 +292,17 @@ function downloadRecord(rows) {
   link.click(); // This will download the data file named 'my_data.csv'.
 }
 
+function mcqSlide() {
+  if (currentQ < numOfQ) {
+    $('#mc_carousel').carousel(currentQ);
+    currentQ++;
+    setHeaderTitle('h2', getQuizTranslate('question ')+currentQ);
+  }else{
+    // all questions answered!
+  }
+  
+}
+
 
 
 
