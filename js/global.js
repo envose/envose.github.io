@@ -19,3 +19,4 @@ var numOfQ = 5;
 var currentQ = 0;
 var mcqBGColor = '#D5E9FF';
 var mcqColor = 'black';
+var mcq = [{},{}]
