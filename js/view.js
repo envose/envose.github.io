@@ -405,7 +405,6 @@ function dashboard() {
   initViews();
   provideSysLangOpt(true);
   provideQuizLangOpt(false);
-  dummyPPL();
 
   // header
   // setHeaderTitle('h1', ppl.length);

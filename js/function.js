@@ -1,57 +1,3 @@
-function loadData(key) {
-
-  const url = 'https://spreadsheets.google.com/feeds/list/'.concat(key).concat('/public/values?alt=json');
-
-  console.log(url);
-
-  $.getJSON(url, function(data) {
-
-    if (data !== null) {
-      console.log(data);
-      console.log(data.feed.author[0].name.$t);
-      if (data.feed.author[0].name.$t == 'wmscoghongkong') {
-        console.log('pass');
-        for (var k in data.feed.entry) {
-          var obj = data.feed.entry[k];
-          // if (obj.gsx$key.$t) {
-          //   list.push(obj);
-          // }
-        }
-
-        return true;
-      }else{
-        return false;
-      }
-
-
-      // let urlParams = new URLSearchParams(window.location.search);
-      // if (urlParams.has('$k')) {
-      //   localStorage.setItem('key', urlParams.get('$k'));
-      // }
-
-      // var key = localStorage.getItem("key");
-      // if (key === 'jackshin') {
-      //   createDropDown();
-      // }else {
-      //   if (key) {
-      //     createForm(true);
-      //     getMetaData(key);
-      //     setTimeout(function(){enableRecord(isActive)},500);
-      //   }else{
-      //     createForm(false);
-      //   }
-      // }
-    }else{
-      console.log('author_error');
-      return false;
-    }
-  })
-  .fail(function() {
-    console.log('fail');
-    return false
-  });
-}
-
 function selectedLang(langOpt) {
   setLangOpt(langOpt);
   createStartPage();
@@ -152,13 +98,14 @@ function updateQuizLangBtn() {
 
 // to-do
 function login() {
-  var key = document.getElementById('key').value;
-  if(loadData(key)){
-    createTeamView();
-  }else{
+  var key = document.getElementById('key');
+  if (key.value != '123') {
     msgAlert(getSysTranslate('alert_login'));
-    logout();
+  }else{
+    localStorage.setItem('key', key.value);
+    createTeamView();
   }
+  
 }
 
 function logout() {
@@ -355,8 +302,6 @@ function mcqSlide() {
   }
   
 }
-
-
 
 
 

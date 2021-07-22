@@ -1,3 +1,25 @@
+var mcq = [{
+  'q1': 'Whose birthday is Dec 25, X\'mas?',
+  'q2': 'What day of the week should we worship God?',
+  'q3': 'How many Gods are testified by the Bible?',
+  'q4': 'When should we have the Holy Supper?',
+  'q5': 'What is the true meaning of the Passover?',
+  'q1c1': 'Sun God',
+  'q1c2': 'Jesus',
+  'q1c3': 'Santa Claus',
+  'q1c4': 'Buddha',
+},{
+  'q1': '12月25日聖誕節是誰的生日？',
+  'q2': '應該在星期幾去教會做禮拜？',
+  'q3': '聖經見證的上帝有幾多位？',
+  'q4': '應該在甚麼時候舉行聖餐？',
+  'q5': '逾越節真正的意義是甚麼？',
+  'q1c1': '太陽神',
+  'q1c2': '耶穌',
+  'q1c3': '聖誕老人',
+  'q1c4': '佛陀',
+}];
+
 var strings = [{
   'login': 'Login',
   'password': 'Password',
