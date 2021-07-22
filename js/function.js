@@ -134,6 +134,7 @@ function submitTeam() {
 function dismiss() {
   localStorage.removeItem('team');
   localStorage.removeItem('startDate');
+  localStorage.removeItem('ppl');
   location.reload();
 }
 
@@ -177,7 +178,7 @@ function popupGuard() {
   input.type = 'password';
   input.classList.add(...['form-control', 'col-12', 'text-center', 'align-self-center']);
   input.id='guard';
-  input.placeholder = getSysTranslate('guard');
+  input.placeholder = getQuizTranslate('guard');
   input.onkeypress = function(event) {
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
@@ -207,15 +208,22 @@ function guardProcedure() {
   }
 }
 
-function createRecord(name, number, note='') {
+function createRecord(name, contact, ans=[]) {
+
+  ppl = JSON.parse(localStorage.getItem('ppl'));
 
   if (name.length > 0) {
     var r = {
     'name': name,
-    'number': number,
-    'note': note,
+    'contact': contact,
+    'a1': ans[0],
+    'a2': ans[1],
+    'a3': ans[2],
+    'a4': ans[3],
+    'a5': ans[4],
     }
     ppl.push(r);
+    localStorage.setItem('ppl', JSON.stringify(ppl));
   }
 }
 
@@ -292,37 +300,102 @@ function downloadRecord(rows) {
   link.click(); // This will download the data file named 'my_data.csv'.
 }
 
-function mcqSlide(ans='init') {
+function shuffle(array) {
+  var currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+function checkAnswer() {
+  for (let i = 1; i <= 5; i++) {
+    var cid = 'q' + i + 'c1';
+    if (ans[i-1] == getQuizContent(cid)) {
+      corrected++;
+    }else{
+      incorrect.push({'q': i, 'a':ans[i-1]});
+    }
+  }
+}
+
+function mcqSlide(input='init') {
+
+  if (input != 'init') {
+    ans.push(input);
+  }
+
   if (currentQ < numOfQ) {
     $('#mc_carousel').carousel(currentQ);
     currentQ++;
     setHeaderTitle('h2', getQuizTranslate('question ')+currentQ);
 
+    var seq = ['1', '2', '3', '4'];
+    shuffle(seq);
+
     // update btns
-    if (ans == 'init') {
-      // init
-      console.log(ans);
-    }else{
-      console.log(ans);
       for (let i = 1; i <= 4; i++) {
         var bid = 'btn_' + i;
-        var cid = 'q' + currentQ + 'c' + i;
+        var cid = 'q' + currentQ + 'c' + seq[(i-1)];
         var c = getQuizContent(cid);
         var btn = document.getElementById(bid);
         btn.value = c;
         btn.innerHTML = c;
       }
-    }
   }else{
     // all questions answered!
-    console.log(ans);
+    checkAnswer();
+    createResultView();
   }
-  
 }
 
+function on() {
+  document.getElementById('overlay').style.display = 'block';
+}
+
+function off() {
+  document.getElementById('overlay').style.display = 'none';
+}
+
+function initQuiz() {
+  ans = [];
+  corrected = 0;
+  currentQ = 0;
+  incorrect = [];
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  //store
+  var name = document.querySelector('#finame').value;
+  var contact = document.querySelector('#ficontact').value;
+  if (!name) {
+    name = getSysTranslate('empty');
+  }
+  if (!contact) {
+    contact = getSysTranslate('empty');
+  }
+  createRecord(name, contact, ans);
+  //reset
+  form.reset();
+  $('#myModal').modal('hide');
+  entryView();
+})
 
 
-
+$('.modal').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+});
 
 
 

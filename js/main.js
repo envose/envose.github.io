@@ -2,6 +2,7 @@ window.onload = function() {
 
   document.getElementById('topbar').style.visibility = 'hidden';
   document.getElementById('mcq_view').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
 
   // check if guard exists
   var localGuard = localStorage.getItem('guard');

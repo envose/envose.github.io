@@ -2,7 +2,7 @@ function initViews() {
   header.innerHTML = '';
   content.innerHTML = '';
   footer.innerHTML = '';
-document.getElementById('mcq_view').style.background = '';
+  document.getElementById('mcq_view').style.background = '';
   document.getElementById('mcq_view').style.display = 'none';
 
   header.style.background = '';
@@ -276,11 +276,43 @@ function createMCView() {
   mcqSlide();
 }
 
+function createResultView() {
+  initViews();
+  provideSysLangOpt(false);
+  provideQuizLangOpt(false);
+
+  var mTitle = document.querySelector('#modalTitle');
+  var cBtn = document.querySelector('#confirmBtn');
+
+  mTitle.innerHTML = '';
+  cBtn.innerHTML = '';
+
+  mTitle.appendChild(document.createTextNode(getQuizTranslate('your_result') + (corrected*20) + getQuizTranslate('marks')));
+  cBtn.appendChild(document.createTextNode(getQuizTranslate('complete')));
+
+  var result = document.getElementById('result');
+
+  result.innerHTML = '';
+
+  var h2 = document.createElement('h2');
+  h2.innerHTML = getQuizTranslate('your_result') + (corrected*20) + getQuizTranslate('marks');
+  result.appendChild(h2);
+
+  document.querySelector('#finame').placeholder = getQuizTranslate('name');
+  document.querySelector('#liname').appendChild(document.createTextNode(getQuizTranslate('name')));
+  document.querySelector('#ficontact').placeholder = getQuizTranslate('contact');
+  document.querySelector('#licontact').appendChild(document.createTextNode(getQuizTranslate('contact')));
+
+  $('#myModal').modal({backdrop: 'static', keyboard: false});
+}
+
 function entryView() {
   initViews();
   provideSysLangOpt(false);
   provideQuizLangOpt(true);
-  storeQuizLangOpt()
+  storeQuizLangOpt();
+
+  initQuiz();
 
   // header
   setHeaderTitle('h3', getQuizTranslate('quiz_title'));
@@ -348,7 +380,7 @@ function recordView() {
 
   th0.innerHTML = '#';
   th1.innerHTML = getSysTranslate('name');
-  th2.innerHTML = getSysTranslate('number');
+  th2.innerHTML = getSysTranslate('contact');
   // th3.innerHTML = getSysTranslate('note');
 
   thead.appendChild(th0);
@@ -365,7 +397,7 @@ function recordView() {
   for (let i = 0; i < ppl.length; i++) {
     var row = [];
     row.push(ppl[i].name);
-    row.push(ppl[i].number);
+    row.push(ppl[i].contact);
     rows.push(row);
 
     var tr = document.createElement('tr');
@@ -376,7 +408,7 @@ function recordView() {
 
     td0.innerHTML = i+1;
     td1.innerHTML = ppl[i].name;
-    td2.innerHTML = ppl[i].number;
+    td2.innerHTML = ppl[i].contact;
     // td3.innerHTML = ppl[i].note;
 
     tr.appendChild(td0);
@@ -421,6 +453,9 @@ function dashboard() {
   initViews();
   provideSysLangOpt(true);
   provideQuizLangOpt(false);
+  if (localStorage.getItem('ppl')) {
+    ppl = JSON.parse(localStorage.getItem('ppl'));
+  }
 
   // header
   // setHeaderTitle('h1', ppl.length);

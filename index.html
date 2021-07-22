@@ -13,6 +13,13 @@
   <link href="css/basic.css" rel="stylesheet">
 </head>
 <body>
+  <div id="overlay">
+    <div class="centered">
+      <div class="spinner-border text-light" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
   <!-- Alert Modal -->
   <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -32,6 +39,37 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle"></h4>
+              </div>
+              <form name="submit-to-google-sheet">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <div id="result"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="finame" id="liname"></label>
+                    <input class="form-control" name="prayer" type="name" id="finame" data-toggle="tooltip">
+                  </div>
+                  <div class="form-group">
+                    <label for="ficontact" id="licontact"></label>
+                    <input class="form-control" name="truth" type="number" id="ficontact" data-toggle="tooltip">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" id="confirmBtn"></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        </div>
 
   <div id="container w-100">
     <div class="d-flex flex-row justify-content-between" id="topbar">

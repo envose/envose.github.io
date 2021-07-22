@@ -1,6 +1,7 @@
 // const
 const GUARD_QUOTA = 2;
 const GUARD_DURATION = 1000 * 60 * 60 * 3;
+const form = document.forms['submit-to-google-sheet'];
 
 // views
 var header = document.getElementById('container_header');
@@ -19,3 +20,6 @@ var numOfQ = 5;
 var currentQ = 0;
 var mcqBGColor = '#D5E9FF';
 var mcqColor = 'black';
+var ans = [];
+var corrected = 0;
+var incorrect = [];

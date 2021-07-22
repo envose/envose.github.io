@@ -73,7 +73,7 @@ var strings = [{
   'dismiss': 'Dismiss',
   'alert_dismiss': 'Make sure you have saved all records',
   'alert_exit': 'Are you sure you want to exit?',
-  'number': 'Number',
+  'contact': 'Contact',
   'note': 'Note',
   'download': 'Download',
   'alert_login': 'Incorrect Password!',
@@ -84,6 +84,10 @@ var strings = [{
   // 'quiz_desc': 'Here are 5 MC questions.<br><br>1. Whose birthday is Dec 25, X\'mas?<br>2. What day of the week should we worship God?<br>3. How many Gods are testified by the Bible?<br>4. When should we have the Holy Supper?<br>5. What is the true meaning of the Passover?',
   'guard': 'Security Code',
   'question ': 'Question ',
+  'quiz_result': 'Quiz Result',
+  'your_result': 'Your Result: ',
+  'marks': ' Marks',
+  'empty': '(Empty)',
 },{
   'login': '登入',
   'password': '密碼',
@@ -105,7 +109,7 @@ var strings = [{
   'dismiss': '解散',
   'alert_dismiss': '請確保已儲存所有資料',
   'alert_exit': '是否確定退出？',
-  'number': '號碼',
+  'contact': '電話',
   'note': '筆記',
   'download': '下載',
   'alert_login': '密碼錯誤！',
@@ -116,6 +120,10 @@ var strings = [{
   'start': '開始',
   'guard': '安全密碼',
   'question ': '問題 ',
+  'quiz_result': '成績',
+  'your_result': '你的成績： ',
+  'marks': ' 分',
+  'empty': '（空）',
 }];
 
 var sysLangOpt = 1;
