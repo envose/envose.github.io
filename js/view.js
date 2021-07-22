@@ -209,52 +209,68 @@ function createMCView() {
   }
 
   // footer
-  var div_col12 = createCustomElement('div', 'col_12');
+  // var div_col12 = createCustomElement('div', 'col_12');
   var div_center = createCustomElement('div', 'view_content_center');
-  var entry = createCustomElement('div', 'view_entry');
+  // var entry = createCustomElement('div', 'view_entry');
+  div_center.classList.add(...['mx-5']);
 
   // btn A
-  var btn_a = createCustomElement('button', 'btn_free_primary');
-  btn_a.classList.add(['mr-3']);
-  btn_a.innerHTML = 'A.   ' + getQuizContent('q1c1');
-  btn_a.onclick = function () { mcqSlide() };
-  entry.appendChild(btn_a);
+  var btn_1 = createCustomElement('button', 'btn_free_primary');
+  // btn_1.classList.add(['mr-3']);
+  btn_1.classList.add(...['mb-1', 'btn-block']);
+  btn_1.innerHTML = getQuizContent('q1c1');
+  btn_1.value = getQuizContent('q1c1');
+  btn_1.id = 'btn_1';
+  btn_1.onclick = function () { mcqSlide(btn_1.value) };
+  // entry.appendChild(btn_1);
+  div_center.appendChild(btn_1);
 
   // btn B
-  var btn_b = createCustomElement('button', 'btn_free_primary');
-  btn_b.innerHTML = 'B.   ' + getQuizContent('q1c2');
-  btn_b.id = 'btn_b';
+  var btn_2 = createCustomElement('button', 'btn_free_primary');
+  btn_2.classList.add(...['mb-1', 'btn-block']);
+  btn_2.innerHTML = getQuizContent('q1c2');
+  btn_2.value = getQuizContent('q1c2');
+  btn_2.id = 'btn_2';
   // btn_cp.onclick = function () { copyToClipboard(rows) };
-  btn_b.onclick = function () { mcqSlide() };
-  entry.appendChild(btn_b);
+  btn_2.onclick = function () { mcqSlide(btn_2.value) };
+  // entry.appendChild(btn_2);
+  div_center.appendChild(btn_2);
 
-  div_center.appendChild(entry);
-  div_col12.appendChild(div_center);
-  footer.appendChild(div_col12);
+  // div_center.appendChild(entry);
+  // div_col12.appendChild(div_center);
+  // footer.appendChild(div_col12);
 
 
   // var div_col12_2 = createCustomElement('div', 'col_12');
   // var div_center_2 = createCustomElement('div', 'view_content_center');
-  var entry2 = createCustomElement('div', 'view_entry');
+  // var entry2 = createCustomElement('div', 'view_entry');
 
   // btn C
-  var btn_c = createCustomElement('button', 'btn_free_primary');
-  btn_c.classList.add(['mr-3']);
-  btn_c.innerHTML = 'C.   ' + getQuizContent('q1c3');
-  btn_c.onclick = function () { mcqSlide() };
-  entry2.appendChild(btn_c);
+  var btn_3 = createCustomElement('button', 'btn_free_primary');
+  // btn_3.classList.add(['mr-3']);
+  btn_3.classList.add(...['mb-1', 'btn-block']);
+  btn_3.innerHTML = getQuizContent('q1c3');
+  btn_3.value = getQuizContent('q1c3');
+  btn_3.id = 'btn_3';
+  btn_3.onclick = function () { mcqSlide(btn_3.value) };
+  // entry2.appendChild(btn_3);
+  div_center.appendChild(btn_3);
 
   // btn D
-  var btn_d = createCustomElement('button', 'btn_free_primary');
-  btn_d.innerHTML = 'D.   ' + getQuizContent('q1c4');
-  btn_d.id = 'btn_d';
+  var btn_4 = createCustomElement('button', 'btn_free_primary');
+  btn_4.classList.add(...['mb-1', 'btn-block']);
+  btn_4.innerHTML = getQuizContent('q1c4');
+  btn_4.value = getQuizContent('q1c4');
+  btn_4.id = 'btn_4';
   // btn_cp.onclick = function () { copyToClipboard(rows) };
-  btn_d.onclick = function () { mcqSlide() };
-  entry2.appendChild(btn_d);
+  btn_4.onclick = function () { mcqSlide(btn_4.value) };
+  // entry2.appendChild(btn_4);
+  div_center.appendChild(btn_4);
 
-  div_center.appendChild(entry2);
+  // div_center.appendChild(entry2);
   // div_col12_2.appendChild(div_center_2);
   // footer.appendChild(div_col12_2);
+  footer.appendChild(div_center);
 
   // default q1
   mcqSlide();

@@ -292,13 +292,30 @@ function downloadRecord(rows) {
   link.click(); // This will download the data file named 'my_data.csv'.
 }
 
-function mcqSlide() {
+function mcqSlide(ans='init') {
   if (currentQ < numOfQ) {
     $('#mc_carousel').carousel(currentQ);
     currentQ++;
     setHeaderTitle('h2', getQuizTranslate('question ')+currentQ);
+
+    // update btns
+    if (ans == 'init') {
+      // init
+      console.log(ans);
+    }else{
+      console.log(ans);
+      for (let i = 1; i <= 4; i++) {
+        var bid = 'btn_' + i;
+        var cid = 'q' + currentQ + 'c' + i;
+        var c = getQuizContent(cid);
+        var btn = document.getElementById(bid);
+        btn.value = c;
+        btn.innerHTML = c;
+      }
+    }
   }else{
     // all questions answered!
+    console.log(ans);
   }
   
 }
