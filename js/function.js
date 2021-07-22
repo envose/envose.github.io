@@ -210,7 +210,9 @@ function guardProcedure() {
 
 function createRecord(name, contact, ans=[]) {
 
-  ppl = JSON.parse(localStorage.getItem('ppl'));
+  if (localStorage.getItem('ppl')) {
+    ppl = JSON.parse(localStorage.getItem('ppl'));
+  }
 
   if (name.length > 0) {
     var r = {
