@@ -281,22 +281,34 @@ function createResultView() {
   provideSysLangOpt(false);
   provideQuizLangOpt(false);
 
+  console.log(incorrect);
+
   var mTitle = document.querySelector('#modalTitle');
   var cBtn = document.querySelector('#confirmBtn');
 
   mTitle.innerHTML = '';
   cBtn.innerHTML = '';
 
-  mTitle.appendChild(document.createTextNode(getQuizTranslate('your_result') + (corrected*20) + getQuizTranslate('marks')));
+  mTitle.appendChild(document.createTextNode(getQuizTranslate('your_result') + corrected + '/5'));
   cBtn.appendChild(document.createTextNode(getQuizTranslate('complete')));
 
   var result = document.getElementById('result');
 
   result.innerHTML = '';
 
-  var h2 = document.createElement('h2');
-  h2.innerHTML = getQuizTranslate('your_result') + (corrected*20) + getQuizTranslate('marks');
-  result.appendChild(h2);
+  for (let i = 0; i < incorrect.length; i++) {
+    var qid = 'q' + incorrect[i].q;
+    var q = getQuizContent(qid);
+    var corr = getQuizContent(qid + 'c1');
+
+    var h5 = document.createElement('h5');
+    h5.classList.add('fadein_1s');
+    h5.innerHTML = '<b>' + q + '</b>';
+
+    h5.innerHTML += '<p class="text-success">' + getQuizTranslate('ans') + corr + '</p>';
+    result.appendChild(h5);
+
+  }
 
   document.querySelector('#finame').placeholder = getQuizTranslate('name');
   document.querySelector('#liname').appendChild(document.createTextNode(getQuizTranslate('name')));
@@ -396,6 +408,7 @@ function recordView() {
 
   for (let i = 0; i < ppl.length; i++) {
     var row = [];
+    row.push(ppl[i].name);
     row.push(ppl[i].name);
     row.push(ppl[i].contact);
     rows.push(row);

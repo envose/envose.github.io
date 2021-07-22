@@ -88,6 +88,9 @@ var strings = [{
   'your_result': 'Your Result: ',
   'marks': ' Marks',
   'empty': '(Empty)',
+  'ans': 'Answer: ',
+  'corr_ans': 'Correct Answer: ',
+  'your_ans': 'Your Answer: ',
 },{
   'login': '登入',
   'password': '密碼',
@@ -124,6 +127,9 @@ var strings = [{
   'your_result': '你的成績： ',
   'marks': ' 分',
   'empty': '（空）',
+  'ans': '答案： ',
+  'corr_ans': '正確答案： ',
+  'your_ans': '你的答案： ',
 }];
 
 var sysLangOpt = 1;
