@@ -408,7 +408,7 @@ function recordView() {
 
   for (let i = 0; i < ppl.length; i++) {
     var row = [];
-    row.push(ppl[i].(i+1));
+    row.push(i+1);
     row.push(ppl[i].name);
     row.push(ppl[i].contact);
     rows.push(row);
