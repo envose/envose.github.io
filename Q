@@ -1,0 +1,6 @@
+q_id	q_zh	corr_ans_zh	ans_zh_1	ans_zh_2	ans_zh_3	q_en	corr_ans_en	ans_en_1	ans_en_2	ans_en_3	img														
+1	12月25日聖誕節是誰的生日？	太陽神	耶穌	聖誕老人	佛陀	Whose birthday is Dec 25, X'mas?	Sun God	Jesus	Santa Claus	Buddha	1djUPXWVJUZC6SFAhl7FZMiNjePxrpss1														
+2	應該在星期幾去教會做禮拜？	星期六	星期日	星期五	星期三	What day of the week should we worship God?	Saturday	Sunday	Friday	Wednesday	1hh8YcE1zdS5iDzjWo4Eb703QlwkJRiS4														
+3	聖經見證的上帝有幾多位？	2	1	3	∞	How many Gods are testified by the Bible?	2	1	3	∞	1r9diPuj-jJuFnvDOrUz5ws5s3HOMnyCm														
+4	逾越節真正的意義是甚麼？	永生、赦罪、越過災殃	只適用於出埃及	被廢除的舊約律法	最後的晚餐，與門徒道別	What is the true meaning of the Passover?	Eternal Life, Forgiveness of Sins, Disasters Will Pass Over	Only applies to Exodus	A Repealed Old Testament Law	Last Supper, Farewell	1EVInzImolSgS3_JNi3yYW-l_a1DTx27r														
+5	應該在甚麼時候舉行聖餐？	逾越節	每月一次	每個星期日	復活節	When should we have the Holy Supper?	Passover	Every Month	Every Sunday	Ressurection Day	15eaAPkHwKY8dRFsmaeS3Uj93KWP21u2Q														
