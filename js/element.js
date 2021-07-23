@@ -3,6 +3,7 @@
 var cssClassStr = {
   'btn_free_primary': ['btn', 'btn-primary', 'text-center', 'align-self-center'],
   'btn_free_info': ['btn', 'btn-info', 'text-center', 'align-self-center'],
+  'btn_free_success': ['btn', 'btn-success', 'text-center', 'align-self-center'],
   'btn_free_danger': ['btn', 'btn-danger', 'text-center', 'align-self-center'],
   'btn_free_light': ['btn', 'btn-light', 'text-center', 'align-self-center'],
   'btn_std_primary': ['btn', 'btn-primary', 'btn-block', 'text-center', 'align-self-center', 'mt-3', 'mb-3'],

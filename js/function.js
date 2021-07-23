@@ -376,6 +376,11 @@ function initQuiz() {
   incorrect = [];
 }
 
+function resultBtnClicked(btn) {
+  btn.style.display = 'none';
+  console.log(btn.value);
+}
+
 form.addEventListener('submit', e => {
   e.preventDefault()
   //store

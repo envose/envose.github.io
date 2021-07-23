@@ -217,7 +217,7 @@ function createMCView() {
   // btn A
   var btn_1 = createCustomElement('button', 'btn_free_primary');
   // btn_1.classList.add(['mr-3']);
-  btn_1.classList.add(...['mb-1', 'btn-block']);
+  btn_1.classList.add(...['mb-1', 'btn-block', 'fadein_1s']);
   btn_1.innerHTML = getQuizContent('q1c1');
   btn_1.value = getQuizContent('q1c1');
   btn_1.id = 'btn_1';
@@ -227,7 +227,7 @@ function createMCView() {
 
   // btn B
   var btn_2 = createCustomElement('button', 'btn_free_primary');
-  btn_2.classList.add(...['mb-1', 'btn-block']);
+  btn_2.classList.add(...['mb-1', 'btn-block', 'fadein_1s']);
   btn_2.innerHTML = getQuizContent('q1c2');
   btn_2.value = getQuizContent('q1c2');
   btn_2.id = 'btn_2';
@@ -248,7 +248,7 @@ function createMCView() {
   // btn C
   var btn_3 = createCustomElement('button', 'btn_free_primary');
   // btn_3.classList.add(['mr-3']);
-  btn_3.classList.add(...['mb-1', 'btn-block']);
+  btn_3.classList.add(...['mb-1', 'btn-block', 'fadein_1s']);
   btn_3.innerHTML = getQuizContent('q1c3');
   btn_3.value = getQuizContent('q1c3');
   btn_3.id = 'btn_3';
@@ -258,7 +258,7 @@ function createMCView() {
 
   // btn D
   var btn_4 = createCustomElement('button', 'btn_free_primary');
-  btn_4.classList.add(...['mb-1', 'btn-block']);
+  btn_4.classList.add(...['mb-1', 'btn-block', 'fadein_1s']);
   btn_4.innerHTML = getQuizContent('q1c4');
   btn_4.value = getQuizContent('q1c4');
   btn_4.id = 'btn_4';
@@ -277,6 +277,32 @@ function createMCView() {
 }
 
 function createResultView() {
+  initViews();
+  provideSysLangOpt(false);
+  provideQuizLangOpt(false);
+
+  console.log(incorrect);
+
+  // header
+  setHeaderTitle('h2', getQuizTranslate('your_result') + corrected + '/5');
+
+
+  var div_center = createCustomElement('div', 'view_content_center');
+  div_center.classList.add(...['mx-5']);
+
+  for (let i = 0; i < incorrect.length; i++) {
+    var btn = createCustomElement('button', 'btn_free_success');
+    btn.classList.add(...['my-2', 'btn-block', 'fadein_1s']);
+    btn.innerHTML = incorrect[i].q;
+    btn.value = incorrect[i].q;
+    btn.onclick = function () { resultBtnClicked(this); };
+    div_center.appendChild(btn);
+  }
+  content.appendChild(div_center);
+
+}
+
+function createSurveyView() {
   initViews();
   provideSysLangOpt(false);
   provideQuizLangOpt(false);
