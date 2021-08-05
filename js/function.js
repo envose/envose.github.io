@@ -99,7 +99,7 @@ function updateQuizLangBtn() {
 // to-do
 function login() {
   var key = document.getElementById('key');
-  if (key.value != '123') {
+  if (key.value != '321') {
     msgAlert(getSysTranslate('alert_login'));
   }else{
     localStorage.setItem('key', key.value);
@@ -379,6 +379,16 @@ function initQuiz() {
 function resultBtnClicked(btn) {
   btn.style.display = 'none';
   console.log(btn.value);
+  initSlideFrame('po');
+  $('#slideModal').modal('show');
+}
+
+function hideEle(ele) {
+  ele.style.display = 'none';
+}
+
+function showEle(ele) {
+  ele.style.display = 'block';
 }
 
 form.addEventListener('submit', e => {
@@ -397,11 +407,13 @@ form.addEventListener('submit', e => {
   form.reset();
   $('#myModal').modal('hide');
   entryView();
-})
+});
 
 
 $('.modal').on('hidden.bs.modal', function(){
+  if ($(this).find('form')[0]) {
     $(this).find('form')[0].reset();
+  }
 });
 
 

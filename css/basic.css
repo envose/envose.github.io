@@ -71,6 +71,19 @@ th {
   cursor: none;
 }
 
+#slide {
+  width: 100%;
+}
+
+#slide_header_container {
+}
+
+#slide_footer_container {
+  padding-top: 1rem;
+  opacity: 1;
+  animation: fadeIn 1s ease-in-out;
+}
+
 .centered {
   position: absolute;
   top: 60%;
@@ -103,7 +116,7 @@ th {
 #myModal {
   color: black;
 }
-.modal-content {
+#result_modal_content {
   background-size: cover;
   background-image: url('../assets/IMG_3136.JPG');
 }

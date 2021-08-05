@@ -17,6 +17,9 @@ window.onload = function() {
     // check if key exists
     var localKey = localStorage.getItem('key');
     if (localKey) {
+      if (localKey != 'hk321') {
+        logout();
+      }
       console.log(localStorage);
 
       // check if sys lang opt stored

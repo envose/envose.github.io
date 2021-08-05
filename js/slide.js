@@ -1,9 +1,22 @@
 var slide = document.getElementById('slide');
 var slide_header_container = document.getElementById('slide_header_container');
 var slide_footer_container = document.getElementById('slide_footer_container');
+var okBtn = document.getElementById('slideOKBtn');
 
 var slides = {
   'po': {
+    0: {
+      'title': '00000000',
+      'img': 'assets/slide_bg.jpg',
+      'h5': 'Hello world<br>',
+      'p': '',
+    },
+    1: {
+      'title': '111111',
+      'img': 'assets/slide_bg.jpg',
+      'h5': 'nice to meet you<br>',
+      'p': '',
+    },
 
   },
   'mo': {
@@ -143,12 +156,10 @@ function createSlideItem(i) {
   return div;
 }
 
-function updateHeader() {
-  slide_header_container.innerHTML = '';
-  var h2 = createCustomElement('h2', 'slide_header');
-  slide_header_container.appendChild(h2);
-
-  h2.innerHTML = getCurrentSlide()['title'];
+function updateSlideHeader() {
+  var header = document.getElementById('slideModalTitle');
+  // header.innerHTML = '';
+  header.innerHTML = getCurrentSlide()['title'];
 }
 
 function createSlideView(key) {
@@ -156,7 +167,7 @@ function createSlideView(key) {
   const c_inn = document.getElementById('carousel-inner');
 
   setCurrentTopic(key);
-  updateHeader();
+  updateSlideHeader();
 
   c_ind.innerHTML = '';
   c_inn.innerHTML = '';
@@ -173,13 +184,8 @@ function initSlideFrame(topic) {
   slide_header_container.innerHTML = '';
   slide_footer_container.innerHTML = '';
 
-  var header = createCustomElement('h2', 'slide_header');
-  var btn = createCustomElement('button', 'btn_default');
-  header.innerHTML = getTranslate('mother');
-  btn.innerHTML = getTranslate('OK');
-
-  slide_header_container.append(header);
-  slide_footer_container.append(btn);
+  okBtn.innerHTML = 'OK';
+  hideEle(okBtn);
   
   createSlideView(topic);
 }
@@ -188,7 +194,7 @@ function initSlideFrame(topic) {
 $('#slide').on('slid.bs.carousel', function() {
   currentIndex = $('div.active').index();
   setCurrentIndex(currentIndex);
-  updateHeader();
+  updateSlideHeader();
 });
 
 //console.log(getCurrentSlide(0));
