@@ -99,7 +99,7 @@ function updateQuizLangBtn() {
 // to-do
 function login() {
   var key = document.getElementById('key');
-  if (key.value != '321') {
+  if (key.value != 'hk321') {
     msgAlert(getSysTranslate('alert_login'));
   }else{
     localStorage.setItem('key', key.value);
