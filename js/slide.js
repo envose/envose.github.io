@@ -113,7 +113,7 @@ function getCurrentNumOfSlide() {
 function createSlideLi(i) {
   var li = document.createElement('li');
 
-  li.setAttribute('data-target', '#carouselExampleIndicators');
+  li.setAttribute('data-target', '#slide_carousel');
   li.setAttribute('data-slide-to', ''+(i+1));
 
   if (i == getCurrentIndex()) {
@@ -178,23 +178,102 @@ function createSlideView(key) {
   	  c_inn.appendChild(createSlideItem(i));
   	}
   }
+  checkitem();
 }
 
 function initSlideFrame(topic) {
   slide_header_container.innerHTML = '';
   slide_footer_container.innerHTML = '';
+  $('#slideModal').modal({backdrop: 'static', keyboard: false});
 
   okBtn.innerHTML = 'OK';
-  hideEle(okBtn);
+  // hideEle(okBtn);
+  // okBtn.classList.add('disabled');
+  // hideEle(getElementById('slide_modal_footer'));
+  $('#slide_modal_footer').hide();
   
   createSlideView(topic);
 }
 
+function slideNext() {
+  // currentIndex = $('div.active').index();
+  // setCurrentIndex(currentIndex);
+  // $('#slide_carousel').carousel(currentIndex);
+  // updateSlideHeader();
+  if ($('div.active').index() >= getCurrentNumOfSlide()-2) {
+    // showEle(okBtn);
+    // okBtn.style.visibility = 'visible';
+    $('#slide_modal_footer').show();
+  }
+  // console.log(tmpSlide);
+}
 
-$('#slide').on('slid.bs.carousel', function() {
+$('#slide_carousel').on('slid.bs.carousel', checkitem);
+
+function checkitem()                        // check function
+{
   currentIndex = $('div.active').index();
   setCurrentIndex(currentIndex);
   updateSlideHeader();
-});
+  // $('#slide_carousel').carousel(currentIndex);
+    // var $this = $('#slide_carousel');
+    // if ($('.carousel-inner .item:first').hasClass('active')) {
+    //     // Hide left arrow
+    //     $this.children('.left.carousel-control').hide();
+    //     // But show right arrow
+    //     $this.children('.right.carousel-control').show();
+    // } else if ($('.carousel-inner .item:last').hasClass('active')) {
+    //     // Hide right arrow
+    //     $this.children('.right.carousel-control').hide();
+    //     // But show left arrow
+    //     $this.children('.left.carousel-control').show();
+    // } else {
+    //     $this.children('.carousel-control').show();
+    // }
+
+  if (currentIndex == 0) {
+    $('.carousel-control-prev').hide();
+    $('.carousel-control-next').show();
+  } else if (currentIndex == getCurrentNumOfSlide()-1){
+    $('.carousel-control-next').hide();
+    $('.carousel-control-prev').show();
+  }else{
+    $('.carousel-control-prev').show();
+    $('.carousel-control-next').show();
+  }
+}
+
+function slideOK() {
+  $('#slideModal').modal('hide');
+
+  if (currentQ < numOfQ) {
+    $('#mc_carousel').carousel(currentQ);
+    currentQ++;
+    setHeaderTitle('h2', getQuizTranslate('question ')+currentQ);
+
+    var seq = ['1', '2', '3', '4'];
+    shuffle(seq);
+
+    // update btns
+      for (let i = 1; i <= 4; i++) {
+        var bid = 'btn_' + i;
+        var cid = 'q' + currentQ + 'c' + seq[(i-1)];
+        var c = getQuizContent(cid);
+        var btn = document.getElementById(bid);
+        btn.value = c;
+        btn.innerHTML = c;
+      }
+  }else{
+    // all questions answered!
+    checkAnswer();
+    createSurveyView();
+  }
+}
+
+// $('#slide').on('slid.bs.carousel', function() {
+//   currentIndex = $('div.active').index();
+//   setCurrentIndex(currentIndex);
+//   updateSlideHeader();
+// });
 
 //console.log(getCurrentSlide(0));

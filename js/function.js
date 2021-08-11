@@ -361,6 +361,19 @@ function mcqSlide(input='init') {
   }
 }
 
+
+
+function mcqNext(input='init') {
+
+  if (input != 'init') {
+    ans.push(input);
+  }
+
+
+  initSlideFrame('po');
+  $('#slideModal').modal('show');
+}
+
 function on() {
   document.getElementById('overlay').style.display = 'block';
 }
@@ -379,7 +392,7 @@ function initQuiz() {
 function resultBtnClicked(btn) {
   btn.style.display = 'none';
   console.log(btn.value);
-  initSlideFrame('po');
+  initSlideFrame('mo');
   $('#slideModal').modal('show');
 }
 

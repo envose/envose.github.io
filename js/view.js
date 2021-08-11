@@ -221,7 +221,7 @@ function createMCView() {
   btn_1.innerHTML = getQuizContent('q1c1');
   btn_1.value = getQuizContent('q1c1');
   btn_1.id = 'btn_1';
-  btn_1.onclick = function () { mcqSlide(btn_1.value) };
+  btn_1.onclick = function () { mcqNext(btn_1.value) };
   // entry.appendChild(btn_1);
   div_center.appendChild(btn_1);
 
@@ -232,7 +232,7 @@ function createMCView() {
   btn_2.value = getQuizContent('q1c2');
   btn_2.id = 'btn_2';
   // btn_cp.onclick = function () { copyToClipboard(rows) };
-  btn_2.onclick = function () { mcqSlide(btn_2.value) };
+  btn_2.onclick = function () { mcqNext(btn_2.value) };
   // entry.appendChild(btn_2);
   div_center.appendChild(btn_2);
 
@@ -252,7 +252,7 @@ function createMCView() {
   btn_3.innerHTML = getQuizContent('q1c3');
   btn_3.value = getQuizContent('q1c3');
   btn_3.id = 'btn_3';
-  btn_3.onclick = function () { mcqSlide(btn_3.value) };
+  btn_3.onclick = function () { mcqNext(btn_3.value) };
   // entry2.appendChild(btn_3);
   div_center.appendChild(btn_3);
 
@@ -263,7 +263,7 @@ function createMCView() {
   btn_4.value = getQuizContent('q1c4');
   btn_4.id = 'btn_4';
   // btn_cp.onclick = function () { copyToClipboard(rows) };
-  btn_4.onclick = function () { mcqSlide(btn_4.value) };
+  btn_4.onclick = function () { mcqNext(btn_4.value) };
   // entry2.appendChild(btn_4);
   div_center.appendChild(btn_4);
 
@@ -322,19 +322,19 @@ function createSurveyView() {
 
   result.innerHTML = '';
 
-  for (let i = 0; i < incorrect.length; i++) {
-    var qid = 'q' + incorrect[i].q;
-    var q = getQuizContent(qid);
-    var corr = getQuizContent(qid + 'c1');
+  // for (let i = 0; i < incorrect.length; i++) {
+  //   var qid = 'q' + incorrect[i].q;
+  //   var q = getQuizContent(qid);
+  //   var corr = getQuizContent(qid + 'c1');
 
-    var h5 = document.createElement('h5');
-    h5.classList.add('fadein_1s');
-    h5.innerHTML = '<b>' + q + '</b>';
+  //   var h5 = document.createElement('h5');
+  //   h5.classList.add('fadein_1s');
+  //   h5.innerHTML = '<b>' + q + '</b>';
 
-    h5.innerHTML += '<p class="text-success">' + getQuizTranslate('ans') + corr + '</p>';
-    result.appendChild(h5);
+  //   h5.innerHTML += '<p class="text-success">' + getQuizTranslate('ans') + corr + '</p>';
+  //   result.appendChild(h5);
 
-  }
+  // }
 
   document.querySelector('#finame').placeholder = getQuizTranslate('name');
   document.querySelector('#liname').appendChild(document.createTextNode(getQuizTranslate('name')));
