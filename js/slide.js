@@ -454,28 +454,28 @@ function checkitem()                        // check function
 function slideOK() {
   $('#slideModal').modal('hide');
 
-  if (currentQ < numOfQ) {
-    $('#mc_carousel').carousel(currentQ);
-    currentQ++;
-    setHeaderTitle('h2', getQuizTranslate('question ')+currentQ);
+  // if (currentQ < numOfQ) {
+  //   $('#mc_carousel').carousel(currentQ);
+  //   currentQ++;
+  //   setHeaderTitle('h2', getQuizTranslate('question ')+currentQ);
 
-    var seq = ['1', '2', '3', '4'];
-    shuffle(seq);
+  //   var seq = ['1', '2', '3', '4'];
+  //   shuffle(seq);
 
-    // update btns
-      for (let i = 1; i <= 4; i++) {
-        var bid = 'btn_' + i;
-        var cid = 'q' + currentQ + 'c' + seq[(i-1)];
-        var c = getQuizContent(cid);
-        var btn = document.getElementById(bid);
-        btn.value = c;
-        btn.innerHTML = c;
-      }
-  }else{
+  //   // update btns
+  //     for (let i = 1; i <= 4; i++) {
+  //       var bid = 'btn_' + i;
+  //       var cid = 'q' + currentQ + 'c' + seq[(i-1)];
+  //       var c = getQuizContent(cid);
+  //       var btn = document.getElementById(bid);
+  //       btn.value = c;
+  //       btn.innerHTML = c;
+  //     }
+  // }else{
     // all questions answered!
     checkAnswer();
     createSurveyView();
-  }
+  // }
 }
 
 // $('#slide').on('slid.bs.carousel', function() {

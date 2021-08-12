@@ -333,9 +333,9 @@ function checkAnswer() {
 
 function mcqSlide(input='init') {
 
-  if (input != 'init') {
-    ans.push(input);
-  }
+  // if (input != 'init') {
+  //   ans.push(input);
+  // }
 
   if (currentQ < numOfQ) {
     $('#mc_carousel').carousel(currentQ);
@@ -359,6 +359,11 @@ function mcqSlide(input='init') {
     checkAnswer();
     createResultView();
   }
+}
+
+function selectTopic(num) {
+  currentQ = num;
+  createMCView();
 }
 
 
@@ -416,6 +421,7 @@ form.addEventListener('submit', e => {
     contact = getSysTranslate('empty');
   }
   createRecord(name, contact, ans);
+  alert(getQuizTranslate('thx'));
   //reset
   form.reset();
   $('#myModal').modal('hide');

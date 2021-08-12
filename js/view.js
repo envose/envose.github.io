@@ -336,6 +336,9 @@ function createSurveyView() {
 
   // }
 
+  document.querySelector('#liname').innerHTML = '';
+  document.querySelector('#licontact').innerHTML = '';
+
   document.querySelector('#finame').placeholder = getQuizTranslate('name');
   document.querySelector('#liname').appendChild(document.createTextNode(getQuizTranslate('name')));
   document.querySelector('#ficontact').placeholder = getQuizTranslate('contact');
@@ -358,17 +361,40 @@ function entryView() {
   // content
   var div2 = createCustomElement('div', 'col_12');
   var b_div = createCustomElement('div', 'view_content_center');
-  var entry1 = createCustomElement('div', 'view_entry');
-  entry1.classList.add('mx-2');
-  entry1.innerHTML = getQuizTranslate('quiz_desc');
-  b_div.appendChild(entry1);
+  // var entry1 = createCustomElement('div', 'view_entry');
+  // entry1.classList.add('mx-2');
+  // entry1.innerHTML = getQuizTranslate('quiz_desc');
+  // b_div.appendChild(entry1);
+  var div_inn = document.createElement('div');
+  div_inn.classList.add('col-10');
+  var btn1 = createCustomElement('button', 'btn_std_info');
+  btn1.innerHTML = getQuizContent('q1');
+  btn1.onclick = function() { selectTopic(0);};
+  div_inn.append(btn1);
+  var btn2 = createCustomElement('button', 'btn_std_info');
+  btn2.innerHTML = getQuizContent('q2');
+  btn2.onclick = function() { selectTopic(1);};
+  div_inn.append(btn2);
+  var btn3 = createCustomElement('button', 'btn_std_info');
+  btn3.innerHTML = getQuizContent('q3');
+  btn3.onclick = function() { selectTopic(2);};
+  div_inn.append(btn3);
+  var btn4 = createCustomElement('button', 'btn_std_info');
+  btn4.innerHTML = getQuizContent('q4');
+  btn4.onclick = function() { selectTopic(3);};
+  div_inn.append(btn4);
+  var btn5 = createCustomElement('button', 'btn_std_info');
+  btn5.innerHTML = getQuizContent('q5');
+  btn5.onclick = function() { selectTopic(4);};
+  div_inn.append(btn5);
+  b_div.appendChild(div_inn);
   div2.appendChild(b_div);
   content.appendChild(div2);
 
   //footer
   var div = createCustomElement('div', 'col_12');
   var div_1 = document.createElement('div');
-  div_1.classList.add(...['d-flex', 'flex-row', 'flex-lg-column', 'justify-content-between', 'mt-5', 'mx-5']);
+  div_1.classList.add(...['d-flex', 'flex-column', 'justify-content-between', 'mt-5', 'mx-5']);
 
   var btn_back = createCustomElement('button', 'btn_free_light');
   btn_back.innerHTML = getQuizTranslate('back');
@@ -377,11 +403,13 @@ function entryView() {
   btn_back.onclick = function() { popupGuard(); };
   div_1.appendChild(btn_back);
 
+  /*
   var btn_s = createCustomElement('button', 'btn_free_primary');
   btn_s.classList.add('mt-lg-5');
   btn_s.innerHTML = getQuizTranslate('start');
   btn_s.onclick = function () { createMCView(); };
   div_1.appendChild(btn_s);
+  */
 
   div.appendChild(div_1);
   footer.appendChild(div);
@@ -409,42 +437,22 @@ function recordView() {
   var th0 = document.createElement('th');
   var th1 = document.createElement('th');
   var th2 = document.createElement('th');
-  var tha1 = document.createElement('th');
-  var tha2 = document.createElement('th');
-  var tha3 = document.createElement('th');
-  var tha4 = document.createElement('th');
-  var tha5 = document.createElement('th');
-  // var th3 = document.createElement('th');
+  var th3 = document.createElement('th');
 
   th0.setAttribute('scope', 'col');
   th1.setAttribute('scope', 'col');
   th2.setAttribute('scope', 'col');
-  tha1.setAttribute('scope', 'col');
-  tha2.setAttribute('scope', 'col');
-  tha3.setAttribute('scope', 'col');
-  tha4.setAttribute('scope', 'col');
-  tha5.setAttribute('scope', 'col');
-  // th3.setAttribute('scope', 'col');
+  th3.setAttribute('scope', 'col');
 
   th0.innerHTML = '#';
   th1.innerHTML = getSysTranslate('name');
   th2.innerHTML = getSysTranslate('contact');
-  tha1.innerHTML = 'A1';
-  tha2.innerHTML = 'A2';
-  tha3.innerHTML = 'A3';
-  tha4.innerHTML = 'A4';
-  tha5.innerHTML = 'A5';
-  // th3.innerHTML = getSysTranslate('note');
+  th3.innerHTML = getSysTranslate('ans');
 
   thead.appendChild(th0);
   thead.appendChild(th1);
   thead.appendChild(th2);
-  thead.appendChild(tha1);
-  thead.appendChild(tha2);
-  thead.appendChild(tha3);
-  thead.appendChild(tha4);
-  thead.appendChild(tha5);
-  // thead.appendChild(th3);
+  thead.appendChild(th3);
 
   table.appendChild(thead);
   table.appendChild(tbody);
@@ -459,42 +467,23 @@ function recordView() {
     row.push(ppl[i].name);
     row.push(ppl[i].contact);
     row.push(ppl[i].a1);
-    row.push(ppl[i].a2);
-    row.push(ppl[i].a3);
-    row.push(ppl[i].a4);
-    row.push(ppl[i].a5);
     rows.push(row);
 
     var tr = document.createElement('tr');
     var td0 = document.createElement('td');
     var td1 = document.createElement('td');
     var td2 = document.createElement('td');
-    var tda1 = document.createElement('td');
-    var tda2 = document.createElement('td');
-    var tda3 = document.createElement('td');
-    var tda4 = document.createElement('td');
-    var tda5 = document.createElement('td');
-    // var td3 = document.createElement('td');
+    var td3 = document.createElement('td');
 
     td0.innerHTML = i+1;
     td1.innerHTML = ppl[i].name;
     td2.innerHTML = ppl[i].contact;
-    tda1.innerHTML = ppl[i].a1;
-    tda2.innerHTML = ppl[i].a2;
-    tda3.innerHTML = ppl[i].a3;
-    tda4.innerHTML = ppl[i].a4;
-    tda5.innerHTML = ppl[i].a5;
-    // td3.innerHTML = ppl[i].note;
+    td3.innerHTML = ppl[i].a1;
 
     tr.appendChild(td0);
     tr.appendChild(td1);
     tr.appendChild(td2);
-    tr.appendChild(tda1);
-    tr.appendChild(tda2);
-    tr.appendChild(tda3);
-    tr.appendChild(tda4);
-    tr.appendChild(tda5);
-    // tr.appendChild(td3);
+    tr.appendChild(td3);
     tbody.appendChild(tr);
   }
 
