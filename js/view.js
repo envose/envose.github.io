@@ -409,21 +409,41 @@ function recordView() {
   var th0 = document.createElement('th');
   var th1 = document.createElement('th');
   var th2 = document.createElement('th');
+  var tha1 = document.createElement('th');
+  var tha2 = document.createElement('th');
+  var tha3 = document.createElement('th');
+  var tha4 = document.createElement('th');
+  var tha5 = document.createElement('th');
   // var th3 = document.createElement('th');
 
   th0.setAttribute('scope', 'col');
   th1.setAttribute('scope', 'col');
   th2.setAttribute('scope', 'col');
+  tha1.setAttribute('scope', 'col');
+  tha2.setAttribute('scope', 'col');
+  tha3.setAttribute('scope', 'col');
+  tha4.setAttribute('scope', 'col');
+  tha5.setAttribute('scope', 'col');
   // th3.setAttribute('scope', 'col');
 
   th0.innerHTML = '#';
   th1.innerHTML = getSysTranslate('name');
   th2.innerHTML = getSysTranslate('contact');
+  tha1.innerHTML = 'A1';
+  tha2.innerHTML = 'A2';
+  tha3.innerHTML = 'A3';
+  tha4.innerHTML = 'A4';
+  tha5.innerHTML = 'A5';
   // th3.innerHTML = getSysTranslate('note');
 
   thead.appendChild(th0);
   thead.appendChild(th1);
   thead.appendChild(th2);
+  thead.appendChild(tha1);
+  thead.appendChild(tha2);
+  thead.appendChild(tha3);
+  thead.appendChild(tha4);
+  thead.appendChild(tha5);
   // thead.appendChild(th3);
 
   table.appendChild(thead);
@@ -431,28 +451,49 @@ function recordView() {
 
   div_c.appendChild(table);
   content.appendChild(div_c);
+  console.log(ppl);
 
   for (let i = 0; i < ppl.length; i++) {
     var row = [];
     row.push(i+1);
     row.push(ppl[i].name);
     row.push(ppl[i].contact);
+    row.push(ppl[i].a1);
+    row.push(ppl[i].a2);
+    row.push(ppl[i].a3);
+    row.push(ppl[i].a4);
+    row.push(ppl[i].a5);
     rows.push(row);
 
     var tr = document.createElement('tr');
     var td0 = document.createElement('td');
     var td1 = document.createElement('td');
     var td2 = document.createElement('td');
+    var tda1 = document.createElement('td');
+    var tda2 = document.createElement('td');
+    var tda3 = document.createElement('td');
+    var tda4 = document.createElement('td');
+    var tda5 = document.createElement('td');
     // var td3 = document.createElement('td');
 
     td0.innerHTML = i+1;
     td1.innerHTML = ppl[i].name;
     td2.innerHTML = ppl[i].contact;
+    tda1.innerHTML = ppl[i].a1;
+    tda2.innerHTML = ppl[i].a2;
+    tda3.innerHTML = ppl[i].a3;
+    tda4.innerHTML = ppl[i].a4;
+    tda5.innerHTML = ppl[i].a5;
     // td3.innerHTML = ppl[i].note;
 
     tr.appendChild(td0);
     tr.appendChild(td1);
     tr.appendChild(td2);
+    tr.appendChild(tda1);
+    tr.appendChild(tda2);
+    tr.appendChild(tda3);
+    tr.appendChild(tda4);
+    tr.appendChild(tda5);
     // tr.appendChild(td3);
     tbody.appendChild(tr);
   }
