@@ -284,7 +284,7 @@ function createResultView() {
   console.log(incorrect);
 
   // header
-  setHeaderTitle('h2', getQuizTranslate('your_result') + corrected + '/5');
+  setHeaderTitle('h2', getQuizTranslate('thx'));
 
 
   var div_center = createCustomElement('div', 'view_content_center');
