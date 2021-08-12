@@ -369,8 +369,8 @@ function mcqNext(input='init') {
     ans.push(input);
   }
 
-
-  initSlideFrame('po');
+  var topic = 'q'+currentQ;
+  initSlideFrame(topic);
   $('#slideModal').modal('show');
 }
 

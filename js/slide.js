@@ -4,7 +4,7 @@ var slide_footer_container = document.getElementById('slide_footer_container');
 var okBtn = document.getElementById('slideOKBtn');
 
 var slides = {
-  'po': {
+  'q1': {
     0: {
       'title': '正確答案：太陽神',
       'img': 'assets/slide_q1_01.JPG',
@@ -43,53 +43,103 @@ var slides = {
     },
 
   },
-  'mo': {
+  'q2': {
     0: {
-      'title': '「只有一位父親上帝」',
-      'img': 'assets/slide_bg.jpg',
-      'h5': '若按這想法，聖經應該常以單數來表現上帝。<br><br>但是聖經卻以複數—「我們」，來表現了上帝。<br>',
-      'p': '',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_bible_bg.JPG',
+      'h5': '上帝賜福給第七日，定為聖日；因為在這日，上帝歇了他一切創造的工，就安息了',
+      'p': '創世記 2:3',
     },
     1: {
-      'title': '只有一位上帝？',
-      'img': 'assets/slide_bg.jpg',
-      'h5': '上帝說：「我們要照著我們的形像、按著我們的樣式造人⋯⋯」',
-      'p': '創世記 1:26<br>',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_q1_02.JPG',
+      'h5': '那麼，第七日安息日是星期幾？',
+      'p': '',
     },
     2: {
-      'title': '上帝卻說了「我們」',
-      'img': 'assets/slide_bg.jpg',
-      'h5': '要是創造人類的創造主，只有父親上帝一位，那麼上帝應該說「我」；<br><br>但分明說了「我們」，證明不是只有父親上帝。<br>',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_q2_03.JPG',
+      'h5': '字典解釋一周的第七日，即周末，是星期六',
       'p': '',
     },
     3: {
-      'title': '為甚麼說「我們」？',
-      'img': 'assets/mo_3.png',
-      'h5': '上帝就照著自己的形像造人，乃是照著他的形像造男造女。',
-      'p': '創世記 1:27',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_q2_04.JPG',
+      'h5': '月曆同樣顯示第七日安息日，是星期六；聖經也同樣記錄了',
+      'p': '',
     },
     4: {
-      'title': '為甚麼說「我們」？',
-      'img': 'assets/mo_4.png',
-      'h5': '',
-      'p': '就像打印一樣，從複本可知原件的形象',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_q1_02.JPG',
+      'h5': '那麼第一日，即星期日禮拜是怎樣來的？',
+      'p': '',
     },
     5: {
-      'title': '為甚麼說「我們」？',
-      'img': 'assets/mo_5.png',
-      'h5': '',
-      'p': '複本有2個形像，告知我們原件有2個形像',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_q1_03.JPG',
+      'h5': '星期日，Sunday，其實是太陽神教的聖日，「尊嚴的太陽日」',
+      'p': '',
     },
     6: {
-      'title': '為甚麼說「我們」？',
-      'img': 'assets/mo_6.png',
-      'h5': '因為有2位上帝，所以上帝才說「我們」',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_q1_01.JPG',
+      'h5': '在公元321年，羅馬教會在尼西亞會議上廢除安息日，改立星期日禮拜',
       'p': '',
     },
     7: {
-      'title': '結論',
-      'img': 'assets/slide_bg.jpg',
-      'h5': '按照聖經的教導，不僅要相信父親上帝，也要相信母親上帝。<br><br>',
+      'title': '正確答案：星期六',
+      'img': 'assets/slide_incorrect.JPG',
+      'h5': '現在人們卻不守上帝的安息日，反而在教會裏守太陽神的聖日，離棄上帝的誡命',
+      'p': '',
+    },
+  },
+  'mo': {
+    0: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
+      'p': '',
+    },
+    1: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
+      'p': '',
+    },
+    2: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
+      'p': '',
+    },
+    3: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
+      'p': '',
+    },
+    4: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
+      'p': '',
+    },
+    5: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
+      'p': '',
+    },
+    6: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
+      'p': '',
+    },
+    7: {
+      'title': '',
+      'img': 'assets/slide_bg.JPG',
+      'h5': '',
       'p': '',
     },
   }
@@ -173,6 +223,7 @@ function createSlideItem(i) {
 
     var p = document.createElement('p');
     p.innerHTML = getSlide(i)['p'];
+    p.style.color = mcqColor;
     tmp.appendChild(p);
 
     div.appendChild(tmp);
