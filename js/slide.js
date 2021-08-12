@@ -6,68 +6,92 @@ var okBtn = document.getElementById('slideOKBtn');
 var slides = {
   'po': {
     0: {
-      'title': '00000000',
-      'img': 'assets/slide_bg.jpg',
-      'h5': 'Hello world<br>',
+      'title': '正確答案：太陽神',
+      'img': 'assets/slide_q1_01.jpg',
+      'h5': '聖經裏找不到耶穌誕生的確實日子<br>',
       'p': '',
     },
     1: {
-      'title': '111111',
-      'img': 'assets/slide_bg.jpg',
-      'h5': 'nice to meet you<br>',
+      'title': '正確答案：太陽神',
+      'img': 'assets/slide_q1_02.jpg',
+      'h5': '那麼，為甚麼會出現12月25日這個日子？<br>',
+      'p': '',
+    },
+    2: {
+      'title': '正確答案：太陽神',
+      'img': 'assets/slide_q1_03.jpg',
+      'h5': '12月25日原是古羅馬的冬至日，是當時羅馬人所崇拜的太陽神的誕生日，與基督毫無關係',
+      'p': '',
+    },
+    3: {
+      'title': '正確答案：太陽神',
+      'img': 'assets/slide_q1_04.jpg',
+      'h5': '在公元336年，羅馬教會才開始引入這個異教的風俗，後來演變成為今日耳熟能詳的聖誕節',
+      'p': '',
+    },
+    4: {
+      'title': '正確答案：太陽神',
+      'img': 'assets/slide_q1_05.jpg',
+      'h5': '穿紅衣的聖誕老人形象最初被可口可樂公司用作宣傳，後來演變成宣傳商業消費的聖誕節',
+      'p': '',
+    },
+    5: {
+      'title': '正確答案：太陽神',
+      'img': 'assets/slide_q1_06.jpg',
+      'h5': '那麼，現在人們在教會裏以耶穌基督的名義，慶祝太陽神生日、盡情消費玩樂的做法，你又怎樣看待呢？',
       'p': '',
     },
 
   },
   'mo': {
-  	0: {
-  	  'title': '「只有一位父親上帝」',
-  	  'img': 'assets/slide_bg.jpg',
-  	  'h5': '若按這想法，聖經應該常以單數來表現上帝。<br><br>但是聖經卻以複數—「我們」，來表現了上帝。<br>',
-  	  'p': '',
-  	},
-  	1: {
-  	  'title': '只有一位上帝？',
-  	  'img': 'assets/slide_bg.jpg',
-  	  'h5': '上帝說：「我們要照著我們的形像、按著我們的樣式造人⋯⋯」',
-  	  'p': '創世記 1:26<br>',
-  	},
-  	2: {
-  	  'title': '上帝卻說了「我們」',
-  	  'img': 'assets/slide_bg.jpg',
-  	  'h5': '要是創造人類的創造主，只有父親上帝一位，那麼上帝應該說「我」；<br><br>但分明說了「我們」，證明不是只有父親上帝。<br>',
-  	  'p': '',
-  	},
-  	3: {
-  	  'title': '為甚麼說「我們」？',
-  	  'img': 'assets/mo_3.png',
-  	  'h5': '上帝就照著自己的形像造人，乃是照著他的形像造男造女。',
-  	  'p': '創世記 1:27',
-  	},
-  	4: {
-  	  'title': '為甚麼說「我們」？',
-  	  'img': 'assets/mo_4.png',
-  	  'h5': '',
-  	  'p': '就像打印一樣，從複本可知原件的形象',
-  	},
-  	5: {
-  	  'title': '為甚麼說「我們」？',
-  	  'img': 'assets/mo_5.png',
-  	  'h5': '',
-  	  'p': '複本有2個形像，告知我們原件有2個形像',
-  	},
-  	6: {
-  	  'title': '為甚麼說「我們」？',
-  	  'img': 'assets/mo_6.png',
-  	  'h5': '因為有2位上帝，所以上帝才說「我們」',
-  	  'p': '',
-  	},
-  	7: {
-  	  'title': '結論',
-  	  'img': 'assets/slide_bg.jpg',
-  	  'h5': '按照聖經的教導，不僅要相信父親上帝，也要相信母親上帝。<br><br>',
-  	  'p': '',
-  	},
+    0: {
+      'title': '「只有一位父親上帝」',
+      'img': 'assets/slide_bg.jpg',
+      'h5': '若按這想法，聖經應該常以單數來表現上帝。<br><br>但是聖經卻以複數—「我們」，來表現了上帝。<br>',
+      'p': '',
+    },
+    1: {
+      'title': '只有一位上帝？',
+      'img': 'assets/slide_bg.jpg',
+      'h5': '上帝說：「我們要照著我們的形像、按著我們的樣式造人⋯⋯」',
+      'p': '創世記 1:26<br>',
+    },
+    2: {
+      'title': '上帝卻說了「我們」',
+      'img': 'assets/slide_bg.jpg',
+      'h5': '要是創造人類的創造主，只有父親上帝一位，那麼上帝應該說「我」；<br><br>但分明說了「我們」，證明不是只有父親上帝。<br>',
+      'p': '',
+    },
+    3: {
+      'title': '為甚麼說「我們」？',
+      'img': 'assets/mo_3.png',
+      'h5': '上帝就照著自己的形像造人，乃是照著他的形像造男造女。',
+      'p': '創世記 1:27',
+    },
+    4: {
+      'title': '為甚麼說「我們」？',
+      'img': 'assets/mo_4.png',
+      'h5': '',
+      'p': '就像打印一樣，從複本可知原件的形象',
+    },
+    5: {
+      'title': '為甚麼說「我們」？',
+      'img': 'assets/mo_5.png',
+      'h5': '',
+      'p': '複本有2個形像，告知我們原件有2個形像',
+    },
+    6: {
+      'title': '為甚麼說「我們」？',
+      'img': 'assets/mo_6.png',
+      'h5': '因為有2位上帝，所以上帝才說「我們」',
+      'p': '',
+    },
+    7: {
+      'title': '結論',
+      'img': 'assets/slide_bg.jpg',
+      'h5': '按照聖經的教導，不僅要相信父親上帝，也要相信母親上帝。<br><br>',
+      'p': '',
+    },
   }
 };
 
@@ -107,7 +131,7 @@ function getSlide(i) {
 }
 
 function getCurrentNumOfSlide() {
-	return Object.keys(getCurrentTopic()).length;
+  return Object.keys(getCurrentTopic()).length;
 }
 
 function createSlideLi(i) {
@@ -117,7 +141,7 @@ function createSlideLi(i) {
   li.setAttribute('data-slide-to', ''+(i+1));
 
   if (i == getCurrentIndex()) {
-  	li.classList.add('active');
+    li.classList.add('active');
   }
 
   return li;
@@ -128,22 +152,23 @@ function createSlideItem(i) {
   div.classList.add(...['carousel-item', 'slide_item']);
 
   if (i == getCurrentIndex()) {
-  	div.classList.add('active');
+    div.classList.add('active');
   }
 
   if (getSlide(i)['img']) {
-	var img = document.createElement('img');
-	img.classList.add(...['d-block', 'w-100']);
-	img.src = getSlide(i)['img'];
-	div.appendChild(img);
+  var img = document.createElement('img');
+  img.classList.add(...['d-block', 'w-100']);
+  img.src = getSlide(i)['img'];
+  div.appendChild(img);
   }
 
   if (getSlide(i)['h5'] != '' || getSlide(i)['p'] != '' ) {
-  	var tmp = document.createElement('div');
+    var tmp = document.createElement('div');
     tmp.classList.add(...['carousel-caption']);
 
     var h5 = document.createElement('h5');
     h5.innerHTML = getSlide(i)['h5'];
+    h5.style.color = mcqColor;
     tmp.appendChild(h5);
 
     var p = document.createElement('p');
@@ -173,10 +198,10 @@ function createSlideView(key) {
   c_inn.innerHTML = '';
 
   if (Object.keys(getCurrentTopic()).length > 0) {
-  	for (let i = 0; i < getCurrentNumOfSlide(); i++) {
-  	  c_ind.appendChild(createSlideLi(i));
-  	  c_inn.appendChild(createSlideItem(i));
-  	}
+    for (let i = 0; i < getCurrentNumOfSlide(); i++) {
+      c_ind.appendChild(createSlideLi(i));
+      c_inn.appendChild(createSlideItem(i));
+    }
   }
   checkitem();
 }
