@@ -91,6 +91,7 @@ var strings = [{
   'ans': 'Answer: ',
   'corr_ans': 'Correct Answer: ',
   'your_ans': 'Your Answer: ',
+  'thx': 'Thank You',
 },{
   'login': '登入',
   'password': '密碼',
@@ -130,6 +131,7 @@ var strings = [{
   'ans': '答案： ',
   'corr_ans': '正確答案： ',
   'your_ans': '你的答案： ',
+  'thx': '多謝你',
 }];
 
 var sysLangOpt = 1;
