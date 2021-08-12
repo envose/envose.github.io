@@ -315,7 +315,7 @@ function createSurveyView() {
   mTitle.innerHTML = '';
   cBtn.innerHTML = '';
 
-  mTitle.appendChild(document.createTextNode(getQuizTranslate('your_result') + corrected + '/5'));
+  mTitle.appendChild(document.createTextNode(getQuizTranslate('thx')));
   cBtn.appendChild(document.createTextNode(getQuizTranslate('complete')));
 
   var result = document.getElementById('result');
