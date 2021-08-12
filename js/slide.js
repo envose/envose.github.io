@@ -7,37 +7,37 @@ var slides = {
   'po': {
     0: {
       'title': '正確答案：太陽神',
-      'img': 'assets/slide_q1_01.jpg',
+      'img': 'assets/slide_q1_01.JPG',
       'h5': '聖經裏找不到耶穌誕生的確實日子<br>',
       'p': '',
     },
     1: {
       'title': '正確答案：太陽神',
-      'img': 'assets/slide_q1_02.jpg',
+      'img': 'assets/slide_q1_02.JPG',
       'h5': '那麼，為甚麼會出現12月25日這個日子？<br>',
       'p': '',
     },
     2: {
       'title': '正確答案：太陽神',
-      'img': 'assets/slide_q1_03.jpg',
+      'img': 'assets/slide_q1_03.JPG',
       'h5': '12月25日原是古羅馬的冬至日，是當時羅馬人所崇拜的太陽神的誕生日，與基督毫無關係',
       'p': '',
     },
     3: {
       'title': '正確答案：太陽神',
-      'img': 'assets/slide_q1_04.jpg',
+      'img': 'assets/slide_q1_04.JPG',
       'h5': '在公元336年，羅馬教會才開始引入這個異教的風俗，後來演變成為今日耳熟能詳的聖誕節',
       'p': '',
     },
     4: {
       'title': '正確答案：太陽神',
-      'img': 'assets/slide_q1_05.jpg',
+      'img': 'assets/slide_q1_05.JPG',
       'h5': '穿紅衣的聖誕老人形象最初被可口可樂公司用作宣傳，後來演變成宣傳商業消費的聖誕節',
       'p': '',
     },
     5: {
       'title': '正確答案：太陽神',
-      'img': 'assets/slide_q1_06.jpg',
+      'img': 'assets/slide_q1_06.JPG',
       'h5': '那麼，現在人們在教會裏以耶穌基督的名義，慶祝太陽神生日、盡情消費玩樂的做法，你又怎樣看待呢？',
       'p': '',
     },
