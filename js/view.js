@@ -370,7 +370,7 @@ function entryView() {
   var btn1 = createCustomElement('button', 'btn_std_info');
   btn1.innerHTML = getQuizContent('q1');
   btn1.onclick = function() { selectTopic(0);};
-  div_inn.append(btn1);
+  //div_inn.append(btn1);
   var btn2 = createCustomElement('button', 'btn_std_info');
   btn2.innerHTML = getQuizContent('q2');
   btn2.onclick = function() { selectTopic(1);};
@@ -386,7 +386,7 @@ function entryView() {
   var btn5 = createCustomElement('button', 'btn_std_info');
   btn5.innerHTML = getQuizContent('q5');
   btn5.onclick = function() { selectTopic(4);};
-  div_inn.append(btn5);
+  //div_inn.append(btn5);
   b_div.appendChild(div_inn);
   div2.appendChild(b_div);
   content.appendChild(div2);
