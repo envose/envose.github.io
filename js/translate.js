@@ -16,7 +16,7 @@ var mcq = [{
   'q3c2': '1',
   'q3c3': '3',
   'q3c4': '∞',
-  'q4c1': 'Jesus Est. New Covernant Passover',
+  'q4c1': 'Jesus Est. New Covenant Passover',
   'q4c2': 'Exdous',
   'q4c3': 'Farewell',
   'q4c4': 'Last Supper',
