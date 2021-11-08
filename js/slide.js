@@ -234,7 +234,7 @@ var slides = {
       'h5': '聖經記錄是耶穌和門徒遵守逾越節的場面，他們為甚麼遵守？',
       'p': '',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': 'Bible clearly recorded it "the Passover". Why they celebrate it?',
+      'h5_en': 'Bible clearly recorded it "the Passover". Why did they celebrate it?',
       'p_en': '',
     },
     3: {
@@ -252,7 +252,7 @@ var slides = {
       'h5': '怎樣才能吃喝耶穌的肉和血，得到永生？',
       'p': '',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': 'What is the way to eat Jesus’s flesh and drink His blood?',
+      'h5_en': 'What is the way to eat Jesus’ flesh and drink His blood?',
       'p_en': '',
     },
     5: {
@@ -288,7 +288,7 @@ var slides = {
       'h5': '按耶穌的約定，我們遵守新約的逾越節，就得到永生，回去天國',
       'p': '',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': 'Let us celebrate the New Covenant Passover as Bible teaches and have eternal life',
+      'h5_en': 'Let us celebrate the New Covenant Passover as Bible teaches us and have eternal life',
       'p_en': '',
     },
   },
