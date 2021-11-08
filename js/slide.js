@@ -142,8 +142,8 @@ var slides = {
       'h5': '上帝說：「我們要照著我們的形像、按著我們的樣式造人⋯」',
       'p': '創世記 1:26',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
-      'p_en': '',
+      'h5_en': 'Then God said, &#8220Let us make man in our image, in our likeness...&#221',
+      'p_en': 'Genesis 1:26',
     },
     1: {
       'title': '正確答案：2位上帝',
@@ -151,7 +151,7 @@ var slides = {
       'h5': '上帝創造人時自稱「我們」，表明有多過1位的上帝',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
+      'h5_en': 'God refers to himself as &#220us&#221, implies > 1',
       'p_en': '',
     },
     2: {
@@ -160,8 +160,8 @@ var slides = {
       'h5': '上帝就照著自己的形像造人，乃是照著他的形像造男造女',
       'p': '創世記 1:27',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
-      'p_en': '',
+      'h5_en': '&#220So God created man in his own image...male and felmale&#221',
+      'p_en': 'Genesis 1:27',
     },
     3: {
       'title': '正確答案：2位上帝',
@@ -169,7 +169,7 @@ var slides = {
       'h5': '按上帝的形象造了2種人，即有2位上帝存在',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
+      'h5_en': '2 types of man created means there are 2 Gods',
       'p_en': '',
     },
     4: {
@@ -178,7 +178,7 @@ var slides = {
       'h5': '男人是按男性形象的父親上帝而造的，那麼女人呢？',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
+      'h5_en': 'Man is created from male image of God, God the Father. How abt woman?',
       'p_en': '',
     },
     5: {
@@ -187,7 +187,7 @@ var slides = {
       'h5': '女人是按照女性形象的母親上帝而造的，聖經有記錄天上母親嗎？',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
+      'h5_en': 'Woman is created from female image of God, God the Mother. Is it?',
       'p_en': '',
     },
     6: {
@@ -196,8 +196,8 @@ var slides = {
       'h5': '但那在上的耶路撒冷是自主的，她是我們的母',
       'p': '加拉太書 4:26',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
-      'p_en': '',
+      'h5_en': 'But the Jerusalem that is above is free, and she is our mother',
+      'p_en': 'Galatians 4:26',
     },
     7: {
       'title': '正確答案：2位上帝',
@@ -205,7 +205,7 @@ var slides = {
       'h5': '所以，我們要按聖經教導，相信父親和母親上帝，才能得到永生',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '',
+      'h5_en': 'Therefore, we have not only God the Father but also God the Mother in heaven',
       'p_en': '',
     },
   },
