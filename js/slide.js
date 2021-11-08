@@ -93,9 +93,9 @@ var slides = {
       'title': '正確答案：星期六',
       'img': 'assets/slide_q2_04.JPG',
       'h5': '月曆同樣顯示第七日安息日，是星期六；聖經也同樣記錄了',
-      'p': 'Calendar and the Bible state the same',
+      'p': '',
       'title_en': 'Correct Answer: Saturday',
-      'h5_en': '',
+      'h5_en': 'Calendar and the Bible state the same',
       'p_en': '',
     },
     4: {
