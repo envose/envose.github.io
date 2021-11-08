@@ -142,7 +142,7 @@ var slides = {
       'h5': '上帝說：「我們要照著我們的形像、按著我們的樣式造人⋯」',
       'p': '創世記 1:26',
       'title_en': 'Correct Answer: 2',
-      'h5_en': 'Then God said, &#8220Let us make man in our image, in our likeness...&#221',
+      'h5_en': 'Then God said, "Let us make man in our image, in our likeness..."',
       'p_en': 'Genesis 1:26',
     },
     1: {
@@ -151,7 +151,7 @@ var slides = {
       'h5': '上帝創造人時自稱「我們」，表明有多過1位的上帝',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': 'God refers to himself as &#220us&#221, implies > 1',
+      'h5_en': 'God refers to himself as "us", implies > 1',
       'p_en': '',
     },
     2: {
@@ -160,7 +160,7 @@ var slides = {
       'h5': '上帝就照著自己的形像造人，乃是照著他的形像造男造女',
       'p': '創世記 1:27',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '&#220So God created man in his own image...male and felmale&#221',
+      'h5_en': '"So God created man in his own image...male and felmale"',
       'p_en': 'Genesis 1:27',
     },
     3: {
@@ -252,7 +252,7 @@ var slides = {
       'h5': '怎樣才能吃喝耶穌的肉和血，得到永生？',
       'p': '',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': 'What is the way to eat Jesus&rsquo flesh and drink His blood?',
+      'h5_en': 'What is the way to eat Jesus＇s flesh and drink His blood?',
       'p_en': '',
     },
     5: {
