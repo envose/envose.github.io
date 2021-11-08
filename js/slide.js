@@ -77,7 +77,7 @@ var slides = {
       'h5': '那麼，第七日安息日是星期幾？',
       'p': '',
       'title_en': 'Correct Answer: Saturday',
-      'h5_en': 'What day is the 7th day?',
+      'h5_en': 'What day of the week is the 7th day?',
       'p_en': '',
     },
     2: {
@@ -86,7 +86,7 @@ var slides = {
       'h5': '字典解釋一周的第七日，即周末，是星期六',
       'p': '',
       'title_en': 'Correct Answer: Saturday',
-      'h5_en': '7th day is Saturday, according to dictionary',
+      'h5_en': '7th day is Saturday, according to the dictionary',
       'p_en': '',
     },
     3: {
@@ -104,7 +104,7 @@ var slides = {
       'h5': '那麼第一日，即星期日禮拜是怎樣來的？',
       'p': '',
       'title_en': 'Correct Answer: Saturday',
-      'h5_en': 'Why people worship God on Sunday?',
+      'h5_en': 'However, why people nowaday worship God on Sunday?',
       'p_en': '',
     },
     5: {
@@ -122,7 +122,7 @@ var slides = {
       'h5': '在公元321年，羅馬皇帝君士坦丁頒布「星期日休業令」，從此確立星期日禮拜',
       'p': '',
       'title_en': 'Correct Answer: Saturday',
-      'h5_en': 'The Sunday Law est. by Roman Emperor Contantine in AD321 exerted greatest influence',
+      'h5_en': 'The Sunday Law est. by Roman Emperor Constantine in AD321 exerted greatest influence',
       'p_en': '',
     },
     7: {
@@ -151,7 +151,7 @@ var slides = {
       'h5': '上帝創造人時自稱「我們」，表明有多過1位的上帝',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': 'God refers to himself as "us", implies > 1',
+      'h5_en': 'God refers to himself as "us", implies there are more than 1 God',
       'p_en': '',
     },
     2: {
@@ -160,7 +160,7 @@ var slides = {
       'h5': '上帝就照著自己的形像造人，乃是照著他的形像造男造女',
       'p': '創世記 1:27',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '"So God created man in his own image...male and felmale"',
+      'h5_en': 'So God created man in his own image...male and felmale',
       'p_en': 'Genesis 1:27',
     },
     3: {
@@ -169,7 +169,7 @@ var slides = {
       'h5': '按上帝的形象造了2種人，即有2位上帝存在',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': '2 types of man created means there are 2 Gods',
+      'h5_en': '2 types of human created means that there are 2 Gods',
       'p_en': '',
     },
     4: {
@@ -178,7 +178,7 @@ var slides = {
       'h5': '男人是按男性形象的父親上帝而造的，那麼女人呢？',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': 'Man is created from male image of God, God the Father. How abt woman?',
+      'h5_en': 'Man is created from male image of God, God the Father. How about woman?',
       'p_en': '',
     },
     5: {
@@ -187,7 +187,7 @@ var slides = {
       'h5': '女人是按照女性形象的母親上帝而造的，聖經有記錄天上母親嗎？',
       'p': '',
       'title_en': 'Correct Answer: 2',
-      'h5_en': 'Woman is created from female image of God, God the Mother. Is it?',
+      'h5_en': 'Woman is created from female image of God, God the Mother. Isn’t it?',
       'p_en': '',
     },
     6: {
@@ -225,7 +225,7 @@ var slides = {
       'h5': '除酵節的第一天⋯門徒遵著耶穌所吩咐的就去預備了逾越節的筵席',
       'p': '馬太福音 26:17-19',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': '...celebrate the Passover...as Jesus had dircted them and prepared the Passover',
+      'h5_en': '"...celebrate the Passover"...as Jesus had directed them and prepared the Passover',
       'p_en': 'Matthew 26:17-19',
     },
     2: {
@@ -243,7 +243,7 @@ var slides = {
       'h5': '耶穌說：「⋯吃我肉、喝我血的人就有永生，在末日我要叫他復活。⋯」',
       'p': '約翰福音 6:53-54',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': 'Jesus said...Whoever eats my flesh and drinks my blood has eternal life',
+      'h5_en': 'Jesus said..."Whoever eats my flesh and drinks my blood has eternal life"',
       'p_en': 'John 6:53-54',
     },
     4: {
@@ -261,7 +261,7 @@ var slides = {
       'h5': '⋯耶穌拿起餅來⋯說：「⋯這是我的身體」；又拿起杯來⋯說：「⋯這是我立約的血⋯」',
       'p': '馬太福音 26:26-28',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': '...Jesus took bread...this is my body... he took the cup[wine]...This is my blood',
+      'h5_en': '...Jesus took bread..."this is my body"... he took the cup[wine]..."This is my blood"',
       'p_en': 'Matthew 26:26-28',
     },
     6: {
@@ -270,7 +270,7 @@ var slides = {
       'h5': '耶穌約定逾越節的餅和酒是他的肉和血，所以路加福音記錄逾越節的葡萄酒為新約',
       'p': '',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': 'Jesus made the New Covenant that Passover bread and wine are His flesh and blood',
+      'h5_en': 'Jesus made a covenant that Passover bread and wine are His flesh and blood',
       'p_en': '',
     },
     7: {
@@ -279,7 +279,7 @@ var slides = {
       'h5': '飯後也照樣拿起杯來，說：「這杯是用我血所立的新約⋯」',
       'p': '路加福音 22:20',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': '...This cup is the new covenant in my blood...',
+      'h5_en': '"...This cup is the new covenant in my blood..."',
       'p_en': 'Luke 22:20',
     },
     8: {
