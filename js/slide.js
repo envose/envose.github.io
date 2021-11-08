@@ -252,7 +252,7 @@ var slides = {
       'h5': '怎樣才能吃喝耶穌的肉和血，得到永生？',
       'p': '',
       'title_en': 'Correct Answer:<br>Jesus Est. New Covenant Passover',
-      'h5_en': 'What is the way to eat Jesus/'s flesh and drink His blood?',
+      'h5_en': 'What is the way to eat Jesus’s flesh and drink His blood?',
       'p_en': '',
     },
     5: {
