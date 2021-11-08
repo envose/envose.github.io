@@ -442,12 +442,12 @@ function createSlideItem(i) {
     tmp.classList.add(...['carousel-caption']);
 
     var h5 = document.createElement('h5');
-    h5.innerHTML = (quizLangOpt==0 ? getSlide(i)['h5'] : getSlide(i)['h5_en']);
+    h5.innerHTML = (quizLangOpt==0 ? getSlide(i)['h5_en'] : getSlide(i)['h5']);
     h5.style.color = mcqColor;
     tmp.appendChild(h5);
 
     var p = document.createElement('p');
-    p.innerHTML = getSlide(i)['p'];
+    p.innerHTML = (quizLangOpt==0 ? getSlide(i)['p_en'] : getSlide(i)['p']);
     p.style.color = mcqColor;
     tmp.appendChild(p);
 
@@ -460,7 +460,7 @@ function createSlideItem(i) {
 function updateSlideHeader() {
   var header = document.getElementById('slideModalTitle');
   // header.innerHTML = '';
-  header.innerHTML = (quizLangOpt==0 ? getCurrentSlide()['title'] : getCurrentSlide()['title_en']);
+  header.innerHTML = (quizLangOpt==0 ? getCurrentSlide()['title_en'] : getCurrentSlide()['title']);
 }
 
 function createSlideView(key) {
