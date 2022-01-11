@@ -4,6 +4,7 @@ var akey = 'AIzaSyC6wCx5KDOBFwi9NL99dbC4GfTkXPpsXiQ';
 //var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+worksheet_id+'/values/'+tab_name+'?alt=json&key='+key-value;
 var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+key+'/values/'+tab_name+'?alt=json&key='+akey;
 var scriptURL = 'https://script.google.com/macros/s/AKfycbzG0SggX1mdjEyahyseArxRwGGFEWxXa-ujCnjN9Q1eUdCkA1jXtETfXxsk68lsCPUL/exec';
+const form = document.forms['submit-to-google-sheet'];
 
 var name_list = ['Envose', 'Yumi', 'Cindy'];
 var today_signIn = [{
@@ -49,38 +50,8 @@ function getSignInTime(dateStr) {
 
 function signIn() {
   console.log('signin');
-  var form = document.createElement('form');
-  form.setAttribute('name','submit-to-google-sheet');
-  var input_1 = document.createElement('input');
-  var input_2 = document.createElement('input');
-  input_1.setAttribute('name','name');
-  input_2.setAttribute('name','mypage');
-  input_1.setAttribute('value',user);
-  input_2.setAttribute('value','Y');
-  form.appendChild(input_1);
-  form.appendChild(input_2);
-
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-      on();
-      alert('submit');
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => {
-        alert('已記錄 Recorded');
-        off();
-        // location.reload();
-        // selectStar('Envose');
-        // name = document.getElementById("finame").value;
-      })
-      .catch(error => {
-        alert('錯誤 Error\n['+ error.message + ']');
-        off();
-      })
-      // form.reset();
-      // location.reload();
-  });
-  document.getElementsByTagName("body")[0].appendChild(form);
-  form.submit();
+  // form.submit();
+  document.getElementById('confirmBtn').click();
 }
 
 function createNameBtns(enable) {
@@ -100,6 +71,7 @@ function createNameBtns(enable) {
       signInBtn = btn;
 
       document.getElementById('myModalLabel').innerHTML = user;
+      document.getElementById('fi0').setAttribute('value',user);
     }else{
       btn.disabled = true;
       btn.classList.add(today_signIn[name_list[name]]?'btn-light':'btn-secondary');
@@ -158,3 +130,21 @@ $(document).ready(function() {
   });
 
 });
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+    console.log('e');
+        alert('已記錄 Recorded');
+        // off();
+        // location.reload();
+        // selectStar('Envose');
+        // name = document.getElementById("finame").value;
+      })
+      .catch(error => {
+        alert('錯誤 Error\n['+ error.message + ']');
+        // off();
+      })
+      // form.reset();
+      // location.reload();
+  });
