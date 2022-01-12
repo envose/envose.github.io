@@ -155,6 +155,11 @@ $("#modal-btn-si").on("click", function(){
 
 $(document).ready(function() {
 
+  
+  $(document).click(function (e) {
+    labelCompletedDate();
+  });
+
   $(".datepicker").datepicker({
     prevText: '<i class="fa fa-fw fa-angle-left"></i>',
     nextText: '<i class="fa fa-fw fa-angle-right"></i>'
