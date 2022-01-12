@@ -33,7 +33,7 @@ function f(v){
 }
 
 function updateCard() {
-  if (Object.values(today_signIn).map(f).every(f)) {
+  if (user && today_signIn[user]) {
     card.style.backgroundImage = cardImg;
   }
 }
