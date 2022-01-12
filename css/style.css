@@ -81,7 +81,7 @@ body {
 }
 .datepicker .ui-datepicker-calendar a:hover {
   /*background: #da89a2;*/
-  background: #69ccff;
+  background: #69aaff;
   color: #fff;
   transition: .7s;
   transform: scale(1);
