@@ -132,18 +132,19 @@ $(document).ready(function() {
 });
   form.addEventListener('submit', e => {
     e.preventDefault()
+      on();
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(response => {
     console.log('e');
-        alert('已記錄 Recorded');
-        // off();
-        // location.reload();
+        // alert('已記錄 Recorded');
+        off();
+        location.reload();
         // selectStar('Envose');
         // name = document.getElementById("finame").value;
       })
       .catch(error => {
         alert('錯誤 Error\n['+ error.message + ']');
-        // off();
+        off();
       })
       // form.reset();
       // location.reload();
