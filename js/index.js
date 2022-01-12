@@ -11,11 +11,11 @@ var card = document.querySelector('#datepicker-header');
 
 
 var name_list = ['Envose', 'Yumi', 'Cindy'];
-var today_signIn = [{
+var today_signIn = {
   'Envose': null,
   'Yumi': null,
   'Cindy': null
-}];
+};
 var user = null;
 var signInBtn = null;
 var list = [];
