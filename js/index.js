@@ -88,6 +88,10 @@ function createNameBtns(enable) {
 
 $(document).ready(function() {
 
+  var cardImg = 'url(https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif)';
+  var card = document.querySelector('#datepicker-header');
+  card.style.backgroundImage = cardImg;
+
   $(".datepicker").datepicker({
     prevText: '<i class="fa fa-fw fa-angle-left"></i>',
     nextText: '<i class="fa fa-fw fa-angle-right"></i>'
