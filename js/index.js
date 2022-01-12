@@ -6,11 +6,15 @@ var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+key+'/values/'+tab_na
 var scriptURL = 'https://script.google.com/macros/s/AKfycbzG0SggX1mdjEyahyseArxRwGGFEWxXa-ujCnjN9Q1eUdCkA1jXtETfXxsk68lsCPUL/exec';
 const form = document.forms['submit-to-google-sheet'];
 
+var cardImg = 'url(https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif)';
+var card = document.querySelector('#datepicker-header');
+
+
 var name_list = ['Envose', 'Yumi', 'Cindy'];
 var today_signIn = [{
-  'Envose': '',
-  'Yumi': '',
-  'Cindy': ''
+  'Envose': null,
+  'Yumi': null,
+  'Cindy': null
 }];
 var user = null;
 var signInBtn = null;
@@ -22,6 +26,16 @@ function on() {
 
 function off() {
   document.getElementById('overlay').style.display = 'none';
+}
+
+function f(v){
+  return !!v;
+}
+
+function updateCard() {
+  if (Object.values(today_signIn[0]).map(f).every(f)) {
+    card.style.backgroundImage = cardImg;
+  }
 }
 
 function isToday(dateStr) {
@@ -88,10 +102,6 @@ function createNameBtns(enable) {
 
 $(document).ready(function() {
 
-  var cardImg = 'url(https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif)';
-  var card = document.querySelector('#datepicker-header');
-  card.style.backgroundImage = cardImg;
-
   $(".datepicker").datepicker({
     prevText: '<i class="fa fa-fw fa-angle-left"></i>',
     nextText: '<i class="fa fa-fw fa-angle-right"></i>'
@@ -130,6 +140,7 @@ $(document).ready(function() {
         }
       }
       createNameBtns();
+      updateCard();
     }
   });
 
