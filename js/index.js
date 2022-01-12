@@ -74,7 +74,7 @@ function createNameBtns(enable) {
       document.getElementById('fi0').setAttribute('value',user);
     }else{
       btn.disabled = true;
-      btn.classList.add(today_signIn[name_list[name]]?'btn-light':'btn-secondary');
+      btn.classList.add(user == name_list[name]?'btn-secondary':'btn-light');
       btn.appendChild(document.createTextNode(today_signIn[name_list[name]]?today_signIn[name_list[name]]:name_list[name]));
     }
     gp.appendChild(btn);
