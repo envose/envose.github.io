@@ -36,31 +36,50 @@
 
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
   <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-light" id="modal-btn-no">返回</button> -->
-        <button type="button" class="btn btn-danger" id="modal-btn-si">打卡</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-light" id="modal-btn-no">返回</button> -->
+          <button type="button" class="btn btn-danger" id="modal-btn-si">打卡</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="smLabel" aria-hidden="true" id="sm-modal">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="pickedDay"></h4>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        </div>
+        <div class="modal-body" id="pickedDayBody">
+        </div>
+        <!-- <div class="modal-footer"> -->
+          <!-- <button type="button" class="btn btn-light" id="modal-btn-no">返回</button> -->
+          <!-- <button type="button" class="btn btn-danger" id="modal-btn-si">打卡</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
   <div id="temp" style="display: none">
     <form name="submit-to-google-sheet">
-                <div class="modal-body">
-                  <div class="form-group">
-                    <input class="form-control" name="name" id="fi0">
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" name="mypage" id="fi1" value="Y">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" id="confirmBtn"></button>
-                </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control" name="name" id="fi0">
+        </div>
+        <div class="form-group">
+          <input class="form-control" name="mypage" id="fi1" value="Y">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="confirmBtn"></button>
+      </div>
+    </form>
   </div>
   <script src="js/index.js"></script>
 </body>

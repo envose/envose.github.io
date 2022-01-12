@@ -18,7 +18,8 @@ var today_signIn = {
 };
 var user = null;
 var signInBtn = null;
-var list = [];
+var entryDateList = [];
+var entriesList = {};
 
 function on() {
   document.getElementById('overlay').style.display = 'block';
@@ -32,9 +33,44 @@ function f(v){
   return !!v;
 }
 
+function f1(a){
+  return a.innerHTML.length < 3;
+}
+
 function updateCard() {
   if (user && today_signIn[user]) {
     card.style.backgroundImage = cardImg;
+  }
+}
+
+function labelCompletedDate() {
+  var today = new Date();
+  
+  var as = document.getElementsByTagName('a');
+  var asList = [];
+  for (var i = 0; i < as.length; i++) {
+    if (as[i].innerHTML.length < 3) {
+      asList.push(as[i]);
+    }
+  }
+  for (var i = 0; i < asList.length; i++) {
+    var d = pickDay(i+1);
+    if (entryDateList.includes(d)) {
+      if (!Object.values(entriesList[d]).every(f)) {
+        asList[i].style.borderWidth = '2px';
+        asList[i].style.borderColor = '#69aaff';
+        asList[i].style.backgroundColor = '#ddd';
+        asList[i].style.color = '#fff';
+      }else{
+        asList[i].style.backgroundColor = '#69aaff';
+        asList[i].style.color = '#fff';
+      }
+    }else{
+      if ((i+1) < today.getDate()) {
+        asList[i].style.backgroundColor = '#ddd';
+        asList[i].style.color = '#fff';
+      }
+    }
   }
 }
 
@@ -57,9 +93,24 @@ function isToday(dateStr) {
   }
 }
 
+function getSignInDate(dateStr) {
+  var inputDate = dateStr.split(' ')[0];
+  var d = parseInt(inputDate.split('/')[0]);
+  var m = parseInt(inputDate.split('/')[1]);
+  var y = parseInt(inputDate.split('/')[2]);
+  var res = m+'/'+d+'/'+y;
+  return res;
+}
+
 function getSignInTime(dateStr) {
   var inputTime = dateStr.split(' ')[1];
   return inputTime;
+}
+
+function pickDay(day) {
+  var today = new Date();
+  var date = (today.getMonth()+1)+'/'+day+'/'+today.getFullYear();
+  return date;
 }
 
 function signIn() {
@@ -95,16 +146,38 @@ function createNameBtns(enable) {
   }
 }
 
-    $("#modal-btn-si").on("click", function(){
-      $("#mi-modal").modal('hide');
-      signIn();
-    });
+
+
+$("#modal-btn-si").on("click", function(){
+  $("#mi-modal").modal('hide');
+  signIn();
+});
 
 $(document).ready(function() {
 
   $(".datepicker").datepicker({
     prevText: '<i class="fa fa-fw fa-angle-left"></i>',
     nextText: '<i class="fa fa-fw fa-angle-right"></i>'
+  });
+
+  $("a").click(function(){
+    var d = pickDay(this.innerHTML);
+    if (entryDateList.includes(d)) {
+      console.log(d);
+      
+      var mtitle = document.querySelector('#pickedDay');
+      var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+      var pday  = new Date(d);
+      mtitle.innerHTML = pday.toLocaleDateString("en-UK", options);
+      var mbody = document.querySelector('#pickedDayBody');
+      var inner = '';
+      for (var n in name_list) {
+        inner += (name_list[n]+': '+entriesList[d][name_list[n]]+'<br>')
+      }
+      mbody.innerHTML = inner;
+      $("#sm-modal").modal('show');
+    }
+    return false;
   });
 
   var currentDate = $(".datepicker").datepicker( "getDate" );
@@ -130,7 +203,6 @@ $(document).ready(function() {
 
     if (data !== null) {
       var entry = data.values.slice(1, data.values.length);
-      console.log(entry);
       for (var key in entry) {
         var obj = entry[key];
         var d = obj[0];
@@ -138,9 +210,26 @@ $(document).ready(function() {
         if (isToday(d)) {
           today_signIn[u] = getSignInTime(d);
         }
+
+        var sd = getSignInDate(d);
+        
+        if (!entryDateList.includes(sd)) {
+          entryDateList.push(sd);
+          var e = {};
+          for (var n in name_list) {
+            e[name_list[n]] = null;
+          }
+          e[u] = getSignInTime(d);
+          entriesList[sd] = e;
+        }else{
+          entriesList[sd][u] = getSignInTime(d);
+        }
       }
+      console.log(entryDateList);
+      console.log(entriesList);
       createNameBtns();
       updateCard();
+      labelCompletedDate();
     }
   });
 
