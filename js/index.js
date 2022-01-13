@@ -59,8 +59,10 @@ function labelCompletedDate() {
       if (!Object.values(entriesList[d]).every(f)) {
         asList[i].style.borderWidth = '2px';
         asList[i].style.borderColor = '#69aaff';
-        asList[i].style.backgroundColor = '#ddd';
-        asList[i].style.color = '#fff';
+        if ((i+1) < today.getDate()) {
+          asList[i].style.backgroundColor = '#ddd';
+          asList[i].style.color = '#fff';
+        }
       }else{
         asList[i].style.backgroundColor = '#69aaff';
         asList[i].style.color = '#fff';
