@@ -235,7 +235,7 @@ $(document).ready(function() {
       console.log(entryDateList);
       console.log(entriesList);
       createNameBtns();
-      updateCard();
+      // updateCard();
       labelCompletedDate();
     }
   });
