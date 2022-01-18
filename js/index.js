@@ -252,9 +252,9 @@ $(document).ready(function() {
     console.log('e');
         // alert('已記錄 Recorded');
         off();
-        viewStar();
+        // viewStar();
         // $('#starModal').modal('show');
-        // location.reload();
+        location.reload();
         // selectStar('Envose');
         // name = document.getElementById("finame").value;
       })
@@ -263,7 +263,7 @@ $(document).ready(function() {
         off();
       })
       // form.reset();
-      location.reload();
+      // location.reload();
   });
 
 $('#starModal').on('shown.bs.modal', function(){
