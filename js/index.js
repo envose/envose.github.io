@@ -239,6 +239,9 @@ $(document).ready(function() {
       createNameBtns();
       // updateCard();
       labelCompletedDate();
+
+$('#starModal').modal('show');
+
     }
   });
 
@@ -252,7 +255,7 @@ $(document).ready(function() {
         // alert('已記錄 Recorded');
         off();
         $('#starModal').modal('show');
-        // location.reload();
+        location.reload();
         // selectStar('Envose');
         // name = document.getElementById("finame").value;
       })
@@ -261,7 +264,7 @@ $(document).ready(function() {
         off();
       })
       // form.reset();
-      location.reload();
+      // location.reload();
   });
 
 $('#starModal').on('shown.bs.modal', function(){
