@@ -252,7 +252,8 @@ $(document).ready(function() {
     console.log('e');
         // alert('已記錄 Recorded');
         off();
-        $('#starModal').modal('show');
+        viewStar();
+        // $('#starModal').modal('show');
         // location.reload();
         // selectStar('Envose');
         // name = document.getElementById("finame").value;
@@ -262,12 +263,8 @@ $(document).ready(function() {
         off();
       })
       // form.reset();
-      // location.reload();
+      location.reload();
   });
-
-$('#starModal').on('hidden.bs.modal', function(){
-  location.reload();
-}
 
 $('#starModal').on('shown.bs.modal', function(){
 // function prepareStarsView() {
@@ -296,3 +293,6 @@ $('#starModal').on('shown.bs.modal', function(){
   }
 });
 
+function viewStar() {
+  $('#starModal').modal('show');
+}
