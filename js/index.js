@@ -272,7 +272,7 @@ $('#starModal').on('shown.bs.modal', function(){
   title.innerHTML = 'Our Starry Sky';
   sbody.innerHTML = '';
   var i = 0;
-  var amount = starNum;
+  var amount = entryDateList.length;
 
   while (i < amount) {
     var node = document.createElement("i");
