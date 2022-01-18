@@ -124,3 +124,66 @@ body {
     padding-top: 0.5em;
   }
 }
+
+#starModal {
+  color: white;
+  overflow: hidden;
+}
+
+#starModal .modal-content {
+  background-size: cover;
+  height: 95vh;
+  min-height: 500px;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%)
+}
+
+#star_container {
+  height: 100%;
+  width: 100%;
+}
+
+
+i {
+   width: 10px;
+   height: 10px;
+   background-color: #fff;
+   border-radius: 50%;
+   box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8);
+   position: absolute;
+   transition: all 0.4s ease-in-out;
+   transform: rotate(15deg);
+   animation: shine;
+   animation-duration: 5s;
+   animation-iteration-count: infinite;
+}
+ i:after, i:before {
+   content: "";
+   display: block;
+   position: absolute;
+   background-image: linear-gradient(to left, transparent, white, transparent);
+   left: -34px;
+   top: calc(50% - 1px);
+   width: 80px;
+   height: 2px;
+}
+ i:before {
+   width: 2px;
+   height: 80px;
+   left: calc(50% - 1px);
+   top: -34px;
+   background-image: linear-gradient(to bottom, transparent, white, transparent);
+}
+
+@keyframes shine{
+  
+  0%{
+      transform: scale(0) rotate(-200deg);
+  }
+  55%{
+      transform: scale(0.4) rotate(180deg);
+  }
+  100%{
+      transform: scale(0) rotate(-200deg);
+  }
+  
+}
