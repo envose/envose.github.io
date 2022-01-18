@@ -240,8 +240,6 @@ $(document).ready(function() {
       // updateCard();
       labelCompletedDate();
 
-$('#starModal').modal('show');
-
     }
   });
 
