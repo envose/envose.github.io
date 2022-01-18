@@ -239,6 +239,7 @@ $(document).ready(function() {
       createNameBtns();
       // updateCard();
       labelCompletedDate();
+      prepareStarsView();
 
     }
   });
@@ -265,7 +266,8 @@ $(document).ready(function() {
       // location.reload();
   });
 
-$('#starModal').on('shown.bs.modal', function(){
+// $('#starModal').on('shown.bs.modal', function(){
+function prepareStarsView() {
   var sbody = document.querySelector('#star_container');
   var rect = document.querySelector('.star').getBoundingClientRect();
   var title = document.querySelector('#starModalTitle');
