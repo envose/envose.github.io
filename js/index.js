@@ -265,6 +265,10 @@ $(document).ready(function() {
       // location.reload();
   });
 
+$('#starModal').on('hidden.bs.modal', function(){
+  location.reload();
+}
+
 $('#starModal').on('shown.bs.modal', function(){
 // function prepareStarsView() {
   var sbody = document.querySelector('#star_container');
@@ -292,8 +296,3 @@ $('#starModal').on('shown.bs.modal', function(){
   }
 });
 
-function viewStar() {
-  // starNum = starList[name];
-  // starName = name + translate[langOpt].starTitle;
-  $('#starModal').modal('show');
-}
