@@ -21,6 +21,8 @@ var signInBtn = null;
 var entryDateList = [];
 var entriesList = {};
 
+var starNum = 0;
+
 function on() {
   document.getElementById('overlay').style.display = 'block';
 }
@@ -249,7 +251,8 @@ $(document).ready(function() {
     console.log('e');
         // alert('已記錄 Recorded');
         off();
-        location.reload();
+        $('#starModal').modal('show');
+        // location.reload();
         // selectStar('Envose');
         // name = document.getElementById("finame").value;
       })
@@ -258,5 +261,31 @@ $(document).ready(function() {
         off();
       })
       // form.reset();
-      // location.reload();
+      location.reload();
   });
+
+$('#starModal').on('shown.bs.modal', function(){
+  var sbody = document.querySelector('#star_container');
+  var rect = document.querySelector('.star').getBoundingClientRect();
+  var title = document.querySelector('#starModalTitle');
+
+  title.innerHTML = 'Our Starry Sky';
+  sbody.innerHTML = '';
+  var i = 0;
+  var amount = starNum;
+
+  while (i < amount) {
+    var node = document.createElement("i");
+    var posX = Math.floor(Math.random() * (rect.width-100) + 50);
+    var posY = Math.floor(Math.random() * (rect.height-200) + 100);
+    var rotation = Math.random() * 180;
+    var delay = Math.random() * 20;
+    var scale = Math.random() * 0.2;
+    node.style.left = posX+'px';
+    node.style.top = posY+'px';
+    node.style.transform = 'rotate('+rotation+'deg) scale('+scale+')';
+    node.style.animationDelay = delay+'s';
+    sbody.appendChild(node);
+    i++;
+  }
+});
