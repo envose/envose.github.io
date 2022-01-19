@@ -21,8 +21,6 @@ var signInBtn = null;
 var entryDateList = [];
 var entriesList = {};
 
-var starNum = 0;
-
 function on() {
   document.getElementById('overlay').style.display = 'block';
 }
@@ -37,6 +35,18 @@ function f(v){
 
 function f1(a){
   return a.innerHTML.length < 3;
+}
+
+function f2(o){
+  var tmp = Object.values(o);
+  return tmp.every(f);
+}
+
+function getStarNum() {
+  var tmp = Object.values(entriesList);
+  tmp = tmp.map(f2);
+  var starNum = tmp.filter(Boolean).length
+  return starNum;
 }
 
 function updateCard() {
@@ -125,6 +135,10 @@ function signIn() {
 
 function createNameBtns(enable) {
   var gp = document.querySelector('#name_btn_gp');
+
+  //init
+  gp.innerHTML = '';
+
   for (var name in name_list) {
     var btn = document.createElement('button');
     btn.classList.add('btn');
@@ -207,6 +221,19 @@ $(document).ready(function() {
       user = localStorage.getItem("key");
     }
   }
+  retrieveData();
+});
+
+function retrieveData(viewStar) {
+
+  // init
+  today_signIn = {
+    'Envose': null,
+    'Yumi': null,
+    'Cindy': null
+  };
+  entryDateList = [];
+  entriesList = {};
 
   $.getJSON(url, function(data) {
 
@@ -239,11 +266,13 @@ $(document).ready(function() {
       createNameBtns();
       // updateCard();
       labelCompletedDate();
-
+      if (viewStar) {
+        $('#starModal').modal('show');
+      }
     }
   });
 
-});
+}
   form.addEventListener('submit', e => {
     e.preventDefault()
       on();
@@ -254,7 +283,7 @@ $(document).ready(function() {
         off();
         // viewStar();
         // $('#starModal').modal('show');
-        location.reload();
+        retrieveData(true);
         // selectStar('Envose');
         // name = document.getElementById("finame").value;
       })
@@ -275,7 +304,7 @@ $('#starModal').on('shown.bs.modal', function(){
   title.innerHTML = 'Our Starry Sky';
   sbody.innerHTML = '';
   var i = 0;
-  var amount = entryDateList.length;
+  var amount = getStarNum();
 
   while (i < amount) {
     var node = document.createElement("i");
@@ -293,6 +322,3 @@ $('#starModal').on('shown.bs.modal', function(){
   }
 });
 
-function viewStar() {
-  $('#starModal').modal('show');
-}
