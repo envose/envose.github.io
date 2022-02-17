@@ -1,8 +1,8 @@
 body {
   /*font-family: 'Abril Fatface', cursive;*/
   /*font-size: 1.2em;*/
-  background: #e7e9ff url("https://image.freepik.com/free-photo/background_53876-32171.jpg") no-repeat center center fixed;
   /*background: #e7e9ff url("https://wallpapercave.com/wp/wp6328875.jpg") no-repeat center center fixed;*/
+  background: #e7e9ff url("https://media3.giphy.com/media/xT9IgDmCrgQ830BvcA/giphy.gif?cid=ecf05e47c8okl64dk9rv3vtj1qy2t7te0y3omqeqb36m5lr4&rid=giphy.gif") no-repeat center center fixed;
   background-size: cover;
   /*color: #ddd;*/
 }
@@ -10,7 +10,8 @@ body {
   font-family: 'Abril Fatface', cursive;
   width: 475px;
   max-width: 90vw;
-  background: #fdfdfd;
+  /*background: #fdfdfd;*/
+  background: rgba(255,255,255,0.1);
   border-radius: 10px;
   box-shadow: 0 19px 38px rgba(0,0,0,0.2), 0 15px 12px rgba(0,0,0,0.2);
   margin: 15px auto;
@@ -19,8 +20,8 @@ body {
 
 .datepicker .datepicker-header {
   height: 250px;
-  background-image: url("https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif");
-  /* background-image: url("https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif"); */
+  /*background-image: url("https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif");*/
+  /* background-image: url("https://envose.github.io/6DCC8A47-1EDA-4A07-90B4-E025624EB538.jpeg"); */
   background-size: 100%;
   opacity: 0.9;
   color: #fff;
@@ -36,7 +37,8 @@ body {
   font-size: 1.4em;
   padding-bottom: .5em;
   letter-spacing: .1em;
-  color: #333;
+  /*color: #333;*/
+  color: #fff;
 }
 .datepicker .ui-datepicker-header .ui-datepicker-prev,
 .datepicker .ui-datepicker-header .ui-datepicker-next {
@@ -70,6 +72,7 @@ body {
   padding-bottom: .4em;
 }
 .datepicker .ui-datepicker-calendar a {
+  /*color: #333;*/
   color: #333;
   text-decoration: none;
   display: block;
@@ -84,8 +87,7 @@ body {
 .datepicker .ui-datepicker-calendar a:hover {
   /*background: #da89a2;*/
   background: #fff;
-  /*color: #69aaff;*/
-  color: #ffaa69;
+  color: #ff69aa;
   transition: .7s;
   transform: scale(1);
 }
@@ -94,12 +96,10 @@ body {
   background: #fff;
   color: #333;
   border-width: 2px;
-  /*border-color: #69aaff;*/
-  border-color: #ffaa69;
+  border-color: #ff69aa;
 }
 .datepicker .ui-datepicker-calendar .ui-state-highlight:hover {
-  /*color: #69aaff;*/
-  color: #ffaa69;
+  color: #ff69aa;
 }
 
 .btn_sign_in {
@@ -127,4 +127,67 @@ body {
     padding-bottom: 0.5em;
     padding-top: 0.5em;
   }
+}
+
+#starModal {
+  color: white;
+  overflow: hidden;
+}
+
+#starModal .modal-content {
+  background-size: cover;
+  height: 95vh;
+  min-height: 500px;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%)
+}
+
+#star_container {
+  height: 100%;
+  width: 100%;
+}
+
+
+i {
+   width: 10px;
+   height: 10px;
+   background-color: #fff;
+   border-radius: 50%;
+   box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8);
+   position: absolute;
+   transition: all 0.4s ease-in-out;
+   transform: rotate(15deg);
+   animation: shine;
+   animation-duration: 5s;
+   animation-iteration-count: infinite;
+}
+ i:after, i:before {
+   content: "";
+   display: block;
+   position: absolute;
+   background-image: linear-gradient(to left, transparent, white, transparent);
+   left: -34px;
+   top: calc(50% - 1px);
+   width: 80px;
+   height: 2px;
+}
+ i:before {
+   width: 2px;
+   height: 80px;
+   left: calc(50% - 1px);
+   top: -34px;
+   background-image: linear-gradient(to bottom, transparent, white, transparent);
+}
+
+@keyframes shine{
+  
+  0%{
+      transform: scale(0) rotate(-200deg);
+  }
+  55%{
+      transform: scale(0.4) rotate(180deg);
+  }
+  100%{
+      transform: scale(0) rotate(-200deg);
+  }
+  
 }
