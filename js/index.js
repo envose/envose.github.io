@@ -9,6 +9,8 @@ const form = document.forms['submit-to-google-sheet'];
 var cardImg = 'url(https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif)';
 var card = document.querySelector('#datepicker-header');
 
+var theme_colour = '#ff69aa';
+
 
 var name_list = ['Envose', 'Yumi', 'Cindy'];
 var today_signIn = {
@@ -70,13 +72,13 @@ function labelCompletedDate() {
     if (entryDateList.includes(d)) {
       if (!Object.values(entriesList[d]).every(f)) {
         asList[i].style.borderWidth = '2px';
-        asList[i].style.borderColor = '#69aaff';
+        asList[i].style.borderColor = theme_colour;
         if ((i+1) < today.getDate()) {
           asList[i].style.backgroundColor = '#ddd';
           asList[i].style.color = '#fff';
         }
       }else{
-        asList[i].style.backgroundColor = '#69aaff';
+        asList[i].style.backgroundColor = theme_colour;
         asList[i].style.color = '#fff';
       }
     }else{
@@ -147,7 +149,9 @@ function createNameBtns(enable) {
     btn.classList.add('my-md-5');
     btn.classList.add('btn_sign_in');
     if (user == name_list[name] && !today_signIn[user]) {
-      btn.classList.add('btn-primary');
+      // btn.classList.add('btn-primary');
+      btn.style.backgroundColor = theme_colour;
+      btn.style.color = '#fff';
       btn.id = 'btn-confirm';
       btn.appendChild(document.createTextNode(name_list[name]));
       btn.onclick = function () {$("#mi-modal").modal('show');};
