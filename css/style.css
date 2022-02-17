@@ -1,184 +1,130 @@
-body{
-  margin:0;
-  background-color:#010712;
-  background-image:url(https://static.pexels.com/photos/1526/dark-blur-blurred-gradient.jpg);
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  height:100vh;
+body {
+  /*font-family: 'Abril Fatface', cursive;*/
+  /*font-size: 1.2em;*/
+  background: #e7e9ff url("https://image.freepik.com/free-photo/background_53876-32171.jpg") no-repeat center center fixed;
+  /*background: #e7e9ff url("https://wallpapercave.com/wp/wp6328875.jpg") no-repeat center center fixed;*/
+  background-size: cover;
+  /*color: #ddd;*/
 }
-.container{
-  width:400px;
-  height:200px;
-  position:relative;
-  perspective: 1000;
-  -webkit-perspective: 1000;
-  left:calc(50% - 200px);
-  top:calc(50vh - 100px);
-}
-.card{
-  width:100%;
-  height:100%;
-  position:absolute;
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
-  transition:transform 1s ease;
-  cursor:pointer;
-}
-.back, .front{
-  border-radius:6px;
-  position:absolute;
-  width:100%;
-  height:100%;
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
-  
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-}
-.contentfront{
-  width:100%;
-  height:100%;
-  float:left;
-  transform:translatez(60px);
-  -webkit-transform:translatez(60px);
-  
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
-  
-}
-.contentback{
-  width:100%;
-  height:100%;
-  float:left;
-  transform:translatez(60px);
-  -webkit-transform:translatez(60px);
-  
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
-  
-}
-.back{
-  transform:rotateY(180deg);
-  background-color:#232227;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.front{
-  text-transform:uppercase;
-  background-color:#232227;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.date{
-  height:100%;
-  width:130px;
-  float:left;
-  background-color:#E76642;
-  border-radius:0 6px 6px 0;
-  text-align:right;
-  padding:10px 30px;
-  box-sizing:border-box;
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
-}
-.datecont{
-  height:100%;
-  transform:translatez(60px) scale(.9);
-  -webkit-transform:translatez(60px) scale(.9);
-}
-#date{
-  font-size:50px;
-  color:#ECECE7;
-  font-family: 'Montserrat', sans-serif;
-  font-weight:500;
-  float:right;
-}
-#day{
-  float:right;
-  font-size:14px;
-  color:#232227;
-  font-family: 'Montserrat', sans-serif;
-  font-weight:400;
-}
-#month{
-  float:right;
-  font-size:10px;
-  color:#232227;
-  font-family: 'Montserrat', sans-serif;
-  font-weight:200;
-}
-.date i{
-  color:#ECECE7;
-  position:absolute;
-  bottom:10px;
-  right:0;
-}
-.date i:hover{
-  color:#232227;
-  transition:.3s ease;
-}
-.month{
-  height:100%;
-  width:270px;
-  float:left;
-  padding:20px 30px;
-  box-sizing:border-box;
-}
-.month table{
-  width:100%;
-}
-.orangeTr{
-  color:#E76642;
-}
-.whiteTr{
-  color:#ECECE7;
-  
-}
-.whiteTr th:hover{
-  color:#E76642;
-  transition:.3s ease;
-}
-.month tr{
-  height:24px;
-}
-.month th{
-  width:14%;
-  font-size:10px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight:400;
+.datepicker {
+  font-family: 'Abril Fatface', cursive;
+  width: 475px;
+  max-width: 90vw;
+  background: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.2), 0 15px 12px rgba(0,0,0,0.2);
+  margin: 15px auto;
+  overflow: hidden;
 }
 
-.flipped{
-  transform:rotateY(-180deg);
-  /*height:400px;
-  width:200px;
-  left:calc(50% - 100px);
-  top:calc(50vh - 200px);*/
+.datepicker .datepicker-header {
+  height: 250px;
+  background-image: url("https://media.giphy.com/media/2seaKlqqoGglLcPH2Q/giphy.gif");
+  /* background-image: url("https://media.giphy.com/media/10Ua7rs9fxa8QE/giphy.gif"); */
+  background-size: 100%;
+  opacity: 0.9;
+  color: #fff;
+  font-size: 4em;
+  text-align: center;
+  padding: 0.7em;
 }
-.backcontainer{
-  transform-style:preserve-3d;
-  width:calc(100% - 60px);
-  height:calc(100% - 40px);
-  float:left;
-  margin-left:30px;
-  margin-top:20px;
-  /*transform:translatez(60px) scale();*/
-  
-  background-color:#E76642;
-  border-radius:6px;
-  padding:10px 30px;
-  box-sizing:border-box;
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
+.datepicker .ui-datepicker-inline {
+  padding: 30px;
+}
+.datepicker .ui-datepicker-header {
+  text-align: center;
+  font-size: 1.4em;
+  padding-bottom: .5em;
+  letter-spacing: .1em;
+  color: #333;
+}
+.datepicker .ui-datepicker-header .ui-datepicker-prev,
+.datepicker .ui-datepicker-header .ui-datepicker-next {
+  float: left;
+  cursor: pointer;
+  font-size: 1.4em;
+  padding: 0 5px;
+  margin-top: -8px;
+  color: #ddd;
+  transition: .6s;
+  visibility: hidden;
+}
+.datepicker .ui-datepicker-header .ui-datepicker-next {
+  float: right;
+}
+.datepicker .ui-datepicker-header .ui-datepicker-prev:hover {
+  transform: translateX(-25px)
+}
+.datepicker .ui-datepicker-header .ui-datepicker-next:hover {
+  transform: translateX(25px)
+}
+.datepicker .ui-datepicker-calendar {
+  width: 100%;
+  text-align: center;
+}
+.datepicker .ui-datepicker-calendar thead {
+  color: #ddd;
+}
+.datepicker .ui-datepicker-calendar tr th,
+.datepicker .ui-datepicker-calendar tr td {
+  padding-bottom: .4em;
+}
+.datepicker .ui-datepicker-calendar a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  margin: 0 auto;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.datepicker .ui-datepicker-calendar a:hover {
+  /*background: #da89a2;*/
+  background: #fff;
+  /*color: #69aaff;*/
+  color: #ffaa69;
+  transition: .7s;
+  transform: scale(1);
+}
+.datepicker .ui-datepicker-calendar .ui-state-highlight {
+  /*background: #da89a2;*/
+  background: #fff;
+  color: #333;
+  border-width: 2px;
+  /*border-color: #69aaff;*/
+  border-color: #ffaa69;
+}
+.datepicker .ui-datepicker-calendar .ui-state-highlight:hover {
+  /*color: #69aaff;*/
+  color: #ffaa69;
+}
+
+.btn_sign_in {
+  width: 25vw;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: none;
+}
+
+@media screen and (max-width: 300px) {
+  .datepicker {
+    max-width: 100vw;
+  }
+  .datepicker .datepicker-header {
+    padding: 0.2em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+  }
 }
