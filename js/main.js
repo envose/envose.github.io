@@ -1,66 +1,84 @@
-window.onload = function() {
+var key = '';
+var tab_name = 'Form responses 1';
+var akey = '';
+var usr = '';
 
-  document.getElementById('topbar').style.visibility = 'hidden';
-  document.getElementById('mcq_view').style.display = 'none';
-  document.getElementById('overlay').style.display = 'none';
-
-  // check if guard exists
-  var localGuard = localStorage.getItem('guard');
-  var localQuizLang = localStorage.getItem('lang_quiz');
-  if (localGuard && !localQuizLang) {
-    guardAttempt = parseInt(localGuard);
-    popupGuard();
-    $('#alertModal').modal({backdrop: 'static', keyboard: false});
-  }else{
-    document.getElementById('topbar').style.visibility = 'visible';
-
-    // check if key exists
-    var localKey = localStorage.getItem('key');
-    if (localKey) {
-      if (localKey != 'hk321') {
-        logout();
-      }
-      console.log(localStorage);
-
-      // check if sys lang opt stored
-      var localSysLang = localStorage.getItem('lang_sys');
-      if (localSysLang) {
-        setSysLangOpt(localSysLang);
-      }
+var dates;
+var names;
+var phones;
 
 
-        // for 3 hrs
-        setTimeout(function(){
-          popupGuard();
-          $('#alertModal').modal({backdrop: 'static', keyboard: false});
-        }, GUARD_DURATION);
+$(document).ready(function() {
 
-      // check if team formed
-      var localTeam = localStorage.getItem('team');
-      if (localTeam) {
-        team = localTeam.split(',');
+  dates = [];
+  names = [];
+  phones = [];
 
-        var localStartDate = localStorage.getItem('startDate');
-        if (localStartDate) {
-          startDate = localStartDate;
-        }else{
-          getStartDate;
-        }
+  var login = false;
 
-        // check if quiz lang opt stored, means entered quiz view
-        var localQuizLang = localStorage.getItem('lang_quiz');
-        if (localQuizLang) {
-          setQuizLangOpt(localQuizLang);
-          entryView();
-        }else{
-          dashboard();
-        }
-      }else{
-        createTeamView();
-      }
-    }else{
-      createLoginView();
-    }
+  let urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('$k')) {
+    localStorage.setItem('$k', urlParams.get('$k'));
+  }
+  if (urlParams.has('$a')) {
+    localStorage.setItem('$a', urlParams.get('$a'));
+  }
+  if (urlParams.has('$u')) {
+    localStorage.setItem('$u', urlParams.get('$u'));
   }
 
-}
+  akey = localStorage.getItem('$a');
+  key = localStorage.getItem('$k');
+  //var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+worksheet_id+'/values/'+tab_name+'?alt=json&key='+key-value;
+  var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+key+'/values/'+tab_name+'?alt=json&key='+akey;
+
+  $.ajaxSetup({
+    "error":function() { msgAlert('alert_login');  }
+  });
+
+  $.getJSON(url, function(data) {
+
+    if (data !== null) {
+      login = true;
+      var entry = data.values.slice(1, data.values.length);
+      // console.log(entry);
+      var k = atob(localStorage.getItem('$u'));
+      usr = k.split('. ')[1];
+      // console.log(usr);
+      for (key in entry) {
+        var obj = entry[key];
+        if (k == obj[1]) {
+          dates.push(obj[0]);
+          names.push(obj[4]);
+          phones.push(obj.length>=6?obj[5]:'');
+        }
+      }
+      off();
+      createTableView();
+    }
+  });
+
+
+
+});
+/*
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+      on();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+    console.log('e');
+        // alert('已記錄 Recorded');
+        off();
+        location.reload();
+        // selectStar('Envose');
+        // name = document.getElementById("finame").value;
+      })
+      .catch(error => {
+        alert('錯誤 Error\n['+ error.message + ']');
+        off();
+      })
+      // form.reset();
+      // location.reload();
+  });
+*/

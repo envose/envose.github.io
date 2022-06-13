@@ -1,3 +1,148 @@
+function createTableView() {
+  initViews();
+
+  // header
+  setHeaderTitle('h2',usr);
+
+  //content
+  var rows = [];
+
+  //create table
+  var div_c = createCustomElement('div', 'col_12');
+
+  var table = createCustomElement('table', 'table');
+  var thead = document.createElement('thead');
+  var tbody = document.createElement('tbody');
+
+  var th0 = document.createElement('th');
+  var th1 = document.createElement('th');
+  var th2 = document.createElement('th');
+  var th3 = document.createElement('th');
+
+  th0.setAttribute('scope', 'col');
+  th1.setAttribute('scope', 'col');
+  th2.setAttribute('scope', 'col');
+  th3.setAttribute('scope', 'col');
+
+  th0.innerHTML = '#';
+  th1.innerHTML = getSysTranslate('Date');
+  th2.innerHTML = getSysTranslate('Name');
+  th3.innerHTML = getSysTranslate('Phone');
+
+  thead.appendChild(th0);
+  thead.appendChild(th1);
+  thead.appendChild(th2);
+  thead.appendChild(th3);
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+
+  div_c.appendChild(table);
+  content.appendChild(div_c);
+
+  for (let i = dates.length-1; i >= 0; i--) {
+    /*
+    var row = [];
+    row.push(dates.length-i+1);
+    row.push(dates[i]);
+    row.push(names[i]);
+    row.push(phones[i]);
+    rows.push(row);
+    */
+
+    var tr = document.createElement('tr');
+    var td0 = document.createElement('td');
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
+    var td3 = document.createElement('td');
+
+    td0.innerHTML = dates.length-i;
+    td1.innerHTML = dates[i];
+    td2.innerHTML = names[i];
+    td3.innerHTML = phones[i];
+
+    tr.appendChild(td0);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tbody.appendChild(tr);
+  }
+
+
+  // footer
+  var div3 = createCustomElement('div', 'view_content_center');
+
+  var btn_exit = createCustomElement('button', 'btn_free_danger');
+  btn_exit.classList.add('mt-5');
+  btn_exit.innerHTML = getSysTranslate('exit');
+  btn_exit.setAttribute('data-toggle', 'modal');
+  btn_exit.setAttribute('data-target', '#alertModal');
+  var callback = function () {
+    logout();
+  }
+  btn_exit.onclick = function() { initModalAlert('btn-danger', getSysTranslate('exit'), getSysTranslate('alert_exit'), getSysTranslate('continue'), callback, getSysTranslate('back')); };
+  div3.appendChild(btn_exit);
+
+  footer.appendChild(div3);
+  
+}
+
+function dashboard() {
+  initViews();
+  provideSysLangOpt(true);
+  provideQuizLangOpt(false);
+  if (localStorage.getItem('ppl')) {
+    ppl = JSON.parse(localStorage.getItem('ppl'));
+  }
+
+  // header
+  // setHeaderTitle('h1', ppl.length);
+  var title = createCustomElement('h1', 'title');
+  title.classList.add('display-1');
+  title.innerHTML = ppl.length;
+  header.appendChild(title);
+
+  // content
+  var div = createCustomElement('div', 'view_content_center');
+  var div2 = createCustomElement('div', 'view_col5');
+
+  var msg = getSysTranslate('team');
+  msg += team.join(', ');
+  var h5 = createCustomElement('h5', 'title');
+  h5.classList.add(...['mt-5', 'mb-3']);
+  h5.innerHTML = msg;
+  div.appendChild(h5);
+
+  var btn_entry = createCustomElement('btn', 'btn_std_primary');
+  btn_entry.innerHTML = getSysTranslate('entry');
+  btn_entry.onclick = function() { entryView(); };
+  div2.appendChild(btn_entry);
+
+  var btn_record = createCustomElement('btn', 'btn_std_info');
+  btn_record.innerHTML = getSysTranslate('record');
+  btn_record.onclick = function() { recordView(); };
+  div2.appendChild(btn_record);
+
+  div.appendChild(div2);
+  content.appendChild(div);
+
+  // footer
+  var div3 = createCustomElement('div', 'view_content_center');
+
+  var btn_dismiss = createCustomElement('button', 'btn_free_danger');
+  btn_dismiss.classList.add('mt-5');
+  btn_dismiss.innerHTML = getSysTranslate('dismiss');
+  btn_dismiss.setAttribute('data-toggle', 'modal');
+  btn_dismiss.setAttribute('data-target', '#alertModal');
+  var callback = function () {
+    dismiss();
+  }
+  btn_dismiss.onclick = function() { initModalAlert('btn-danger', getSysTranslate('dismiss'), getSysTranslate('alert_dismiss'), getSysTranslate('continue'), callback, getSysTranslate('back')); };
+  div3.appendChild(btn_dismiss);
+
+  footer.appendChild(div3);
+}
+
 function initViews() {
   header.innerHTML = '';
   content.innerHTML = '';
@@ -370,7 +515,7 @@ function entryView() {
   var btn1 = createCustomElement('button', 'btn_std_info');
   btn1.innerHTML = getQuizContent('q1');
   btn1.onclick = function() { selectTopic(0);};
-  //div_inn.append(btn1);
+  div_inn.append(btn1);
   var btn2 = createCustomElement('button', 'btn_std_info');
   btn2.innerHTML = getQuizContent('q2');
   btn2.onclick = function() { selectTopic(1);};
@@ -386,7 +531,7 @@ function entryView() {
   var btn5 = createCustomElement('button', 'btn_std_info');
   btn5.innerHTML = getQuizContent('q5');
   btn5.onclick = function() { selectTopic(4);};
-  //div_inn.append(btn5);
+  div_inn.append(btn5);
   b_div.appendChild(div_inn);
   div2.appendChild(b_div);
   content.appendChild(div2);
