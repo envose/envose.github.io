@@ -56,7 +56,7 @@ function createTableView() {
     var td2 = document.createElement('td');
     var td3 = document.createElement('td');
 
-    td0.innerHTML = dates.length-i;
+    td0.innerHTML = i+1;
     td1.innerHTML = dates[i];
     td2.innerHTML = names[i];
     td3.innerHTML = phones[i];
