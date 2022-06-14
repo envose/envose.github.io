@@ -25,9 +25,9 @@ function createTableView() {
   th3.setAttribute('scope', 'col');
 
   th0.innerHTML = '#';
-  th1.innerHTML = getSysTranslate('Date');
-  th2.innerHTML = getSysTranslate('Name');
-  th3.innerHTML = getSysTranslate('Phone');
+  th1.innerHTML = getSysTranslate('record');
+  th2.innerHTML = getSysTranslate('name');
+  th3.innerHTML = getSysTranslate('contact');
 
   thead.appendChild(th0);
   thead.appendChild(th1);
