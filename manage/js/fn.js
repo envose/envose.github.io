@@ -1,4 +1,4 @@
-const start = "2022-12";
+const start = "2022-10";
 var rptYrList = [];
 var rptMthList = {};
 var ip = "";
