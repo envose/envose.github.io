@@ -503,7 +503,7 @@ console.log("decrypted: " + decrypted.toString(CryptoJS.enc.Utf8));
 $(document).ready(function() {
   $.ajax({
 
-    url: 'https://script.google.com/macros/s/AKfycbzziyjx3RrBDGWQ_Kvn5san8vo1SuWE3OII2VMq6NEhYHNhe13vsz730BM0uKdaK3wB/exec?k=123',
+    url: 'https://script.google.com/macros/s/AKfycbwFDejWjf7fz8S8hiwuQ_Jp5g36_WlrCz0LgujaAnAXoIYXRFLBeQUQmUlaRfCLyvGd/exec?k=123',
     // data: myData,
     type: 'GET',
     // crossDomain: true,
