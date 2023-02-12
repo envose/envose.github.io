@@ -89,17 +89,24 @@ function getFullScore (y, m, aspect) {
     case "w":
       score = getNumOfWeekDays(y, m, 2)+getNumOfWeekDays(y, m, 6)*3;
       break;
+    case "sp":
+      score = 10;
+      break;
     case "p":
-      score = 8;
+      score = 30;
       break;
     case "s":
-      score = 4;
+      score = 10;
       break;
-    case "e":
-      score = 4;
+    case "t":
+      score = 100;
       break;
   }
   return score;
+}
+
+function getTotal() {
+
 }
 
 function createRptLI(value, label, onclick) {
@@ -285,6 +292,7 @@ function generateReport() {
       members = nameList[i].members;
     }
   }
+  var total = 0;
   Array.from(records).forEach(r => {
     if (u.includes(r.unit) && e.includes(r.entry)) {
       if (!members.includes(r.name)) {
@@ -292,10 +300,24 @@ function generateReport() {
       }
       var entry = [];
       entry.push(r.name);
-      entry.push(r.score_w+' / '+getFullScore(rptSelector.year, rptSelector.month, "w"));
-      entry.push(r.score_p+' / '+getFullScore(rptSelector.year, rptSelector.month, "p"));
-      entry.push(r.score_s+' / '+getFullScore(rptSelector.year, rptSelector.month, "s"));
-      entry.push(r.score_e+' / '+getFullScore(rptSelector.year, rptSelector.month, "e"));
+      var w = (r.score_w/getFullScore(rptSelector.year, rptSelector.month, "w"))*100;
+      var sp = (r.score_sp/getFullScore(rptSelector.year, rptSelector.month, "sp"))*100;
+      var p = (r.score_p/getFullScore(rptSelector.year, rptSelector.month, "p"))*100;
+      var s = (r.score_s/getFullScore(rptSelector.year, rptSelector.month, "s"))*100;
+      var t = r.score_t;
+      w = (w > 100 ? 100 : w);
+      sp = (sp > 100 ? 100 : sp);
+      p = (p > 100 ? 100 : p);
+      s = (s > 100 ? 100 : s);
+      t = (t > 100 ? 100 : t);
+      var score = Math.floor(w+sp+p+s+t);
+      total += score;
+      entry.push(r.score_w+' <small class="text-secondary">/ '+getFullScore(rptSelector.year, rptSelector.month, "w")+'</small>');
+      entry.push(r.score_sp+' <small class="text-secondary">/ '+getFullScore(rptSelector.year, rptSelector.month, "sp")+'</small>');
+      entry.push(r.score_p+' <small class="text-secondary">/ '+getFullScore(rptSelector.year, rptSelector.month, "p")+'</small>');
+      entry.push(r.score_s+' <small class="text-secondary">/ '+getFullScore(rptSelector.year, rptSelector.month, "s")+'</small>');
+      entry.push(r.score_t+' %');
+      entry.push('<strong>'+score+'</strong>');
       json[r.name]=entry;
     }
   });
@@ -306,6 +328,8 @@ function generateReport() {
       rptMissingList.push(members[j]);
       var entry = [];
       entry.push(members[j]);
+      entry.push("---");
+      entry.push("---");
       entry.push("---");
       entry.push("---");
       entry.push("---");
@@ -321,6 +345,9 @@ function generateReport() {
     var rptBtn = document.getElementById('reportBtn');
     rptBtn.classList.remove('d-none');
   }
+  var span = document.getElementById('score');
+  span.innerHTML = Math.floor(total/members.length);
+
 }
 
 function openReport() {
@@ -440,7 +467,7 @@ function prefill() {
   o.setAttribute("selected", "");
   o.setAttribute("disabled", "");
   o.setAttribute("value", "");
-  o.innerHTML = "Choose...";
+  o.innerHTML = "請選擇...";
   name.appendChild(o);
 
   Array.from(rptMissingList).forEach(n => {

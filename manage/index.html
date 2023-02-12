@@ -61,7 +61,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Report</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">輸入報告</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -69,46 +69,53 @@
             <input type="text" class="form-control d-none" id="input_unit" disabled>
             <div class="col-lg-12 form-floating">
               <input type="text" class="form-control" id="input_unit_display" disabled>
-              <label for="validationCustom02" class="form-label">Unit</label>
+              <label for="validationCustom02" class="form-label">區域</label>
             </div>
             <div class="col-lg-9 form-floating">
               <select class="form-select" id="input_name" required>
               </select>
-              <label for="validationCustom01" class="form-label">Member</label>
+              <label for="validationCustom01" class="form-label">組員</label>
               <div class="invalid-feedback">
                 Please select a member.
               </div>
             </div>
             <div class="col-lg-3 form-floating">
               <input type="text" class="form-control" id="input_month" disabled>
-              <label for="validationCustom02" class="form-label">Month</label>
+              <label for="validationCustom02" class="form-label">月份</label>
             </div>
             <div class="col-lg-6 form-floating">
               <input type="text" class="form-control" id="validationCustom03" required>
-              <label for="validationCustom03" class="form-label">Worship Service</label>
+              <label for="validationCustom03" class="form-label">禮拜出席</label>
               <div class="invalid-feedback">
                 Please input the attendance of worship services.
               </div>
             </div>
             <div class="col-lg-6 form-floating">
-              <input type="text" class="form-control" id="validationCustom04" required>
-              <label for="validationCustom04" class="form-label">Study</label>
-              <div class="invalid-feedback">
-                Please input the attendance of study meetings.
-              </div>
-            </div>
-            <div class="col-lg-6 form-floating">
               <input type="text" class="form-control" id="validationCustom05" required>
-              <label for="validationCustom05" class="form-label">Evaluation</label>
+              <label for="validationCustom05" class="form-label">發表</label>
               <div class="invalid-feedback">
-                Please input the number of sermon preaching evalution completed.
+                Please input the number of practicing sermon preaching.
               </div>
             </div>
             <div class="col-lg-6 form-floating">
               <input type="text" class="form-control" id="validationCustom06" required>
-              <label for="validationCustom06" class="form-label">Preaching</label>
+              <label for="validationCustom06" class="form-label">傳道</label>
               <div class="invalid-feedback">
-                Please input the attendance of preaching meetings.
+                Please input the attendance of preaching.
+              </div>
+            </div>
+            <div class="col-lg-6 form-floating">
+              <input type="text" class="form-control" id="validationCustom04" required>
+              <label for="validationCustom04" class="form-label">侍奉</label>
+              <div class="invalid-feedback">
+                Please input the attendance of church services.
+              </div>
+            </div>
+            <div class="col-lg-6 form-floating">
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <label for="validationCustom07" class="form-label">1/10</label>
+              <div class="invalid-feedback">
+                Please input the % of tithe.
               </div>
             </div>
         </div>
@@ -165,11 +172,13 @@
         <table class="table table-striped table-hover table-light">
         <thead>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Worship</th>
-            <th scope="col">Study</th>
-            <th scope="col">Preaching</th>
-            <th scope="col">Evaluation</th>
+            <th scope="col">組員</th>
+            <th scope="col">禮拜出席</th>
+            <th scope="col">發表</th>
+            <th scope="col">傳道</th>
+            <th scope="col">侍奉</th>
+            <th scope="col">1/10</th>
+            <th scope="col">分數</th>
         </thead>
         <tbody id="rptBody">
         </tbody>
@@ -181,8 +190,9 @@
     <div class="row">
       <div class="col text-center">
         <!-- Button trigger modal -->
+        <p><strong>區域分數：<span id="score" class="lead"></span></strong><small class="text-secondary"> / 500</small></p>
         <button id="reportBtn" type="button" class="btn btn-primary text-center d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          Input
+          輸入報告
         </button>
       </div>
     </div>
