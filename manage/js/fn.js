@@ -346,7 +346,7 @@ function generateReport() {
     rptBtn.classList.remove('d-none');
   }
   var span = document.getElementById('score');
-  span.innerHTML = Math.floor(total/members.length);
+  span.innerHTML = Math.floor(total/entries.length);
 
 }
 
@@ -499,4 +499,15 @@ var encrypted = CryptoJS.AES.encrypt("Message", "Secret");
 var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret");
 console.log("encrypted: " + encrypted);
 console.log("decrypted: " + decrypted.toString(CryptoJS.enc.Utf8));
+
+$(document).ready(function() {
+  $.getJSON('https://script.google.com/macros/s/AKfycbzziyjx3RrBDGWQ_Kvn5san8vo1SuWE3OII2VMq6NEhYHNhe13vsz730BM0uKdaK3wB/exec?k=123', function(data) {
+
+    if (data != null) {
+      console.log('go() res: '+ JSON.stringify(data));
+    }else{
+      console.log('data is null');
+    }
+  });
+});
 
