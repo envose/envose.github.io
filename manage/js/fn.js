@@ -501,6 +501,18 @@ console.log("encrypted: " + encrypted);
 console.log("decrypted: " + decrypted.toString(CryptoJS.enc.Utf8));
 
 $(document).ready(function() {
+  $.ajax({
+
+    url: 'https://script.google.com/macros/s/AKfycbzziyjx3RrBDGWQ_Kvn5san8vo1SuWE3OII2VMq6NEhYHNhe13vsz730BM0uKdaK3wB/exec?k=123',
+    // data: myData,
+    type: 'GET',
+    // crossDomain: true,
+    dataType: 'jsonp',
+    success: function() { alert("Success"); },
+    error: function() { alert('Failed!'); }
+    // beforeSend: setHeader
+});
+  /*
   $.getJSON('https://script.google.com/macros/s/AKfycbzziyjx3RrBDGWQ_Kvn5san8vo1SuWE3OII2VMq6NEhYHNhe13vsz730BM0uKdaK3wB/exec?k=123', function(data) {
 
     if (data != null) {
@@ -509,5 +521,6 @@ $(document).ready(function() {
       console.log('data is null');
     }
   });
+  */
 });
 
