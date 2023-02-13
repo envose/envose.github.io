@@ -1,5 +1,12 @@
-var user = 'envose';
+var user = '';
 var write = '';
+var fullMarks = {
+  "sp": 0,
+  "p": 0,
+  "s": 0,
+  "t": 0
+};
+
 var nameList = [
 	{
 		'unit': 'YF_1-1',

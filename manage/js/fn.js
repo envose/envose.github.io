@@ -1,8 +1,9 @@
-const start = "2022-10";
+var start = "";
 var rptYrList = [];
 var rptMthList = {};
 var ip = "";
 const form = document.forms['submit-to-google-sheet'];
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwhWrQIKC0CHWSwNGDDe8v3J0EDLyCn9cR4QnCW8mFjIuFQMdrpXzYytWTuRg_RTTEQ/exec?k=';
 
 (() => {
   'use strict'
@@ -16,6 +17,8 @@ const form = document.forms['submit-to-google-sheet'];
       if (!form.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
+      }else{
+        alert("OK");
       }
 
       form.classList.add('was-validated')
@@ -90,24 +93,15 @@ function getFullScore (y, m, aspect) {
       score = getNumOfWeekDays(y, m, 2)+getNumOfWeekDays(y, m, 6)*3;
       break;
     case "sp":
-      score = 10;
-      break;
     case "p":
-      score = 30;
-      break;
     case "s":
-      score = 10;
-      break;
     case "t":
-      score = 100;
+      score = fullMarks[aspect];
       break;
   }
   return score;
 }
 
-function getTotal() {
-
-}
 
 function createRptLI(value, label, onclick) {
   var li = document.createElement('li');
@@ -144,7 +138,7 @@ function createRptEntries(entry) {
 function selectAge(value, label) {
   var btn = document.getElementById('rptAgeBtnGp');
   btn.innerHTML = label;
-  rptSelector.age = value;
+  rptSelector.age = {'label': label, 'value': value};
   setRptUnitBtn();
   generateReport();
 }
@@ -172,7 +166,7 @@ function selectMonth(value, label) {
 }
 
 function setRptAgeBtn() {
-  
+  /*
   if (ageList.length == 1) {
     var btn = document.getElementById('rptAgeBtn');
     btn.innerHTML = ageList[0].label;
@@ -180,24 +174,34 @@ function setRptAgeBtn() {
     btn.classList.remove('d-none');
   }
   if (ageList.length > 1) {
+    */
     var btn = document.getElementById('rptAgeBtnGp');
     btn.innerHTML = ageList[0].label;
     btn.classList.remove('d-none');
     var ul = document.getElementById('rptAgeBtnGpUL');
     ul.innerHTML = '';
-    for (let i = 0; i < list.length; i++) {
+
+    if (ageList.length == 1) {
+      btn.classList.add('disabled');
+    }else{
+      btn.classList.remove('disabled');
+    }
+    for (let i = 0; i < ageList.length; i++) {
       var li = createRptLI(ageList[i].value, ageList[i].label, function () {selectAge(ageList[i].value, ageList[i].label)});
       ul.appendChild(li);
     }
     selectUnit(ageList[0].value, ageList[0].label);
-  }
+  // }
   rptSelector.age = ageList[0];
   setRptUnitBtn();
 }
 
 function setRptUnitBtn() {
   var list = [];
+  console.log("unitList: "+JSON.stringify(unitList));
+  console.log("rptSelector: "+JSON.stringify(rptSelector));
   Array.from(unitList).forEach(unit => {
+    console.log(unit.age+rptSelector.age.value);
     if (unit.age == rptSelector.age.value) {
       var json = {};
       json.value = unit.unit;
@@ -205,7 +209,7 @@ function setRptUnitBtn() {
       list.push(json);
     }
   });
-  
+  /*
   if (list.length == 1) {
     var btn = document.getElementById('rptUnitBtn');
     btn.innerHTML = list[0].label;
@@ -213,21 +217,29 @@ function setRptUnitBtn() {
     btn.classList.remove('d-none');
   }
   if (list.length > 1) {
+    */
     var btn = document.getElementById('rptUnitBtnGp');
     btn.innerHTML = list[0].label;
     btn.classList.remove('d-none');
     var ul = document.getElementById('rptUnitBtnGpUL');
     ul.innerHTML = '';
+    if (list.length == 1) {
+      btn.classList.add('disabled');
+    }else{
+      btn.classList.remove('disabled');
+    }
     for (let i = 0; i < list.length; i++) {
       var li = createRptLI(list[i].value, list[i].label, function () {selectUnit(list[i].value, list[i].value)});
       ul.appendChild(li);
     }
     selectUnit(list[0].value, list[0].value);
-  }
+  // }
+  console.log("list: "+JSON.stringify(list));
   rptSelector.unit = list[0].value;
 }
 
 function setRptYearBtn() {
+  /*
   if (rptYrList.length == 1) {
     var btn = document.getElementById('rptYearBtn');
     btn.innerHTML = rptYrList[0];
@@ -235,17 +247,23 @@ function setRptYearBtn() {
     btn.classList.remove('d-none');
   }
   if (rptYrList.length > 1) {
+    */
     var btn = document.getElementById('rptYearBtnGp');
     btn.innerHTML = rptYrList[0];
     btn.classList.remove('d-none');
     var ul = document.getElementById('rptYearBtnGpUL');
     ul.innerHTML = '';
+    if (rptYrList.length == 1) {
+      btn.classList.add('disabled');
+    }else{
+      btn.classList.remove('disabled');
+    }
     for (let i = 0; i < rptYrList.length; i++) {
       var li = createRptLI(rptYrList[i], rptYrList[i], function () {selectYear(rptYrList[i], rptYrList[i])});
       ul.appendChild(li);
     }
     selectYear(rptYrList[0], rptYrList[0]);
-  }
+  // }
   rptSelector.year = rptYrList[0];
   setRptMonthBtn();
 }
@@ -255,13 +273,15 @@ function setRptMonthBtn() {
   var list = rptMthList[rptSelector.year];
   var btn1 = document.getElementById('rptMonthBtn');
   var btn2 = document.getElementById('rptMonthBtnGp');
+  
   if (list.length == 1) {
-    btn2.classList.add('d-none');
-    btn1.innerHTML = monthLabel[list[0]];
-    btn1.value = list[0];
-    btn1.classList.remove('d-none');
+    btn2.classList.add('disabled');
+  }else{
+    btn2.classList.remove('disabled');
   }
+  /*
   if (list.length > 1) {
+    */
     btn1.classList.add('d-none');
     btn2.innerHTML = list[0];
     btn2.classList.remove('d-none');
@@ -272,7 +292,7 @@ function setRptMonthBtn() {
       ul.appendChild(li);
     }
     selectMonth(list[0], monthLabel[list[0]]);
-  }
+  // }
   rptSelector.month = list[0];
 }
 
@@ -397,6 +417,12 @@ function resetForm() {
 }
 
 function clearContent() {
+
+  $('#red_alert').hide();
+  $('#overlay').hide();
+  $('#signin').hide();
+  $('#sys').show();
+  /*
   var c = document.querySelector('#content');
   c.innerHTML = '';
   var ct = document.querySelector('#reportContainer');
@@ -406,6 +432,7 @@ function clearContent() {
   if (menuToggle.classList.contains('show')) { 
     bsCollapse.toggle(); 
   } 
+  */
 }
 
 function getAge(str) {
@@ -500,27 +527,77 @@ var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret");
 console.log("encrypted: " + encrypted);
 console.log("decrypted: " + decrypted.toString(CryptoJS.enc.Utf8));
 
-$(document).ready(function() {
-  $.ajax({
+function parseData(data) {
+  start = data.startDate;
+  fullMarks.sp=data.sp;
+  fullMarks.p=data.p;
+  fullMarks.s=data.s;
+  fullMarks.t=data.t;
+  user = data.user;
+  write = data.write;
+  nameList = data.unitList;
+  console.log(nameList);
+}
 
-    url: 'https://script.google.com/macros/s/AKfycbwFDejWjf7fz8S8hiwuQ_Jp5g36_WlrCz0LgujaAnAXoIYXRFLBeQUQmUlaRfCLyvGd/exec?k=123',
-    // data: myData,
-    type: 'GET',
-    // crossDomain: true,
-    dataType: 'jsonp',
-    success: function() { alert("Success"); },
-    error: function() { alert('Failed!'); }
-    // beforeSend: setHeader
-});
-  /*
-  $.getJSON('https://script.google.com/macros/s/AKfycbzziyjx3RrBDGWQ_Kvn5san8vo1SuWE3OII2VMq6NEhYHNhe13vsz730BM0uKdaK3wB/exec?k=123', function(data) {
+function getData(k) {
 
+  $.getJSON(scriptURL+k, function(data) {
+    
     if (data != null) {
       console.log('go() res: '+ JSON.stringify(data));
+      if (data.result=="success") {
+        localStorage.setItem('k', k);
+        parseData(data);
+        openReport();
+      }else{
+        redAlert(data.error_msg);
+      }
     }else{
-      console.log('data is null');
+      redAlert("Failed to access server");
     }
+    $('#overlay').hide();
   });
-  */
-});
+}
+
+function login() {
+  $('#overlay').show();
+  var e = document.querySelector('#inputEmail').value;
+  var p = document.querySelector('#inputPassword').value;
+  var encrypted = btoa(e+p);
+
+  getData(encrypted);
+  
+}
+
+function logout() {
+  localStorage.clear();
+  window.location.assign(window.location.href.split('?')[0]);
+}
+
+function redAlert(msg) {
+  var e = document.querySelector('#red_alert_msg');
+  e.innerHTML = msg;
+  $('#red_alert').show();
+}
+
+function loginPage() {
+  $('#overlay').hide();
+  $('#signin').show();
+  $('#sys').hide();
+}
+
+function sysPage() {
+  $('#red_alert').hide();
+  $('#overlay').hide();
+  $('#signin').hide();
+  $('#sys').show();
+}
+window.onload = function() {
+  var k = localStorage.getItem("k");
+  if (k) {
+    getData(k);
+  }else{
+    loginPage();
+  }
+}
 

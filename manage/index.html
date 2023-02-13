@@ -3,26 +3,63 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HK Zion</title>
+    <title>Shepherds</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://envose.github.io/ruby-gemstone.png" rel="icon" type="image/png">
     <link href="https://envose.github.io/ruby-gemstone.png" rel="apple-touch-icon" type="image/png">
     <link href="css/basic.css" rel="stylesheet">
   </head>
   <body>
+  <div id="overlay">
+    <div class="centered">
+      <div class="spinner-border text-light" role="status">
+        <span class="sr-only"></span>
+      </div>
+    </div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>
+  <div class="alert alert-danger collapse" role="alert" id="red_alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <span><strong id="red_alert_msg"></strong></span>
+    <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    <div class="text-center" id="signin">
+      <form class="form-signin">
+      <img class="mb-4" src="https://envose.github.io/ruby-gemstone.png" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Shepherds</h1>
+      <!-- <label for="inputEmail" class="sr-only">Email address</label> -->
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+      <!-- <label for="inputPassword" class="sr-only">Password</label> -->
+      <input type="password" id="inputPassword" class="form-control" placeholder="密碼" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">登入</button>
+      
+      <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+      </form>
+    </div>
+    <div id="sys">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand mb-0 h1" href="#" onClick="clearContent()">HK Zion</a>
+      <a class="navbar-brand mb-0 h1" href="#" onClick="clearContent()">Shepherds</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" onClick="openReport()">Report</a>
+            <a class="nav-link active" aria-current="page" href="#" onClick="openReport()">報告</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" aria-current="page" href="#" onClick="openAnalysis()">Stat</a>
+            <a class="nav-link disabled" aria-current="page" href="#" onClick="openAnalysis()">管理</a>
           </li>
           <!--
           <li class="nav-item">
@@ -84,43 +121,43 @@
               <label for="validationCustom02" class="form-label">月份</label>
             </div>
             <div class="col-lg-6 form-floating">
-              <input type="number" class="form-control" id="validationCustom03" required>
-              <label for="validationCustom03" class="form-label">禮拜出席</label>
+              <input type="number" class="form-control" id="input_item1" required>
+              <label for="input_item1" class="form-label">禮拜出席</label>
               <div class="invalid-feedback">
                 Please input the attendance of worship services.
               </div>
             </div>
             <div class="col-lg-6 form-floating">
-              <input type="number" class="form-control" id="validationCustom05" required>
-              <label for="validationCustom05" class="form-label">發表次數</label>
+              <input type="number" class="form-control" id="input_item2" required>
+              <label for="input_item2" class="form-label">發表次數</label>
               <div class="invalid-feedback">
                 Please input the number of practicing sermon preaching.
               </div>
             </div>
             <div class="col-lg-6 form-floating">
-              <input type="number" class="form-control" id="validationCustom06" required>
-              <label for="validationCustom06" class="form-label">傳道次數</label>
+              <input type="number" class="form-control" id="input_item3" required>
+              <label for="input_item3" class="form-label">傳道活動</label>
               <div class="invalid-feedback">
                 Please input the attendance of preaching.
               </div>
             </div>
             <div class="col-lg-6 form-floating">
-              <input type="number" class="form-control" id="validationCustom04" required>
-              <label for="validationCustom04" class="form-label">侍奉次數</label>
+              <input type="number" class="form-control" id="input_item4" required>
+              <label for="input_item14" class="form-label">侍奉次數</label>
               <div class="invalid-feedback">
                 Please input the attendance of church services.
               </div>
             </div>
             <div class="col-lg-4 form-floating">
-              <input type="number" class="form-control" id="validationCustom07" required>
-              <label for="validationCustom07" class="form-label">十分之一（%）</label>
+              <input type="number" class="form-control" id="input_item5" required>
+              <label for="input_item5" class="form-label">十分之一（%）</label>
               <div class="invalid-feedback">
                 Please input the % of tithe.
               </div>
             </div>
             <div class="col-lg-8 form-floating">
-              <input type="text" class="form-control" id="remarks">
-              <label for="remarks" class="form-label">備註（如有）</label>
+              <input type="text" class="form-control" id="input_item6">
+              <label for="input_item6" class="form-label">備註（如有）</label>
               
             </div>
         </div>
@@ -136,16 +173,16 @@
 
     <div class="row">
       <div class="col text-center">
+        <div class="btn-group" role="group" aria-label="Basic outlined">
           <div class="btn-group" role="group">
-            <button id="rptAgeBtnGp" type="button" class="btn btn-outline-primary dropdown-toggle  rptSelector d-none active" data-bs-toggle="dropdown" aria-expanded="false">
+            <button id="rptAgeBtnGp" type="button" class="btn btn-outline-primary dropdown-toggle  rptSelector d-none" data-bs-toggle="dropdown" aria-expanded="false">
               Age
             </button>
             <ul id="rptAgeBtnGpUL" class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             </ul>
-          </div>
-        <div class="btn-group" role="group" aria-label="Basic outlined">
-
           <button type="button" class="btn btn-primary rptSelector d-none" id="rptAgeBtn">Age</button>
+          </div>
+
           <button type="button" class="btn btn-primary rptSelector d-none" id="rptUnitBtn">Unit</button>
           <div class="btn-group" role="group">
             <button id="rptUnitBtnGp" type="button" class="btn btn-outline-primary dropdown-toggle  rptSelector d-none" data-bs-toggle="dropdown" aria-expanded="false">
@@ -180,7 +217,7 @@
             <th scope="col">組員</th>
             <th scope="col">禮拜出席</th>
             <th scope="col">發表次數</th>
-            <th scope="col">傳道次數</th>
+            <th scope="col">傳道活動</th>
             <th scope="col">侍奉次數</th>
             <th scope="col">十分之一</th>
             <th scope="col">總分</th>
@@ -201,6 +238,7 @@
         </button>
       </div>
     </div>
+  </div>
   </div>
 
 
