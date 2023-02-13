@@ -563,8 +563,11 @@ function login() {
   $('#overlay').show();
   var e = document.querySelector('#inputEmail').value;
   var p = document.querySelector('#inputPassword').value;
+  if (e.length < 1 || p.length < 1) {
+    redAlert("不能留空");
+    return;
+  }
   var encrypted = btoa(e+p);
-
   getData(encrypted);
   
 }
