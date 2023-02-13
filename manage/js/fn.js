@@ -564,7 +564,7 @@ function login() {
   var e = document.querySelector('#inputEmail').value;
   var p = document.querySelector('#inputPassword').value;
   if (e.length < 1 || p.length < 1) {
-    redAlert("不能留空");
+    // redAlert("不能留空");
     loginPage();
     return;
   }
