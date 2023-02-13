@@ -565,6 +565,7 @@ function login() {
   var p = document.querySelector('#inputPassword').value;
   if (e.length < 1 || p.length < 1) {
     redAlert("不能留空");
+    loginPage();
     return;
   }
   var encrypted = btoa(e+p);
