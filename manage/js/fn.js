@@ -3,7 +3,7 @@ var rptYrList = [];
 var rptMthList = {};
 var ip = "";
 const form = document.forms['submit-to-google-sheet'];
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwhWrQIKC0CHWSwNGDDe8v3J0EDLyCn9cR4QnCW8mFjIuFQMdrpXzYytWTuRg_RTTEQ/exec?k=';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxIwuIrQLMGDnZejDJ4RbfuaNqJePeUUo-ZWI0zpnykuwpNJW--jOnMrW7AFfkQhMUs/exec?k=';
 
 (() => {
   'use strict'
