@@ -3,7 +3,8 @@ var rptYrList = [];
 var rptMthList = {};
 var ip = "";
 const form = document.forms['submit-to-google-sheet'];
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxIwuIrQLMGDnZejDJ4RbfuaNqJePeUUo-ZWI0zpnykuwpNJW--jOnMrW7AFfkQhMUs/exec?k=';
+const loginForm = document.forms['login_form'];
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwLeu0lGOyddhTwtLtJ3b6iz2GXnNTp6T-tw2tB8pi6p92pk7T_fEd2y5HaUu9FYXJq/exec?k=';
 
 (() => {
   'use strict'
@@ -12,19 +13,46 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbxIwuIrQLMGDnZejDJ4Rb
   const forms = document.querySelectorAll('.needs-validation')
 
   // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
+  Array.from(forms).forEach(f => {
+    f.addEventListener('submit', event => {
+      if (!f.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
-      }else{
-        alert("OK");
       }
 
-      form.classList.add('was-validated')
+      f.classList.add('was-validated')
     }, false)
   })
 })()
+
+loginForm.addEventListener('submit', e => {
+    e.preventDefault()
+    login();
+      // form.reset();
+      // location.reload();
+  });
+
+form.addEventListener('submit', e => {
+    e.preventDefault()
+      $('#overlay').show();
+      fetch(scriptURL+localStorage.getItem("k"), { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        console.log(JSON.stringify(response));
+        // alert('已記錄 Recorded');
+        ;
+        getData(localStorage.getItem("k"));
+        // viewStar();
+        // $('#starModal').modal('show');
+        // retrieveData(true);
+        // selectStar('Envose');
+        // name = document.getElementById("finame").value;
+      })
+      .catch(error => {
+        alert('錯誤 Error\n['+ error.message + ']');
+        // off();
+      })
+      $('#input_record').modal('hide');
+  });
 
 const navLinks = document.querySelectorAll('.nav-item:not(.dropdown)');
 const menuToggle = document.getElementById('navbarSupportedContent');
@@ -400,19 +428,18 @@ function resetRptSelector() {
   const rpt = document.querySelectorAll('.rptSelector')
 
   // Loop over them and prevent submission
-  Array.from(rpt).forEach(form => {
-    form.classList.add('d-none');
+  Array.from(rpt).forEach(f => {
+    f.classList.add('d-none');
   })
 }
 
 function resetForm() {
-  form.reset();
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
   // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.classList.remove('was-validated')
+  Array.from(forms).forEach(f => {
+    f.classList.remove('was-validated')
   })
 }
 
@@ -422,6 +449,7 @@ function clearContent() {
   $('#overlay').hide();
   $('#signin').hide();
   $('#sys').show();
+  
   /*
   var c = document.querySelector('#content');
   c.innerHTML = '';
@@ -507,11 +535,11 @@ function prefill() {
   mo.value = rptSelector.year+'-'+rptSelector.month;
 }
 
-$('#staticBackdrop').on('hidden.bs.modal', function(){
+$('#input_record').on('hidden.bs.modal', function(){
   resetForm();
 });
 
-$('#staticBackdrop').on('show.bs.modal', function(){
+$('#input_record').on('show.bs.modal', function(){
   prefill();
 });
 
@@ -540,27 +568,36 @@ function parseData(data) {
 }
 
 function getData(k) {
-
   $.getJSON(scriptURL+k, function(data) {
+    
     
     if (data != null) {
       console.log('go() res: '+ JSON.stringify(data));
       if (data.result=="success") {
+
+        var o = document.querySelector('#overlay');
+        o.classList.remove('d-none');
+
+        console.log(JSON.stringify(data));
         localStorage.setItem('k', k);
         parseData(data);
+        sysPage();
         openReport();
+        return;
       }else{
-        redAlert(data.error_msg);
+        console.log(JSON.stringify(data));
+        redAlert(data.error_msg?data.error_msg:"Unknown Error");
       }
     }else{
       redAlert("Failed to access server");
     }
     $('#overlay').hide();
+    localStorage.clear();
+    loginPage();
   });
 }
 
 function login() {
-  $('#overlay').show();
   var e = document.querySelector('#inputEmail').value;
   var p = document.querySelector('#inputPassword').value;
   if (e.length < 1 || p.length < 1) {
@@ -575,7 +612,7 @@ function login() {
 
 function logout() {
   localStorage.clear();
-  window.location.assign(window.location.href.split('?')[0]);
+  location.reload();
 }
 
 function redAlert(msg) {
@@ -585,23 +622,30 @@ function redAlert(msg) {
 }
 
 function loginPage() {
+  var l = document.querySelector('#signin');
+  l.classList.remove('d-none');
+  $('#default_overlay').hide();
   $('#overlay').hide();
   $('#signin').show();
   $('#sys').hide();
 }
 
 function sysPage() {
+  var s = document.querySelector('#sys');
+  s.classList.remove('d-none');
+  $('#default_overlay').hide();
   $('#red_alert').hide();
   $('#overlay').hide();
   $('#signin').hide();
   $('#sys').show();
 }
-window.onload = function() {
+
+$(document).ready(function() {
   var k = localStorage.getItem("k");
   if (k) {
     getData(k);
   }else{
     loginPage();
   }
-}
-
+  
+});

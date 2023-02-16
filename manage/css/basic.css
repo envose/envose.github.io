@@ -27,26 +27,9 @@ html, body {
 #457B9D
 #1D3557*/
 
-.centered {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-  cursor: none;
-}
-
 table {
   position:  relative;
+  max-height: 30 vh;
 }
 
 th {
@@ -54,6 +37,9 @@ th {
   position: sticky;
   top: 0;  /*Don't forget this, required for the stickiness */
 }
+.table-responsive {
+        overflow: visible;
+    }
 
 #signin {
   display: -ms-flexbox;
@@ -148,11 +134,11 @@ th {
 
 .centered {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+/*
 .spinner {
   height: 60px;
   width: 60px;
@@ -174,7 +160,7 @@ th {
   width: 3rem;
   height: 3rem;
 }
-
+*/
 #myModal {
   color: black;
 }
