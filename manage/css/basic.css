@@ -29,7 +29,6 @@ html, body {
 
 table {
   position:  relative;
-  max-height: 30 vh;
 }
 
 th {
@@ -100,7 +99,7 @@ th {
 }
 
 #container_content {
-  max-height: 70vh;
+  max-height: 50vh;
   overflow: auto;
 }
 
