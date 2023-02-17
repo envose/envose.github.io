@@ -4,7 +4,7 @@ var rptMthList = {};
 var ip = "";
 const form = document.forms['submit-to-google-sheet'];
 const loginForm = document.forms['login_form'];
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwLeu0lGOyddhTwtLtJ3b6iz2GXnNTp6T-tw2tB8pi6p92pk7T_fEd2y5HaUu9FYXJq/exec?k=';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbz2hwjGo9O1Z7ucQyVJID0jWiRI69hCYK6DloZbxL6taEdseR5TYyyshFd06Dp4EDe7/exec?k=';
 
 (() => {
   'use strict'
@@ -13,25 +13,48 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbwLeu0lGOyddhTwtLtJ3b
   const forms = document.querySelectorAll('.needs-validation')
 
   // Loop over them and prevent submission
-  Array.from(forms).forEach(f => {
-    f.addEventListener('submit', event => {
-      if (!f.checkValidity()) {
-        event.preventDefault()
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault()
+      if (!form.checkValidity()) {
         event.stopPropagation()
+      }else{
+
+      $('#overlay').show();
+      fetch(scriptURL+localStorage.getItem("k"), { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        console.log(JSON.stringify(response));
+        // alert('已記錄 Recorded');
+        ;
+        getData(localStorage.getItem("k"));
+        // viewStar();
+        // $('#starModal').modal('show');
+        // retrieveData(true);
+        // selectStar('Envose');
+        // name = document.getElementById("finame").value;
+      })
+      .catch(error => {
+        alert('錯誤 Error\n['+ error.message + ']');
+        // off();
+      })
+      $('#input_record').modal('hide');
       }
 
-      f.classList.add('was-validated')
+      form.classList.add('was-validated')
     }, false)
   })
 })()
 
 loginForm.addEventListener('submit', e => {
     e.preventDefault()
+    $('#overlay').show();
+    $("#inputEmail").blur(); 
+    $("#inputPassword").blur(); 
+    $("#loginBtn").blur(); 
     login();
-      // form.reset();
       // location.reload();
   });
-
+/*
 form.addEventListener('submit', e => {
     e.preventDefault()
       $('#overlay').show();
@@ -53,7 +76,7 @@ form.addEventListener('submit', e => {
       })
       $('#input_record').modal('hide');
   });
-
+*/
 const navLinks = document.querySelectorAll('.nav-item:not(.dropdown)');
 const menuToggle = document.getElementById('navbarSupportedContent');
 const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
@@ -533,6 +556,8 @@ function prefill() {
 
   var mo = document.querySelector('#input_month');
   mo.value = rptSelector.year+'-'+rptSelector.month;
+
+  $('#input_name').focus();
 }
 
 $('#input_record').on('hidden.bs.modal', function(){
@@ -555,6 +580,26 @@ var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret");
 console.log("encrypted: " + encrypted);
 console.log("decrypted: " + decrypted.toString(CryptoJS.enc.Utf8));
 
+function parseRecords(arr) {
+  var res = [];
+  Array.from(arr).forEach(record => {
+    var entry = {};
+    entry.timestamp = record[0];
+    entry.unit = record[1];
+    entry.unit_display = record[2];
+    entry.name = record[3];
+    entry.entry = record[4];
+    entry.score_w = record[5];
+    entry.score_sp = record[6];
+    entry.score_p = record[7];
+    entry.score_s = record[8];
+    entry.score_t = record[9];
+    entry.remarks = record[10];
+    res.push(entry);
+  });
+  return res;
+}
+
 function parseData(data) {
   start = data.startDate;
   fullMarks.sp=data.sp;
@@ -564,7 +609,7 @@ function parseData(data) {
   user = data.user;
   write = data.write;
   nameList = data.unitList;
-  console.log(nameList);
+  records = parseRecords(data.records);
 }
 
 function getData(k) {
@@ -572,6 +617,7 @@ function getData(k) {
     
     
     if (data != null) {
+      $('#overlay').hide();
       console.log('go() res: '+ JSON.stringify(data));
       if (data.result=="success") {
 
@@ -591,7 +637,6 @@ function getData(k) {
     }else{
       redAlert("Failed to access server");
     }
-    $('#overlay').hide();
     localStorage.clear();
     loginPage();
   });
@@ -607,7 +652,6 @@ function login() {
   }
   var encrypted = btoa(e+p);
   getData(encrypted);
-  
 }
 
 function logout() {
@@ -628,6 +672,9 @@ function loginPage() {
   $('#overlay').hide();
   $('#signin').show();
   $('#sys').hide();
+
+  loginForm.reset();
+  $("#inputEmail").focus(); 
 }
 
 function sysPage() {

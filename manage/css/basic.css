@@ -39,6 +39,7 @@ th {
 }
 .table-responsive {
         overflow: visible;
+  max-height: 30 vh;
     }
 
 #signin {
