@@ -49,8 +49,8 @@ $(document).ready(function() {
         var obj = entry[key];
         if (k == obj[1]) {
           dates.push(obj[0]);
-          names.push(obj[6]);
-          phones.push(obj.length>=8?obj[7]:'');
+          names.push(obj[7]);
+          phones.push(obj.length>=9?obj[8]:'');
         }
       }
       off();
