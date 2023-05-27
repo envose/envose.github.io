@@ -18,13 +18,13 @@ function createTableView() {
   var th1 = document.createElement('th');
   var th2 = document.createElement('th');
   var th3 = document.createElement('th');
-  var th4 = document.createElement('th');
+  // var th4 = document.createElement('th');
 
   th0.setAttribute('scope', 'col');
   th1.setAttribute('scope', 'col');
   th2.setAttribute('scope', 'col');
   th3.setAttribute('scope', 'col');
-  th4.setAttribute('scope', 'col');
+  // th4.setAttribute('scope', 'col');
 
   th0.innerHTML = '#';
   th1.innerHTML = getSysTranslate('record');
@@ -36,7 +36,7 @@ function createTableView() {
   thead.appendChild(th1);
   thead.appendChild(th2);
   thead.appendChild(th3);
-  thead.appendChild(th4);
+  // thead.appendChild(th4);
 
   table.appendChild(thead);
   table.appendChild(tbody);
@@ -59,19 +59,19 @@ function createTableView() {
     var td1 = document.createElement('td');
     var td2 = document.createElement('td');
     var td3 = document.createElement('td');
-    var td4 = document.createElement('td');
+    // var td4 = document.createElement('td');
 
     td0.innerHTML = i+1;
     td1.innerHTML = dates[i];
     td2.innerHTML = names[i];
     td3.innerHTML = phones[i];
-    td4.innerHTML = topics[i];
+    // td4.innerHTML = topics[i];
 
     tr.appendChild(td0);
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
-    tr.appendChild(td4);
+    // tr.appendChild(td4);
     tbody.appendChild(tr);
   }
 
