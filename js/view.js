@@ -30,7 +30,7 @@ function createTableView() {
   th1.innerHTML = getSysTranslate('record');
   th2.innerHTML = getSysTranslate('name');
   th3.innerHTML = getSysTranslate('contact');
-  th4.innerHTML = getSysTranslate('topic');
+  // th4.innerHTML = getSysTranslate('topic');
 
   thead.appendChild(th0);
   thead.appendChild(th1);
