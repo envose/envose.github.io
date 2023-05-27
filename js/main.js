@@ -6,6 +6,9 @@ var usr = '';
 var dates;
 var names;
 var phones;
+var topics;
+var willingness;
+var ractiviries;
 
 
 $(document).ready(function() {
@@ -49,6 +52,7 @@ $(document).ready(function() {
         var obj = entry[key];
         if (k == obj[1]) {
           dates.push(obj[0]);
+          topics.push(obj[3]);
           names.push(obj[7]);
           phones.push(obj.length>=9?obj[8]:'');
         }
