@@ -1,10 +1,10 @@
 var pool = [
-"0",
-"1",
-"2",
-"3",
-"4",
-"5"
+"錫安",
+"父親",
+"母親",
+"安息日",
+"逾越節",
+"祈禱"
 /*,
 "6",
 "7",
@@ -105,9 +105,12 @@ var pool = [
 
 var used = [];
 
-var dur = 3; // mins
+var dur = 0.1; // mins
+var indur = "00:06";
 
-window.onload = function() {
+function showContent(content) {
+	var div = document.getElementById('content');
+	div.innerHTML = content;
 }
 
 function getRandomInt(max) {
@@ -122,23 +125,31 @@ while (used.includes(num)) {
 if (used.length < pool.length) {
 num = getRandomInt(pool.length);
 }else{
-num = "done";
+num = "End";
+stopTimer()
 }
 
 }
 
-if (num != "done") {
+if (num != "End") {
 used.push(num);
 }
 
 console.log("num: "+num);
-var div = document.getElementById('content');
-div.innerHTML = num;
+showContent((num == "End") ? num : pool[num]);
+}
+
+function hideBtn(btn) {
+	btn.style = "display: none";
+}
+
+function showBtn(btn) {
+	btn.style = "display: block";
 }
 
 function startTimer(duration, display, bar) {
     var timer = duration, minutes, seconds;
-    setInterval(function () {
+    var interval = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
         
@@ -153,14 +164,78 @@ function startTimer(duration, display, bar) {
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            timer = duration;
+            //timer = duration;
+            clearInterval(interval);
         }
     }, 1000);
 }
 
-window.onload = function () {
-    var minutes = 60 * dur,
+//window.onload = function () {
+    var minutes1 = 60 * dur;
     display = document.querySelector('#time');
     bar = document.querySelector('#progressBar');
-    startTimer(minutes, display, bar);
-};
+    var timer = minutes1, minutes, seconds;
+
+    display.innerHTML = indur;
+    nextBtn = document.querySelector('#nextBtn');
+    startTimerBtn = document.querySelector('#startTimerBtn');
+    stopTimerBtn = document.querySelector('#stopTimerBtn');
+    resetTimerBtn = document.querySelector('#resetTimerBtn');
+
+    hideBtn(nextBtn);
+    hideBtn(stopTimerBtn);
+    hideBtn(resetTimerBtn);
+
+    function timerFn() {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        
+        var totalSeconds = dur * 60
+        , remainingSeconds = minutes * 60 + seconds
+        
+        bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
+        
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            //timer = duration;
+            stopTimer();
+        }
+    }
+
+    var interval = null;
+
+    function stopTimer() {
+		clearInterval(interval);
+		hideBtn(stopTimerBtn);
+		hideBtn(startTimerBtn);
+		hideBtn(nextBtn);
+		showBtn(resetTimerBtn);
+	}
+
+	function startTimer() {
+		interval = setInterval(timerFn, 1000);
+		hideBtn(startTimerBtn);
+		hideBtn(resetTimerBtn);
+		showBtn(stopTimerBtn);
+		showBtn(nextBtn);
+		nextBtn.click();
+	}
+
+	function resetTimer() {
+		used = [];
+		showContent("");
+		var minutes1 = 60 * dur;
+		timer = minutes1, minutes, seconds;
+		var div = document.getElementById('time');
+		display.innerHTML = indur;
+		bar.style.width = "100%";
+		hideBtn(resetTimerBtn);
+		showBtn(startTimerBtn);
+	}
+
+    
+//};
