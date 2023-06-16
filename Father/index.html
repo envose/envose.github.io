@@ -11,6 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
@@ -21,17 +22,18 @@
   <center><h5 id="time"></h5></center>
   <br>
  
-  <center><button type="button" class="btn btn-success" id="startTimerBtn" onclick="startTimer()">Start</button></center>
-  <center><button type="button" class="btn btn-danger" id="stopTimerBtn" onclick="stopTimer()">Stop</button></center>
-  <center><button type="button" class="btn btn-info" id="resetTimerBtn" onclick="resetTimer()">Reset</button></center>
+  <center><button type="button" class="btn btn-success" id="startTimerBtn" onclick="startTimer()"><i class="fa fa-play"></i></button></center>
+  <center><button type="button" class="btn btn-danger" id="stopTimerBtn" onclick="stopTimer()"><i class="fa fa-pause"></i></button></center>
+  <center><button type="button" class="btn btn-info" id="resetTimerBtn" onclick="resetTimer()"><i class="fa fa-refresh"></i></button></center>
   <br><br><br>
   <div class="jumbotron jumbotron-fluid text-center" id="card">
     <div class="container">
-      <center><h1 class="display-1" id="content"></h1></center>
+      <center><h1 class="display-1" id="content"><i>預備</i></h1></center>
     </div>
   </div>
   
-  <center><button type="button" class="btn btn-warning" id="nextBtn" onclick="next()">Next</button></center>
+  <center><button type="button" class="btn btn-warning btn-lg" id="nextBtn" onclick="next()">Next</button></center>
+  <script type="text/javascript" src="data.js"></script>
   <script type="text/javascript" src="fn.js"></script>
 </body>
 </html>
