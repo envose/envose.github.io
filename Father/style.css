@@ -9,6 +9,7 @@ body{
 }
 .btn:focus {
   outline: none;
+  box-shadow: none;
 }
 #rulesContent {
   font-size: 24px;
