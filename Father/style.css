@@ -7,10 +7,12 @@ body{
   -ms-user-select: none;
   user-select: none;
 }
-.btn:focus {
-  outline: none;
+
+:focus:not(:focus-visible) {
+  outline: 0;
   box-shadow: none;
 }
+
 #rulesContent {
   font-size: 24px;
   padding: 20px;
