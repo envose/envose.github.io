@@ -1,3 +1,4 @@
+
 body{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -11,5 +12,5 @@ body{
 }
 #rulesContent {
   font-size: 24px;
-  padding: 40px;
+  padding: 20px;
 }
