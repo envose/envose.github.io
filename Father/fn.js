@@ -118,6 +118,7 @@ function startTimer(duration, display, bar) {
 		showBtn(stopTimerBtn);
 		showBtn(nextBtn);
 		nextBtn.click();
+        nextBtn.blur();
 	}
 
 	function resetTimer() {
