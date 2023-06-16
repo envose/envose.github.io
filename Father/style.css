@@ -9,3 +9,7 @@ body{
 .btn:focus {
   outline: none;
 }
+#rulesContent {
+  font-size: 24px;
+  padding: 40px;
+}
