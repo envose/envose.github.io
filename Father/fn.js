@@ -1,4 +1,5 @@
 
+// run on page load
 var demo = true;
 
 const pool = demo ? pool_demo : pool_prod;
@@ -8,9 +9,6 @@ const max = demo ? 5 : 20;
 var count = max;
 
 var used = [];
-
-
-var isAudioStarted = false;
 
 
 var rulesContent = document.querySelector('#rulesContent');
@@ -31,19 +29,26 @@ hideBtn(nextBtn);
 hideBtn(stopTimerBtn);
 hideBtn(resetTimerBtn);
 
-
 var interval = null;
 
-$('#rulesModal').modal('show');
+var playAudio = document.getElementById('playAudio');
+var pauseAudio = document.getElementById('pauseAudio');
+var audio = document.getElementById('audio');
+ 
+var onPlay = function() {
+    audio.play(); // audio will load and then play
+};
+ 
+playAudio.addEventListener('click', onPlay, false);
 
-function playBeep() {
-  var audio = document.getElementById('audio');
-  audio.play();
-   
-  // at some later point in your script (does not need to be from a touch event)
-  audio.src = 'timer_10s.mp3';
-  audio.play();
-}
+var onPause = function() {
+    audio.pause();
+    audio.currentTime = 0;
+};
+ 
+pauseAudio.addEventListener('click', onPause, false);
+
+$('#rulesModal').modal('show');
 
 function showContent(content) {
   var div = document.getElementById('content');
@@ -53,7 +58,6 @@ function showContent(content) {
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-
 
 function next() {
 
@@ -97,11 +101,9 @@ function timerFn() {
   
   bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
   if (remainingSeconds < 11) {
-    if (!isAudioStarted) {
-      playBeep();
-      isAudioStarted = true;
+    if (remainingSeconds = 10) {
+      playAudio.click();
     }
-    
     bar.classList.remove("bg-warning");
     bar.classList.add("bg-danger");
   }
@@ -116,6 +118,7 @@ function timerFn() {
 }
 
 function stopTimer() {
+  pauseAudio.click();
   clearInterval(interval);
   hideBtn(stopTimerBtn);
   hideBtn(startTimerBtn);
@@ -124,7 +127,6 @@ function stopTimer() {
 }
 
 function startTimer() {
-  isAudioStarted = false;
   interval = setInterval(timerFn, 1000);
   hideBtn(startTimerBtn);
   hideBtn(resetTimerBtn);
