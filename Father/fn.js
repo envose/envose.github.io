@@ -9,8 +9,6 @@ var count = max;
 
 var used = [];
 
-const audio = new Audio();
-audio.autoplay =true;
 
 var isAudioStarted = false;
 
@@ -39,6 +37,10 @@ var interval = null;
 $('#rulesModal').modal('show');
 
 function playBeep() {
+  var audio = document.getElementById('audio');
+  audio.play();
+   
+  // at some later point in your script (does not need to be from a touch event)
   audio.src = 'timer_10s.mp3';
   audio.play();
 }
