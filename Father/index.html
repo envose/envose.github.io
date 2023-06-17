@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-touch-fullscreen" content="yes">
   <link href="https://envose.github.io/Father/icon_father.png" rel="icon" type="image/png">
   <link href="https://envose.github.io/Father/icon_father.png" rel="apple-touch-icon" type="image/png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -16,34 +18,37 @@
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <div>
-    <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#rulesModal"><i class="fa fa-navicon"></i></button>
-
-<div class="modal fade bd-example-modal-xl" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLongTitle">玩法</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="rulesContent">
-      </div>
-<!--       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div> -->
+  <div class="row">
+    <div class="col-auto mr-auto"><button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#rulesModal"><i class="fa fa-navicon"></i></button></div>
+    <!-- <div class="col-auto"><span id="count" class="text-white bg-warning">30</span></div> -->
+    <div class="col-auto">
+      <button type="button" id="counting" class="btn btn-outline-secondary btn-lg" disabled></button>
     </div>
   </div>
-</div>
+
+  <div class="modal fade bd-example-modal-xl" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLongTitle">玩法</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="rulesContent">
+        </div>
+  <!--       <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+    </div>
   </div>
-  <br>
-  <div class="progress mx-auto mb-2" style="max-width: 300px;">
+  <div class="progress mx-auto mb-2" style="max-width: 500px;">
     <div class="progress-bar bg-warning" role="progressbar" id="progressBar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
   <center><h5 id="time"></h5></center>
   <br>
- 
+
   <center><button type="button" class="btn btn-success" id="startTimerBtn" onclick="startTimer()"><i class="fa fa-play"></i></button></center>
   <center><button type="button" class="btn btn-danger" id="stopTimerBtn" onclick="stopTimer()"><i class="fa fa-pause"></i></button></center>
   <center><button type="button" class="btn btn-info" id="resetTimerBtn" onclick="resetTimer()"><i class="fa fa-refresh"></i></button></center>
@@ -55,6 +60,12 @@
   </div>
   
   <center><button type="button" class="btn btn-warning btn-lg" id="nextBtn" onclick="next()">下一題 <i class="fa fa-chevron-right"></i></button></center>
+
+  <audio id="audio">
+    <source src="timer_10s.mp3" type="audio/mpeg" />
+  </audio>
+  <button id="playAudio" class="btn btn-light"></button>
+  <button id="pauseAudio" class="btn btn-light"></button>
   <script type="text/javascript" src="data.js"></script>
   <script type="text/javascript" src="fn.js"></script>
 </body>
