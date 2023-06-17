@@ -100,8 +100,9 @@ function timerFn() {
   var remainingSeconds = minutes * 60 + seconds;
   
   bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
+
   if (remainingSeconds < 11) {
-    if (remainingSeconds = 10) {
+    if (remainingSeconds == 10) {
       playAudio.click();
     }
     bar.classList.remove("bg-warning");
@@ -118,7 +119,9 @@ function timerFn() {
 }
 
 function stopTimer() {
-  pauseAudio.click();
+  setTimeout(function (){ 
+    pauseAudio.click();       
+  }, 1000);
   clearInterval(interval);
   hideBtn(stopTimerBtn);
   hideBtn(startTimerBtn);
