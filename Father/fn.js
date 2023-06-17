@@ -1,9 +1,35 @@
 
-
-var dur = 3 // mins
-var indur = "03:00";
+var audio = new Audio('timer_10s.mp3');
+const dur = 0.3 // mins
+const indur = "01:00";
+const max = 5;
+var count = max;
 
 var used = [];
+
+
+var rulesContent = document.querySelector('#rulesContent');
+rulesContent.innerHTML = rules;
+
+var minutes1 = 60 * dur;
+display = document.querySelector('#time');
+bar = document.querySelector('#progressBar');
+var timer = minutes1, minutes, seconds;
+display.innerHTML = indur;
+nextBtn = document.querySelector('#nextBtn');
+startTimerBtn = document.querySelector('#startTimerBtn');
+stopTimerBtn = document.querySelector('#stopTimerBtn');
+resetTimerBtn = document.querySelector('#resetTimerBtn');
+counting = document.querySelector('#counting');
+counting.innerHTML = max;
+hideBtn(nextBtn);
+hideBtn(stopTimerBtn);
+hideBtn(resetTimerBtn);
+
+
+var interval = null;
+
+$('#rulesModal').modal('show');
 
 function showContent(content) {
   var div = document.getElementById('content');
@@ -14,7 +40,9 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+
 function next() {
+
   var num = getRandomInt(pool.length);
   while (used.includes(num)) {
     if (used.length < pool.length) {
@@ -30,6 +58,12 @@ function next() {
   }
 
   showContent((num == "End") ? num : pool[num]);
+  counting.innerHTML = count;
+  count--;
+  if (count<0) {
+    stopTimer();
+    showContent("<i>結束</i>");
+  }
 }
 
 function hideBtn(btn) {
@@ -64,29 +98,19 @@ function startTimer(duration, display, bar) {
 }
 
 
-var rulesContent = document.querySelector('#rulesContent');
-rulesContent.innerHTML = rules;
-
-var minutes1 = 60 * dur;
-display = document.querySelector('#time');
-bar = document.querySelector('#progressBar');
-var timer = minutes1, minutes, seconds;
-display.innerHTML = indur;
-nextBtn = document.querySelector('#nextBtn');
-startTimerBtn = document.querySelector('#startTimerBtn');
-stopTimerBtn = document.querySelector('#stopTimerBtn');
-resetTimerBtn = document.querySelector('#resetTimerBtn');
-hideBtn(nextBtn);
-hideBtn(stopTimerBtn);
-hideBtn(resetTimerBtn);
 function timerFn() {
   minutes = parseInt(timer / 60, 10);
   seconds = parseInt(timer % 60, 10);
   
-  var totalSeconds = dur * 60
-  , remainingSeconds = minutes * 60 + seconds
+  var totalSeconds = dur * 60;
+  var remainingSeconds = minutes * 60 + seconds;
   
   bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
+  if (remainingSeconds < 11) {
+    audio.play();
+    bar.classList.remove("bg-warning");
+    bar.classList.add("bg-danger");
+  }
   
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -96,7 +120,6 @@ function timerFn() {
     stopTimer();
   }
 }
-var interval = null;
 
 function stopTimer() {
   clearInterval(interval);
@@ -117,6 +140,10 @@ function startTimer() {
 
 function resetTimer() {
   //used = [];
+  bar.classList.remove("bg-danger");
+  bar.classList.add("bg-warning");
+  count = max;
+  counting.innerHTML = count;
   showContent("<i>預備</i>");
   var minutes1 = 60 * dur;
   timer = minutes1, minutes, seconds;
@@ -126,5 +153,3 @@ function resetTimer() {
   hideBtn(resetTimerBtn);
   showBtn(startTimerBtn);
 }
-
-$('#rulesModal').modal('show')
