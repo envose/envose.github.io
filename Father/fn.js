@@ -1,14 +1,45 @@
 
+var demo = true;
 
-var dur = 3 // mins
-var indur = "03:00";
+const pool = demo ? pool_demo : pool_prod;
+const dur = demo ? 0.3 : 2; // mins
+const indur = demo ? "00:18" : "02:00";
+const max = demo ? 5 : 20;
+var count = max;
 
 var used = [];
 
+const audio = new Audio();
+audio.autoplay =true;
+
+
+var rulesContent = document.querySelector('#rulesContent');
+rulesContent.innerHTML = rules;
+
+var minutes1 = 60 * dur;
+display = document.querySelector('#time');
+bar = document.querySelector('#progressBar');
+var timer = minutes1, minutes, seconds;
+display.innerHTML = indur;
 nextBtn = document.querySelector('#nextBtn');
 startTimerBtn = document.querySelector('#startTimerBtn');
 stopTimerBtn = document.querySelector('#stopTimerBtn');
 resetTimerBtn = document.querySelector('#resetTimerBtn');
+counting = document.querySelector('#counting');
+counting.innerHTML = max;
+hideBtn(nextBtn);
+hideBtn(stopTimerBtn);
+hideBtn(resetTimerBtn);
+
+
+var interval = null;
+
+$('#rulesModal').modal('show');
+
+function playBeep() {
+  audio.src = 'timer_10s.mp3';
+  audio.play();
+}
 
 function showContent(content) {
   var div = document.getElementById('content');
@@ -19,8 +50,9 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+
 function next() {
-  $("#nextBtn").blur();
+
   var num = getRandomInt(pool.length);
   while (used.includes(num)) {
     if (used.length < pool.length) {
@@ -36,6 +68,12 @@ function next() {
   }
 
   showContent((num == "End") ? num : pool[num]);
+  counting.innerHTML = count;
+  count--;
+  if (count<0) {
+    stopTimer();
+    showContent("<i>結束</i>");
+  }
 }
 
 function hideBtn(btn) {
@@ -46,50 +84,19 @@ function showBtn(btn) {
   btn.style = "display: block";
 }
 
-function startTimer(duration, display, bar) {
-  var timer = duration, minutes, seconds;
-  var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-    
-    var totalSeconds = dur * 60
-    , remainingSeconds = minutes * 60 + seconds
-    
-    bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
-    
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    display.textContent = minutes + ":" + seconds;
-
-    if (--timer < 0) {
-      //timer = duration;
-      clearInterval(interval);
-    }
-  }, 1000);
-}
-
-
-var rulesContent = document.querySelector('#rulesContent');
-rulesContent.innerHTML = rules;
-
-var minutes1 = 60 * dur;
-display = document.querySelector('#time');
-bar = document.querySelector('#progressBar');
-var timer = minutes1, minutes, seconds;
-display.innerHTML = indur;
-
-hideBtn(nextBtn);
-hideBtn(stopTimerBtn);
-hideBtn(resetTimerBtn);
 function timerFn() {
   minutes = parseInt(timer / 60, 10);
   seconds = parseInt(timer % 60, 10);
   
-  var totalSeconds = dur * 60
-  , remainingSeconds = minutes * 60 + seconds
+  var totalSeconds = dur * 60;
+  var remainingSeconds = minutes * 60 + seconds;
   
   bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
+  if (remainingSeconds < 11) {
+    playBeep();
+    bar.classList.remove("bg-warning");
+    bar.classList.add("bg-danger");
+  }
   
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -99,7 +106,6 @@ function timerFn() {
     stopTimer();
   }
 }
-var interval = null;
 
 function stopTimer() {
   clearInterval(interval);
@@ -120,6 +126,10 @@ function startTimer() {
 
 function resetTimer() {
   //used = [];
+  bar.classList.remove("bg-danger");
+  bar.classList.add("bg-warning");
+  count = max;
+  counting.innerHTML = count;
   showContent("<i>預備</i>");
   var minutes1 = 60 * dur;
   timer = minutes1, minutes, seconds;
@@ -129,6 +139,3 @@ function resetTimer() {
   hideBtn(resetTimerBtn);
   showBtn(startTimerBtn);
 }
-
-
-$('#rulesModal').modal('show');
