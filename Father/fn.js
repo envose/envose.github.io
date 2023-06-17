@@ -28,6 +28,7 @@ counting.innerHTML = max;
 hideBtn(nextBtn);
 hideBtn(stopTimerBtn);
 hideBtn(resetTimerBtn);
+display.style.opacity = 0;
 
 var interval = null;
 
@@ -103,6 +104,7 @@ function timerFn() {
 
   if (remainingSeconds < 11) {
     if (remainingSeconds == 10) {
+      display.style.opacity = 100;
       playAudio.click();
     }
     bar.classList.remove("bg-warning");
@@ -119,6 +121,7 @@ function timerFn() {
 }
 
 function stopTimer() {
+  display.style.opacity = 100;
   setTimeout(function (){ 
     pauseAudio.click();       
   }, 1000);
@@ -130,6 +133,7 @@ function stopTimer() {
 }
 
 function startTimer() {
+  display.style.opacity = 0;
   interval = setInterval(timerFn, 1000);
   hideBtn(startTimerBtn);
   hideBtn(resetTimerBtn);
@@ -148,6 +152,7 @@ function resetTimer() {
   var minutes1 = 60 * dur;
   timer = minutes1, minutes, seconds;
   var div = document.getElementById('time');
+  display.style.opacity = 0;
   display.innerHTML = indur;
   bar.style.width = "100%";
   hideBtn(resetTimerBtn);
