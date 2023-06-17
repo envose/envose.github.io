@@ -30,6 +30,11 @@ var interval = null;
 
 $('#rulesModal').modal('show');
 
+function playBeep() {
+  var audio = new Audio('timer_10s.mp3');
+  audio.play();
+}
+
 function showContent(content) {
   var div = document.getElementById('content');
   div.innerHTML = content;
@@ -73,30 +78,6 @@ function showBtn(btn) {
   btn.style = "display: block";
 }
 
-function startTimer(duration, display, bar) {
-  var timer = duration, minutes, seconds;
-  var interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-    
-    var totalSeconds = dur * 60
-    , remainingSeconds = minutes * 60 + seconds
-    
-    bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
-    
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    display.textContent = minutes + ":" + seconds;
-
-    if (--timer < 0) {
-      //timer = duration;
-      clearInterval(interval);
-    }
-  }, 1000);
-}
-
-
 function timerFn() {
   minutes = parseInt(timer / 60, 10);
   seconds = parseInt(timer % 60, 10);
@@ -106,9 +87,7 @@ function timerFn() {
   
   bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
   if (remainingSeconds < 11) {
-
-    var audio = new Audio('timer_10s.mp3');
-    audio.play();
+    playBeep();
     bar.classList.remove("bg-warning");
     bar.classList.add("bg-danger");
   }
