@@ -9,7 +9,8 @@ var count = max;
 
 var used = [];
 
-var audio = new Audio('timer_10s.mp3');
+const audio = new Audio();
+audio.autoplay =true;
 
 
 var rulesContent = document.querySelector('#rulesContent');
@@ -36,6 +37,7 @@ var interval = null;
 $('#rulesModal').modal('show');
 
 function playBeep() {
+  audio.src = 'timer_10s.mp3';
   audio.play();
 }
 
