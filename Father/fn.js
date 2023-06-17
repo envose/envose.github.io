@@ -12,6 +12,8 @@ var used = [];
 const audio = new Audio();
 audio.autoplay =true;
 
+var isAudioStarted = false;
+
 
 var rulesContent = document.querySelector('#rulesContent');
 rulesContent.innerHTML = rules;
@@ -93,7 +95,11 @@ function timerFn() {
   
   bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
   if (remainingSeconds < 11) {
-    playBeep();
+    if (!isAudioStarted) {
+      playBeep();
+      isAudioStarted = true;
+    }
+    
     bar.classList.remove("bg-warning");
     bar.classList.add("bg-danger");
   }
@@ -116,6 +122,7 @@ function stopTimer() {
 }
 
 function startTimer() {
+  isAudioStarted = false;
   interval = setInterval(timerFn, 1000);
   hideBtn(startTimerBtn);
   hideBtn(resetTimerBtn);
