@@ -1,5 +1,4 @@
 
-var audio = new Audio('timer_10s.mp3');
 const dur = 0.3 // mins
 const indur = "01:00";
 const max = 5;
@@ -107,6 +106,8 @@ function timerFn() {
   
   bar.style.width = (remainingSeconds*100/totalSeconds) + "%";
   if (remainingSeconds < 11) {
+
+    var audio = new Audio('timer_10s.mp3');
     audio.play();
     bar.classList.remove("bg-warning");
     bar.classList.add("bg-danger");
