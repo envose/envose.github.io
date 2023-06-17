@@ -2,8 +2,8 @@
 var demo = true;
 
 const pool = demo ? pool_demo : pool_prod;
-const dur = demo ? 0.3 : 3; // mins
-const indur = demo ? "00:18" : "03:00";
+const dur = demo ? 0.3 : 2; // mins
+const indur = demo ? "00:18" : "02:00";
 const max = demo ? 5 : 20;
 var count = max;
 
