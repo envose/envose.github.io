@@ -1,11 +1,11 @@
 
 // run on page load
-var demo = true;
+var demo = false;
 
 const pool = demo ? pool_demo : pool_prod;
 const dur = demo ? 0.3 : 2; // mins
 const indur = demo ? "00:18" : "02:00";
-const max = demo ? 5 : 20;
+const max = demo ? 5 : 100;
 var count = max;
 
 var used = [];
@@ -23,8 +23,8 @@ nextBtn = document.querySelector('#nextBtn');
 startTimerBtn = document.querySelector('#startTimerBtn');
 stopTimerBtn = document.querySelector('#stopTimerBtn');
 resetTimerBtn = document.querySelector('#resetTimerBtn');
-counting = document.querySelector('#counting');
-counting.innerHTML = max;
+//counting = document.querySelector('#counting');
+//counting.innerHTML = max;
 hideBtn(nextBtn);
 hideBtn(stopTimerBtn);
 hideBtn(resetTimerBtn);
@@ -77,12 +77,14 @@ function next() {
   }
 
   showContent((num == "End") ? num : pool[num]);
+  /*
   counting.innerHTML = count;
   count--;
   if (count<0) {
     stopTimer();
     showContent("<i>結束</i>");
   }
+  */
 }
 
 function hideBtn(btn) {
@@ -104,7 +106,7 @@ function timerFn() {
 
   if (remainingSeconds < 11) {
     if (remainingSeconds == 10) {
-      display.style.opacity = 100;
+      // display.style.opacity = 100;
       playAudio.click();
     }
     bar.classList.remove("bg-warning");
@@ -121,7 +123,7 @@ function timerFn() {
 }
 
 function stopTimer() {
-  display.style.opacity = 100;
+  // display.style.opacity = 100;
   setTimeout(function (){ 
     pauseAudio.click();       
   }, 1000);
@@ -147,7 +149,7 @@ function resetTimer() {
   bar.classList.remove("bg-danger");
   bar.classList.add("bg-warning");
   count = max;
-  counting.innerHTML = count;
+  //counting.innerHTML = count;
   showContent("<i>預備</i>");
   var minutes1 = 60 * dur;
   timer = minutes1, minutes, seconds;
