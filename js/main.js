@@ -49,7 +49,7 @@ $(document).ready(function() {
         var obj = entry[key];
         if (k == obj[1]) {
           dates.push(obj[0]);
-          names.push(obj[7]);
+          names.push("<b>"+obj[7]+"</b><br>"+obj[10]);
           phones.push(obj.length>=9?obj[8]:'');
         }
       }
