@@ -44,39 +44,52 @@
     var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
     if (params && params['access_token']) { 
       // User authorized the request. Now, check which scopes were granted.
-      if (params['scope'].includes('https://www.googleapis.com/auth/drive.metadata.readonly')) {
-        // User authorized read-only Drive activity permission.
-        // Calling the APIs, etc.
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET',
-          'https://www.googleapis.com/drive/v3/about?fields=user&' +
-          'access_token=' + params['access_token']);
-        xhr.onreadystatechange = function (e) {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.response);
-          } else if (xhr.readyState === 4 && xhr.status === 401) {
-            // Token invalid, so prompt for user permission.
-            oauth2SignIn();
-          }
-        };
-        xhr.send(null);
-      }
-      else {
-        // User didn't authorize read-only Drive activity permission.
-        // Update UX and application accordingly
-        console.log('User did not authorize read-only Drive activity permission.');
-      }
 
-      // Check if user authorized Calendar read permission.
-      if (params['scope'].includes('https://www.googleapis.com/auth/calendar.readonly')) {
-        // User authorized Calendar read permission.
+      // if (params['scope'].includes('https://www.googleapis.com/auth/drive.metadata.readonly')) {
+      //   // User authorized read-only Drive activity permission.
+      //   // Calling the APIs, etc.
+      //   var xhr = new XMLHttpRequest();
+      //   xhr.open('GET',
+      //     'https://www.googleapis.com/drive/v3/about?fields=user&' +
+      //     'access_token=' + params['access_token']);
+      //   xhr.onreadystatechange = function (e) {
+      //     if (xhr.readyState === 4 && xhr.status === 200) {
+      //       console.log(xhr.response);
+      //     } else if (xhr.readyState === 4 && xhr.status === 401) {
+      //       // Token invalid, so prompt for user permission.
+      //       oauth2SignIn();
+      //     }
+      //   };
+      //   xhr.send(null);
+      // }
+      // else {
+      //   // User didn't authorize read-only Drive activity permission.
+      //   // Update UX and application accordingly
+      //   console.log('User did not authorize read-only Drive activity permission.');
+      // }
+
+      // Check if user authorized Email permission.
+      if (params['scope'].includes('https://www.googleapis.com/auth/userinfo.email')) {
+        // User authorized Email permission.
         // Calling the APIs, etc.
-        console.log('User authorized Calendar read permission.');
+        console.log('User authorized Email permission.');
       }
       else {
-        // User didn't authorize Calendar read permission.
+        // User didn't authorize Email permission.
         // Update UX and application accordingly
-        console.log('User did not authorize Calendar read permission.');
+        console.log('User did not authorize Email permission.');
+      } 
+
+      // Check if user authorized Profile permission.
+      if (params['scope'].includes('https://www.googleapis.com/auth/userinfo.profile')) {
+        // User authorized Profile permission.
+        // Calling the APIs, etc.
+        console.log('User authorized Profile permission.');
+      }
+      else {
+        // User didn't authorize Profile permission.
+        // Update UX and application accordingly
+        console.log('User did not authorize Profile permission.');
       } 
     } else {
       oauth2SignIn();
@@ -102,7 +115,7 @@
     // Parameters to pass to OAuth 2.0 endpoint.
     var params = {'client_id': YOUR_CLIENT_ID,
                   'redirect_uri': YOUR_REDIRECT_URI,
-                  'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/calendar.readonly',
+                  'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
                   'state': state,
                   'include_granted_scopes': 'true',
                   'response_type': 'token'};
