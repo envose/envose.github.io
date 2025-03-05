@@ -94,6 +94,58 @@ function createTableView() {
   
 }
 
+function createGLoginView() {
+  initViews();
+
+  setHeaderTitle('h2', getSysTranslate('  '));
+
+  // var div_c = createCustomElement('div','d-grid gap-2 col-6 mx-auto');
+  // content.appendChild(div_c);
+
+  // var btn_glogin = createCustomElement('button', 'btn btn-primary');
+  // btn_glogin.innerHTML = getSysTranslate('Login with Google');
+  // div_c.appendChild(btn_glogin);
+  var div = createCustomElement('div', 'view_content_center');
+  div.id='signin';
+  var div2 = createCustomElement('form', 'form-signin');
+
+  
+  // <img class="mb-4" src="https://envose.github.io/ruby-gemstone.png" alt="" width="72" height="72">
+
+
+  var div3 = createCustomElement('div', 'text-center mb-12');
+
+  var img = document.createElement('img');
+  img.classList.add('mb-4');
+  img.src = 'https://envose.github.io/ruby-gemstone.png';
+  img.width = '72';
+  img.height = '72';
+  div3.appendChild(img);
+  div2.appendChild(div3);
+
+  // var msg = getSysTranslate('Please Login');
+  // msg += team.join(', ');
+  // // <h1 class="h3 mb-3 font-weight-normal">Shepherds</h1>
+  // var h1 = createCustomElement('h5', 'h3 mb-3 font-weight-normal');
+  // h1.innerHTML = '錫安的星辰';
+  // div3.appendChild(h1);
+
+  var btn_glogin = createCustomElement('btn', 'btn_std_primary');
+  btn_glogin.innerHTML = getSysTranslate(' Login with Google');
+  btn_glogin.onclick = function() { oauth2SignIn(); };
+  div2.appendChild(btn_glogin);
+
+  // var btn_record = createCustomElement('btn', 'btn_std_info');
+  // btn_record.innerHTML = getSysTranslate('record');
+  // btn_record.onclick = function() { recordView(); };
+  // div2.appendChild(btn_record);
+
+  div.appendChild(div2);
+  content.appendChild(div);
+
+  // alert('abc');
+}
+
 function dashboard() {
   initViews();
   provideSysLangOpt(true);

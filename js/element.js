@@ -28,7 +28,12 @@ function getCSSClassStr(key) {
 function createCustomElement(ele, cssClassKey='') {
   var e = document.createElement(ele);
   if (cssClassKey != '') {
-    e.classList.add(...getCSSClassStr(cssClassKey));
+    let arr = cssClassKey.split(' ');
+    for (i=0; i<arr.length; i++) {
+      // alert(arr[i]);
+      e.classList.add(...getCSSClassStr(arr[i]));
+    }
+    
   }
 	
   return e;

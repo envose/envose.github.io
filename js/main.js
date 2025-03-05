@@ -29,34 +29,79 @@ $(document).ready(function() {
 
   akey = localStorage.getItem('$a');
   key = localStorage.getItem('$k');
-  //var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+worksheet_id+'/values/'+tab_name+'?alt=json&key='+key-value;
-  var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+key+'/values/'+tab_name+'?alt=json&key='+akey;
 
-  $.ajaxSetup({
-    "error":function() { msgAlert('alert_login');  }
-  });
-
-  $.getJSON(url, function(data) {
-
-    if (data !== null) {
-      login = true;
-      var entry = data.values.slice(1, data.values.length);
-      // console.log(entry);
-      var k = atob(localStorage.getItem('$u'));
-      usr = k.split('. ')[1];
-      // console.log(usr);
-      for (key in entry) {
-        var obj = entry[key];
-        if (k == obj[1]) {
-          dates.push(obj[0]);
-          names.push("<b>"+obj[7]+"</b><br>"+obj[10]+"<br>"+obj[9]);
-          phones.push(obj.length>=9?obj[8]:'');
-        }
-      }
-      off();
-      createTableView();
+  if (akey == null || key == null) {
+    // login
+      // Parse query string to see if page request is coming from OAuth 2.0 server.
+    var fragmentString = location.hash.substring(1);
+    var params = {};
+    var regex = /([^&=]+)=([^&]*)/g, m;
+    while (m = regex.exec(fragmentString)) {
+      params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
     }
-  });
+    if (Object.keys(params).length > 0 && params['state'] && params['access_token']) {
+      /*
+      if (params['state'] == localStorage.getItem('state')) {
+        localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
+
+        trySampleRequest();
+      } else {
+        console.log('State mismatch. Possible CSRF attack');
+      }
+      */
+      var url = 'https://script.google.com/macros/s/AKfycbzQHSZ8SHEdUl4eDVWZj8NAiqvKjfZrDoQ-DEq8VUFlMlHlRbhlY2zxcsG6gbjdF8QcBQ/exec?action=login&token='+params['access_token'];
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          alert(JSON.stringify(data));
+        }
+      });
+      
+    }else{
+      createGLoginView();
+    }
+
+    // if (urlParams.has('access_token')) {
+    //   alert(urlParams.get('access_token'));
+    // } else {
+    //   createGLoginView();
+    // }
+
+  } else {
+    // original
+
+    //var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+worksheet_id+'/values/'+tab_name+'?alt=json&key='+key-value;
+    var url = 'https://sheets.googleapis.com/v4/spreadsheets/'+key+'/values/'+tab_name+'?alt=json&key='+akey;
+
+    $.ajaxSetup({
+      "error":function() { msgAlert('alert_login');  }
+    });
+
+    $.getJSON(url, function(data) {
+
+      if (data !== null) {
+        login = true;
+        var entry = data.values.slice(1, data.values.length);
+        // console.log(entry);
+        var k = atob(localStorage.getItem('$u'));
+        usr = k.split('. ')[1];
+        // console.log(usr);
+        for (key in entry) {
+          var obj = entry[key];
+          if (k == obj[1]) {
+            dates.push(obj[0]);
+            names.push("<b>"+obj[7]+"</b><br>"+obj[10]+"<br>"+obj[9]);
+            phones.push(obj.length>=9?obj[8]:'');
+          }
+        }
+        off();
+        createTableView();
+      }
+    });
+  }
+
+
 
 
 
