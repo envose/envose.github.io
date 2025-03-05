@@ -1,5 +1,5 @@
   var YOUR_CLIENT_ID = '207039464470-ds863khed849svfntdjertq4bpddpqva.apps.googleusercontent.com';
-  var YOUR_REDIRECT_URI = 'https://envose.github.io/oauth2callback';
+  var YOUR_REDIRECT_URI = 'https://envose.github.io';
 
   // Function to generate a random state value
   function generateCryptoRandomState() {
@@ -18,7 +18,7 @@
       .replace(/\//g, '_')
       .replace(/=+$/, '');
   }
-  
+
   function oauth2SignIn() {
     // create random state value and store in local storage
     var state = generateCryptoRandomState();
