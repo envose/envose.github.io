@@ -98,7 +98,7 @@ function createUserView(data) {
   initViews();
   setHeaderTitle('h2', (data !== null ) ? data.res.name:'Invalid User');
   
-  var div = createCustomElement('div', 'view_content_center'');
+  var div = createCustomElement('div', 'view_content_center');
   div.id='qrcode';
   content.appendChild(div);
   var qrcode = new QRCode("qrcode","https://envose.github.io?u="+((data !== null ) ? data.res.id : 'invalid_user'));
