@@ -126,9 +126,9 @@ function createGLoginView() {
   // var msg = getSysTranslate('Please Login');
   // msg += team.join(', ');
   // // <h1 class="h3 mb-3 font-weight-normal">Shepherds</h1>
-  // var h1 = createCustomElement('h5', 'h3 mb-3 font-weight-normal');
-  // h1.innerHTML = '錫安的星辰';
-  // div3.appendChild(h1);
+  var h1 = createCustomElement('h5', 'h3 mb-3 font-weight-normal');
+  h1.innerHTML = 'envose.github.io';
+  div3.appendChild(h1);
 
   var btn_glogin = createCustomElement('btn', 'btn_std_primary');
   btn_glogin.innerHTML = getSysTranslate(' Login with Google');
