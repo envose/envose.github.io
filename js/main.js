@@ -54,7 +54,7 @@ $(document).ready(function() {
       $.getJSON(url, function(data) {
 
         if (data !== null) {
-          alert(JSON.stringify(data));
+          createUserView(data);
         }
       });
       
