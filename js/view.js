@@ -131,7 +131,7 @@ function createGLoginView() {
   div3.appendChild(h1);
 
   var btn_glogin = createCustomElement('btn', 'btn_std_primary');
-  btn_glogin.innerHTML = getSysTranslate(' Login with Google');
+  btn_glogin.innerHTML = getSysTranslate('Sign in with Google');
   btn_glogin.onclick = function() { oauth2SignIn(); };
   div2.appendChild(btn_glogin);
 
