@@ -30,7 +30,7 @@ $(document).ready(function() {
   akey = localStorage.getItem('$a');
   key = localStorage.getItem('$k');
 
-  if (akey == null || key == null) {
+  if (akey === null || key === null) {
     // login
       // Parse query string to see if page request is coming from OAuth 2.0 server.
     var fragmentString = location.hash.substring(1);
