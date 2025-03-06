@@ -94,12 +94,22 @@ function createTableView() {
   
 }
 
+function createUserView(data) {
+  initViews();
+  setHeaderTitle('h2', (data.res.name === '')?data.res.name:'Invalid User');
+  
+  var div = createCustomElement('div', 'text-center mb-12');
+  div.id='qrcode';
+  content.appendChild(div);
+  var qrcode = new QRCode("qrcode","https://envose.github.io?u="+data.res.id);
+
+}
+
 function createGLoginView() {
   initViews();
 
   setHeaderTitle('h2', getSysTranslate('  '));
-
-  // var div_c = createCustomElement('div','d-grid gap-2 col-6 mx-auto');
+// var div_c = createCustomElement('div','d-grid gap-2 col-6 mx-auto');
   // content.appendChild(div_c);
 
   // var btn_glogin = createCustomElement('button', 'btn btn-primary');
