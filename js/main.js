@@ -61,6 +61,7 @@ $(document).ready(function() {
       $.getJSON(url, function(data) {
 
         if (data !== null) {
+          console.log(params['access_token']);
           window.history.pushState({}, document.title, "?");
           localStorage.setItem('gid', data.res.id);
           off();
