@@ -2,6 +2,7 @@ var key = '';
 var tab_name = 'Form responses 1';
 var akey = '';
 var usr = '';
+var gid = '';
 
 var dates;
 var names;
@@ -30,6 +31,12 @@ $(document).ready(function() {
   akey = localStorage.getItem('$a');
   key = localStorage.getItem('$k');
 
+  gid = localStorage.getItem('gid');
+
+  // if (gid !== null) {
+    
+  // }
+
   if (akey === null || key === null) {
     // login
       // Parse query string to see if page request is coming from OAuth 2.0 server.
@@ -40,25 +47,29 @@ $(document).ready(function() {
       params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
     }
     if (Object.keys(params).length > 0 && params['state'] && params['access_token']) {
-      /*
-      if (params['state'] == localStorage.getItem('state')) {
-        localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
+      
+      // if (params['state'] == localStorage.getItem('state')) {
+      //   localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
 
-        trySampleRequest();
-      } else {
-        console.log('State mismatch. Possible CSRF attack');
-      }
-      */
+      //   trySampleRequest();
+      // } else {
+      //   console.log('State mismatch. Possible CSRF attack');
+      // }
+      
       var url = 'https://script.google.com/macros/s/AKfycbzQHSZ8SHEdUl4eDVWZj8NAiqvKjfZrDoQ-DEq8VUFlMlHlRbhlY2zxcsG6gbjdF8QcBQ/exec?action=login&token='+params['access_token'];
 
       $.getJSON(url, function(data) {
 
         if (data !== null) {
+          window.history.pushState({}, document.title, "?");
+          localStorage.setItem('gid', data.res.id);
+          off();
           createUserView(data);
         }
       });
       
     }else{
+      off();
       createGLoginView();
     }
 
