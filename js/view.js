@@ -98,11 +98,233 @@ function createUserView(data) {
   initViews();
   setHeaderTitle('h2', (data.res.name !== null ) ? data.res.name:'Invalid User');
   
+  /*
   var div = createCustomElement('div', 'view_content_center');
   div.id='qrcode';
   content.appendChild(div);
   var qrcode = new QRCode("qrcode","https://envose.github.io?u="+((data.res.id !== null ) ? data.res.id : 'invalid_user'));
+  */
 
+  var div = createCustomElement('div', 'view_content_center');
+  content.appendChild(div);
+
+  var div1 = createCustomElement('div', 'btn-group-vertical');
+  div.appendChild(div1);
+
+  // var btn = createCustomElement('button', 'btn btn-primary');
+  // btn.innerHTML='寫記錄';
+  // btn.setAttribute('onclick', "return enterActivityRecord()");
+
+  // var a1 = createCustomElement('a', 'btn btn-primary dropdown-toggle');
+  // div1.appendChild(a1);
+  // a1.setAttribute('href', '#');
+  // a1.setAttribute('role', 'button');
+  // a1.setAttribute('data-toggle', 'dropdown');
+  // a1.setAttribute('aria-expanded', 'false');
+  // a1.id = 'btn_activity';
+  // a1.innerHTML='寫記錄';
+
+  // var ul1 = createCustomElement('ul', 'dropdown-menu');
+  // div1.appendChild(ul1);
+
+  var ul1_li1 = createCustomElement('div');
+  div1.appendChild(ul1_li1);
+
+  var ahist = createCustomElement('a', 'btn btn-primary btn-block');
+  ul1_li1.appendChild(ahist);
+  ahist.setAttribute('onclick', "return getAcitvity('查看記錄')");
+  ahist.innerHTML = '查看記錄';
+
+  var act0 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act0);
+  act0.setAttribute('onclick', "return selectActivity('btn_activity', '2025發表慶典', 'act0')");
+  act0.innerHTML = '2025發表慶典';
+
+  var act1 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act1);
+  act1.setAttribute('onclick', "return selectActivity('btn_activity', '發表評價', 'act1')");
+  act1.innerHTML = '發表評價';
+
+  var act2 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act2);
+  act2.setAttribute('onclick', "return selectActivity('btn_activity', 'LMS 教育', 'act2')");
+  act2.innerHTML = 'LMS 教育';
+
+  var act3 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act3);
+  act3.setAttribute('onclick', "return selectActivity('btn_activity', '閱讀《我的羊聽我的聲音》', 'act3')");
+  act3.innerHTML = '閱讀《我的羊聽我的聲音》';
+
+  var act4 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act4);
+  act4.setAttribute('onclick', "return selectActivity('btn_activity', '真理書評價《我的羊聽我的聲音》', 'act4')");
+  act4.innerHTML = '真理書評價《我的羊聽我的聲音》';
+
+
+  var act5 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act5);
+  act5.setAttribute('onclick', "return selectActivity('btn_activity', '（每日）線上宣教', 'act5')");
+  act5.innerHTML = '（每日）線上宣教';
+
+
+  var act6 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act6);
+  act6.setAttribute('onclick', "return selectActivity('btn_activity', '傳道', 'act6')");
+  act6.innerHTML = '傳道';
+
+
+  var act7 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act7);
+  act7.setAttribute('onclick', "return selectActivity('btn_activity', '（每日）祈禱', 'act7')");
+  act7.innerHTML = '（每日）祈禱';
+  
+}
+
+function selectActivity(btn_id, title, key) {
+  act_act=title;
+  act_con='';
+
+  document.getElementById('modal_act_title').innerHTML = title;
+  var form = document.getElementById('modal_act_form');
+  form.innerHTML = '';
+  if (key == 'act0') {
+
+    var arr = [
+      '3階段第1章（3次）',
+      '3階段第2章（3次）',
+      '3階段第3章（3次）',
+      '3階段第4章（3次）',
+      '3階段第5章（3次）',
+    ];
+    var item1 = createFormInputSelect(key, '登錄完成', arr);
+    form.appendChild(item1);
+
+  } else if (key == 'act1') {
+
+    var item1 = createFormInputText(key, '主題', '請輸入 EA 5階段的發表主題');
+    form.appendChild(item1);
+
+  } else if (key == 'act2') {
+
+    var arr1 = [
+      '傳道人',
+      '聖徒II',
+      '新聖徒',
+    ];
+    var item1 = createFormInputSelect(key+'_01', '部門', arr1);
+    form.appendChild(item1);
+
+    var arr2 = [
+      1,2,3,4,5,6,7,8,9,10,11,12
+    ];
+    var item2 = createFormInputSelect(key+'_02', '階段', arr2);
+    form.appendChild(item2);
+
+  } else if (key == 'act3') {
+
+    var arr = [
+      '第1章', '第2章', '第3章', '第4章', '第5章', '第6章', '第7章', '第8章', '第9章', '第0章', '第11章', '第12章', '第13章', '第14章', '第15章', '第16章', '第17章', '第18章', '第19章', '第10章', '第21章', '第22章', '第23章', '第24章',
+    ];
+    var item1 = createFormInputSelect(key, '閱讀', arr);
+    form.appendChild(item1);
+
+  } else if (key == 'act4') {
+
+    var arr = [
+      '第1章', '第2章', '第3章', '第4章', '第5章', '第6章', '第7章', '第8章', '第9章', '第0章', '第11章', '第12章', '第13章', '第14章', '第15章', '第16章', '第17章', '第18章', '第19章', '第10章', '第21章', '第22章', '第23章', '第24章',
+    ];
+    var item1 = createFormInputSelect(key, '評價', arr);
+    form.appendChild(item1);
+
+  } else if (key == 'act5') {
+
+    var arr = [
+      '影像講道（30分鐘）'
+    ];
+    var item1 = createFormInputSelect(key, '完成', arr);
+    form.appendChild(item1);
+    act_con = arr[0];
+
+  } else if (key == 'act6') {
+
+    var item1 = createFormInputText(key, '對象', '肉身家族、同事、傳道人');
+    form.appendChild(item1);
+
+    var arr2 = [
+      '發送 Flower Letter',
+      '介紹 watv.org',
+      '分享 Card News 內容',
+      '發表 Feed My Sheep',
+      '參與傳道會議',
+      '傳道人學習',
+    ];
+    var item2 = createFormInputSelect(key+'_02', '內容', arr2);
+    form.appendChild(item2);
+
+  } else if (key == 'act7') {
+
+    var arr = [
+      '常燔祭(10:00) + 常燔祭(14:30) + 聯合禱告(22:00)'
+    ];
+    var item1 = createFormInputSelect(key, '完成', arr);
+    form.appendChild(item1);
+    act_con = arr[0];
+
+  } 
+  $('#activity').modal({backdrop: 'static', keyboard: false});
+}
+
+function createFormInputText(_key, _label, _placeholder) {
+
+  var input_id = 'input_'+_key;
+
+  var div = createCustomElement('div', 'input-group mb-3');
+
+  var div1 = createCustomElement('div', 'input-group-prepend');
+  div.appendChild(div1);
+
+  var span = createCustomElement('span', 'input-group-text');
+  div1.appendChild(span);
+  span.innerHTML = _label;
+  span.id = input_id;
+
+  var input = createCustomElement('input', 'form-control');
+  div.appendChild(input);
+  input.setAttribute('type', 'text');
+  input.setAttribute('placeholder', _placeholder);
+  input.setAttribute('aria-label', _placeholder);
+  input.setAttribute('aria-describedby', input_id);
+  input.setAttribute('required', 'true');
+
+  return div;
+}
+
+function createFormInputSelect(key, options, values) {
+
+  var input_id = 'input_'+key;
+
+  var div = createCustomElement('div', 'input-group mb-3');
+
+  var div1 = createCustomElement('div', 'input-group-prepend');
+  div.appendChild(div1);
+
+  var label = createCustomElement('label', 'input-group-text');
+  div1.appendChild(label);
+  label.setAttribute('for', input_id);
+  label.innerHTML = options;
+
+  var select = createCustomElement('select', 'custom-select');
+  div.appendChild(select);
+  select.id = input_id;
+  select.value = values[0];
+
+  for (var i = 0; i < values.length; i++) {
+    var opt = createCustomElement('option');
+    opt.value = values[i];
+    opt.innerHTML = values[i];
+    select.appendChild(opt);
+  }
+  return div;
 }
 
 function createGLoginView() {

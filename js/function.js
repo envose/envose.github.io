@@ -1,5 +1,6 @@
-  var YOUR_CLIENT_ID = '207039464470-ds863khed849svfntdjertq4bpddpqva.apps.googleusercontent.com';
-  var YOUR_REDIRECT_URI = 'https://envose.github.io';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzQHSZ8SHEdUl4eDVWZj8NAiqvKjfZrDoQ-DEq8VUFlMlHlRbhlY2zxcsG6gbjdF8QcBQ/exec';
+  const YOUR_CLIENT_ID = '207039464470-ds863khed849svfntdjertq4bpddpqva.apps.googleusercontent.com';
+  const YOUR_REDIRECT_URI = 'https://envose.github.io';
 
   // Function to generate a random state value
   function generateCryptoRandomState() {
@@ -53,6 +54,69 @@
     document.body.appendChild(form);
     form.submit();
   }
+function b64EncodeUnicode(str) {
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function toSolidBytes(match, p1) {
+            return String.fromCharCode('0x' + p1);
+    }));
+}
+
+function b64DecodeUnicode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+}
+function submitAcitvity() {
+  /*
+  on();
+      var raw_str = genActivityContent(act_act,act_con);
+      var str = b64EncodeUnicode(raw_str);
+      var url = GAS_URL+'?action=activity&content='+str;
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            alert('已保存');
+          }
+        }
+        off();
+      });
+      */
+      alert('功能未完成 ');
+      $('#activity').modal('toggle');
+}
+
+function getAcitvity() {
+  on();
+      var url = GAS_URL+'?action=getActivity&id='+localStorage.getItem('gid');
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            // alert(JSON.stringify(data.res));
+            document.getElementById('act_hist_content').innerHTML = data.res;
+            $('#act_hist').modal({backdrop: 'static', keyboard: false});
+          }
+        }
+        off();
+      });
+}
+
+function genActivityContent(act, con) {
+  var json = {};
+  json.id = localStorage.getItem('gid');
+  json.activity = act;
+  json.content = con;
+
+  return JSON.stringify(json);
+
+}
 
 function selectedLang(langOpt) {
   setLangOpt(langOpt);

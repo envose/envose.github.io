@@ -8,6 +8,8 @@ var dates;
 var names;
 var phones;
 
+var act_act='';
+var act_con='';
 
 $(document).ready(function() {
 
@@ -34,7 +36,7 @@ $(document).ready(function() {
   gid = localStorage.getItem('gid');
 
   // if (gid !== null) {
-    
+  //   alert(gid);
   // }
 
   if (akey === null || key === null) {
@@ -56,12 +58,11 @@ $(document).ready(function() {
       //   console.log('State mismatch. Possible CSRF attack');
       // }
       
-      var url = 'https://script.google.com/macros/s/AKfycbzQHSZ8SHEdUl4eDVWZj8NAiqvKjfZrDoQ-DEq8VUFlMlHlRbhlY2zxcsG6gbjdF8QcBQ/exec?action=login&token='+params['access_token'];
+      var url = GAS_URL+'?action=login&token='+params['access_token'];
 
       $.getJSON(url, function(data) {
 
         if (data !== null) {
-          console.log(params['access_token']);
           window.history.pushState({}, document.title, "?");
           localStorage.setItem('gid', data.res.id);
           off();
