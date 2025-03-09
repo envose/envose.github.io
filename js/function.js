@@ -54,41 +54,76 @@
     document.body.appendChild(form);
     form.submit();
   }
-function b64EncodeUnicode(str) {
-    // first we use encodeURIComponent to get percent-encoded UTF-8,
-    // then we convert the percent encodings into raw bytes which
-    // can be fed into btoa.
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-        function toSolidBytes(match, p1) {
-            return String.fromCharCode('0x' + p1);
-    }));
+
+function saveAcitvity() {
+  
+
+  if (act_key=='act1') {
+    var item1 = document.getElementById('input_'+act_key+'_01').value;
+    var item2 = document.getElementById('input_'+act_key+'_02').value;
+    act_con='【'+item1+'】'+item2+' 階段';
+  } else if (act_key=='act2') {
+    var item1 = document.getElementById('input_'+act_key+'_01').value;
+    var item2 = document.getElementById('input_'+act_key+'_02').value;
+    act_con='【'+item1+'】'+item2;
+  }else if (act_key=='act5') {
+    var item1 = document.getElementById('input_'+act_key+'_01').value;
+    var item2 = document.getElementById('input_'+act_key+'_02').value;
+
+    if (item2 == '') {
+      alert('請輸入傳道對象');
+      $('#input_'+act_key+'_02').focus();
+      return;
+    }
+    act_con=''+item1+' ('+item2+')';
+  }else{
+    act_con = document.getElementById('input_'+act_key).value;
+  }
+  var msg = '<strong>'+act_act+'</strong><br>'+act_con;
+  document.getElementById('confirmActivityBody').innerHTML = msg;
+  $('#activity').modal('toggle');
+  $('#confirmActivity').modal({backdrop: 'static', keyboard: false});
+  
+  
+
+  // on();
+  // var raw_str = genActivityContent(act_act,act_con);
+  // // var str = b64EncodeUnicode(raw_str);
+  // var str = window.btoa(unescape(encodeURIComponent(raw_str)));
+  // var url = GAS_URL+'?action=activity&content='+str;
+  // // console.log(url);
+
+  // $.getJSON(url, function(data) {
+  //   if (data !== null) {
+  //     if (data.status=='0') {
+  //       alert('已保存');
+  //     }
+  //   }
+  //   off();
+  // });
+      
+  // $('#activity').modal('toggle');
 }
 
-function b64DecodeUnicode(str) {
-    // Going backwards: from bytestream, to percent-encoding, to original string.
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-}
 function submitAcitvity() {
-  /*
+  var raw_str = genActivityContent(act_key,act_act,act_con);
+  var str = window.btoa(unescape(encodeURIComponent(raw_str)));
+  var url = GAS_URL+'?action=activity&content='+str;
+  console.log(url);
+
   on();
-      var raw_str = genActivityContent(act_act,act_con);
-      var str = b64EncodeUnicode(raw_str);
-      var url = GAS_URL+'?action=activity&content='+str;
-
-      $.getJSON(url, function(data) {
-
-        if (data !== null) {
-          if (data.status=='0') {
-            alert('已保存');
-          }
-        }
-        off();
-      });
-      */
-      alert('功能未完成 ');
-      $('#activity').modal('toggle');
+  $.getJSON(url, function(data) {
+    if (data !== null) {
+      if (data.status=='0') {
+        alert('已保存');
+      }else{
+        alert(data.error_msg);
+      }
+    }
+    off();
+  });
+      
+  $('#confirmActivity').modal('toggle');
 }
 
 function getAcitvity() {
@@ -100,17 +135,30 @@ function getAcitvity() {
         if (data !== null) {
           if (data.status=='0') {
             // alert(JSON.stringify(data.res));
-            document.getElementById('act_hist_content').innerHTML = data.res;
+            document.getElementById('act_hist_content').innerHTML = genActHistTable(data.res);
             $('#act_hist').modal({backdrop: 'static', keyboard: false});
+          }else{
+            alert(data.error_msg);
           }
         }
         off();
       });
 }
 
-function genActivityContent(act, con) {
+function genActHistTable(arr) {
+  var table_html = '<table class="table">  <thead>    <tr>      <th scope="col">#</th>      <th scope="col">記錄</th>      <th scope="col">活動內容</th>  </tr>  </thead>  <tbody>'
+  for (var i = arr.length-1; i >= 0; i--) {
+    var formatDate = arr[i][0].replace('T','<br>').replace('.000Z','');
+    table_html += '<tr><th scope="row">'+(i+1)+'</th><td>'+formatDate+'</td><td>'+'<strong>'+arr[i][1]+'</strong><br>'+arr[i][2]+'</td></tr>';
+  }
+  table_html+='</tbody></table>';
+  return table_html;
+}
+
+function genActivityContent(key, act, con) {
   var json = {};
   json.id = localStorage.getItem('gid');
+  json.act_key = key;
   json.activity = act;
   json.content = con;
 

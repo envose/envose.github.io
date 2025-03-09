@@ -8,6 +8,7 @@ var dates;
 var names;
 var phones;
 
+var act_key='';
 var act_act='';
 var act_con='';
 
@@ -63,10 +64,14 @@ $(document).ready(function() {
       $.getJSON(url, function(data) {
 
         if (data !== null) {
-          window.history.pushState({}, document.title, "?");
-          localStorage.setItem('gid', data.res.id);
+          if (data.status=='0') {
+            window.history.pushState({}, document.title, "?");
+            localStorage.setItem('gid', data.res.id);
+            createUserView(data);
+          }else{
+            alert(data.error_msg);
+          }
           off();
-          createUserView(data);
         }
       });
       

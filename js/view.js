@@ -96,7 +96,11 @@ function createTableView() {
 
 function createUserView(data) {
   initViews();
-  setHeaderTitle('h2', (data.res.name !== null ) ? data.res.name:'Invalid User');
+  if (data.res.name == null){
+    setHeaderTitle('h2', 'Invalid User');
+    return;
+  }
+  setHeaderTitle('h2', data.res.name);
   
   /*
   var div = createCustomElement('div', 'view_content_center');
@@ -107,6 +111,12 @@ function createUserView(data) {
 
   var div = createCustomElement('div', 'view_content_center');
   content.appendChild(div);
+
+  var tdiv = createCustomElement('div');
+  div.appendChild(tdiv);
+  tdiv.innerHTML='<div class="alert alert-primary alert-dismissible fade show col-12" role="alert">  <strong>請多多得福！</strong> <br>已開啟記錄功能，活動日期到4月30日，更多功能將會陸續開啟，敬請期待。<button type="button" class="close" data-dismiss="alert" aria-label="Close">    <span aria-hidden="true">&times;</span>  </button></div>';
+
+  // div.innerHTML = getToastHtml('Envose','2025-03-09','請多多得福，可以開始記錄❤️');
 
   var div1 = createCustomElement('div', 'btn-group-vertical');
   div.appendChild(div1);
@@ -142,13 +152,13 @@ function createUserView(data) {
 
   var act1 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act1);
-  act1.setAttribute('onclick', "return selectActivity('btn_activity', '發表評價', 'act1')");
-  act1.innerHTML = '發表評價';
+  act1.setAttribute('onclick', "return selectActivity('btn_activity', 'LMS 教育', 'act1')");
+  act1.innerHTML = 'LMS 教育';
 
   var act2 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act2);
-  act2.setAttribute('onclick', "return selectActivity('btn_activity', 'LMS 教育', 'act2')");
-  act2.innerHTML = 'LMS 教育';
+  act2.setAttribute('onclick', "return selectActivity('btn_activity', '發表評價', 'act2')");
+  act2.innerHTML = '發表評價';
 
   var act3 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act3);
@@ -163,24 +173,28 @@ function createUserView(data) {
 
   var act5 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act5);
-  act5.setAttribute('onclick', "return selectActivity('btn_activity', '（每日）線上宣教', 'act5')");
-  act5.innerHTML = '（每日）線上宣教';
-
+  act5.setAttribute('onclick', "return selectActivity('btn_activity', '傳道', 'act5')");
+  act5.innerHTML = '傳道';
 
   var act6 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act6);
-  act6.setAttribute('onclick', "return selectActivity('btn_activity', '傳道', 'act6')");
-  act6.innerHTML = '傳道';
-
+  act6.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 祈禱', 'act6')");
+  act6.innerHTML = '(每日) 祈禱';
 
   var act7 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act7);
-  act7.setAttribute('onclick', "return selectActivity('btn_activity', '（每日）祈禱', 'act7')");
-  act7.innerHTML = '（每日）祈禱';
+  act7.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 感謝日記', 'act7')");
+  act7.innerHTML = '(每日) 感謝日記';
+
+  var act8 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  ul1_li1.appendChild(act8);
+  act8.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 線上宣教', 'act8')");
+  act8.innerHTML = '(每日) 線上宣教';
   
 }
 
 function selectActivity(btn_id, title, key) {
+  act_key=key;
   act_act=title;
   act_con='';
 
@@ -196,15 +210,10 @@ function selectActivity(btn_id, title, key) {
       '3階段第4章（3次）',
       '3階段第5章（3次）',
     ];
-    var item1 = createFormInputSelect(key, '登錄完成', arr);
+    var item1 = createFormInputSelect(key, '完成', arr);
     form.appendChild(item1);
 
   } else if (key == 'act1') {
-
-    var item1 = createFormInputText(key, '主題', '請輸入 EA 5階段的發表主題');
-    form.appendChild(item1);
-
-  } else if (key == 'act2') {
 
     var arr1 = [
       '傳道人',
@@ -220,10 +229,28 @@ function selectActivity(btn_id, title, key) {
     var item2 = createFormInputSelect(key+'_02', '階段', arr2);
     form.appendChild(item2);
 
+  } else if (key == 'act2') {
+
+    var arr1 = [
+      '真理發表 1階段',
+      '真理發表 2階段',
+      '真理發表 3階段',
+      '真理發表 4階段',
+      '真理發表 5階段',
+    ];
+    var item1 = createFormInputSelect(key+'_01', '發表階段', arr1);
+    form.appendChild(item1);
+
+    var arr2 = [
+      '第1章', '第2章', '第3章', '第4章', '第5章', '第6章', '第7章', '第8章', '第9章', '第10章'
+    ];
+    var item2 = createFormInputSelect(key+'_02', '評價主題', arr2);
+    form.appendChild(item2);
+
   } else if (key == 'act3') {
 
     var arr = [
-      '第1章', '第2章', '第3章', '第4章', '第5章', '第6章', '第7章', '第8章', '第9章', '第0章', '第11章', '第12章', '第13章', '第14章', '第15章', '第16章', '第17章', '第18章', '第19章', '第10章', '第21章', '第22章', '第23章', '第24章',
+      '第1章', '第2章', '第3章', '第4章', '第5章', '第6章', '第7章', '第8章', '第9章', '第10章', '第11章', '第12章', '第13章', '第14章', '第15章', '第16章', '第17章', '第18章', '第19章', '第10章', '第21章', '第22章', '第23章', '第24章',
     ];
     var item1 = createFormInputSelect(key, '閱讀', arr);
     form.appendChild(item1);
@@ -231,26 +258,14 @@ function selectActivity(btn_id, title, key) {
   } else if (key == 'act4') {
 
     var arr = [
-      '第1章', '第2章', '第3章', '第4章', '第5章', '第6章', '第7章', '第8章', '第9章', '第0章', '第11章', '第12章', '第13章', '第14章', '第15章', '第16章', '第17章', '第18章', '第19章', '第10章', '第21章', '第22章', '第23章', '第24章',
+      '第1章', '第2章', '第3章', '第4章', '第5章', '第6章', '第7章', '第8章', '第9章', '第10章', '第11章', '第12章', '第13章', '第14章', '第15章', '第16章', '第17章', '第18章', '第19章', '第10章', '第21章', '第22章', '第23章', '第24章',
     ];
     var item1 = createFormInputSelect(key, '評價', arr);
     form.appendChild(item1);
 
-  } else if (key == 'act5') {
+  }else if (key == 'act5') {
 
-    var arr = [
-      '影像講道（30分鐘）'
-    ];
-    var item1 = createFormInputSelect(key, '完成', arr);
-    form.appendChild(item1);
-    act_con = arr[0];
-
-  } else if (key == 'act6') {
-
-    var item1 = createFormInputText(key, '對象', '肉身家族、同事、傳道人');
-    form.appendChild(item1);
-
-    var arr2 = [
+    var arr1 = [
       '發送 Flower Letter',
       '介紹 watv.org',
       '分享 Card News 內容',
@@ -258,10 +273,14 @@ function selectActivity(btn_id, title, key) {
       '參與傳道會議',
       '傳道人學習',
     ];
-    var item2 = createFormInputSelect(key+'_02', '內容', arr2);
+    var item1 = createFormInputSelect(key+'_01', '內容', arr1);
+    form.appendChild(item1);
+
+
+    var item2 = createFormInputText(key+'_02', '對象', '肉身家族、同事、傳道人');
     form.appendChild(item2);
 
-  } else if (key == 'act7') {
+  } else if (key == 'act6') {
 
     var arr = [
       '常燔祭(10:00) + 常燔祭(14:30) + 聯合禱告(22:00)'
@@ -270,7 +289,25 @@ function selectActivity(btn_id, title, key) {
     form.appendChild(item1);
     act_con = arr[0];
 
-  } 
+  } else if (key == 'act7') {
+
+    var arr = [
+      '寫感謝日記'
+    ];
+    var item1 = createFormInputSelect(key, '完成', arr);
+    form.appendChild(item1);
+    act_con = arr[0];
+
+  } else if (key == 'act8') {
+
+    var arr = [
+      '影像講道（30分鐘）'
+    ];
+    var item1 = createFormInputSelect(key, '完成', arr);
+    form.appendChild(item1);
+    act_con = arr[0];
+
+  }
   $('#activity').modal({backdrop: 'static', keyboard: false});
 }
 
@@ -286,15 +323,15 @@ function createFormInputText(_key, _label, _placeholder) {
   var span = createCustomElement('span', 'input-group-text');
   div1.appendChild(span);
   span.innerHTML = _label;
-  span.id = input_id;
+  span.id = 'label_'+input_id;
 
   var input = createCustomElement('input', 'form-control');
   div.appendChild(input);
+  input.id=input_id;
   input.setAttribute('type', 'text');
   input.setAttribute('placeholder', _placeholder);
   input.setAttribute('aria-label', _placeholder);
   input.setAttribute('aria-describedby', input_id);
-  input.setAttribute('required', 'true');
 
   return div;
 }
@@ -325,6 +362,12 @@ function createFormInputSelect(key, options, values) {
     select.appendChild(opt);
   }
   return div;
+}
+
+function getToastHtml(name,date,msg) {
+  var toast_html='<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">  <div class="toast-header">    <img src="https://envose.github.io/ruby-gemstone.png" class="rounded mr-2" alt="https://envose.github.io/ruby-gemstone.png">    <strong class="mr-auto">'+name+'</strong>    <small>'+date+'</small>    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">      <span aria-hidden="true">&times;</span>    </button>  </div>  <div class="toast-body">    '+msg+'  </div></div>';
+  return toast_html;
+
 }
 
 function createGLoginView() {
