@@ -55,6 +55,13 @@
     form.submit();
   }
 
+function getUserInfo() {
+  var data = localStorage.getItem('userinfo');
+  var userinfo = JSON.parse(data);
+
+  return userinfo;
+}
+
 function saveAcitvity() {
   
 
@@ -128,7 +135,8 @@ function submitAcitvity() {
 
 function getAcitvity() {
   on();
-      var url = GAS_URL+'?action=getActivity&id='+localStorage.getItem('gid');
+      var userinfo = getUserInfo();
+      var url = GAS_URL+'?action=getActivity&id='+userinfo.id;
 
       $.getJSON(url, function(data) {
 
@@ -156,8 +164,9 @@ function genActHistTable(arr) {
 }
 
 function genActivityContent(key, act, con) {
+  var userinfo = getUserInfo();
   var json = {};
-  json.id = localStorage.getItem('gid');
+  json.id = userinfo.id;
   json.act_key = key;
   json.activity = act;
   json.content = con;

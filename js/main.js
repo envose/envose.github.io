@@ -42,6 +42,7 @@ $(document).ready(function() {
 
   if (akey === null || key === null) {
     // login
+    var access_token = '';
       // Parse query string to see if page request is coming from OAuth 2.0 server.
     var fragmentString = location.hash.substring(1);
     var params = {};
@@ -50,7 +51,12 @@ $(document).ready(function() {
       params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
     }
     if (Object.keys(params).length > 0 && params['state'] && params['access_token']) {
-      
+      access_token = params['access_token'];
+    }else{
+      access_token = localStorage.getItem('access_token');
+    }
+    if (access_token !== null) {
+
       // if (params['state'] == localStorage.getItem('state')) {
       //   localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
 
@@ -58,23 +64,28 @@ $(document).ready(function() {
       // } else {
       //   console.log('State mismatch. Possible CSRF attack');
       // }
+      on();
       
-      var url = GAS_URL+'?action=login&token='+params['access_token'];
-
+      var url = GAS_URL+'?action=login&token='+access_token;
       $.getJSON(url, function(data) {
 
         if (data !== null) {
           if (data.status=='0') {
             window.history.pushState({}, document.title, "?");
-            localStorage.setItem('gid', data.res.id);
-            createUserView(data);
+            // localStorage.setItem('gid', data.res.id);
+            // localStorage.setItem('usr', data.res.name);
+            localStorage.setItem('userinfo', JSON.stringify(data.res));
+            localStorage.setItem('access_token', access_token);
+            createRecordView(data);
+            off();
           }else{
-            alert(data.error_msg);
+            localStorage.clear();
+            alert('已過期，請重新登入');    
+            off();
+            createGLoginView();
           }
-          off();
         }
       });
-      
     }else{
       off();
       createGLoginView();

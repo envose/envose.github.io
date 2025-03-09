@@ -94,13 +94,55 @@ function createTableView() {
   
 }
 
-function createUserView(data) {
+function getNavHtml() {
+  var userinfo = getUserInfo();
+  var html = '';
+  html += '<div class="bg-light container-fluid p-3">';
+  html += '  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">';
+  html += '    <a class="navbar-brand" href="#">';
+  html += '      <img src="https://envose.github.io/ruby-gemstone.png" width="30" height="30" alt="">  ';
+  html += userinfo.name;
+  html += '    </a>';
+  html += '  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">';
+  html += '    <span class="navbar-toggler-icon"></span>';
+  html += '  </button>';
+  html += '  <div class="collapse navbar-collapse" id="navbarSupportedContent">';
+  html += '    <ul class="navbar-nav mr-auto">';
+
+  html += '      <li class="nav-item">';
+  html += '        <a class="nav-link" href="#" onclick="return createRecordView()">記錄</a>';
+  html += '      </li>';
+
+  html += '      <li class="nav-item">';
+  html += '        <a class="nav-link" href="#" onclick="return createStampView()">印花</a>';
+  html += '      </li>';
+
+  html += '      <li class="nav-item">';
+  html += '        <a class="nav-link" href="#" onclick="return createGiftView()">禮物</a>';
+  html += '      </li>';
+  html += '    </ul>';
+  html += '    <form class="form-inline my-2 my-lg-0">';
+  html += '      <button class="btn btn-danger my-2 my-sm-0" onclick="return logout()">登出</button>';
+  html += '    </form>';
+  html += '  </div>';
+  html += '</nav>';
+  html += '</div>';
+  return html;
+}
+
+function genToastHtml(title, msg) {
+  var html = '<div class="alert alert-primary alert-dismissible fade show col-12" role="alert">  <strong>'+title+'</strong> <br>'+msg+'<button type="button" class="close" data-dismiss="alert" aria-label="Close">    <span aria-hidden="true">&times;</span>  </button></div>';
+  return html;
+}
+
+function createRecordView() {
+  var userinfo = getUserInfo();
   initViews();
-  if (data.res.name == null){
+  if (userinfo.name == null){
     setHeaderTitle('h2', 'Invalid User');
     return;
   }
-  setHeaderTitle('h2', data.res.name);
+  header.innerHTML = getNavHtml();
   
   /*
   var div = createCustomElement('div', 'view_content_center');
@@ -112,30 +154,14 @@ function createUserView(data) {
   var div = createCustomElement('div', 'view_content_center');
   content.appendChild(div);
 
+  /*
   var tdiv = createCustomElement('div');
   div.appendChild(tdiv);
-  tdiv.innerHTML='<div class="alert alert-primary alert-dismissible fade show col-12" role="alert">  <strong>請多多得福！</strong> <br>已開啟記錄功能和感謝日記，更多功能將會陸續開放，敬請期待。<button type="button" class="close" data-dismiss="alert" aria-label="Close">    <span aria-hidden="true">&times;</span>  </button></div>';
-
-  // div.innerHTML = getToastHtml('Envose','2025-03-09','請多多得福，可以開始記錄❤️');
+  tdiv.innerHTML=genToastHtml('請多多得福！', '已開啟記錄功能和感謝日記，更多功能將會陸續開放，敬請期待。');
+  */
 
   var div1 = createCustomElement('div', 'btn-group-vertical');
   div.appendChild(div1);
-
-  // var btn = createCustomElement('button', 'btn btn-primary');
-  // btn.innerHTML='寫記錄';
-  // btn.setAttribute('onclick', "return enterActivityRecord()");
-
-  // var a1 = createCustomElement('a', 'btn btn-primary dropdown-toggle');
-  // div1.appendChild(a1);
-  // a1.setAttribute('href', '#');
-  // a1.setAttribute('role', 'button');
-  // a1.setAttribute('data-toggle', 'dropdown');
-  // a1.setAttribute('aria-expanded', 'false');
-  // a1.id = 'btn_activity';
-  // a1.innerHTML='寫記錄';
-
-  // var ul1 = createCustomElement('ul', 'dropdown-menu');
-  // div1.appendChild(ul1);
 
   var ul1_li1 = createCustomElement('div');
   div1.appendChild(ul1_li1);
@@ -364,10 +390,32 @@ function createFormInputSelect(key, options, values) {
   return div;
 }
 
-function getToastHtml(name,date,msg) {
-  var toast_html='<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">  <div class="toast-header">    <img src="https://envose.github.io/ruby-gemstone.png" class="rounded mr-2" alt="https://envose.github.io/ruby-gemstone.png">    <strong class="mr-auto">'+name+'</strong>    <small>'+date+'</small>    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">      <span aria-hidden="true">&times;</span>    </button>  </div>  <div class="toast-body">    '+msg+'  </div></div>';
-  return toast_html;
+function createStampView() {
+  var userinfo = getUserInfo();
+  initViews();
+  if (userinfo.name == null){
+    setHeaderTitle('h2', 'Invalid User');
+    return;
+  }
+  header.innerHTML = getNavHtml();
 
+  var div = createCustomElement('div', 'view_content_center');
+  content.appendChild(div);
+  div.innerHTML = '印花功能將會開放，敬請期待';
+}
+
+function createGiftView() {
+  var userinfo = getUserInfo();
+  initViews();
+  if (userinfo.name == null){
+    setHeaderTitle('h2', 'Invalid User');
+    return;
+  }
+  header.innerHTML = getNavHtml();
+
+  var div = createCustomElement('div', 'view_content_center');
+  content.appendChild(div);
+  div.innerHTML = '禮物功能將會開放，敬請期待';
 }
 
 function createGLoginView() {
