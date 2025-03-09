@@ -134,7 +134,7 @@
         </div>
         </div>
 
-<div class="modal fade" id="activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="activity" tabindex="-1" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -148,7 +148,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <button type="button" class="btn btn-primary" id="modal_act_save" onclick="return submitAcitvity()">Save</button>
+        <button type="button" class="btn btn-primary" id="modal_act_save" onclick="return saveAcitvity()">Save</button>
       </div>
     </div>
   </div>
@@ -170,6 +170,21 @@
   </div>
 </div>
 
+<div class="modal fade" id="confirmActivity" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmActivityTitle">確認記錄</h5>
+      </div>
+      <div class="modal-body" id="confirmActivityBody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="return submitAcitvity()">完成</button>
+      </div>
+    </div>
+  </div>
+</div>
   <div id="container w-100">
     <div class="d-flex flex-row justify-content-between" id="topbar">
         <!-- <button type="button" class="btn btn-light mx-3 mx-md-5 mt-1 mt-md-5" id="btn_lang_quiz" onclick="switchQuizLang()">Eng</button>
