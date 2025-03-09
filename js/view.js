@@ -114,7 +114,7 @@ function createUserView(data) {
 
   var tdiv = createCustomElement('div');
   div.appendChild(tdiv);
-  tdiv.innerHTML='<div class="alert alert-primary alert-dismissible fade show col-12" role="alert">  <strong>請多多得福！</strong> <br>已開啟記錄功能，活動日期到4月30日，更多功能將會陸續開放，敬請期待。<button type="button" class="close" data-dismiss="alert" aria-label="Close">    <span aria-hidden="true">&times;</span>  </button></div>';
+  tdiv.innerHTML='<div class="alert alert-primary alert-dismissible fade show col-12" role="alert">  <strong>請多多得福！</strong> <br>已開啟記錄功能和感謝日記，更多功能將會陸續開放，敬請期待。<button type="button" class="close" data-dismiss="alert" aria-label="Close">    <span aria-hidden="true">&times;</span>  </button></div>';
 
   // div.innerHTML = getToastHtml('Envose','2025-03-09','請多多得福，可以開始記錄❤️');
 
