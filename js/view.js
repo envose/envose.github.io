@@ -103,7 +103,7 @@ function getNavHtml() {
   html += '      <img src="https://envose.github.io/ruby-gemstone.png" width="30" height="30" alt="">  ';
   html += userinfo.name;
   html += '    </a>';
-  html += '  <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">';
+  html += '  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">';
   html += '    <span class="navbar-toggler-icon"></span>';
   html += '  </button>';
   html += '  <div class="collapse navbar-collapse" id="navbarSupportedContent">';
@@ -242,7 +242,6 @@ function selectActivity(btn_id, title, key) {
   } else if (key == 'act1') {
 
     var arr1 = [
-      '傳道人II',
       '傳道人',
       '聖徒II',
       '新聖徒',
@@ -402,7 +401,8 @@ function createStampView() {
 
   var div = createCustomElement('div', 'view_content_center');
   content.appendChild(div);
-  div.innerHTML = '印花功能將會開放，敬請期待';
+  div.innerHTML = '印花的計算方法將會公開，敬請期待';
+  calcStamps();
 }
 
 function createGiftView() {

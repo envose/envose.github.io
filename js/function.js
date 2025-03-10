@@ -159,6 +159,28 @@ function getAcitvity() {
       });
 }
 
+function calcStamps() {
+  on();
+      var userinfo = getUserInfo();
+      var url = GAS_URL+'?action=calcStamps&id='+userinfo.id;
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            msgModal('印花','當前印花數: '+data.res);
+            // alert(JSON.stringify(data));
+          }else{
+            alert(data.error_msg);
+            if (data.error_code == '104') {
+              logout();
+            }
+          }
+        }
+        off();
+      });
+}
+
 function genActHistTable(arr) {
   var table_html = '<table class="table">  <thead>    <tr>      <th scope="col">#</th>      <th scope="col">記錄</th>      <th scope="col">活動內容</th>  </tr>  </thead>  <tbody>'
   for (var i = arr.length-1; i >= 0; i--) {
@@ -211,6 +233,12 @@ function msgAlert(msg) {
 function msgToast(msg) {
   document.getElementById('toast_body').innerHTML = msg;
   $('#toast').toast('show');
+}
+
+function msgModal(title,msg) {
+  document.getElementById('alertModalLabel').innerHTML = title;
+  document.getElementById('alertModalBody').innerHTML = msg;
+  $('#alertModal').modal({backdrop: 'static', keyboard: false});
 }
 
 function storeSysLangOpt() {
