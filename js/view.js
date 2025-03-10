@@ -242,6 +242,7 @@ function selectActivity(btn_id, title, key) {
   } else if (key == 'act1') {
 
     var arr1 = [
+      '傳道人II',
       '傳道人',
       '聖徒II',
       '新聖徒',
