@@ -79,10 +79,8 @@ $(document).ready(function() {
             createRecordView(data);
             off();
           }else{
-            localStorage.clear();
-            alert('已過期，請重新登入');    
-            off();
-            createGLoginView();
+            alert('已過期，請重新登入');
+            logout();
           }
         }
       });

@@ -125,6 +125,9 @@ function submitAcitvity() {
         alert('已保存');
       }else{
         alert(data.error_msg);
+        if (data.error_code == '104') {
+          logout();
+        }
       }
     }
     off();
@@ -147,6 +150,9 @@ function getAcitvity() {
             $('#act_hist').modal({backdrop: 'static', keyboard: false});
           }else{
             alert(data.error_msg);
+            if (data.error_code == '104') {
+              logout();
+            }
           }
         }
         off();
@@ -287,7 +293,7 @@ function login() {
 
 function logout() {
   localStorage.clear();
-  window.location.assign(window.location.href.split('?')[0]);
+  window.location.replace('https://envose.github.io/');
 }
 
 function submitTeam() {
