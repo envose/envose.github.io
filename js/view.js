@@ -103,7 +103,7 @@ function getNavHtml() {
   html += '      <img src="https://envose.github.io/ruby-gemstone.png" width="30" height="30" alt="">  ';
   html += userinfo.name;
   html += '    </a>';
-  html += '  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">';
+  html += '  <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">';
   html += '    <span class="navbar-toggler-icon"></span>';
   html += '  </button>';
   html += '  <div class="collapse navbar-collapse" id="navbarSupportedContent">';
