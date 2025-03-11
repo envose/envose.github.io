@@ -162,14 +162,14 @@ function getAcitvity() {
 function calcStamps() {
   on();
       var userinfo = getUserInfo();
-      var url = GAS_URL+'?action=calcStamps&id='+userinfo.id;
+      var url = GAS_URL+'?action=getActStampCountArr&id='+userinfo.id;
 
       $.getJSON(url, function(data) {
 
         if (data !== null) {
           if (data.status=='0') {
             msgModal('印花','當前印花數: '+data.res);
-            // alert(JSON.stringify(data));
+            alert(JSON.stringify(data));
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {
