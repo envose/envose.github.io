@@ -185,7 +185,7 @@ function calcStamps() {
 function genStampTable(res) {
   var html='<div><ul class="list-group">';
   for (var i =0; i<=8; i++) {
-    var act_key = 'act_'+i;
+    var act_key = 'act'+i;
     if (res[act_key][0] > 0) {
       html += '<li class="list-group-item d-flex justify-content-between align-items-center">';
       html += act_key;
