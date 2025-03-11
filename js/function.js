@@ -168,9 +168,9 @@ function calcStamps() {
 
         if (data !== null) {
           if (data.status=='0') {
-            msgModal('印花','當前印花數: '+JSON.stringify(data));
+            // msgModal('印花','當前印花數: '+JSON.stringify(data));
             //alert(JSON.stringify(data));
-            // content.appendChild(genStampTable(data.res));
+            content.appendChild(genStampTable(data.res));
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {
