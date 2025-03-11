@@ -213,7 +213,7 @@ function genStampTable(res) {
     }
   }
   html += '<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">';
-  html += '<strong>當前印花數</strong>';
+  html += '<strong>獲得印花數</strong>';
   html += '<span class="badge badge-light badge-pill">';
   html += total;
   html += '</span>';
