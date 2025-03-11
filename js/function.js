@@ -193,19 +193,28 @@ function calcStamps() {
 }
 
 function genStampTable(res) {
+  var total = 0;
   var html='<ul class="list-group">';
+
+  var li = '';
   for (var i =0; i<=8; i++) {
     var act_key = 'act'+i;
     if (res[act_key][0] > 0) {
-      html += '<li class="list-group-item d-flex justify-content-between align-items-center">';
-      html += act_labels[act_key];
-      html += '<span class="badge badge-primary badge-pill">';
-      html += '+'+res[act_key][0];
-      html += '</span>';
-
+      total += res[act_key][0];
+      li += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+      li += act_labels[act_key];
+      li += '<span class="badge badge-primary badge-pill">';
+      li += '+'+res[act_key][0];
+      li += '</span>';
     }
   }
-  html+='</ul>';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">';
+  html += '<strong>Total</strong>';
+  html += '<span class="badge badge-light badge-pill">';
+  html += total;
+  html += '</span>';
+  html += li;
+  html += '</ul>';
   return html;
   /*
   <li class="list-group-item d-flex justify-content-between align-items-center">
