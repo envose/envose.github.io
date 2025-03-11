@@ -2,6 +2,15 @@
   const YOUR_CLIENT_ID = '207039464470-ds863khed849svfntdjertq4bpddpqva.apps.googleusercontent.com';
   const YOUR_REDIRECT_URI = 'https://envose.github.io';
 
+  const act_labels = {'act0':'2025發表慶典', 
+              'act1':'LMS 教育', 
+              'act2':'發表評價', 
+              'act3':'閱讀《我的羊聽我的聲音》', 
+              'act4':'真理書評價《我的羊聽我的聲音》', 
+              'act5':'傳道', 
+              'act6':'(每日) 祈禱', 
+              'act7':'(每日) 感謝日記', 
+              'act8':'(每日) 線上宣教', };
   // Function to generate a random state value
   function generateCryptoRandomState() {
     const randomValues = new Uint32Array(2);
@@ -189,7 +198,7 @@ function genStampTable(res) {
     var act_key = 'act'+i;
     if (res[act_key][0] > 0) {
       html += '<li class="list-group-item d-flex justify-content-between align-items-center">';
-      html += act_key;
+      html += act_labels[act_key];
       html += '<span class="badge badge-primary badge-pill">';
       html += '+'+res[act_key][0];
       html += '</span>';
