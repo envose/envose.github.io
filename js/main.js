@@ -78,6 +78,7 @@ $(document).ready(function() {
             localStorage.setItem('access_token', access_token);
             createRecordView(data);
             off();
+            msgToast('Envose', '08:00', '請多多得福，印花功能已開啟');
           }else{
             alert('已過期，請重新登入');
             logout();

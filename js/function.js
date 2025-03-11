@@ -282,7 +282,9 @@ function msgAlert(msg) {
   alert(getSysTranslate('warning') + getSysTranslate(msg));
 }
 
-function msgToast(msg) {
+function msgToast(name, time, msg) {
+  document.getElementById('toast_name').innerHTML = name;
+  document.getElementById('toast_time').innerHTML = time;
   document.getElementById('toast_body').innerHTML = msg;
   $('#toast').toast('show');
 }
