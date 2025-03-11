@@ -170,7 +170,7 @@ function calcStamps() {
           if (data.status=='0') {
             msgModal('印花','當前印花數: '+data.res['act7'][0]);
             //alert(JSON.stringify(data));
-            content.appendChild(JSON.stringify(data.res));
+            content.innerHTML = genStampTable(data.res);
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {
