@@ -168,7 +168,7 @@ function calcStamps() {
 
         if (data !== null) {
           if (data.status=='0') {
-            msgModal('印花','當前印花數: '+JSON.stringify(data.res));
+            msgModal('印花','當前印花數: '+JSON.stringify(data));
             //alert(JSON.stringify(data));
             // content.appendChild(genStampTable(data.res));
           }else{
