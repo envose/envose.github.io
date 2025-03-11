@@ -197,6 +197,7 @@ function genStampTable(res) {
   var html='<ul class="list-group">';
 
   var li = '';
+  var progress = '';
   for (var i =0; i<=8; i++) {
     var act_key = 'act'+i;
     if (res[act_key][0] > 0) {
@@ -206,6 +207,8 @@ function genStampTable(res) {
       li += '<span class="badge badge-primary badge-pill">';
       li += '+'+res[act_key][0];
       li += '</span>';
+    } else if (res[act_key][1]>0 && res[act_key][2]>0) {
+      progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div></div>';
     }
   }
   html += '<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">';
@@ -214,6 +217,7 @@ function genStampTable(res) {
   html += total;
   html += '</span>';
   html += li;
+  html += progress;
   html += '</ul>';
   return html;
   /*
