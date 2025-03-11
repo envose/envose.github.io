@@ -217,8 +217,8 @@ function genStampTable(res) {
   html += total;
   html += '</span>';
   html += li;
-  html += progress;
   html += '</ul>';
+  html += progress;
   return html;
   /*
   <li class="list-group-item d-flex justify-content-between align-items-center">
