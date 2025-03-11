@@ -168,8 +168,9 @@ function calcStamps() {
 
         if (data !== null) {
           if (data.status=='0') {
-            msgModal('印花','當前印花數: '+data.res);
-            alert(JSON.stringify(data));
+            //msgModal('印花','當前印花數: '+data.res);
+            //alert(JSON.stringify(data));
+            content.appendChild(genStampTable(data.res));
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {
@@ -179,6 +180,37 @@ function calcStamps() {
         }
         off();
       });
+}
+
+function genStampTable(res) {
+  var html='<div><ul class="list-group">';
+  for (var i =0; i<=8; i++) {
+    var act_key = 'act_'+i;
+    if (res[act_key][0] > 0) {
+      html += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+      html += act_key;
+      html += '<span class="badge badge-primary badge-pill">';
+      html += '+'+res[act_key][0];
+      html += '</span>';
+
+    }
+  }
+  html+='</ul></div>';
+  /*
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    A list item
+    <span class="badge badge-primary badge-pill">14</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    A second list item
+    <span class="badge badge-primary badge-pill">2</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    A third list item
+    <span class="badge badge-primary badge-pill">1</span>
+  </li>
+</ul>';
+*/
 }
 
 function genActHistTable(arr) {
