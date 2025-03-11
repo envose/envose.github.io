@@ -400,7 +400,7 @@ function createStampView() {
   }
   header.innerHTML = getNavHtml();
 
-  var div = createCustomElement('div', 'container col_12');
+  var div = createCustomElement('div', 'container col_11');
   content.appendChild(div);
   div.id = 'stamps';
   calcStamps();
