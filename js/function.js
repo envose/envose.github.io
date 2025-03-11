@@ -208,7 +208,7 @@ function genStampTable(res) {
       li += '+'+res[act_key][0];
       li += '</span>';
     } else if (res[act_key][1]>0 && res[act_key][2]>0) {
-      progress += '<h5>'+act_labels[act_key]+'</h5>';
+      progress += '<h6>'+act_labels[act_key]+'</h6>';
       progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: '+(res[act_key][1]/res[act_key][2]*100)+'%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+res[act_key][1]+' / '+res[act_key][2]+'</div></div>';
     }
   }
