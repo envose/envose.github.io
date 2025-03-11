@@ -212,7 +212,7 @@ function genStampTable(res) {
       progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: '+(res[act_key][1]/res[act_key][2]*100)+'%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+res[act_key][1]+' / '+res[act_key][2]+'</div></div>';
     }
   }
-  html += '<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
   html += '<strong>獲得印花數</strong>';
   html += '<span class="badge badge-light badge-pill">';
   html += total;
