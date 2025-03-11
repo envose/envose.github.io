@@ -194,7 +194,9 @@ function calcStamps() {
 
 function genStampTable(res) {
   var total = 0;
-  var html='<div class="container col-11 mp-3"><ul class="list-group">';
+  var html='';
+
+  html += '<div class="container col-11 mt-3"><ul class="list-group">';
 
   var li = '';
   var progress = '';
@@ -221,22 +223,14 @@ function genStampTable(res) {
   html += '</ul>';
   html += progress;
   html + '</div>';
+
+
+  if (res['achv'] > 0) {
+    html += '<div class="d-flex flex-column align-items-center mt-5">';
+    html += '<a class="btn btn-primary btn-block col-5">成就</a>';
+    html += '</div>';
+  }
   return html;
-  /*
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    A list item
-    <span class="badge badge-primary badge-pill">14</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    A second list item
-    <span class="badge badge-primary badge-pill">2</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    A third list item
-    <span class="badge badge-primary badge-pill">1</span>
-  </li>
-</ul>';
-*/
 }
 
 function genActHistTable(arr) {
