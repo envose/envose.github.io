@@ -194,7 +194,7 @@ function calcStamps() {
 
 function genStampTable(res) {
   var total = 0;
-  var html='<ul class="list-group">';
+  var html='<div class="container col-11 mp-3"><ul class="list-group">';
 
   var li = '';
   var progress = '';
@@ -208,18 +208,19 @@ function genStampTable(res) {
       li += '+'+res[act_key][0];
       li += '</span>';
     } else if (res[act_key][1]>0 && res[act_key][2]>0) {
-      progress += '<h6>'+act_labels[act_key]+'</h6>';
-      progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: '+(res[act_key][1]/res[act_key][2]*100)+'%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+res[act_key][1]+' / '+res[act_key][2]+'</div></div>';
+      progress += '<div class="container mt-3"><h6>'+act_labels[act_key]+'</h6>';
+      progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: '+(res[act_key][1]/res[act_key][2]*100)+'%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+res[act_key][1]+' / '+res[act_key][2]+'</div></div></div>';
     }
   }
   html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
   html += '<strong>獲得印花數</strong>';
-  html += '<span class="badge badge-light badge-pill">';
+  html += '<h5><span class="badge badge-light badge-pill">';
   html += total;
-  html += '</span>';
+  html += '</span></h5>';
   html += li;
   html += '</ul>';
   html += progress;
+  html + '</div>';
   return html;
   /*
   <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -702,7 +703,6 @@ $('.modal').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
   }
 });
-
 
 
 
