@@ -168,9 +168,10 @@ function calcStamps() {
 
         if (data !== null) {
           if (data.status=='0') {
-            msgModal('印花','當前印花數: '+data.res['act7'][0]);
+            //msgModal('印花','當前印花數: '+data.res['act7'][0]);
             //alert(JSON.stringify(data));
-            content.innerHTML = genStampTable(data.res);
+            //content.innerHTML = genStampTable(data.res);
+            document.getElementById('stamps').innerHTML = genStampTable(data.res);
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {
@@ -183,7 +184,7 @@ function calcStamps() {
 }
 
 function genStampTable(res) {
-  var html='<div><ul class="list-group">';
+  var html='<ul class="list-group">';
   for (var i =0; i<=8; i++) {
     var act_key = 'act'+i;
     if (res[act_key][0] > 0) {
@@ -195,7 +196,7 @@ function genStampTable(res) {
 
     }
   }
-  html+='</ul></div>';
+  html+='</ul>';
   return html;
   /*
   <li class="list-group-item d-flex justify-content-between align-items-center">
