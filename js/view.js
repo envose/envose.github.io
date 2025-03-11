@@ -400,9 +400,10 @@ function createStampView() {
   }
   header.innerHTML = getNavHtml();
 
-  var div = createCustomElement('div', 'view_content_center');
+  var div = createCustomElement('div', ''col_12');
   content.appendChild(div);
   div.innerHTML = '印花的計算方法將會公開，敬請期待';
+  div.id = 'stamps';
   calcStamps();
 }
 
