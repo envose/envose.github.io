@@ -166,7 +166,7 @@ function createRecordView() {
   var ul1_li1 = createCustomElement('div');
   div1.appendChild(ul1_li1);
 
-  var ahist = createCustomElement('a', 'btn btn-primary btn-block');
+  var ahist = createCustomElement('a', 'btn btn-primary btn-block mb-4');
   ul1_li1.appendChild(ahist);
   ahist.setAttribute('onclick', "return getAcitvity('查看記錄')");
   ahist.innerHTML = '查看記錄';
