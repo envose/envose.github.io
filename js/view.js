@@ -110,7 +110,7 @@ function getNavHtml() {
   html += '    <ul class="navbar-nav mr-auto">';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createRecordView()">我的記錄</a>';
+  html += '        <a class="nav-link" href="#" onclick="return createRecordView()">記錄</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
@@ -171,17 +171,13 @@ function createRecordView() {
   var div1 = createCustomElement('div', 'btn-group-vertical');
   div.appendChild(div1);
 
-  var h4 = createCustomElement('h4');
-  div1.appendChild(h4);
-  h4.innerHTML = '我的記錄';
-
   var ul1_li1 = createCustomElement('div');
   div1.appendChild(ul1_li1);
 
 
   var ahist = createCustomElement('a', 'btn btn-primary btn-block mb-4');
   ul1_li1.appendChild(ahist);
-  ahist.setAttribute('onclick', "return getAcitvity('查看記錄')");
+  ahist.setAttribute('onclick', "return getAcitvity('我的記錄')");
   ahist.innerHTML = '查看記錄';
 
   var act0 = createCustomElement('a', 'btn btn-outline-primary btn-block');
