@@ -196,7 +196,7 @@ function genStampTable(res) {
   var total = 0;
   var html='';
 
-  html += '<div class="container col-11 mt-3"><ul class="list-group">';
+  html += '<div class="container col-11 mt-3"><h4>我的印花</h4><ul class="list-group">';
 
   var li = '';
   var progress = '';
@@ -233,6 +233,64 @@ function genStampTable(res) {
   return html;
 }
 
+function getRanking() {
+  on();
+      var userinfo = getUserInfo();
+      var url = GAS_URL+'?action=ranking&id='+userinfo.id;
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            //msgModal('印花','當前印花數: '+data.res['act7'][0]);
+            // alert(JSON.stringify(data));
+            //content.innerHTML = genStampTable(data.res);
+            document.getElementById('ranking').innerHTML = genRankingTable(data.res);
+          }else{
+            alert(data.error_msg);
+            if (data.error_code == '104') {
+              logout();
+            }
+          }
+        }
+        off();
+      });
+}
+
+function genRankingTable(res) {
+  var total = 0;
+  var html='';
+
+  html += '<div class="container col-11 mt-3"><h4>排行榜</h4><ul class="list-group">';
+
+  var li = '';
+  var progress = '';
+  for (var i = 0; i<res.ranking.length; i++) {
+      li += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+      li += res.ranking[i].name;
+      li += '<span class="badge badge-primary badge-pill">';
+      li += res.ranking[i].score;
+      li += '</span>';
+  }
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
+  html += '<strong>最後更新時間</strong>';
+  html += '<h5><span class="badge badge-light badge-pill">';
+  html += res.timestamp;
+  html += '</span></h5>';
+  html += li;
+  html += '</ul>';
+  // html += progress;
+  html + '</div>';
+
+
+  if (res['achv'] > 0) {
+    html += '<div class="d-flex flex-column align-items-center mt-5">';
+    html += '<a class="btn btn-primary btn-block col-5">成就</a>';
+    html += '</div>';
+  }
+  return html;
+}
+
 function genActHistTable(arr) {
   var table_html = '<table class="table">  <thead>    <tr>      <th scope="col">#</th>      <th scope="col">記錄</th>      <th scope="col">活動內容</th>  </tr>  </thead>  <tbody>'
   for (var i = arr.length-1; i >= 0; i--) {
@@ -253,6 +311,27 @@ function genActivityContent(key, act, con) {
 
   return JSON.stringify(json);
 
+}
+
+function getOutpostGift() {
+  on();
+      var userinfo = getUserInfo();
+      var url = GAS_URL+'?action=giftOutpost&id='+userinfo.id;
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            msgModal('禮物提示碼','已獲取禮物提示碼【'+data.res+'】，請在安息日 (15/3) 使用');
+          }else{
+            alert(data.error_msg);
+            if (data.error_code == '104') {
+              logout();
+            }
+          }
+        }
+        off();
+      });
 }
 
 function selectedLang(langOpt) {
@@ -282,11 +361,34 @@ function msgAlert(msg) {
   alert(getSysTranslate('warning') + getSysTranslate(msg));
 }
 
-function msgToast(name, time, msg) {
-  document.getElementById('toast_name').innerHTML = name;
-  document.getElementById('toast_time').innerHTML = time;
-  document.getElementById('toast_body').innerHTML = msg;
-  $('#toast').toast('show');
+function msgToast(tid, name, time, msg, arr) {
+
+  var html = '';
+
+  html += '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" id="'+tid+'">';
+  html += '<div class="toast-header">';
+  html += '<img src="https://envose.github.io/ruby-gemstone.png" class="img-fluid rounded mr-2" style="height:20px;"alt="">';
+  html += '<strong class="mr-auto">'+name+'</strong>';
+  html += '<small>'+time+'</small>';
+  html += '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">';
+  html += '<span aria-hidden="true">&times;</span>';
+  html += '</button>';
+  html += '</div>';
+  html += '<div class="toast-body">';
+  html += msg;
+  html += '</div>';
+  html += '</div>';
+
+
+  document.getElementById('toast_group').innerHTML += html;
+
+  if (arr.length > 0) {
+    for (var i = arr.length-1; i >= 0; i--) {
+      $('#'+arr[i]).toast('show');
+    }
+  }
+  
+  // $('#'+tid+'2').toast('show');
 }
 
 function msgModal(title,msg) {

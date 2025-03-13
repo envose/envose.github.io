@@ -110,15 +110,19 @@ function getNavHtml() {
   html += '    <ul class="navbar-nav mr-auto">';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createRecordView()">記錄</a>';
+  html += '        <a class="nav-link" href="#" onclick="return createRecordView()">我的記錄</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createStampView()">印花</a>';
+  html += '        <a class="nav-link" href="#" onclick="return createStampView()">我的印花</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
   html += '        <a class="nav-link" href="#" onclick="return createGiftView()">禮物</a>';
+  html += '      </li>';
+
+  html += '      <li class="nav-item">';
+  html += '        <a class="nav-link" href="#" onclick="return createRankingView()">排行榜</a>';
   html += '      </li>';
   html += '    </ul>';
   html += '    <form class="form-inline my-2 my-lg-0">';
@@ -167,8 +171,13 @@ function createRecordView() {
   var div1 = createCustomElement('div', 'btn-group-vertical');
   div.appendChild(div1);
 
+  var h4 = createCustomElement('h4');
+  div1.appendChild(h4);
+  h4.innerHTML = '我的記錄';
+
   var ul1_li1 = createCustomElement('div');
   div1.appendChild(ul1_li1);
+
 
   var ahist = createCustomElement('a', 'btn btn-primary btn-block mb-4');
   ul1_li1.appendChild(ahist);
@@ -421,7 +430,28 @@ function createGiftView() {
 
   var div = createCustomElement('div', 'view_content_center');
   content.appendChild(div);
-  div.innerHTML = '禮物功能將會開放，敬請期待';
+
+  // Gift Outpost
+    var html = '<div class="d-flex flex-column align-items-center">';
+    html += '<a class="btn btn-primary btn-block" onclick="return getOutpostGift();">前往禮物前哨站</a>';
+    html += '</div>';
+    div.innerHTML = html;
+}
+
+function createRankingView() {
+  var userinfo = getUserInfo();
+  initViews();
+  if (userinfo.name == null){
+    setHeaderTitle('h2', 'Invalid User');
+    return;
+  }
+  header.innerHTML = getNavHtml();
+
+  var div = createCustomElement('div', 'container col_11');
+  content.appendChild(div);
+  div.id = 'ranking';
+  getRanking();
+
 }
 
 function createGLoginView() {
