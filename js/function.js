@@ -290,6 +290,10 @@ function msgToast(name, time, msg) {
 }
 
 function msgModal(title,msg) {
+
+  var m_footer = document.getElementById('alertModalFooter');
+  m_footer.innerHTML = '';
+
   document.getElementById('alertModalLabel').innerHTML = title;
   document.getElementById('alertModalBody').innerHTML = msg;
   $('#alertModal').modal({backdrop: 'static', keyboard: false});
