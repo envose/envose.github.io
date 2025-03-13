@@ -79,8 +79,8 @@ $(document).ready(function() {
             createRecordView(data);
             off();
             document.getElementById('toast_group').innerHTML = '';
-            msgToast('toast2', 'Envose', '', '請多多得福，【禮物前哨站】已開啟', ['toast2']);
-            msgToast('toast1', 'Envose', '', '請多多得福，【排行榜】已開啟', ['toast1','toast2']);
+            msgToast('toast2', 'Envose', '', '請多多得福，【禮物前哨站】【排行榜】已開啟', ['toast2']);
+            // msgToast('toast1', 'Envose', '', '請多多得福，【排行榜】已開啟', ['toast1','toast2']);
           }else{
             alert('已過期，請重新登入');
             logout();
