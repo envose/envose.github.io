@@ -196,7 +196,7 @@ function genStampTable(res) {
   var total = 0;
   var html='';
 
-  html += '<div class="container col-11 mt-3"><h4>我的印花</h4><ul class="list-group">';
+  html += '<div class="container col-11 mt-3"><ul class="list-group">';
 
   var li = '';
   var progress = '';
@@ -215,7 +215,7 @@ function genStampTable(res) {
     }
   }
   html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
-  html += '<strong>獲得印花數</strong>';
+  html += '<strong>我的印花</strong>';
   html += '<h5><span class="badge badge-light badge-pill">';
   html += total;
   html += '</span></h5>';
@@ -261,22 +261,22 @@ function genRankingTable(res) {
   var total = 0;
   var html='';
 
-  html += '<div class="container col-11 mt-3"><h4>排行榜</h4><ul class="list-group">';
+  html += '<div class="container col-11 mt-3"><ul class="list-group">';
 
   var li = '';
   var progress = '';
   for (var i = 0; i<res.ranking.length; i++) {
-      li += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+      li += '<li class="list-group-item d-flex justify-content-between align-items-center"><strong>';
       li += res.ranking[i].name;
-      li += '<span class="badge badge-primary badge-pill">';
+      li += '</strong><h5><span class="badge badge-primary badge-pill">';
       li += res.ranking[i].score;
-      li += '</span>';
+      li += '</span></h5>';
   }
   html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
-  html += '<strong>最後更新時間</strong>';
-  html += '<h5><span class="badge badge-light badge-pill">';
-  html += res.timestamp;
-  html += '</span></h5>';
+  html += '<strong>排行榜 No. 1</strong>';
+  html += '<small><span class="badge badge-secondary">';
+  html += '最後更新: '+res.timestamp;
+  html += '</span></small>';
   html += li;
   html += '</ul>';
   // html += progress;
@@ -338,13 +338,13 @@ function genAnnounceContent(announce) {
   var html = '';
   for (var i = 0; i < announce.length; i++) {
     if (announce[i].datetime == announce[0].datetime) {
-      html += '<span class="badge badge-primary">';
+      html += '<small><span class="badge badge-primary">';
     } else {
-      html += '<span class="badge badge-secondary">';
+      html += '<small><span class="badge badge-secondary">';
     }
     
     html += announce[i].datetime;
-    html += '</span><span class="badge badge-light">';
+    html += '</span></small><span class="badge badge-light">';
     html += announce[i].msg;
     html += '</span><br>';
   }
