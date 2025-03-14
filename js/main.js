@@ -72,16 +72,11 @@ $(document).ready(function() {
         if (data !== null) {
           if (data.status=='0') {
             window.history.pushState({}, document.title, "?");
-            // localStorage.setItem('gid', data.res.id);
-            // localStorage.setItem('usr', data.res.name);
             localStorage.setItem('userinfo', JSON.stringify(data.res));
             localStorage.setItem('access_token', access_token);
             createRecordView(data);
             off();
-            msgModal('請多多得福', '（2025-03-14）【禮物前哨站】已開啟<br>（2025-03-14）【排行榜】已開啟<br>（2025-03-12）【我的印花】已開啟<br>（2025-03-09）【記錄】已開啟');
-            // document.getElementById('toast_group').innerHTML = '';
-            // msgToast('toast2', 'Envose', '', '請多多得福，【禮物前哨站】【排行榜】已開啟', ['toast2']);
-            // msgToast('toast1', 'Envose', '', '請多多得福，【排行榜】已開啟', ['toast1','toast2']);
+            msgModal('請多多得福', genAnnounceContent(data.res.announce));
           }else{
             alert('已過期，請重新登入');
             logout();

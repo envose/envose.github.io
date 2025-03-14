@@ -334,6 +334,23 @@ function getOutpostGift() {
       });
 }
 
+function genAnnounceContent(announce) {
+  var html = '';
+  for (var i = 0; i < announce.length; i++) {
+    if (announce[i].datetime == announce[0].datetime) {
+      html += '<span class="badge badge-primary">';
+    } else {
+      html += '<span class="badge badge-secondary">';
+    }
+    
+    html += announce[i].datetime;
+    html += '</span><span class="badge badge-light">';
+    html += announce[i].msg;
+    html += '</span><br>';
+  }
+  return html;
+}
+
 function selectedLang(langOpt) {
   setLangOpt(langOpt);
   createStartPage();
