@@ -214,6 +214,15 @@ function genStampTable(res) {
       progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: '+(res[act_key][1]/res[act_key][2]*100)+'%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+res[act_key][1]+' / '+res[act_key][2]+'</div></div></div>';
     }
   }
+  if (res.achv > 0) {
+    total += res.achv;
+    li += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+    li += '成就';
+    li += '<span class="badge badge-warning badge-pill">';
+    li += '+'+res.achv;
+    li += '</span>';
+
+  }
   html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
   html += '<strong>我的印花</strong>';
   html += '<h5><span class="badge badge-light badge-pill">';
@@ -224,10 +233,9 @@ function genStampTable(res) {
   html += progress;
   html + '</div>';
 
-
   if (res['achv'] > 0) {
     html += '<div class="d-flex flex-column align-items-center mt-5">';
-    html += '<a class="btn btn-primary btn-block col-5">成就</a>';
+    html += '<a class="btn btn-warning btn-block col-5" onclick="return createAchvView();">我的成就</a>';
     html += '</div>';
   }
   return html;
@@ -281,13 +289,6 @@ function genRankingTable(res) {
   html += '</ul>';
   // html += progress;
   html + '</div>';
-
-
-  if (res['achv'] > 0) {
-    html += '<div class="d-flex flex-column align-items-center mt-5">';
-    html += '<a class="btn btn-primary btn-block col-5">成就</a>';
-    html += '</div>';
-  }
   return html;
 }
 
@@ -311,6 +312,88 @@ function genActivityContent(key, act, con) {
 
   return JSON.stringify(json);
 
+}
+
+function createAchvView() {
+  on();
+      var userinfo = getUserInfo();
+      var url = GAS_URL+'?action=achievement&id='+userinfo.id;
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            msgModal('我的成就', genAchvContent(data.res));
+            console.log(JSON.stringify(data.res));
+          }else{
+            alert(data.error_msg);
+            if (data.error_code == '104') {
+              logout();
+            }
+          }
+        }
+        off();
+      });
+}
+
+function genAchvContent(res) {
+  var html = '';
+  html+='<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">';
+  html+='  <ol class="carousel-indicators">';
+  html+='    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>';
+  for (var i = 1; i < res.length; i++) {
+    html+='    <li data-target="#carouselExampleCaptions" data-slide-to="'+i+'"></li>';
+  }
+  // html+='    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>';
+  // html+='    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>';
+  html+='  </ol>';
+  html+='  <div class="carousel-inner">';
+
+  for (var i = 0; i < res.length; i++) {
+    if (i==0) {
+      html+='    <div class="carousel-item active">';
+    }else{
+      html+='    <div class="carousel-item">';
+    }
+    html+='      <img src="https://envose.github.io/img/achv_'+res[i].act_key+'.png" class="d-block w-100" alt="">';
+    html+='      <div class="carousel-caption d-block">';
+    html+='        <p>'+res[i].desc+'</p>';
+    html+='        <span class="badge badge-warning badge-pill">+'+res[i].stamps+'</span>';
+    html+='      </div>';
+    html+='    </div>';
+  }
+  
+  
+  // html+='      <div class="carousel-caption d-block">';
+  // html+='        <p>完成發表慶典的挑戰者</p>';
+  // html+='        <span class="badge badge-primary badge-pill">+5</span>';
+  // html+='      </div>';
+  // html+='    </div>';
+  // html+='    <div class="carousel-item">';
+  // html+='      <img src="https://envose.github.io/img/achv_act3.png" class="d-block w-100" alt="">';
+  // html+='      <div class="carousel-caption d-block">';
+  // html+='        <p>我的羊</p>';
+  // html+='        <span class="badge badge-primary badge-pill">+5</span>';
+  // html+='      </div>';
+  // html+='    </div>';
+  // html+='    <div class="carousel-item">';
+  // html+='      <img src="https://envose.github.io/img/achv_act4.png" class="d-block w-100" alt="">';
+  // html+='      <div class="carousel-caption d-block">';
+  // html+='        <p>願得到羔羊引導的人</p>';
+  // html+='        <span class="badge badge-primary badge-pill">+5</span>';
+  // html+='      </div>';
+  // html+='    </div>';
+  html+='  </div>';
+  html+='  <button class="btn carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">';
+  html+='    <span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+  html+='    <span class="sr-only">Previous</span>';
+  html+='  </button>';
+  html+='  <button class="btn carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">';
+  html+='    <span class="carousel-control-next-icon" aria-hidden="true"></span>';
+  html+='    <span class="sr-only">Next</span>';
+  html+='  </button>';
+  html+='</div>';
+  return html;
 }
 
 function getOutpostGift() {
@@ -344,7 +427,7 @@ function genAnnounceContent(announce) {
     }
     
     html += announce[i].datetime;
-    html += '</span></small><small>';
+    html += '</small></span><small>';
     html += announce[i].msg;
     html += '</small><br>';
   }
