@@ -198,13 +198,6 @@ function genStampTable(res) {
   var html='';
 
   html += '<div class="container col-11 mt-3">';
-
-  if (res['achv'] > 0) {
-    html += '<div class="d-flex flex-column align-items-center mb-3">';
-    html += '<a class="btn btn-warning btn-block col-5" onclick="return createAchvView();">我的成就</a>';
-    html += '</div>';
-  }
-
   html += '<ul class="list-group">';
 
   var li = '';
@@ -239,6 +232,13 @@ function genStampTable(res) {
   html += '</span></h5>';
   html += li;
   html += '</ul>';
+
+  if (res['achv'] > 0) {
+    html += '<div class="d-flex flex-column align-items-center mt-3 mb-3">';
+    html += '<a class="btn btn-warning btn-block col-5" onclick="return createAchvView();">我的成就</a>';
+    html += '</div>';
+  }
+
   html += progress;
   html + '</div>';
   return html;
