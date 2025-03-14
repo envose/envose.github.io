@@ -344,9 +344,9 @@ function genAnnounceContent(announce) {
     }
     
     html += announce[i].datetime;
-    html += '</span></small><span class="badge badge-light">';
+    html += '</span></small><small>';
     html += announce[i].msg;
-    html += '</span><br>';
+    html += '</small><br>';
   }
   return html;
 }
