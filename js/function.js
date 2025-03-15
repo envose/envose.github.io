@@ -284,7 +284,7 @@ function genRankingTable(res) {
       li += '</span></h5>';
   }
   html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
-  html += '<strong>排行榜 No. 1</strong>';
+  html += '<strong>排行榜 Top 7</strong>';
   html += '<small><span class="badge badge-secondary">';
   html += '最後更新: '+res.timestamp;
   html += '</span></small>';
