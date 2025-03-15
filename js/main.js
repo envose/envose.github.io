@@ -76,7 +76,7 @@ $(document).ready(function() {
             localStorage.setItem('access_token', access_token);
             createRecordView(data);
             off();
-            msgModal('請多多得福', genAnnounceContent(data.res.announce));
+            msgModal('公告欄', genAnnounceContent(data.res.announce));
           }else{
             alert('已過期，請重新登入');
             logout();

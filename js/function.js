@@ -420,6 +420,28 @@ function getOutpostGift() {
       });
 }
 
+function getAnnouncement() {
+  on();
+      var userinfo = getUserInfo();
+      var url = GAS_URL+'?action=announcement';
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            msgModal('公告欄', genAnnounceContent(data.res));
+          }else{
+            alert(data.error_msg);
+            if (data.error_code == '104') {
+              logout();
+            }
+          }
+        }
+        off();
+      });
+
+}
+
 function genAnnounceContent(announce) {
   var html = '';
   for (var i = 0; i < announce.length; i++) {
@@ -908,6 +930,3 @@ $('.modal').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
   }
 });
-
-
-

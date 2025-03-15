@@ -118,11 +118,15 @@ function getNavHtml() {
   html += '      </li>';
 
   html += '      <li class="nav-item">';
+  html += '        <a class="nav-link" href="#" onclick="return createRankingView()">排行榜</a>';
+  html += '      </li>';
+
+  html += '      <li class="nav-item">';
   html += '        <a class="nav-link" href="#" onclick="return createGiftView()">禮物</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createRankingView()">排行榜</a>';
+  html += '        <a class="nav-link" href="#" onclick="return getAnnouncement()">公告欄</a>';
   html += '      </li>';
   html += '    </ul>';
   html += '    <form class="form-inline my-2 my-lg-0">';
@@ -426,12 +430,13 @@ function createGiftView() {
 
   var div = createCustomElement('div', 'view_content_center');
   content.appendChild(div);
+  div.innerHTML = '禮物功能將會開放，敬請期待';
 
   // Gift Outpost
-    //var html = '<div class="d-flex flex-column align-items-center">';
-    //html += '<a class="btn btn-primary btn-block" onclick="return getOutpostGift();">前往禮物前哨站</a>';
-    //html += '</div>';
-    //div.innerHTML = html;
+    // var html = '<div class="d-flex flex-column align-items-center">';
+    // html += '<a class="btn btn-primary btn-block" onclick="return getOutpostGift();">前往禮物前哨站</a>';
+    // html += '</div>';
+    // div.innerHTML = html;
 }
 
 function createRankingView() {
