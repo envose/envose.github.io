@@ -428,10 +428,10 @@ function createGiftView() {
   content.appendChild(div);
 
   // Gift Outpost
-    var html = '<div class="d-flex flex-column align-items-center">';
-    html += '<a class="btn btn-primary btn-block" onclick="return getOutpostGift();">前往禮物前哨站</a>';
-    html += '</div>';
-    div.innerHTML = html;
+    //var html = '<div class="d-flex flex-column align-items-center">';
+    //html += '<a class="btn btn-primary btn-block" onclick="return getOutpostGift();">前往禮物前哨站</a>';
+    //html += '</div>';
+    //div.innerHTML = html;
 }
 
 function createRankingView() {
