@@ -258,6 +258,7 @@ function selectActivity(btn_id, title, key) {
       '傳道人II',
       '傳道人',
       '聖徒II',
+      '聖徒I',
       '新聖徒',
     ];
     var item1 = createFormInputSelect(key+'_01', '部門', arr1);
