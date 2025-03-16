@@ -455,6 +455,13 @@ function createRankingView() {
 
 }
 
+function createGetAchvView(badge) {
+  var contentHTML = '<img src="https://envose.github.io/img/reward-badge.webp" class="d-block w-100" alt="">';
+  contentHTML += '<h3 class="text-center"><span class="badge badge-pill badge-warning">'+badge+'</span></h3>';
+  contentHTML += '<br><p class="text-center">請前往【我的印花】查看詳情</p>';
+  msgModal('獲得新成就', contentHTML);
+}
+
 function createGLoginView() {
   initViews();
 

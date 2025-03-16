@@ -132,7 +132,12 @@ function submitAcitvity() {
   $.getJSON(url, function(data) {
     if (data !== null) {
       if (data.status=='0') {
-        alert('已保存');
+        if (data.res.achv) {
+          createGetAchvView(data.res.badge);
+        } else {
+          alert('已保存');
+        }
+        
       }else{
         alert(data.error_msg);
         if (data.error_code == '104') {
