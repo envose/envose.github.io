@@ -218,7 +218,13 @@ function genStampTable(res) {
       li += '</span>';
     } else if (res[act_key][1]>0 && res[act_key][2]>0) {
       progress += '<div class="container mt-3"><h6>'+act_labels[act_key]+'</h6>';
-      progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: '+(res[act_key][1]/res[act_key][2]*100)+'%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+res[act_key][1]+' / '+res[act_key][2]+'</div></div></div>';
+      // progress += '<div class="progress"><div class="progress-bar" role="progressbar" style="width: '+(res[act_key][1]/res[act_key][2]*100)+'%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'+res[act_key][1]+' / '+res[act_key][2]+'</div></div></div>';
+      for (var j = 1; j <= res[act_key][2]; j++) {
+        progress += '<span class="badge badge-'+(res[act_key][3].includes(j)?'primary':'secondary')+' mx-1">';
+        progress += j;
+        progress += '</span>';
+      }
+      progress += '</div>';
     }
   }
   if (res.achv > 0) {
