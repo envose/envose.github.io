@@ -15,6 +15,11 @@ html, body {
   -ms-user-select: none;
   user-select: none;
 }
+
+img {
+  pointer-events: none;
+}
+
 /*#1b1725
 #534b62
 #a499b3
