@@ -243,11 +243,11 @@ function selectActivity(btn_id, title, key) {
   if (key == 'act0') {
 
     var arr = [
-      '3階段第1章（3次）',
-      '3階段第2章（3次）',
-      '3階段第3章（3次）',
-      '3階段第4章（3次）',
-      '3階段第5章（3次）',
+      '３階段第1章（３次）',
+      '３階段第2章（３次）',
+      '３階段第3章（３次）',
+      '３階段第4章（３次）',
+      '３階段第5章（３次）',
     ];
     var item1 = createFormInputSelect(key, '完成', arr);
     form.appendChild(item1);
