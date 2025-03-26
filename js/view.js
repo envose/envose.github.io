@@ -278,6 +278,8 @@ function selectActivity(btn_id, title, key) {
       '真理發表 3階段',
       '真理發表 4階段',
       '真理發表 5階段',
+      '摩西的杖 6階段',
+      '摩西的杖 7階段',
     ];
     var item1 = createFormInputSelect(key+'_01', '發表階段', arr1);
     form.appendChild(item1);
@@ -313,6 +315,7 @@ function selectActivity(btn_id, title, key) {
       '發表 Feed My Sheep',
       '參與傳道會議',
       '傳道人學習',
+      '參與預備日會議',
     ];
     var item1 = createFormInputSelect(key+'_01', '內容', arr1);
     form.appendChild(item1);
