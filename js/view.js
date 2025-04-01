@@ -183,12 +183,12 @@ function createRecordView() {
   ul1_li1.appendChild(ahist);
   ahist.setAttribute('onclick', "return getAcitvity('我的記錄')");
   ahist.innerHTML = '我的記錄';
-
+/*
   var act0 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act0);
   act0.setAttribute('onclick', "return selectActivity('btn_activity', '2025發表慶典', 'act0')");
   act0.innerHTML = '2025發表慶典';
-
+*/
   var act1 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act1);
   act1.setAttribute('onclick', "return selectActivity('btn_activity', 'LMS 教育', 'act1')");
