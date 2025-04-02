@@ -122,7 +122,7 @@ function getNavHtml() {
   html += '      </li>';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createGiftView()">禮物</a>';
+  html += '        <a class="nav-link" href="#" onclick="return getGiftList()">禮物</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
@@ -423,7 +423,7 @@ function createStampView() {
   calcStamps();
 }
 
-function createGiftView() {
+function createGiftView(res) {
   var userinfo = getUserInfo();
   initViews();
   if (userinfo.name == null){
@@ -432,9 +432,19 @@ function createGiftView() {
   }
   header.innerHTML = getNavHtml();
 
-  var div = createCustomElement('div', 'view_content_center');
+  var div = createCustomElement('div', 'container col_11');
   content.appendChild(div);
-  div.innerHTML = '禮物功能將會開放，敬請期待';
+  div.innerHTML += '<div class="text-center mb-12">';
+  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3 disabled" onclick="return ;">選取禮物</button>';
+  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3 disabled" onclick="return ;">我的寶箱</button>';
+  div.innerHTML += '</div>';
+  div.innerHTML += '<div class="row row-cols-1 row-cols-md-2">';
+
+  for (var i = 0; i < res.length; i++) {
+    div.innerHTML += createGiftCard(res[i].item, res[i].stamps, res[i].qty, res[i].occupied);
+  }
+  
+  div.innerHTML += '</div>';
 
   // Gift Outpost
     // var html = '<div class="d-flex flex-column align-items-center">';
@@ -465,6 +475,27 @@ function createGetAchvView(badge) {
   contentHTML += '<h3 class="text-center"><span class="badge badge-pill badge-warning">'+badge+'</span></h3>';
   contentHTML += '<br><p class="text-center">請前往【我的印花】查看詳情</p>';
   msgModal('獲得成就', contentHTML);
+}
+
+function createGiftCard(item, stamps, qty, occupied) {
+  var html = ''
+  html += '<div class="card mb-3" style="max-width: 540px;">';
+  html += '  <div class="row no-gutters">';
+  html += '    <div class="col-4">';
+  html += '      <img class="img-fluid" src="assets/gift.png" alt="gift">';
+  html += '    </div>';
+  html += '    <div class="col-8">';
+  html += '      <div class="card-body">';
+  html += '        <h5 class="card-title">'+item+'</h5>';
+  html += '        <p class="card-text"><small class="text-muted">'+stamps+'💮</small></p>';
+  html += '        <p class="card-text"><small class="text-muted">'+occupied+'/'+qty+'</small></p>';
+  html += '      </div>';
+  html += '    </div>';
+  html += '  </div>';
+  html += '</div>';
+
+  return html;
+
 }
 
 function createGLoginView() {
