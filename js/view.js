@@ -479,10 +479,10 @@ function createGetAchvView(badge) {
 
 function createGiftCard(item, stamps, qty, occupied) {
   var html = ''
-  html += '<div class="card mb-3" style="max-width: 540px;">';
+  html += '<div class="card mb-3" style="max-width: 540px; border-radius: 5%">';
   html += '  <div class="row no-gutters">';
   html += '    <div class="col-4">';
-  html += '      <img class="img-fluid" src="assets/gift.png" alt="gift">';
+  html += '      <img class="img-fluid" style="border-radius: 5%" src="assets/gift.png" alt="gift">';
   html += '    </div>';
   html += '    <div class="col-8">';
   html += '      <div class="card-body">';
