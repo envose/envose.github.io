@@ -463,7 +463,6 @@ function getGiftList() {
 
         if (data !== null) {
           if (data.status=='0') {
-            console.log(JSON.stringify(data.res));
             createGiftView(data.res);
           }else{
             alert(data.error_msg);
