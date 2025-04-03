@@ -7,7 +7,7 @@
               'act2':'發表評價', 
               'act3':'閱讀《我的羊聽我的聲音》', 
               'act4':'真理書評價《我的羊聽我的聲音》', 
-              'act5':'傳道', 
+              'act5':'其他', 
               'act6':'(每日) 祈禱', 
               'act7':'(每日) 感謝日記', 
               'act8':'(每日) 線上宣教', };
@@ -85,6 +85,7 @@ function saveAcitvity() {
     act_con='【'+item1+'】'+item2;
   }else if (act_key=='act5') {
     var item1 = document.getElementById('input_'+act_key+'_01').value;
+    /*
     var item2 = document.getElementById('input_'+act_key+'_02').value;
 
     if (item2 == '') {
@@ -92,7 +93,10 @@ function saveAcitvity() {
       $('#input_'+act_key+'_02').focus();
       return;
     }
-    act_con=''+item1+' ('+item2+')';
+    */
+
+    // act_con=''+item1+' ('+item2+')';
+    act_con=item1;
   }else{
     act_con = document.getElementById('input_'+act_key).value;
   }
@@ -227,6 +231,14 @@ function genStampTable(res) {
       progress += '</div>';
     }
   }
+
+  total += res.act9;
+  li += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+  li += '逾越節新生命傳道慶典';
+  li += '<span class="badge badge-warning badge-pill">';
+  li += '+'+res.act9;
+  li += '</span>';
+
   if (res.achv > 0) {
     total += res.achv;
     li += '<li class="list-group-item d-flex justify-content-between align-items-center">';
@@ -236,6 +248,7 @@ function genStampTable(res) {
     li += '</span>';
 
   }
+
   html += '<li class="list-group-item d-flex justify-content-between align-items-center active">';
   html += '<strong>我的印花</strong>';
   html += '<h5><span class="badge badge-light badge-pill">';
@@ -491,6 +504,28 @@ function genAnnounceContent(announce) {
     html += '</small><br>';
   }
   return html;
+}
+
+
+function getFest() {
+  on();
+      var userinfo = getUserInfo();
+      var url = GAS_URL+'?action=getFest&id='+userinfo.id;
+
+      $.getJSON(url, function(data) {
+
+        if (data !== null) {
+          if (data.status=='0') {
+            createFestView(data.res);
+          }else{
+            alert(data.error_msg);
+            if (data.error_code == '104') {
+              logout();
+            }
+          }
+        }
+        off();
+      });
 }
 
 function selectedLang(langOpt) {

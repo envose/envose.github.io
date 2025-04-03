@@ -128,6 +128,11 @@ function getNavHtml() {
   html += '      <li class="nav-item">';
   html += '        <a class="nav-link" href="#" onclick="return getAnnouncement()">公告欄</a>';
   html += '      </li>';
+
+  html += '      <li class="nav-item">';
+  html += '        <a class="nav-link text-warning" href="#" onclick="return getFest()">逾越節新生命傳道慶典</a>';
+  html += '      </li>';
+
   html += '    </ul>';
   html += '    <form class="form-inline my-2 my-lg-0">';
   html += '      <button class="btn btn-danger my-2 my-sm-0" onclick="return logout()">登出</button>';
@@ -183,12 +188,14 @@ function createRecordView() {
   ul1_li1.appendChild(ahist);
   ahist.setAttribute('onclick', "return getAcitvity('我的記錄')");
   ahist.innerHTML = '我的記錄';
+
 /*
   var act0 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act0);
   act0.setAttribute('onclick', "return selectActivity('btn_activity', '2025發表慶典', 'act0')");
   act0.innerHTML = '2025發表慶典';
 */
+
   var act1 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act1);
   act1.setAttribute('onclick', "return selectActivity('btn_activity', 'LMS 教育', 'act1')");
@@ -212,8 +219,8 @@ function createRecordView() {
 
   var act5 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act5);
-  act5.setAttribute('onclick', "return selectActivity('btn_activity', '傳道', 'act5')");
-  act5.innerHTML = '傳道';
+  act5.setAttribute('onclick', "return selectActivity('btn_activity', '其他', 'act5')");
+  act5.innerHTML = '其他';
 
   var act6 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act6);
@@ -225,10 +232,10 @@ function createRecordView() {
   act7.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 感謝日記', 'act7')");
   act7.innerHTML = '(每日) 感謝日記';
 
-  var act8 = createCustomElement('a', 'btn btn-outline-primary btn-block');
-  ul1_li1.appendChild(act8);
-  act8.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 線上宣教', 'act8')");
-  act8.innerHTML = '(每日) 線上宣教';
+  // var act8 = createCustomElement('a', 'btn btn-outline-primary btn-block');
+  // ul1_li1.appendChild(act8);
+  // act8.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 線上宣教', 'act8')");
+  // act8.innerHTML = '(每日) 線上宣教';
   
 }
 
@@ -309,20 +316,14 @@ function selectActivity(btn_id, title, key) {
   }else if (key == 'act5') {
 
     var arr1 = [
-      '發送 Flower Letter',
-      '介紹 watv.org',
-      '分享 Card News 內容',
-      '發表 Feed My Sheep',
-      '參與傳道會議',
-      '傳道人學習',
-      '參與預備日會議',
+      '參與預備日會議'
     ];
     var item1 = createFormInputSelect(key+'_01', '內容', arr1);
     form.appendChild(item1);
 
 
-    var item2 = createFormInputText(key+'_02', '對象', '肉身家族、同事、傳道人');
-    form.appendChild(item2);
+    // var item2 = createFormInputText(key+'_02', '對象', '肉身家族、同事、傳道人');
+    // form.appendChild(item2);
 
   } else if (key == 'act6') {
 
@@ -353,6 +354,61 @@ function selectActivity(btn_id, title, key) {
 
   }
   $('#activity').modal({backdrop: 'static', keyboard: false});
+}
+
+function createFestView(res) {
+  var html = '<small class="text-muted">'+res.timestamp+'</small>';
+  html += '<div class="table-responsive">        ';
+  html += '  <table class="table table-bordered text-center">';
+  html += '    <thead class="bg-warning">';
+  html += '      <tr>';
+  html += '        <td rowspan="2"></td>';
+  html += '        <td class="align-middle" rowspan="2">單純</td>';
+  html += '        <td class="align-middle" rowspan="2">有效</td>';
+  html += '        <td class="align-middle" rowspan="2">浸禮</td>';
+  html += '        <td class="align-middle" colspan="2">出席</td>';
+  html += '        <td class="align-middle" colspan="3">教育</td>';
+  html += '        <td class="align-middle" rowspan="2">線上宣教</td>';
+  html += '        <td class="align-middle" rowspan="2">總分數</td>';
+  html += '      </tr>';
+  html += '      <tr>';
+  html += '        <td class="align-middle"><span class="badge badge-success">N</span></td>';
+  html += '        <td class="align-middle"><span class="badge badge-primary">L</span></td>';
+  html += '        <td class="align-middle">PA</td>';
+  html += '        <td class="align-middle">EA</td>';
+  html += '        <td class="align-middle">LMS</td>';
+  html += '      </tr>';
+  html += '    </thead>';
+  html += '    <tbody>';
+  html += '      <tr>';
+  html += '        <td class="bg-warning">次數</td>';
+  html += '        <td class="align-middle">'+res.t_sim+'</td>';
+  html += '        <td class="align-middle">'+res.t_val+'</td>';
+  html += '        <td class="align-middle">'+res.t_bap+'</td>';
+  html += '        <td class="align-middle">'+res.t_attn+'</td>';
+  html += '        <td class="align-middle">'+res.t_attl+'</td>';
+  html += '        <td class="align-middle">'+res.t_pa+'</td>';
+  html += '        <td class="align-middle">'+res.t_ea+'</td>';
+  html += '        <td class="align-middle">'+res.t_lms+'</td>';
+  html += '        <td class="align-middle">'+res.t_onm+'</td>';
+  html += '        <td class="align-middle" rowspan="2">'+res.score+'</td>';
+  html += '      </tr>';
+  html += '      <tr>';
+  html += '        <td class="bg-warning">分數</td>';
+  html += '        <td class="align-middle">'+res.s_sim+'</td>';
+  html += '        <td class="align-middle">'+res.s_val+'</td>';
+  html += '        <td class="align-middle">'+res.s_bap+'</td>';
+  html += '        <td class="align-middle" colspan="2">'+res.s_att+'</td>';
+  html += '        <td class="align-middle" colspan="3">'+res.s_edu+'</td>';
+  html += '        <td class="align-middle">'+res.s_onm+'</td>';
+  html += '      </tr>';
+  html += '    </tbody>';
+  html += '  </table>';
+  html += '</div>';
+  html += '<br><br>';
+  html += '<h3 class="text-center"><span class="badge badge-warning">獲取印花：'+res.stamps+'</span></h3>';
+  html += '<br>';
+  msgModal('逾越節新生命傳道慶典', html);
 }
 
 function createFormInputText(_key, _label, _placeholder) {
