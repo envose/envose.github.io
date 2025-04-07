@@ -359,6 +359,7 @@ function selectActivity(btn_id, title, key) {
 function createSelectGiftView(res) {
   document.getElementById('modal_gift_title').innerHTML = '每日禮物';
   var form = document.getElementById('modal_gift_form');
+  document.getElementById('modal_gift_footer').innerHTML = '';
 
   if (!res.dglist) {
     form.innerHTML = '沒有可換領的禮物，請於07:00後重試。';
