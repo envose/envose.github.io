@@ -122,7 +122,7 @@ function getNavHtml() {
   html += '      </li>';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return getGiftList()">禮物</a>';
+  html += '        <a class="nav-link text-primary" href="#" onclick="return getGiftList()">禮物</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
@@ -356,6 +356,43 @@ function selectActivity(btn_id, title, key) {
   $('#activity').modal({backdrop: 'static', keyboard: false});
 }
 
+function createSelectGiftView(res) {
+  document.getElementById('modal_gift_title').innerHTML = '每日禮物';
+  var form = document.getElementById('modal_gift_form');
+
+  if (!res.dglist) {
+    form.innerHTML = '沒有可換領的禮物，請於07:00後重試。';
+  }else if (res.redeemed) {
+    form.innerHTML = '今天已換領禮物。';
+  }else{
+    form.innerHTML = '<h6>可用印花：'+res.available+'</h6>';
+
+    var disabled_count = 0;
+
+    for (var i = 0; i < Object.keys(res.dglist).length; i++) {
+      var disabled = res.available < res.dglist[i].stamps;
+
+      if (disabled) disabled_count++;
+
+      var  html = '<div class="form-check">';
+      html += '  <input class="form-check-input" type="radio" name="dgift" id="dgift_'+i+'" value="'+i+'" '+(disabled?'disabled>':(i==0?'checked>':'>'));
+      html += '  <label class="form-check-label" for="dgift_'+i+'">';
+      html += '<strong>'+res.dglist[i].item+'</strong> ';
+      html += '<small class="text-muted">'+res.dglist[i].stamps+'💮<small></td>';
+      html += '  </label>';
+      html += '</div>';
+      form.innerHTML += html;
+    }
+
+    var all_disabled = disabled_count == Object.keys(res.dglist).length;
+
+    document.getElementById('modal_gift_footer').innerHTML = '<button type="button" class="btn btn-primary" id="modal_gift_save" onclick="return selectGift()" '+(all_disabled?'disabled':'')+'>選擇</button>';
+
+
+  }
+  $('#gift').modal({backdrop: 'static', keyboard: false});
+}
+
 function createFestView(res) {
   var html = '<small class="text-muted">'+res.timestamp+'</small>';
   html += '<div class="table-responsive">        ';
@@ -491,8 +528,8 @@ function createGiftView(res) {
   var div = createCustomElement('div', 'container col_11');
   content.appendChild(div);
   div.innerHTML += '<div class="text-center mb-12">';
-  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3 disabled" onclick="return ;">選取禮物</button>';
-  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3 disabled" onclick="return ;">我的寶箱</button>';
+  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3" onclick="return createDailyGiftView();">每日禮物</button>';
+  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3" onclick="return createAllGiftView();">我的寶箱</button>';
   div.innerHTML += '</div>';
   div.innerHTML += '<div class="row row-cols-1 row-cols-md-2">';
 
