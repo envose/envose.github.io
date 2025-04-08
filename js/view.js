@@ -362,7 +362,7 @@ function createSelectGiftView(res) {
   document.getElementById('modal_gift_footer').innerHTML = '';
 
   if (!res.dglist) {
-    form.innerHTML = '沒有可換領的禮物，請於07:00後重試。';
+    form.innerHTML = '沒有可換領的禮物，請於08:00後重試。';
   }else if (res.redeemed) {
     form.innerHTML = '今天已換領禮物。';
   }else{
