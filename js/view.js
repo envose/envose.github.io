@@ -122,7 +122,7 @@ function getNavHtml() {
   html += '      </li>';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link text-primary" href="#" onclick="return getGiftList()">禮物</a>';
+  html += '        <a class="nav-link text-primary" href="#" onclick="return createGiftView([])">禮物</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
