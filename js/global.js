@@ -23,3 +23,4 @@ var mcqColor = 'black';
 var ans = [];
 var corrected = 0;
 var incorrect = [];
+var gift = {};

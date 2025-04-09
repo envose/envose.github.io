@@ -341,17 +341,17 @@ function genActivityContent(key, act, con) {
 
 }
 
-function createDailyGiftView() {
+function getGiftList() {
   on();
       var userinfo = getUserInfo();
-      var url = GAS_URL+'?action=getDailyGift&id='+userinfo.id;
+      var url = GAS_URL+'?action=getAllGift&id='+userinfo.id;
 
       $.getJSON(url, function(data) {
 
         if (data !== null) {
           if (data.status=='0') {
-            // msgModal('每日禮物', Object.keys(data.res.dglist).length);
-            createSelectGiftView(data.res);
+            // msgModal('我的寶箱', genAllGiftContent(data.res));
+            createGiftView(data.res);
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {
@@ -374,8 +374,8 @@ function selectGift() {
 
         if (data !== null) {
           if (data.status=='0') {
+            getGiftList();
             msgModal('成功', '請前往【我的寶箱】查閱詳情');
-            // console.log(JSON.stringify(data.res));
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {
@@ -387,51 +387,6 @@ function selectGift() {
       });
 }
 
-function createAllGiftView() {
-  on();
-      var userinfo = getUserInfo();
-      var url = GAS_URL+'?action=getAllGift&id='+userinfo.id;
-
-      $.getJSON(url, function(data) {
-
-        if (data !== null) {
-          if (data.status=='0') {
-            msgModal('我的寶箱', genAllGiftContent(data.res));
-          }else{
-            alert(data.error_msg);
-            if (data.error_code == '104') {
-              logout();
-            }
-          }
-        }
-        off();
-      });
-}
-
-function genAllGiftContent(res) {
-  var html = '<ul class="list-group">';
-
-  for (var i = res.length-1; i >= 0 ; i--) {
-    html += '<li class="list-group-item">'+res[i].stamps+'</li>';
-  }
-
-  html += '</ul>';
-
-  var html = '<table class="table table-striped">';
-  html += '  <tbody>';
-
-  for (var i = res.length-1; i >= 0 ; i--) {
-    html += '    <tr>';
-    html += '      <td>'+(i+1)+'</td>';
-    html += '      <td><strong>'+res[i].item+'<strong><br>';
-    html += '      <small class="text-muted">'+res[i].stamps+'💮<small></td>';
-    html += '      <td><small><span class="badge badge-secondary">'+res[i].timestamp+'<small></td>';
-  }
-  html += '  </tbody>';
-  html += '</table>';
-
-  return html;
-}
 
 function createAchvView() {
   on();
@@ -546,29 +501,6 @@ function getAnnouncement() {
         if (data !== null) {
           if (data.status=='0') {
             msgModal('公告欄', genAnnounceContent(data.res));
-          }else{
-            alert(data.error_msg);
-            if (data.error_code == '104') {
-              logout();
-            }
-          }
-        }
-        off();
-      });
-
-}
-
-
-function getGiftList() {
-  on();
-      var userinfo = getUserInfo();
-      var url = GAS_URL+'?action=getGiftList';
-
-      $.getJSON(url, function(data) {
-
-        if (data !== null) {
-          if (data.status=='0') {
-            createGiftView(data.res);
           }else{
             alert(data.error_msg);
             if (data.error_code == '104') {

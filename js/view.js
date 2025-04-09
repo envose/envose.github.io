@@ -122,7 +122,7 @@ function getNavHtml() {
   html += '      </li>';
 
   html += '      <li class="nav-item">';
-  html += '        <a class="nav-link text-primary" href="#" onclick="return createGiftView([])">禮物</a>';
+  html += '        <a class="nav-link text-primary" href="#" onclick="return getGiftList()">禮物</a>';
   html += '      </li>';
 
   html += '      <li class="nav-item">';
@@ -356,7 +356,8 @@ function selectActivity(btn_id, title, key) {
   $('#activity').modal({backdrop: 'static', keyboard: false});
 }
 
-function createSelectGiftView(res) {
+function createSelectGiftView() {
+  var res = gift.daily_gifts;
   document.getElementById('modal_gift_title').innerHTML = '每日禮物';
   var form = document.getElementById('modal_gift_form');
   document.getElementById('modal_gift_footer').innerHTML = '';
@@ -366,7 +367,7 @@ function createSelectGiftView(res) {
   }else if (res.redeemed) {
     form.innerHTML = '今天已換領禮物。';
   }else{
-    form.innerHTML = '<h6>可用印花：'+res.available+'</h6>';
+    form.innerHTML = '<p><h5>可用印花：'+res.available+'</h6></p>';
 
     var disabled_count = 0;
 
@@ -375,13 +376,13 @@ function createSelectGiftView(res) {
 
       if (disabled) disabled_count++;
 
-      var  html = '<div class="form-check">';
+      var  html = '<div class="form-check"><p>';
       html += '  <input class="form-check-input" type="radio" name="dgift" id="dgift_'+i+'" value="'+i+'" '+(disabled?'disabled>':(i==0?'checked>':'>'));
       html += '  <label class="form-check-label" for="dgift_'+i+'">';
       html += '<strong>'+res.dglist[i].item+'</strong> ';
       html += '<small class="text-muted">'+res.dglist[i].stamps+'💮<small></td>';
       html += '  </label>';
-      html += '</div>';
+      html += '</p></div>';
       form.innerHTML += html;
     }
 
@@ -393,6 +394,67 @@ function createSelectGiftView(res) {
   }
   $('#gift').modal({backdrop: 'static', keyboard: false});
 }
+
+function createAllGiftView() {
+  msgModal('我的寶箱', genAllGiftContent(gift.red_gifts));
+}
+
+function genAllGiftContent(res) {
+  // var html = '<ul class="list-group">';
+
+  // for (var i = res.length-1; i >= 0 ; i--) {
+  //   html += '<li class="list-group-item">'+res[i].stamps+'</li>';
+  // }
+
+  // html += '</ul>';
+
+  // var html = '<table class="table table-striped">';
+  // html += '  <tbody>';
+
+  // for (var i = res.length-1; i >= 0 ; i--) {
+  //   if (res.isMe) {
+  //     html += '    <tr>';
+  //     html += '      <td>'+(i+1)+'</td>';
+  //     html += '      <td><strong>'+res[i].item+'<strong><br>';
+  //     html += '      <small class="text-muted">'+res[i].stamps+'💮<small></td>';
+  //     html += '      <td><small><span class="badge badge-secondary">'+res[i].timestamp+'<small></td>';
+  //   }
+  // }
+  // html += '  </tbody>';
+  // html += '</table>';
+
+  // return html;
+  var html = '<div>';
+  for (var i = 0; i <res.length; i++) {
+    if (res[i].isMe) {
+      html += createGiftCard(res[i],2);
+    }
+  }
+  html += '</div>';
+  return html;
+}
+
+// function createDailyGiftView() {
+//   on();
+//       var userinfo = getUserInfo();
+//       var url = GAS_URL+'?action=getDailyGift&id='+userinfo.id;
+
+//       $.getJSON(url, function(data) {
+
+//         if (data !== null) {
+//           if (data.status=='0') {
+//             // msgModal('每日禮物', Object.keys(data.res.dglist).length);
+//             createSelectGiftView(data.res);
+//           }else{
+//             alert(data.error_msg);
+//             if (data.error_code == '104') {
+//               logout();
+//             }
+//           }
+//         }
+//         off();
+//       });
+// }
 
 function createFestView(res) {
   var html = '<small class="text-muted">'+res.timestamp+'</small>';
@@ -518,6 +580,7 @@ function createStampView() {
 }
 
 function createGiftView(res) {
+  gift = res;
   var userinfo = getUserInfo();
   initViews();
   if (userinfo.name == null){
@@ -529,13 +592,13 @@ function createGiftView(res) {
   var div = createCustomElement('div', 'container col_11');
   content.appendChild(div);
   div.innerHTML += '<div class="text-center mb-12">';
-  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3" onclick="return createDailyGiftView();">每日禮物</button>';
+  div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3" onclick="return createSelectGiftView();">每日禮物</button>';
   div.innerHTML += '<button type="button" class="btn btn-primary mx-3 my-3" onclick="return createAllGiftView();">我的寶箱</button>';
   div.innerHTML += '</div>';
   div.innerHTML += '<div class="row row-cols-1 row-cols-md-2">';
 
-  for (var i = 0; i < res.length; i++) {
-    div.innerHTML += createGiftCard(res[i].item, res[i].stamps, res[i].qty, res[i].occupied);
+  for (var i = 0; i < res.red_gifts.length; i++) {
+    div.innerHTML += createGiftCard(res.red_gifts[i], 1);
   }
   
   div.innerHTML += '</div>';
@@ -571,18 +634,26 @@ function createGetAchvView(badge) {
   msgModal('獲得成就', contentHTML);
 }
 
-function createGiftCard(item, stamps, qty, occupied) {
+function createGiftCard(res, style) {
+  var img = 'assets/gift.png';
+  var bg = '';
+  var theme = 'primary';
+  if (style==2) {
+    img = 'assets/gift2.jpg';
+    bg = 'bg-light';
+    theme = 'danger';
+  }
   var html = ''
-  html += '<div class="card mb-3" style="max-width: 540px; border-radius: 5px">';
+  html += '<div class="card mb-3 '+bg+'" style="max-width: 540px; border-radius: 5px">';
   html += '  <div class="row no-gutters">';
   html += '    <div class="col-4">';
-  html += '      <img class="img-fluid" style="border-radius: 5px" src="assets/gift.png" alt="gift">';
+  html += '      <img class="img-fluid" style="border-radius: 5px" src="'+img+'" alt="gift">';
   html += '    </div>';
   html += '    <div class="col-8">';
   html += '      <div class="card-body">';
-  html += '        <strong class="card-title">'+item+'</strong>';
-  html += '        <p class="card-text"><small class="text-muted">'+stamps+'💮</small></p>';
-  html += '        <p class="card-text"><small class="text-muted">'+occupied+'/'+qty+'</small></p>';
+  html += '        <strong class="card-title">'+res.name+'</strong>';
+  html += '        <p><span class="badge badge-pill badge-'+theme+'"><strong>'+res.item+'</strong> <small>'+res.stamps+'💮</small><span></p>';
+  html += '        <p class="card-text"><small class="text-muted">'+res.timestamp+'</small></p>';
   html += '      </div>';
   html += '    </div>';
   html += '  </div>';
