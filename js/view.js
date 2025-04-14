@@ -328,7 +328,7 @@ function selectActivity(btn_id, title, key) {
   } else if (key == 'act6') {
 
     var arr = [
-      '常燔祭(10:00) + 常燔祭(14:30) + 聯合禱告(22:00)'
+      '常燔祭(09:00) + 常燔祭(15:00) + 聯合禱告(22:00)'
     ];
     var item1 = createFormInputSelect(key, '完成', arr);
     form.appendChild(item1);
