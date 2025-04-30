@@ -195,7 +195,7 @@ function createRecordView() {
   act0.setAttribute('onclick', "return selectActivity('btn_activity', '2025發表慶典', 'act0')");
   act0.innerHTML = '2025發表慶典';
 */
-
+/*
   var act1 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act1);
   act1.setAttribute('onclick', "return selectActivity('btn_activity', 'LMS 教育', 'act1')");
@@ -231,7 +231,7 @@ function createRecordView() {
   ul1_li1.appendChild(act7);
   act7.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 感謝日記', 'act7')");
   act7.innerHTML = '(每日) 感謝日記';
-
+*/
   // var act8 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   // ul1_li1.appendChild(act8);
   // act8.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 線上宣教', 'act8')");
