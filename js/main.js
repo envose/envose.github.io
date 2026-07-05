@@ -13,7 +13,12 @@ var act_act='';
 var act_con='';
 
 $(document).ready(function() {
-
+  var userinfo = getUserInfo();
+console.log(userinfo);
+createMainView();
+// msgModal('公告欄', genAnnounceContent(userinfo.announce));
+off();
+/*
   dates = [];
   names = [];
   phones = [];
@@ -129,7 +134,7 @@ $(document).ready(function() {
 
 
 
-
+*/
 
 });
 /*

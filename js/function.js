@@ -517,15 +517,15 @@ function genAnnounceContent(announce) {
   var html = '';
   for (var i = 0; i < announce.length; i++) {
     if (announce[i].datetime == announce[0].datetime) {
-      html += '<small><span class="badge badge-primary">';
+      html += '<span class="badge bg-primary">';
     } else {
-      html += '<small><span class="badge badge-secondary">';
+      html += '<span class="badge bg-secondary">';
     }
     
     html += announce[i].datetime;
-    html += '</small></span><small>';
+    html += '</span><br>';
     html += announce[i].msg;
-    html += '</small><br>';
+    html += '<br>';
   }
   return html;
 }

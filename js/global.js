@@ -2,25 +2,16 @@
 const GUARD_QUOTA = 2;
 const GUARD_DURATION = 1000 * 60 * 60 * 3;
 const form = document.forms['submit-to-google-sheet'];
+const app_name = '錫安的星辰';
+
+const alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {backdrop: 'static', keyboard: false});
+const inputModal = new bootstrap.Modal(document.getElementById('inputModal'), {backdrop: 'static', keyboard: false});
 
 // views
 var header = document.getElementById('container_header');
 var content = document.getElementById('container_content');
 var footer = document.getElementById('container_footer');
 
-// team
-var numOfMemEntry = 0;
-var team = [];
-var ppl = [];
-var startDate = '';
-var guardAttempt = 0;
-
-// quiz
-var numOfQ = 5;
-var currentQ = 0;
-var mcqBGColor = '#D5E9FF';
-var mcqColor = 'black';
-var ans = [];
-var corrected = 0;
-var incorrect = [];
-var gift = {};
+var starNum = 0;
+var starName = '';
+var starList = {};

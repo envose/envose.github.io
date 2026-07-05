@@ -1,3 +1,38 @@
+function setAttributeValueById(id, attr, value) {
+  if (document.getElementById(id)) {
+    document.getElementById(id).setAttribute(attr, value);
+  }
+}
+
+function setInnerHTMLById(id, value) {
+  if (document.getElementById(id)) {
+    document.getElementById(id).innerHTML = value;
+  }
+}
+
+function showInputModal(title, body, footer) {
+  document.getElementById('inputModalTitle').innerHTML = '';
+  document.getElementById('inputModalBody').innerHTML = '';
+  document.getElementById('inputModalFooter').innerHTML = '';
+
+  document.getElementById('inputModalTitle').innerHTML = title;
+  document.getElementById('inputModalBody').innerHTML = body;
+  document.getElementById('inputModalFooter').innerHTML = footer;
+  inputModal.show();
+}
+
+function showAlertModal(title, body, footer) {
+  setInnerHTMLById('alertModalTitle', '');
+  setInnerHTMLById('alertModalBody', '');
+  setInnerHTMLById('alertModalFooter', '');
+
+  setInnerHTMLById('alertModalTitle', title);
+  setInnerHTMLById('alertModalBody', body);
+  setInnerHTMLById('alertModalFooter', footer);
+
+  alertModal.show();
+}
+
 function createTableView() {
   initViews();
 
@@ -97,55 +132,90 @@ function createTableView() {
 function getNavHtml() {
   var userinfo = getUserInfo();
   var html = '';
-  html += '<div class="bg-light container-fluid p-3">';
-  html += '  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">';
-  html += '    <a class="navbar-brand" href="#">';
-  html += '      <img src="https://envose.github.io/ruby-gemstone.png" width="30" height="30" alt="">  ';
-  html += userinfo.name;
+  html += '<nav class="navbar navbar-expand-lg bg-body-tertiary">';
+  html += '  <div class="container-fluid mx-4 my-1">';
+  html += '    <a class="navbar-brand" onclick="createMainView()">';
+  html += '      <img src="ruby-gemstone.png" height="32px" alt="">  ';
+  html += '<span class="mx-2">'+app_name+'</span>';
   html += '    </a>';
-  html += '  <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">';
-  html += '    <span class="navbar-toggler-icon"></span>';
-  html += '  </button>';
-  html += '  <div class="collapse navbar-collapse" id="navbarSupportedContent">';
-  html += '    <ul class="navbar-nav mr-auto">';
-
-  html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createRecordView()">記錄</a>';
-  html += '      </li>';
-
-  html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createStampView()">我的印花</a>';
-  html += '      </li>';
-
-  html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return createRankingView()">排行榜</a>';
-  html += '      </li>';
-
-  html += '      <li class="nav-item">';
-  html += '        <a class="nav-link text-primary" href="#" onclick="return getGiftList()">禮物</a>';
-  html += '      </li>';
-
-  html += '      <li class="nav-item">';
-  html += '        <a class="nav-link" href="#" onclick="return getAnnouncement()">公告欄</a>';
-  html += '      </li>';
-
-  html += '      <li class="nav-item">';
-  html += '        <a class="nav-link text-warning" href="#" onclick="return getFest()">逾越節新生命傳道慶典</a>';
-  html += '      </li>';
-
-  html += '    </ul>';
-  html += '    <form class="form-inline my-2 my-lg-0">';
-  html += '      <button class="btn btn-danger my-2 my-sm-0" onclick="return logout()">登出</button>';
-  html += '    </form>';
+  html += '      <button class="btn btn-light text-primary my-2 my-sm-0"><i class="fa fa-edit" style="font-size:32px;" onclick="return createRecordView();"></i></button>';
+  html += '    </div>';
+  
   html += '  </div>';
   html += '</nav>';
-  html += '</div>';
   return html;
 }
 
-function genToastHtml(title, msg) {
-  var html = '<div class="alert alert-primary alert-dismissible fade show col-12" role="alert">  <strong>'+title+'</strong> <br>'+msg+'<button type="button" class="close" data-dismiss="alert" aria-label="Close">    <span aria-hidden="true">&times;</span>  </button></div>';
+function getFooterHtml() {
+  var userinfo = getUserInfo();
+  var html = '';
+  html += '<nav class="navbar navbar-expand-lg bg-body-tertiary">';
+  html += '  <div class="container-fluid mx-1 my-1">';
+  html += '    <div class="container navbar-brand col-12">';
+  html += '    <div class="row">';
+  html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary" type="button"><i class="fa fa-history" style="font-size:32px;" onclick="return createTempView();"></i></button></div>';
+  html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
+  html += '</button></div>';
+  html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
+  html += '</button></div>';
+  html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
+  html += '</button></div>';
+  html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary" type="button" onclick="return logout();"><i class="fa fa-sign-out" style="font-size:32px;"></i></button></div>';
+  html += '    </div>';
+  html += '    </div>';
+
+  html += '  </div>';
+  html += '</nav>';
   return html;
+
+}
+
+function createMainView() {
+
+  var userinfo = getUserInfo();
+  initViews();
+  if (userinfo.name == null){
+    setHeaderTitle('h2', 'Invalid User');
+    return;
+  }
+  header.innerHTML = getNavHtml();
+  footer.innerHTML = getFooterHtml();
+
+  var div = createCustomElement('div', 'container col_11');
+  content.appendChild(div);
+  div.id = 'mainPage';
+  var html = '<div class="container col-11 mt-5 pb-5"><ul class="list-group pb-5 mb-5">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-primary">';
+  html += '<strong>公告欄</strong>';
+  html += '</li>';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center ">';
+  html += (userinfo.announce?genAnnounceContent(userinfo.announce):'沒有內容 No Content');
+  html += '</li>';
+  html += '</ul>';
+  html += '</div>';
+  div.innerHTML = html;
+
+}
+
+function createSorryView() {
+  var contentHTML = '';
+  contentHTML += '正在加建中，請稍後再試';
+  showAlertModal('很抱歉', contentHTML, '');
+}
+
+function createPrayView() {
+  const time = new Date().toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+
+  var body = '';
+  body += '<span class="text-primary"><strong>記錄我的祈禱時間:</strong> <p>'+time+'</p></span>';
+  // var footer = '<div class="d-flex col flex-column align-items"><button type="button" class="btn btn-warning" onclick="submitJoin('+id+');">確定</button></div>';
+  var footer = '';
+  footer += '<button type="button" class="btn btn-danger" onclick="return submitPray();">確定</button>';
+  showInputModal('今日的我',body,footer);
 }
 
 function createRecordView() {
@@ -156,6 +226,57 @@ function createRecordView() {
     return;
   }
   header.innerHTML = getNavHtml();
+  footer.innerHTML = getFooterHtml();
+
+
+  var div = createCustomElement('div', 'container col_11');
+  content.appendChild(div);
+  div.id = 'mainPage';
+  var html = '<div class="container col-11 mt-5"><ul class="list-group">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-primary">';
+  html += '<strong>今日的我...</strong>';
+  html += '</li>';
+  html += '<div class="col-12">';
+  html += '<li class="list-group-item">';
+  html += '<div class="input-group mt-3">';
+  html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🙏 以禱告呼吸</span>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_pray" onclick="createSorryView()">Amen!</button>';
+  html += '</div><br>';
+  html += '<div class="input-group mb-3">';
+  html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🍚 吃話語的糧食</span>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_mypage" onclick="createSorryView()">Amen!</button>';
+  html += '</div>';
+  html += '<div class="input-group mb-3">';
+  html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🏃‍♀️ 用傳道來活動</span>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_preach" onclick="createSorryView()">Amen!</button>';
+  html += '</div>';
+  html += '<div class="input-group mb-3">';
+  html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🥊 打倒網絡敵人</span>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_online_mission" onclick="createSorryView()">Amen!</button>';
+  html += '</div>';
+  html += '</div>';
+  html += '</li>';
+  html += '</ul>';
+  html += '</div>';
+
+  html += '<div class="container col-11 mt-3 pb-5"><ul class="list-group pb-5 mb-5">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-warning">';
+  html += '<strong>成為五個聰明的童女</strong>';
+  html += '</li>';
+  html += '<li class="list-group-item">';
+  html += '<div class="input-group mt-3">';
+  html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">💡 預備燈</span>';
+  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_lms" onclick="createSorryView()">Amen!</button>';
+  html += '</div><br>';
+  html += '<div class="input-group mb-3">';
+  html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🔋 預備油</span>';
+  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_prep_day" onclick="createSorryView()">Amen!</button>';
+  html += '</div>';
+  html += '</div>';
+  html += '</li>';
+  html += '</ul>';
+  html += '</div>';
+  div.innerHTML = html;
   
   /*
   var div = createCustomElement('div', 'view_content_center');
@@ -164,8 +285,8 @@ function createRecordView() {
   var qrcode = new QRCode("qrcode","https://envose.github.io?u="+((data.res.id !== null ) ? data.res.id : 'invalid_user'));
   */
 
-  var div = createCustomElement('div', 'view_content_center');
-  content.appendChild(div);
+  // var div = createCustomElement('div', 'view_content_center');
+  // content.appendChild(div);
 
 //   var div2 = createCustomElement('div');
 //   content.appendChild(div2);
@@ -176,7 +297,7 @@ function createRecordView() {
   div.appendChild(tdiv);
   tdiv.innerHTML=genToastHtml('請多多得福！', '已開啟記錄功能和感謝日記，更多功能將會陸續開放，敬請期待。');
   */
-
+/*
   var div1 = createCustomElement('div', 'btn-group-vertical');
   div.appendChild(div1);
 
@@ -188,14 +309,14 @@ function createRecordView() {
   ul1_li1.appendChild(ahist);
   ahist.setAttribute('onclick', "return getAcitvity('我的記錄')");
   ahist.innerHTML = '我的記錄';
-
+*/
 /*
   var act0 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act0);
   act0.setAttribute('onclick', "return selectActivity('btn_activity', '2025發表慶典', 'act0')");
   act0.innerHTML = '2025發表慶典';
 */
-
+/*
   var act1 = createCustomElement('a', 'btn btn-outline-primary btn-block');
   ul1_li1.appendChild(act1);
   act1.setAttribute('onclick', "return selectActivity('btn_activity', 'LMS 教育', 'act1')");
@@ -236,7 +357,75 @@ function createRecordView() {
   ul1_li1.appendChild(act8);
   act8.setAttribute('onclick', "return selectActivity('btn_activity', '(每日) 線上宣教', 'act8')");
   act8.innerHTML = '(每日) 線上宣教';
-  
+  */
+}
+
+function createTempView() {
+
+  var userinfo = getUserInfo();
+  initViews();
+  if (userinfo.name == null){
+    setHeaderTitle('h2', 'Invalid User');
+    return;
+  }
+  header.innerHTML = getNavHtml();
+  footer.innerHTML = getFooterHtml();
+
+  var div = createCustomElement('div', 'container col_11');
+  content.appendChild(div);
+  div.id = 'mainPage';
+  var html = '<div class="container col-11 mt-5 pb-5"><ul class="list-group pb-5 mb-5">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-secondary">';
+  html += '<strong>???</strong>';
+  html += '</li>';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center ">';
+  html += '更多功能將會陸續開放，敬請期待。';
+  html += '</li>';
+  html += '</ul>';
+  html += '</div>';
+  div.innerHTML = html;
+}
+
+$('#starModal').on('hidden.bs.modal', function(){
+  var sbody = document.querySelector('#star_container');
+  var title = document.querySelector('#starModalTitle');
+
+  title.innerHTML = '';
+  sbody.innerHTML = '';
+});
+
+$('#starModal').on('shown.bs.modal', function(){
+  var sbody = document.querySelector('#star_container');
+  var rect = document.querySelector('.star').getBoundingClientRect();
+  var title = document.querySelector('#starModalTitle');
+
+  title.innerHTML = starName;
+  sbody.innerHTML = '';
+  var i = 0;
+  var amount = starNum;
+
+  while (i < amount) {
+    var node = document.createElement("i");
+    var posX = Math.floor(Math.random() * (rect.width-100) + 50);
+    var posY = Math.floor(Math.random() * (rect.height-200) + 100);
+    var rotation = Math.random() * 180;
+    var delay = Math.random() * 20;
+    var scale = Math.random() * 0.2;
+    node.classList.add('star');
+    node.style.left = posX+'px';
+    node.style.top = posY+'px';
+    node.style.transform = 'rotate('+rotation+'deg) scale('+scale+')';
+    node.style.animationDelay = delay+'s';
+    sbody.appendChild(node);
+    i++;
+  }
+});
+
+function selectStar(name) {
+  // starNum = starList[name];
+  var userinfo = getUserInfo();
+  starName = userinfo.name + ' 的星空';
+  $('#starModal').modal('show');
 }
 
 function selectActivity(btn_id, title, key) {
@@ -774,11 +963,6 @@ function initViews() {
   header.innerHTML = '';
   content.innerHTML = '';
   footer.innerHTML = '';
-  document.getElementById('mcq_view').style.background = '';
-  document.getElementById('mcq_view').style.display = 'none';
-
-  header.style.background = '';
-  document.getElementById('topbar').style.background = '';
 }
 
 function setHeaderTitle(ele, text) {
@@ -932,10 +1116,6 @@ function createMCView() {
   // setHeaderTitle('h2', getSysTranslate('Question 1'));
   header.style.background = mcqBGColor;
   document.getElementById('topbar').style.background = mcqBGColor;
-
-  // content
-  document.getElementById('mcq_view').style.background = mcqBGColor;
-  document.getElementById('mcq_view').style.display = 'block';
 
   var mc_ol = document.getElementById('mc_ol');
   mc_ol.innerHTML = '';
