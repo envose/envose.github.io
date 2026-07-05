@@ -864,7 +864,7 @@ function createGLoginView() {
   // div_c.appendChild(btn_glogin);
   var div = createCustomElement('div', 'view_content_center');
   div.id='signin';
-  var div2 = createCustomElement('form', 'form-signin');
+  var div2 = createCustomElement('form', 'form-signin d-flex col flex-column align-items-center py-5');
 
   
   // <img class="mb-4" src="https://envose.github.io/ruby-gemstone.png" alt="" width="72" height="72">
@@ -874,7 +874,7 @@ function createGLoginView() {
 
   var img = document.createElement('img');
   img.classList.add('mb-4');
-  img.src = 'https://envose.github.io/ruby-gemstone.png';
+  img.src = 'ruby-gemstone.png';
   img.width = '72';
   img.height = '72';
   div3.appendChild(img);

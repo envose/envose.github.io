@@ -73,9 +73,8 @@ $(document).ready(function() {
             window.history.pushState({}, document.title, "?");
             localStorage.setItem('userinfo', JSON.stringify(data.res));
             localStorage.setItem('access_token', access_token);
-            createGiftView(data.res.gift);
+            createMainView();
             off();
-            msgModal('公告欄', genAnnounceContent(data.res.announce));
           }else{
             alert('已過期，請重新登入');
             logout();
