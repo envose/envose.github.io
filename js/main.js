@@ -13,6 +13,10 @@ var act_act='';
 var act_con='';
 
 $(document).ready(function() {
+  console.log(getUserInfo());
+  // createMainView();
+  // off();
+  // /*
   dates = [];
   names = [];
   phones = [];
@@ -124,7 +128,7 @@ $(document).ready(function() {
       }
     });
   }
-
+  // */
 });
 /*
   form.addEventListener('submit', e => {

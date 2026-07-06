@@ -15,3 +15,5 @@ var footer = document.getElementById('container_footer');
 var starNum = 0;
 var starName = '';
 var starList = {};
+
+var taskForm = {'tid' : ''};

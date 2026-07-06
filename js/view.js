@@ -211,10 +211,72 @@ function createPrayView() {
   });
 
   var body = '';
-  body += '<span class="text-primary"><strong>記錄我的祈禱時間:</strong> <p>'+time+'</p></span>';
-  // var footer = '<div class="d-flex col flex-column align-items"><button type="button" class="btn btn-warning" onclick="submitJoin('+id+');">確定</button></div>';
+  body += '<span class="text-primary"><strong>祈禱時間:</strong> <p>'+time+'</p></span>';
   var footer = '';
-  footer += '<button type="button" class="btn btn-danger" onclick="return submitPray();">確定</button>';
+  footer += '<button type="button" class="btn btn-danger" onclick="return submitTask(\'dt01\');">確定</button>';
+  showInputModal('今日的我',body,footer);
+}
+
+function createWordView() {
+  var body = '';
+  body += '<div class="input-group my-3 mb-3">';
+  body += '  <select class="form-select" id="input_dt02">';
+  body += '    <option value="dt02">完成 My Page</option>';
+  body += '  </select>';
+  body += '</div>';
+  var footer = '';
+  footer += '<button type="button" class="btn btn-danger" onclick="return submitTask(\'dt02\');">確定</button>';
+  showInputModal('今日的我',body,footer);
+}
+
+function createPreachView() {
+  var body = '';
+  body += '<div class="input-group my-3 mb-3">';
+  body += '  <select class="form-select" id="input_dt03">';
+  body += '    <option value="dt03_1">街上傳道</option>';
+  body += '    <option value="dt03_2">職場人傳道</option>';
+  body += '    <option value="dt03_3">家族傳道</option>';
+  body += '    <option value="dt03_4">連結傳道</option>';
+  body += '  </select>';
+  body += '</div>';
+  var footer = '';
+  footer += '<button type="button" class="btn btn-danger" onclick="return submitTask(\'dt03\');">確定</button>';
+  showInputModal('今日的我',body,footer);
+}
+
+function createOnlineMissionView() {
+  var body = '';
+  body += '<div class="input-group my-3 mb-3">';
+  body += '  <select class="form-select" id="input_dt04">';
+  body += '    <option value="dt04">完成線上宣教</option>';
+  body += '  </select>';
+  body += '</div>';
+  var footer = '';
+  footer += '<button type="button" class="btn btn-danger" onclick="return submitTask(\'dt04\');">確定</button>';
+  showInputModal('今日的我',body,footer);
+}
+
+function createLMSView() {
+  var body = '';
+  body += '<div class="input-group my-3 mb-3">';
+  body += '  <select class="form-select" id="input_mt01">';
+  body += '    <option value="mt01">完成 LMS</option>';
+  body += '  </select>';
+  body += '</div>';
+  var footer = '';
+  footer += '<button type="button" class="btn btn-danger" onclick="return submitTask(\'mt01\');">確定</button>';
+  showInputModal('今日的我',body,footer);
+}
+
+function createPrepDayView() {
+  var body = '';
+  body += '<div class="input-group my-3 mb-3">';
+  body += '  <select class="form-select" id="input_mt02">';
+  body += '    <option value="mt02">參與預備日事奉</option>';
+  body += '  </select>';
+  body += '</div>';
+  var footer = '';
+  footer += '<button type="button" class="btn btn-danger" onclick="return submitTask(\'mt02\');">確定</button>';
   showInputModal('今日的我',body,footer);
 }
 
@@ -240,19 +302,19 @@ function createRecordView() {
   html += '<li class="list-group-item">';
   html += '<div class="input-group mt-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🙏 以禱告呼吸</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_pray" onclick="createSorryView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_pray" onclick="createPrayView()">Amen!</button>';
   html += '</div><br>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🍚 吃話語的糧食</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_mypage" onclick="createSorryView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_mypage" onclick="createWordView()">Amen!</button>';
   html += '</div>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🏃‍♀️ 用傳道來活動</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_preach" onclick="createSorryView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_preach" onclick="createPreachView()">Amen!</button>';
   html += '</div>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🥊 打倒網絡敵人</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_online_mission" onclick="createSorryView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_online_mission" onclick="createOnlineMissionView()">Amen!</button>';
   html += '</div>';
   html += '</div>';
   html += '</li>';
@@ -266,11 +328,11 @@ function createRecordView() {
   html += '<li class="list-group-item">';
   html += '<div class="input-group mt-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">💡 預備燈</span>';
-  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_lms" onclick="createSorryView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_lms" onclick="createLMSView()">Amen!</button>';
   html += '</div><br>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🔋 預備油</span>';
-  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_prep_day" onclick="createSorryView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_prep_day" onclick="createPrepDayView()">Amen!</button>';
   html += '</div>';
   html += '</div>';
   html += '</li>';

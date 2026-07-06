@@ -1,4 +1,4 @@
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzQHSZ8SHEdUl4eDVWZj8NAiqvKjfZrDoQ-DEq8VUFlMlHlRbhlY2zxcsG6gbjdF8QcBQ/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwiBELviyiEdSFVfLnQoCSc_orJAbwOWTOTQ4kt0QSu6xE3jGnUIuclFhFl22yLPo32iQ/exec';
   const YOUR_CLIENT_ID = '207039464470-ds863khed849svfntdjertq4bpddpqva.apps.googleusercontent.com';
   const YOUR_REDIRECT_URI = 'https://envose.github.io';
 
@@ -124,6 +124,45 @@ function saveAcitvity() {
   // });
       
   // $('#activity').modal('toggle');
+}
+
+function submitTask(tid) {
+  if (tid != 'dt01') {
+    var input = document.getElementById('input_'+tid);
+    tid = input.value;
+  }
+  inputModal.hide();
+
+  var userinfo = getUserInfo();
+  var json = {};
+  json.id = userinfo.id;
+  json.tid = tid;
+
+  var raw_str = JSON.stringify(json);
+  var str = window.btoa(unescape(encodeURIComponent(raw_str)));
+  var url = GAS_URL+'?action=task&content='+str;
+  console.log(url);
+
+  on();
+  $.getJSON(url, function(data) {
+    if (data !== null) {
+      if (data.status=='0') {
+        localStorage.setItem('userinfo', JSON.stringify(data.res));
+        alert('已保存');
+        createRecordView();
+        if (data.res.task.star) {
+          starNum = data.res.task.star;
+          selectStar(data.res.name);
+        }
+      }else{
+        alert(data.error_msg);
+        if (data.error_code == '104') {
+          logout();
+        }
+      }
+    }
+    off();
+  });
 }
 
 function submitAcitvity() {
@@ -514,7 +553,7 @@ function getAnnouncement() {
 }
 
 function genAnnounceContent(announce) {
-  var html = '';
+  var html = '<div>';
   for (var i = 0; i < announce.length; i++) {
     if (announce[i].datetime == announce[0].datetime) {
       html += '<span class="badge bg-primary">';
@@ -525,8 +564,9 @@ function genAnnounceContent(announce) {
     html += announce[i].datetime;
     html += '</span><br>';
     html += announce[i].msg;
-    html += '<br>';
+    html += '<br><br>';
   }
+  html += '</div>';
   return html;
 }
 
