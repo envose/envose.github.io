@@ -55,8 +55,6 @@ th {
 
 #container_header {
   /*padding-top: 2rem;*/
-
-  background-color: white;
 }
 
 #container_content {
@@ -65,7 +63,6 @@ th {
 }
 
 #container_footer {
-  background-color: white;
     position: fixed;
     height: 70px;
     bottom: 0px;
