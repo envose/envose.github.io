@@ -216,7 +216,7 @@ function createHistView() {
 
   html += '<ul class="list-group pb-5 mb-5">';
   html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-primary">';
-  html += '<strong>我的行為錄</strong>';
+  html += '<strong>我的信心日誌</strong>';
   html += '</li>';
   if (userinfo.history) {
     var txArr = userinfo.history;
