@@ -154,12 +154,14 @@ function getFooterHtml() {
   html += '    <div class="container navbar-brand col-12">';
   html += '    <div class="row">';
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary" type="button"><i class="fa fa-history" style="font-size:32px;" onclick="return createHistView();"></i></button></div>';
+  /*
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
   html += '</button></div>';
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
   html += '</button></div>';
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
   html += '</button></div>';
+  */
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary" type="button" onclick="return logout();"><i class="fa fa-sign-out" style="font-size:32px;"></i></button></div>';
   html += '    </div>';
   html += '    </div>';
