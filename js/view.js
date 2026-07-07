@@ -199,8 +199,40 @@ function createMainView() {
 
 function createHistView() {
   var userinfo = getUserInfo();
-  var hist = userinfo.history;
-  alert(JSON.stringify(hist,0,2));
+  initViews();
+  if (userinfo.name == null){
+    setHeaderTitle('h2', 'Invalid User');
+    return;
+  }
+  header.innerHTML = getNavHtml();
+  footer.innerHTML = getFooterHtml();
+
+  var div = createCustomElement('div', 'container col_11');
+  content.appendChild(div);
+  div.id = 'txPage';
+  var html = '<div class="container col-11 mt-5 pb-5">';
+
+  html += '<ul class="list-group pb-5 mb-5">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-primary">';
+  html += '<strong>我的行為錄</strong>';
+  html += '</li>';
+  if (userinfo.hist) {
+    var txArr = userinfo.hist;
+    for (var i = txArr.length-1; i >= 0; i--) {
+      html += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+      html += '<p>'+txArr[i].desc+'<br>';
+      html += '<small class="text-muted">'+txArr[i].timestamp+' </small></p>';
+      html += '</li>';
+    }
+
+  }else{
+    html += '<li class="list-group-item d-flex justify-content-between align-items-center ">';
+    html += '即將登場';
+    html += '</li>';
+  }
+  html += '</ul>';
+  html += '</div>';
+  div.innerHTML = html;
 }
 
 function createSorryView() {
