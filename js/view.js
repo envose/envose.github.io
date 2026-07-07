@@ -216,8 +216,8 @@ function createHistView() {
   html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-primary">';
   html += '<strong>我的行為錄</strong>';
   html += '</li>';
-  if (userinfo.hist) {
-    var txArr = userinfo.hist;
+  if (userinfo.history) {
+    var txArr = userinfo.history;
     for (var i = txArr.length-1; i >= 0; i--) {
       html += '<li class="list-group-item d-flex justify-content-between align-items-center">';
       html += '<p>'+txArr[i].desc+'<br>';
