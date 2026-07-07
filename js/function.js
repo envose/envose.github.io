@@ -1,4 +1,4 @@
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzoDDPleFyAG-XdMwWvC76zZ19S5XOxj5HrE4YXoz1rPiD_AUfFqm-pBgNKOHFRahC2Yw/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbx0jVhbdFXZqq5z-Fx1x6Nzs8gOIAsY-4HWHs-KPBM66FCbSbRZh0cQgFWcdlAqPSwKVg/exec';
   const YOUR_CLIENT_ID = '207039464470-ds863khed849svfntdjertq4bpddpqva.apps.googleusercontent.com';
   const YOUR_REDIRECT_URI = 'https://envose.github.io';
 
