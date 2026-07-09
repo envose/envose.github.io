@@ -6,6 +6,7 @@ const app_name = '錫安的星辰';
 
 const alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {backdrop: 'static', keyboard: false});
 const inputModal = new bootstrap.Modal(document.getElementById('inputModal'), {backdrop: 'static', keyboard: false});
+const chartModal = new bootstrap.Modal(document.getElementById('chartModal'), {backdrop: 'static', keyboard: false});
 
 // views
 var header = document.getElementById('container_header');
@@ -17,6 +18,20 @@ var starName = '';
 var starList = {};
 
 var taskForm = {'tid' : ''};
+
+var chartForm = {
+	'data' : [12, 19, 3, 5, 2, 3],
+	'labels' : ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+};
+
+  var chartLabelList = {
+    'dt01': '祈禱',
+    'dt02': 'My Page',
+    'dt03': '傳道',
+    'dt04': '線上宣教',
+    'mt01': 'LMS',
+    'mt02': '預備日'
+  }
 
 
 var cheerUpMsg = [

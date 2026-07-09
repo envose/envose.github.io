@@ -136,9 +136,9 @@ function getNavHtml() {
   html += '  <div class="container-fluid mx-4 my-1">';
   html += '    <a class="navbar-brand" onclick="createMainView()">';
   html += '      <img src="ruby-gemstone.png" height="32px" alt="">  ';
-  html += '<span class="mx-2">'+app_name+'</span>';
+  html += '<span class="mx-2">'+userinfo.name+'</span>';
   html += '    </a>';
-  html += '      <button class="btn btn-light text-primary my-2 my-sm-0"><i class="fa fa-edit" style="font-size:32px;" onclick="return createRecordView();"></i></button>';
+  html += '      <button class="btn btn-light text-primary my-2 my-sm-0"><i class="fa fa-sign-out" style="font-size:32px;" onclick="return logout();"></i></button>';
   html += '    </div>';
   
   html += '  </div>';
@@ -154,15 +154,16 @@ function getFooterHtml() {
   html += '    <div class="container navbar-brand col-12">';
   html += '    <div class="row">';
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary" type="button"><i class="fa fa-history" style="font-size:32px;" onclick="return createHistView();"></i></button></div>';
+  
+  html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary  position-relative" type="button" onclick="return createChartView();"><i class="fa fa-pie-chart" style="font-size:32px;"></i>';
+  html += '</button></div>';
   /*
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
   html += '</button></div>';
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
   html += '</button></div>';
-  html += '      <div class="col text-center px-0"><button class="btn btn-light text-secondary  position-relative" type="button" onclick="return createTempView();"><i class="fa fa-question" style="font-size:32px;"></i>';
-  html += '</button></div>';
   */
-  html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary" type="button" onclick="return logout();"><i class="fa fa-sign-out" style="font-size:32px;"></i></button></div>';
+  html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary" type="button" onclick="return createRecordView();"><i class="fa fa-edit" style="font-size:32px;"></i></button></div>';
   html += '    </div>';
   html += '    </div>';
 
@@ -209,6 +210,106 @@ function createMainView() {
   html += '</ul>';
   html += '</div>';
   div.innerHTML = html;
+
+}
+
+function createChartView() {
+  parseHistoryData();
+
+  var userinfo = getUserInfo();
+  // initViews();
+  // if (userinfo.name == null){
+  //   setHeaderTitle('h2', 'Invalid User');
+  //   return;
+  // }
+  // header.innerHTML = getNavHtml();
+  // footer.innerHTML = getFooterHtml();
+
+  // var div = createCustomElement('div', 'container col_11');
+  // content.appendChild(div);
+  // div.id = 'chartPage';
+  // var html = '<div class="container col-11 mt-5 pb-5"><ul class="list-group pb-5 mb-5">';
+  // html + '<div>';
+  // html + '  <canvas id="myChart"></canvas>';
+  // html + '</div>';
+  // html += '</div>';
+  // div.innerHTML = html;
+
+
+  const today = new Date();
+  const month = String(today.getMonth() + 1); // 07 (0-11 index, needs +1)
+  var title = document.getElementById('chartModalTitle');
+  title.innerHTML = month + '月的我';
+
+  // 1. Check if a chart already exists on the canvas
+  const existingChart = Chart.getChart("myChart"); 
+
+  if (existingChart) {
+      // 2. Destroy it if found
+      existingChart.destroy(); 
+  }
+
+  // 3. Now it is completely safe to create your new chart
+
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+  type: 'radar',
+  data: {
+  labels: chartForm.labels,
+  datasets: [{
+    label: '我的準備',
+    data: chartForm.data,
+    fill: true,
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgb(54, 162, 235)',
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(54, 162, 235)'
+  }]
+},
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    },
+    scales: {
+        r: {
+            angleLines: {
+                display: false
+            },
+            suggestedMin: 0,
+            suggestedMax: 10
+        }
+    }
+  },
+});
+
+//bar
+/*
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartForm.labels,
+      datasets: [{
+        label: '我的準備',
+        data: chartForm.data,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  */
+  chartModal.show();
 
 }
 
@@ -347,7 +448,8 @@ function createRecordView() {
   var div = createCustomElement('div', 'container col_11');
   content.appendChild(div);
   div.id = 'mainPage';
-  var html = '<div class="container col-11 mt-5"><ul class="list-group">';
+  var html = '';
+  html += '<div class="container col-11 mt-5"><ul class="list-group">';
   html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-primary">';
   html += '<strong>今日的我...</strong>';
   html += '</li>';

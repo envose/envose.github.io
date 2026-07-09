@@ -165,6 +165,67 @@ function submitTask(tid) {
   });
 }
 
+function parseHistoryData() {
+  var userinfo = getUserInfo();
+  var labels = [];
+  var data = [];
+  if (userinfo) {
+    var hist = userinfo.history;
+    var stat = {};
+
+    const today = new Date();
+
+    const year = today.getFullYear();               // 2026 (4-digit year)
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // 07 (0-11 index, needs +1)
+    const day = String(today.getDate()).padStart(2, '0');
+
+    hist.forEach(h => {
+      if (h.tid.startsWith('dt') || h.tid.startsWith('mt')) {
+        if (h.tid.startsWith('dt03')) {
+          if (stat['dt03']) {
+            stat['dt03'] ++;
+          }else{
+            stat['dt03'] = 1;
+          }
+        }else {
+          if (stat[h.tid]) {
+            stat[h.tid] ++;
+          }else{
+            stat[h.tid] = 1;
+          }
+        }
+      }
+    });
+    stat['dt01'] = stat['dt01']/2;
+    Object.keys(stat).forEach(key => {
+      if (stat[key] > day) {
+        stat[key] = day;
+      }
+    });
+    stat['mt01'] = (stat['mt01'] == 1) ? day : 0;
+    stat['mt02'] = (stat['mt02'] >= 2) ? day : stat['mt02']/2*day;
+
+    labels = Object.keys(chartLabelList).map(key => {
+        return chartLabelList[key];
+    });
+    data = Object.keys(chartLabelList).map(key => {
+        return stat[key] ? stat[key] : 0;
+    });
+    chartForm.labels = labels;
+    chartForm.data = data;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 function submitAcitvity() {
   var raw_str = genActivityContent(act_key,act_act,act_con);
   var str = window.btoa(unescape(encodeURIComponent(raw_str)));
