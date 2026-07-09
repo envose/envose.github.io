@@ -20,8 +20,9 @@ var starList = {};
 var taskForm = {'tid' : ''};
 
 var chartForm = {
-	'data' : [12, 19, 3, 5, 2, 3],
-	'labels' : ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+	'data' : [],
+	'labels' : [],
+	'max' : 0
 };
 
   var chartLabelList = {

@@ -281,7 +281,7 @@ function createChartView() {
                 display: false
             },
             suggestedMin: 0,
-            suggestedMax: 10
+            suggestedMax: chartForm.max
         }
     }
   },
@@ -444,6 +444,41 @@ function createRecordView() {
   header.innerHTML = getNavHtml();
   footer.innerHTML = getFooterHtml();
 
+  var checkIcon = '<i class="fa fa-check"></i>';
+  var btnLabelList = {
+    'dt01': 'Amen!',
+    'dt02': 'Amen!',
+    'dt03': 'Amen!',
+    'dt04': 'Amen!',
+    'mt01': 'Amen!',
+    'mt02': 'Amen!'
+  };
+  var disabledlist = {
+    'dt01': '',
+    'dt02': '',
+    'dt03': '',
+    'dt04': '',
+    'mt01': '',
+    'mt02': ''
+  };
+  if (userinfo.task) {
+    Object.keys(btnLabelList).forEach(k => {
+      if (userinfo.task[k] > 0) {
+        if (k == 'dt01') {
+          btnLabelList[k] = userinfo.task[k] >= 2 ? checkIcon : userinfo.task[k]+' / 2';
+        }else if (k == 'dt02' || k == 'dt04' || k == 'mt01') {
+          btnLabelList[k] = checkIcon;
+          disabledlist[k] = 'disabled';
+        }else if (k == 'dt03') {
+          btnLabelList[k] = checkIcon;
+          disabledlist[k] = userinfo.task[k] >= 4 ? 'disabled' : '';
+        }else if (k == 'mt02') {
+          btnLabelList[k] = userinfo.task[k] >= 2 ? checkIcon : userinfo.task[k]+' / 2';
+        }
+      }
+    });
+  }
+
 
   var div = createCustomElement('div', 'container col_11');
   content.appendChild(div);
@@ -457,19 +492,19 @@ function createRecordView() {
   html += '<li class="list-group-item">';
   html += '<div class="input-group mt-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🙏 以禱告呼吸</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_pray" onclick="createPrayView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_pray" onclick="createPrayView()" '+disabledlist.dt01+'>'+btnLabelList.dt01+'</button>';
   html += '</div><br>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🍚 吃話語的糧食</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_mypage" onclick="createWordView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_mypage" onclick="createWordView()" '+disabledlist.dt02+'>'+btnLabelList.dt02+'</button>';
   html += '</div>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🏃‍♀️ 用傳道來活動</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_preach" onclick="createPreachView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_preach" onclick="createPreachView()" '+disabledlist.dt03+'>'+btnLabelList.dt03+'</button>';
   html += '</div>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🥊 打倒網絡敵人</span>';
-  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_online_mission" onclick="createOnlineMissionView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-primary" type="button" id="btn_online_mission" onclick="createOnlineMissionView()" '+disabledlist.dt04+'>'+btnLabelList.dt04+'</button>';
   html += '</div>';
   html += '</div>';
   html += '</li>';
@@ -483,11 +518,11 @@ function createRecordView() {
   html += '<li class="list-group-item">';
   html += '<div class="input-group mt-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">💡 預備燈</span>';
-  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_lms" onclick="createLMSView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_lms" onclick="createLMSView()" '+disabledlist.mt01+'>'+btnLabelList.mt01+'</button>';
   html += '</div><br>';
   html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🔋 預備油</span>';
-  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_prep_day" onclick="createPrepDayView()">Amen!</button>';
+  html += '  <button class="col-4 btn btn-warning" type="button" id="btn_prep_day" onclick="createPrepDayView()" '+disabledlist.mt02+'>'+btnLabelList.mt02+'</button>';
   html += '</div>';
   html += '</div>';
   html += '</li>';

@@ -148,6 +148,7 @@ function submitTask(tid) {
     if (data !== null) {
       if (data.status=='0') {
         localStorage.setItem('userinfo', JSON.stringify(data.res));
+        createRecordView();
         if (data.res.task.star) {
           starNum = data.res.task.star;
           selectStar(data.res.name);
@@ -213,6 +214,7 @@ function parseHistoryData() {
     });
     chartForm.labels = labels;
     chartForm.data = data;
+    chartForm.max=day;
   }
 }
 
