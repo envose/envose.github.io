@@ -148,11 +148,11 @@ function submitTask(tid) {
     if (data !== null) {
       if (data.status=='0') {
         localStorage.setItem('userinfo', JSON.stringify(data.res));
-        alert('已保存');
-        createRecordView();
         if (data.res.task.star) {
           starNum = data.res.task.star;
           selectStar(data.res.name);
+        }else{
+          createSavedView();
         }
       }else{
         alert(data.error_msg);

@@ -172,6 +172,19 @@ function getFooterHtml() {
 
 }
 
+function createSavedView() {
+
+  const rnum1 = Math.floor(Math.random() * (cheerUpMsg.length-1)) + 1;
+  const rnum2 = Math.floor(Math.random() * 6) + 1;
+
+  var body = '';
+  body += '<div class="text-center">';
+  body += '<img src="assets/save_'+rnum2+'.jpg" class="text-center img-thumbnail w-75" alt="已保存">';
+  body += '</div>';
+
+  showAlertModal(cheerUpMsg[rnum1],body,'');
+}
+
 function createMainView() {
 
   var userinfo = getUserInfo();
