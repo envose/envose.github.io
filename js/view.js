@@ -154,7 +154,7 @@ function getFooterHtml() {
   html += '    <div class="container navbar-brand col-12">';
   html += '    <div class="row">';
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary" type="button"><i class="fa fa-history" style="font-size:32px;" onclick="return createHistView();"></i></button></div>';
-  
+  /*
   html += '      <div class="col text-center px-0"><button class="btn btn-light text-primary  position-relative" type="button" onclick="return createChartView();"><i class="fa fa-pie-chart" style="font-size:32px;"></i>';
   html += '</button></div>';
   /*
