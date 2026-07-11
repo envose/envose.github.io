@@ -520,7 +520,7 @@ function createRecordView() {
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">💡 預備燈</span>';
   html += '  <button class="col-4 btn btn-warning" type="button" id="btn_lms" onclick="createLMSView()" '+disabledlist.mt01+'>'+btnLabelList.mt01+'</button>';
   html += '</div><br>';
-  html += '<div class="input-group mb-3">';
+  html += '<div class="input-group mb-6">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🔋 預備油</span>';
   html += '  <button class="col-4 btn btn-warning" type="button" id="btn_prep_day" onclick="createPrepDayView()" '+disabledlist.mt02+'>'+btnLabelList.mt02+'</button>';
   html += '</div>';
