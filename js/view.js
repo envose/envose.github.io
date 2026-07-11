@@ -512,7 +512,7 @@ function createRecordView() {
   html += '</div>';
 
   html += '<div class="container col-11 mt-3 pb-5"><ul class="list-group pb-5 mb-5">';
-  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-warning">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-warning mb-5">';
   html += '<strong>成為五個聰明的童女</strong>';
   html += '</li>';
   html += '<li class="list-group-item">';
