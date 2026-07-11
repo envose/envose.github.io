@@ -511,8 +511,8 @@ function createRecordView() {
   html += '</ul>';
   html += '</div>';
 
-  html += '<div class="container col-11 mt-3 pb-5"><ul class="list-group pb-5 mb-5">';
-  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-warning mb-5">';
+  html += '<div class="container col-11 mt-3 pb-5"><ul class="list-group pb-5 mb-8">';
+  html += '<li class="list-group-item d-flex justify-content-between align-items-center text-bg-warning">';
   html += '<strong>成為五個聰明的童女</strong>';
   html += '</li>';
   html += '<li class="list-group-item">';
@@ -520,7 +520,7 @@ function createRecordView() {
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">💡 預備燈</span>';
   html += '  <button class="col-4 btn btn-warning" type="button" id="btn_lms" onclick="createLMSView()" '+disabledlist.mt01+'>'+btnLabelList.mt01+'</button>';
   html += '</div><br>';
-  html += '<div class="input-group mb-6">';
+  html += '<div class="input-group mb-3">';
   html += '  <span class="col-8 input-group-text" id="inputGroup-sizing-default">🔋 預備油</span>';
   html += '  <button class="col-4 btn btn-warning" type="button" id="btn_prep_day" onclick="createPrepDayView()" '+disabledlist.mt02+'>'+btnLabelList.mt02+'</button>';
   html += '</div>';
