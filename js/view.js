@@ -149,7 +149,7 @@ function getNavHtml() {
 function getFooterHtml() {
   var userinfo = getUserInfo();
   var html = '';
-  html += '<nav class="navbar navbar-expand-lg bg-body-tertiary" style="z-index: 500">';
+  html += '<nav class="navbar navbar-expand-lg bg-body-tertiary position-relative" style="z-index: 500">';
   html += '  <div class="container-fluid mx-1 my-1">';
   html += '    <div class="container navbar-brand col-12">';
   html += '    <div class="row">';
